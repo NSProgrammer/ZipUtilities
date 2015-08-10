@@ -339,16 +339,18 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
             unsigned char buffer[bufferSize];
             size_t bytesRead;
             do {
-                bytesRead = fread(buffer, sizeof(unsigned char), bufferSize, file);
-                if (bytesRead > 0) {
-                    status = zipWriteInFileInZip(_zipFile, buffer, (unsigned int)bytesRead);
-                    if (status == Z_OK) {
-                        [self private_didCompressBytes:(int64_t)bytesRead];
+                @autoreleasepool {
+                    bytesRead = fread(buffer, sizeof(unsigned char), bufferSize, file);
+                    if (bytesRead > 0) {
+                        status = zipWriteInFileInZip(_zipFile, buffer, (unsigned int)bytesRead);
+                        if (status == Z_OK) {
+                            [self private_didCompressBytes:(int64_t)bytesRead];
+                        }
                     }
-                }
 
-                if (self.isCancelled) {
-                    return kCancelledError;
+                    if (self.isCancelled) {
+                        return kCancelledError;
+                    }
                 }
             } while (bytesRead == bufferSize && status == Z_OK);
 
@@ -360,6 +362,8 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
     if (status != Z_OK) {
         return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry });
+    } else if (self.isCancelled) {
+        return kCancelledError;
     }
 
     return nil;

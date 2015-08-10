@@ -283,6 +283,9 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     int nextFileError = UNZ_OK;
     do {
         error = [self private_unzipCurrentEntry];
+        if (self.isCancelled) {
+            return kCancelledError;
+        }
     } while ((nextFileError = unzGoToNextFile(_unzipFile)) == UNZ_OK);
 
     if (nextFileError != UNZ_END_OF_LIST_OF_FILE) {
@@ -365,6 +368,10 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 
 - (NSError *)private_unzipCurrentOpenEntry:(unz_file_info *)fileInfoPtr toFilePath:(NSString *)filePath
 {
+    if (self.isCancelled) {
+        return kCancelledError;
+    }
+
     const size_t bufferSize = 4096;
     char buffer[bufferSize];
     FILE* file = fopen(filePath.UTF8String, "w");
@@ -376,15 +383,21 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     int bytesRead = 0;
     size_t bytesWritten = 0;
     do {
-        bytesRead = unzReadCurrentFile(_unzipFile, buffer, bufferSize);
-        if (bytesRead < 0) {
-            return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+        @autoreleasepool {
+            bytesRead = unzReadCurrentFile(_unzipFile, buffer, bufferSize);
+            if (bytesRead < 0) {
+                return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+            }
+            bytesWritten = fwrite(buffer, sizeof(char), (size_t)bytesRead, file);
+            if (bytesWritten != (size_t)bytesRead) {
+                return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+            }
+            [self private_didDecompressBytes:bytesRead];
+
+            if (self.isCancelled) {
+                return kCancelledError;
+            }
         }
-        bytesWritten = fwrite(buffer, sizeof(char), (size_t)bytesRead, file);
-        if (bytesWritten != (size_t)bytesRead) {
-            return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
-        }
-        [self private_didDecompressBytes:bytesRead];
     } while (bytesRead > 0);
 
     if (fileInfoPtr->tmu_date.tm_year > 0) {
@@ -401,7 +414,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 
         NSError *innerError = nil;
         if (![[NSFileManager defaultManager] setAttributes:@{ NSFileModificationDate : date } ofItemAtPath:filePath error:&innerError]) {
-            // error occurred, ignore it
+            // error occurred, ignore it...it's just the timestamp
         }
     }
 

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/NOZDecompressOperation.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZDecompressOperation</TokenIdentifier>
+			<Abstract type="html">NOZDecompressOperation is an NSOperation for decompressing a zip archive on disk into unarchived files on disk.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+            
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/setRequest:</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressRequest of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressRequest *request</Declaration>
+			
+			
+			<Anchor>//api/name/request</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/request</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressRequest of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressRequest *request</Declaration>
+			
+			
+			<Anchor>//api/name/request</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressOperation/request</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressRequest of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressRequest *request</Declaration>
+			
+			
+			<Anchor>//api/name/request</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/setDelegate:</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressDelegate of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZDecompressDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/delegate</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressDelegate of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZDecompressDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressOperation/delegate</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressDelegate of the operation</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZDecompressDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/setResult:</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressResult of the operation.  Populated once operation finishes.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressResult *result</Declaration>
+			
+			
+			<Anchor>//api/name/result</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/result</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressResult of the operation.  Populated once operation finishes.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressResult *result</Declaration>
+			
+			
+			<Anchor>//api/name/result</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressOperation/result</TokenIdentifier>
+			<Abstract type="html">The NOZDecompressResult of the operation.  Populated once operation finishes.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZDecompressResult *result</Declaration>
+			
+			
+			<Anchor>//api/name/result</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/initWithRequest:delegate:</TokenIdentifier>
+			<Abstract type="html">Designated initializer</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithRequest:(NOZDecompressRequest *)request delegate:(nullable id&lt;NOZDecompressDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>request</Name>
+					<Abstract type="html">The NOZDecompressRequest to operate on</Abstract>
+				</Parameter><Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">The NOZDecompressDelegate for callbacks</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithRequest:delegate:</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/initWithRequest:completion:</TokenIdentifier>
+			<Abstract type="html">Convenience initializer</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithRequest:(NOZDecompressRequest *)request completion:(NOZDecompressCompletionBlock)completion</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>request</Name>
+					<Abstract type="html">The NOZDecompressRequest to operate on</Abstract>
+				</Parameter><Parameter>
+					<Name>completion</Name>
+					<Abstract type="html">The NOZDecompressCompletionBlock block that will be called when the operation finishes</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithRequest:completion:</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/init</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)init</Declaration>
+			
+			
+			<Anchor>//api/name/init</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressOperation/new</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)new</Declaration>
+			
+			
+			<Anchor>//api/name/new</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

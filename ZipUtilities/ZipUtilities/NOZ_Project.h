@@ -27,16 +27,44 @@
 
 @import Foundation;
 
-#define defer support
+#pragma mark Utils
 
+/**
+ `noz_macro_concat`
+ Macro for combining 2 names into a single name.
+ Offers the ability to expand any initial macros passed in.
+ 
+ *Example:*
+
+     // writing this:
+     int noz_macro_concat(hidden_int_, __FILE__) = __FILE__;
+     // will be preprocessed as this:
+     int hidden_int_38 = 38;
+
+ */
 #define _noz_macro_concat(a, b) a##b
 #define noz_macro_concat(a, b) _noz_macro_concat(a, b)
+
+#pragma mark Defer Support
+
+/**
+ `noz_defer`
+ Macro for support code deferral.
+ Offers the same behavior as `defer` in Swift.
+ Effectively, the block provided to `noz_defer` will execute on scope exit.
+ Offers a safe way to perform cleanup on scope exit, no matter the mechanism.
+ Scope exits include: break, continue, return, @throw/throw and leaving the scope of an if/else/while/for
+ 
+ *Example:*
+
+     FILE *file
+ */
+#define noz_defer(deferBlock) \
+__strong noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock
+
 typedef void(^noz_defer_block_t)();
 NS_INLINE void noz_deferFunc(__strong noz_defer_block_t *blockRef)
 {
     noz_defer_block_t actualBlock = *blockRef;
     actualBlock();
 }
-
-#define noz_defer(deferBlock) \
-__strong noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock

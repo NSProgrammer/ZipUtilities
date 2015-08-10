@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/NOZCompressEntry.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZCompressEntry</TokenIdentifier>
+			<Abstract type="html">NOZCompressEntry encapsulates the information needed for an entry of a zip archive</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+            
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/setName:</TokenIdentifier>
+			<Abstract type="html">The name of the entry.  Cannot be nil.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/name</TokenIdentifier>
+			<Abstract type="html">The name of the entry.  Cannot be nil.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressEntry/name</TokenIdentifier>
+			<Abstract type="html">The name of the entry.  Cannot be nil.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/setPath:</TokenIdentifier>
+			<Abstract type="html">The path to a file for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/path</TokenIdentifier>
+			<Abstract type="html">The path to a file for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressEntry/path</TokenIdentifier>
+			<Abstract type="html">The path to a file for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/setData:</TokenIdentifier>
+			<Abstract type="html">The data for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSData *data</Declaration>
+			
+			
+			<Anchor>//api/name/data</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/data</TokenIdentifier>
+			<Abstract type="html">The data for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSData *data</Declaration>
+			
+			
+			<Anchor>//api/name/data</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressEntry/data</TokenIdentifier>
+			<Abstract type="html">The data for the entry.  Must provide either path or data.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSData *data</Declaration>
+			
+			
+			<Anchor>//api/name/data</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/fileDate</TokenIdentifier>
+			<Abstract type="html">Timestamp for the entry.  nil for data, read from the modification date of the file at path.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (NSDate *)fileDate</Declaration>
+			
+			
+			<Anchor>//api/name/fileDate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/sizeInBytes</TokenIdentifier>
+			<Abstract type="html">The size in bytes of the entry</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (int64_t)sizeInBytes</Declaration>
+			
+			
+			<Anchor>//api/name/sizeInBytes</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/hasDataOrFile</TokenIdentifier>
+			<Abstract type="html">Method to validate the entry has either data or path with path being a valid file on disk.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)hasDataOrFile</Declaration>
+			
+			
+			<Anchor>//api/name/hasDataOrFile</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/initWithFilePath:</TokenIdentifier>
+			<Abstract type="html">Convenience initializer.  name will be set to path.lastPathComponent</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)path</Declaration>
+			
+			
+			<Anchor>//api/name/initWithFilePath:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/initWithFilePath:name:</TokenIdentifier>
+			<Abstract type="html">Convenience initializer</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)path name:(NSString *)name</Declaration>
+			
+			
+			<Anchor>//api/name/initWithFilePath:name:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressEntry/initWithData:name:</TokenIdentifier>
+			<Abstract type="html">Convenience initializer</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithData:(NSData *)data name:(NSString *)name</Declaration>
+			
+			
+			<Anchor>//api/name/initWithData:name:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

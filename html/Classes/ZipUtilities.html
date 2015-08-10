@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ZipUtilities Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ZipUtilities </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Nolan O&apos;Brien</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	
+
+	
+	
+
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ZipUtilities Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>ZipUtilities.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<h1>ZipUtilities</h1>
+
+<h2>Introduction</h2>
+
+<p><em>ZipUtilities</em>, prefixed with <code>NOZ</code> for <em>Nolan O'Brien ZipUtilities</em>, is a library of zipping and
+unzipping utilities for iOS (and Mac OS X soon).</p>
+
+<h2>Background</h2>
+
+<p>The need can occasionally arise where easy compressing and decompressing of data is desired from a
+simple API.  There are many zipping/unzipping utilities out there but all of them can be found
+wanting in some way or another.</p>
+
+<ul>
+<li> too low/level</li>
+<li> too complex</li>
+<li> poor code quality</li>
+<li> old coding practices/style (basically really old)</li>
+<li> lack a service oriented approach (request, operation and response pattern)</li>
+</ul>
+
+
+<h2>Overview</h2>
+
+<p>The primary value of <em>ZipUtilities</em> is that it provides an easy to use interface for archiving data
+or files into a single zip archive and unarchiving a zip archive to the contained files.  The
+primary approach for <em>ZipUtilities</em> is to provide a service oriented pattern for compressing and
+decompressing.</p>
+
+<h3><code>NOZCompress.h</code></h3>
+
+<p><code>NOZCompress.h</code> contains the service oriented interfaces related to compressing into a zip archive.</p>
+
+<ul>
+<li> <a href="../Classes/NOZCompressRequest.html"><code>NOZCompressRequest</code></a> is the object that encapsulates the <em>what</em> and <em>how</em> for the compression
+operation to act upon</li>
+<li> <a href="../Classes/NOZCompressOperation.html"><code>NOZCompressOperation</code></a> is the <code>NSOperation</code> subclass object that performs the compression.
+By being an <code>NSOperation</code>, consumers can take advantage of cancelling, prioritization and
+dependencies.  Progress is also provided with the operation and can be observed via <em>KVO</em> on the
+<code>progress</code> property or via the delegate callback.</li>
+<li> <a href="../Protocols/NOZCompressDelegate.html"><code>NOZCompressDelegate</code></a> is the delegate for the <a href="../Classes/NOZCompressOperation.html"><code>NOZCompressOperation</code></a>.  It provides callbacks
+for progress and completion.</li>
+<li> <a href="../Classes/NOZCompressResult.html"><code>NOZCompressResult</code></a> is the object taht encapsulates the result of a compress operation. It
+holds whether or not the operation succeed, the error if it didn&rsquo;t succeed, the path to the created
+zip archive and other informative metrics like duration and compression ratio.</li>
+</ul>
+
+
+<h3><code>NOZDecompress.h</code></h3>
+
+<p><code>NOZDecompress.h</code> contains the service oriented interfaces related to decompressing from a zip
+archive.</p>
+
+<ul>
+<li><a href="../Classes/NOZDecompressRequest.html"><code>NOZDecompressRequest</code></a> is the object that encapsulates the <em>what</em> and <em>how</em> for the decompression
+operation to act upon</li>
+<li><a href="../Classes/NOZDecompressOperation.html"><code>NOZDecompressOperation</code></a> is the <code>NSOperation</code> subclass object that performs the compression.
+By being an <code>NSOperation</code>, consumers can take advantage of cancelling, prioritization and
+dependencies.  Progress is also provided with the operation and can be observed via <em>KVO</em> on the
+<code>progress</code> property or via the delegate callback.</li>
+<li><a href="../Protocols/NOZDecompressDelegate.html"><code>NOZDecompressDelegate</code></a> is the delegate for the <a href="../Classes/NOZDecompressOperation.html"><code>NOZDecompressOperation</code></a>.  It provides callbacks
+for progress, overwriting output files and completion.</li>
+<li><a href="../Classes/NOZDecompressResult.html"><code>NOZDecompressResult</code></a> is the object taht encapsulates the result of a compress operation. It
+holds whether or not the operation succeed, the error if it didn&rsquo;t succeed, the paths to the output
+unarchived files and other informative metrics like duration and compression ratio.</li>
+</ul>
+
+
+<h2>History</h2>
+
+<h3>1.0.1 (Aug 10, 2015) - Nolan O'Brien</h3>
+
+<ul>
+<li>Added comments/documentation throughout headers</li>
+<li>Added more places to detect cancellation to NOZDecompressOperation</li>
+</ul>
+
+
+<h3>1.0.0 (Aug 9, 2015) - Nolan O'Brien</h3>
+
+<ul>
+<li>Refactored code</li>
+<li>fixed compilation and static analysis warnings in minizip 1.1</li>
+<li>pushed to github ( <a href="https://github.com/NSProgrammer/ZipUtilities">https://github.com/NSProgrammer/ZipUtilities</a> )</li>
+</ul>
+
+
+<h3>0.9.0 (Aug 4, 2015) - Nolan O'Brien</h3>
+
+<ul>
+<li>Initial Project built, structured and unit tested</li>
+</ul>
+
+
+<h2>TODO</h2>
+
+<h3>Near term</h3>
+
+<ul>
+<li>modernize minizip 1.1 into minizip 1.2</li>
+<li>add Mac OS X target and support</li>
+<li>add iOS dynamic framework target</li>
+<li>add generic utilies like compressing/decompressing from NSData to NSData</li>
+</ul>
+
+
+<h3>Eventually</h3>
+
+<ul>
+<li>add password support</li>
+<li>add support for the global commment on an archive</li>
+<li>add support for per entry comments in an archive</li>
+<li>add support for per entry &ldquo;extra info&rdquo; in an archive</li>
+<li>expand on progress info
+
+<ul>
+<li>state transitions</li>
+<li>what files are being zipped/unzipped</li>
+<li>per file progress</li>
+</ul>
+</li>
+</ul>
+
+					</div>
+					
+					
+
+					
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-08-10</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

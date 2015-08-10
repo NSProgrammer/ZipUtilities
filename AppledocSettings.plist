@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>--project-name</key>
+    <string>ZipUtilities</string>
+    <key>--project-company</key>
+    <string>Nolan O'Brien</string>
+    <key>--input</key>
+    <array>
+        <string>ZipUtilities/ZipUtilities</string>
+    </array>
+    <key>--ignore</key>
+    <array>
+        <string>*_Project.h</string>
+        <string>*.m</string>
+        <string>ZipUtilities/ZipUtilities/minizip/*</string>
+    </array>
+    <key>--keep-undocumented-objects</key>
+    <true/>
+    <key>--keep-undocumented-members</key>
+    <true/>
+    <key>--merge-categories</key>
+    <false/>
+    <key>--merge-category-comment</key>
+    <false/>
+    <key>--use-code-order</key>
+    <true/>
+    <key>--repeat-first-par</key>
+    <false/>
+    <key>--keep-intermediate-files</key>
+    <true/>
+</dict>
+</plist>

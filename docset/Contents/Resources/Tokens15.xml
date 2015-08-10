@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Constants/NOZErrorCode.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/NOZErrorCode</TokenIdentifier>
+			<Abstract type="html">NOZErrorCode values for ZipUtilities related errors in the NOZErrorDomain domain.</Abstract>
+			<DeclaredIn>NOZError.h</DeclaredIn>
+            
+			
+			<NodeRef refid="15"/>
+		</Token>
+		
+		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressUnknown</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressUnknown</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressFailedToOpenNewZipFile</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressFailedToOpenNewZipFile</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressNoEntriesToCompress</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressNoEntriesToCompress</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressMissingEntryName</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressMissingEntryName</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressMissingEntryDataOrFile</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressMissingEntryDataOrFile</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressFailedToAppendEntryToZip</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressFailedToAppendEntryToZip</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressFailedToFinalizeNewZipFile</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressFailedToFinalizeNewZipFile</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeCompressCancelled</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeCompressCancelled</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressUnknown</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressUnknown</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressFailedToOpenZipArchive</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressFailedToOpenZipArchive</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressFailedToCreateDestinationDirectory</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressFailedToCreateDestinationDirectory</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressFailedToReadArchiveEntry</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressFailedToReadArchiveEntry</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressFailedToCreateUnarchivedFile</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressFailedToCreateUnarchivedFile</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressCannotOverwriteExistingFile</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressCannotOverwriteExistingFile</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeDecompressCancelled</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeDecompressCancelled</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeZipUnknown</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeZipUnknown</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorCodeUnzipUnknown</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZErrorCodeUnzipUnknown</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="15"/>
+        </Token>
+        
+        
+	</File>
+</Tokens>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NOZSyncStepOperation+DoNotOverride.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(DoNotOverride)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+            
+			
+			<NodeRef refid="10"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/main</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (void)main</Declaration>
+			
+			
+			<Anchor>//api/name/main</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/start</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (void)start</Declaration>
+			
+			
+			<Anchor>//api/name/start</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isConcurrent</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isConcurrent</Declaration>
+			
+			
+			<Anchor>//api/name/isConcurrent</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isAsynchronous</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isAsynchronous</Declaration>
+			
+			
+			<Anchor>//api/name/isAsynchronous</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isCancelled</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isCancelled</Declaration>
+			
+			
+			<Anchor>//api/name/isCancelled</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isFinished</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isFinished</Declaration>
+			
+			
+			<Anchor>//api/name/isFinished</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isExecuting</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isExecuting</Declaration>
+			
+			
+			<Anchor>//api/name/isExecuting</Anchor>
+            <NodeRef refid="10"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

@@ -31,17 +31,42 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXTERN NSString * const NOZErrorDomain;
 
+/**
+ `NOZErrorCode` values are broken into pages (`NOZErrorPage`) for each are of *ZipUtilities* that can produce an error.
+ 
+    static const NSInteger NOZErrorPageSize = 100;
+ */
 typedef NS_ENUM(NSInteger, NOZErrorPage)
 {
+    /** None */
     NOZErrorPageNone = 0,
+    /** For `NOZCompressOperation` errors */
     NOZErrorPageCompress,
+    /** For `NOZDecompressOperation` errors */
     NOZErrorPageDecompress,
+    /** Future */
     NOZErrorPageZip,
+    /** Future */
     NOZErrorPageUnzip,
 };
 
 static const NSInteger NOZErrorPageSize = 100;
 
+/**
+ `NOZErrorCode` values for *ZipUtilities* related errors in the `NOZErrorDomain` domain.
+
+     FOUNDATION_EXTERN NSString * const NOZErrorDomain;
+
+ ## Error Utilities
+
+     BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page);
+     BOOL NOZErrorCodeIsCompressError(NOZErrorCode code);
+     BOOL NOZErrorCodeIsDecompressError(NOZErrorCode code);
+     BOOL NOZErrorCodeIsZipError(NOZErrorCode code);
+     BOOL NOZErrorCodeIsUnzipError(NOZErrorCode code);
+     NSError *NOZErrorCreate(NOZErrorCode code, NSDictionary *userInfo);
+
+ */
 typedef NS_ENUM(NSInteger, NOZErrorCode)
 {
     NOZErrorCodeCompressUnknown = NOZErrorPageCompress * NOZErrorPageSize,
