@@ -69,19 +69,27 @@ typedef zipFile__ *zipFile;
 typedef voidp zipFile;
 #endif
 
-#define ZIP_OK                          (0)
-#define ZIP_EOF                         (0)
-#define ZIP_ERRNO                       (Z_ERRNO)
-#define ZIP_PARAMERROR                  (-102)
-#define ZIP_BADZIPFILE                  (-103)
-#define ZIP_INTERNALERROR               (-104)
+
+typedef enum {
+
+    ZIP_OK = 0,
+
+    ZIP_EOF     = 0,
+    ZIP_ERRNO   = Z_ERRNO,
+
+    ZIP_PARAMERROR      = -102,
+    ZIP_BADZIPFILE      = -103,
+    ZIP_INTERNALERROR   = -104,
+
+} ZIP_ERRCODE;
+
 
 #ifndef DEF_MEM_LEVEL
-#  if MAX_MEM_LEVEL >= 8
-#    define DEF_MEM_LEVEL 8
-#  else
-#    define DEF_MEM_LEVEL  MAX_MEM_LEVEL
-#  endif
+ #if MAX_MEM_LEVEL >= 8
+  #define DEF_MEM_LEVEL (8)
+ #else
+  #define DEF_MEM_LEVEL MAX_MEM_LEVEL
+ #endif
 #endif
 /* default memLevel */
 
@@ -108,10 +116,11 @@ typedef struct
 
 typedef const char* zipcharpc;
 
-
-#define APPEND_STATUS_CREATE        (0)
-#define APPEND_STATUS_CREATEAFTER   (1)
-#define APPEND_STATUS_ADDINZIP      (2)
+typedef enum {
+    zip_append_status_create        = 0,
+    zip_append_status_createafter   = 1,
+    zip_append_status_addinzip      = 2,
+} zip_append_status;
 
 extern zipFile ZEXPORT zipOpen OF((const char *pathname, int append));
 extern zipFile ZEXPORT zipOpen64 OF((const void *pathname, int append));
@@ -119,10 +128,10 @@ extern zipFile ZEXPORT zipOpen64 OF((const void *pathname, int append));
   Create a zipfile.
      pathname contain on Windows XP a filename like "c:\\zlib\\zlib113.zip" or on
        an Unix computer "zlib/zlib113.zip".
-     if the file pathname exist and append==APPEND_STATUS_CREATEAFTER, the zip
+     if the file pathname exist and append==zip_append_status_createAFTER, the zip
        will be created at the end of the file.
          (useful if the file contain a self extractor code)
-     if the file pathname exist and append==APPEND_STATUS_ADDINZIP, we will
+     if the file pathname exist and append==zip_append_status_addinzip, we will
        add files in existing zip (be sure you don't add file that doesn't exist)
      If the zipfile cannot be opened, the return value is NULL.
      Else, the return value is a zipFile Handle, usable with other function
@@ -135,37 +144,37 @@ extern zipFile ZEXPORT zipOpen64 OF((const void *pathname, int append));
 */
 
 extern zipFile ZEXPORT zipOpen2 OF((const char *pathname,
-                                   int append,
-                                   zipcharpc* globalcomment,
-                                   zlib_filefunc_def* pzlib_filefunc_def));
+                                    int append,
+                                    zipcharpc* globalcomment,
+                                    zlib_filefunc_def* pzlib_filefunc_def));
 
 extern zipFile ZEXPORT zipOpen2_64 OF((const void *pathname,
-                                   int append,
-                                   zipcharpc* globalcomment,
-                                   zlib_filefunc64_def* pzlib_filefunc_def));
+                                       int append,
+                                       zipcharpc* globalcomment,
+                                       zlib_filefunc64_def* pzlib_filefunc_def));
 
 extern int ZEXPORT zipOpenNewFileInZip OF((zipFile file,
-                       const char* filename,
-                       const zip_fileinfo* zipfi,
-                       const void* extrafield_local,
-                       uInt size_extrafield_local,
-                       const void* extrafield_global,
-                       uInt size_extrafield_global,
-                       const char* comment,
-                       int method,
-                       int level));
+                                           const char* filename,
+                                           const zip_fileinfo* zipfi,
+                                           const void* extrafield_local,
+                                           uInt size_extrafield_local,
+                                           const void* extrafield_global,
+                                           uInt size_extrafield_global,
+                                           const char* comment,
+                                           int method,
+                                           int level));
 
 extern int ZEXPORT zipOpenNewFileInZip64 OF((zipFile file,
-                       const char* filename,
-                       const zip_fileinfo* zipfi,
-                       const void* extrafield_local,
-                       uInt size_extrafield_local,
-                       const void* extrafield_global,
-                       uInt size_extrafield_global,
-                       const char* comment,
-                       int method,
-                       int level,
-                       int zip64));
+                                             const char* filename,
+                                             const zip_fileinfo* zipfi,
+                                             const void* extrafield_local,
+                                             uInt size_extrafield_local,
+                                             const void* extrafield_global,
+                                             uInt size_extrafield_global,
+                                             const char* comment,
+                                             int method,
+                                             int level,
+                                             int zip64));
 
 /*
   Open a file in the ZIP for writing.
@@ -198,17 +207,17 @@ extern int ZEXPORT zipOpenNewFileInZip2 OF((zipFile file,
 
 
 extern int ZEXPORT zipOpenNewFileInZip2_64 OF((zipFile file,
-                                            const char* filename,
-                                            const zip_fileinfo* zipfi,
-                                            const void* extrafield_local,
-                                            uInt size_extrafield_local,
-                                            const void* extrafield_global,
-                                            uInt size_extrafield_global,
-                                            const char* comment,
-                                            int method,
-                                            int level,
-                                            int raw,
-                                            int zip64));
+                                               const char* filename,
+                                               const zip_fileinfo* zipfi,
+                                               const void* extrafield_local,
+                                               uInt size_extrafield_local,
+                                               const void* extrafield_global,
+                                               uInt size_extrafield_global,
+                                               const char* comment,
+                                               int method,
+                                               int level,
+                                               int raw,
+                                               int zip64));
 /*
   Same than zipOpenNewFileInZip, except if raw=1, we write raw file
  */
@@ -231,23 +240,22 @@ extern int ZEXPORT zipOpenNewFileInZip3 OF((zipFile file,
                                             uLong crcForCrypting));
 
 extern int ZEXPORT zipOpenNewFileInZip3_64 OF((zipFile file,
-                                            const char* filename,
-                                            const zip_fileinfo* zipfi,
-                                            const void* extrafield_local,
-                                            uInt size_extrafield_local,
-                                            const void* extrafield_global,
-                                            uInt size_extrafield_global,
-                                            const char* comment,
-                                            int method,
-                                            int level,
-                                            int raw,
-                                            int windowBits,
-                                            int memLevel,
-                                            int strategy,
-                                            const char* password,
-                                            uLong crcForCrypting,
-                                            int zip64
-                                            ));
+                                               const char* filename,
+                                               const zip_fileinfo* zipfi,
+                                               const void* extrafield_local,
+                                               uInt size_extrafield_local,
+                                               const void* extrafield_global,
+                                               uInt size_extrafield_global,
+                                               const char* comment,
+                                               int method,
+                                               int level,
+                                               int raw,
+                                               int windowBits,
+                                               int memLevel,
+                                               int strategy,
+                                               const char* password,
+                                               uLong crcForCrypting,
+                                               int zip64));
 
 /*
   Same than zipOpenNewFileInZip2, except
@@ -273,30 +281,28 @@ extern int ZEXPORT zipOpenNewFileInZip4 OF((zipFile file,
                                             const char* password,
                                             uLong crcForCrypting,
                                             uLong versionMadeBy,
-                                            uLong flagBase
-                                            ));
+                                            uLong flagBase));
 
 
 extern int ZEXPORT zipOpenNewFileInZip4_64 OF((zipFile file,
-                                            const char* filename,
-                                            const zip_fileinfo* zipfi,
-                                            const void* extrafield_local,
-                                            uInt size_extrafield_local,
-                                            const void* extrafield_global,
-                                            uInt size_extrafield_global,
-                                            const char* comment,
-                                            int method,
-                                            int level,
-                                            int raw,
-                                            int windowBits,
-                                            int memLevel,
-                                            int strategy,
-                                            const char* password,
-                                            uLong crcForCrypting,
-                                            uLong versionMadeBy,
-                                            uLong flagBase,
-                                            int zip64
-                                            ));
+                                               const char* filename,
+                                               const zip_fileinfo* zipfi,
+                                               const void* extrafield_local,
+                                               uInt size_extrafield_local,
+                                               const void* extrafield_global,
+                                               uInt size_extrafield_global,
+                                               const char* comment,
+                                               int method,
+                                               int level,
+                                               int raw,
+                                               int windowBits,
+                                               int memLevel,
+                                               int strategy,
+                                               const char* password,
+                                               uLong crcForCrypting,
+                                               uLong versionMadeBy,
+                                               uLong flagBase,
+                                               int zip64));
 /*
   Same than zipOpenNewFileInZip4, except
     versionMadeBy : value for Version made by field
@@ -305,8 +311,8 @@ extern int ZEXPORT zipOpenNewFileInZip4_64 OF((zipFile file,
 
 
 extern int ZEXPORT zipWriteInFileInZip OF((zipFile file,
-                       const void* buf,
-                       unsigned len));
+                                           const void* buf,
+                                           unsigned len));
 /*
   Write data in the zipfile
 */
@@ -321,8 +327,8 @@ extern int ZEXPORT zipCloseFileInZipRaw OF((zipFile file,
                                             uLong crc32));
 
 extern int ZEXPORT zipCloseFileInZipRaw64 OF((zipFile file,
-                                            ZPOS64_T uncompressed_size,
-                                            uLong crc32));
+                                              ZPOS64_T uncompressed_size,
+                                              uLong crc32));
 
 /*
   Close the current file in the zipfile, for file opened with
@@ -331,7 +337,7 @@ extern int ZEXPORT zipCloseFileInZipRaw64 OF((zipFile file,
 */
 
 extern int ZEXPORT zipClose OF((zipFile file,
-                const char* global_comment));
+                                const char* global_comment));
 /*
   Close the zipfile
 */
@@ -356,7 +362,7 @@ extern int ZEXPORT zipRemoveExtraInfoBlock OF((char* pData, int* dataLen, short 
 */
 
 #ifdef __cplusplus
-}
+} // extern "C"
 #endif
 
 #endif /* _zip64_H */

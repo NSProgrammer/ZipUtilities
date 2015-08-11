@@ -9,7 +9,7 @@
 #import "NOZCompress.h"
 #include "zip.h"
 
-#define kWEIGHT 1000ll
+#define kWEIGHT (1000ll)
 
 typedef NS_ENUM(NSUInteger, NOZCompressStep)
 {
@@ -221,7 +221,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 {
     NSString *path = [_request.destinationPath stringByStandardizingPath];
     [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:NULL];
-    _zipFile = zipOpen(path.UTF8String, APPEND_STATUS_CREATE);
+    _zipFile = zipOpen(path.UTF8String, zip_append_status_create);
     [self updateProgress:1.f forStep:NOZCompressStepOpen];
 
     if (!_zipFile) {

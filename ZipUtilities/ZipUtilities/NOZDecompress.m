@@ -9,7 +9,7 @@
 #import "NOZDecompress.h"
 #include "unzip.h"
 
-#define kWEIGHT 1000ll
+#define kWEIGHT (1000ll)
 
 typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 {

@@ -120,6 +120,8 @@
  ### Near term
 
  - modernize minizip 1.1 into minizip 1.2
+ - use simple direct wrappers on minizip for the NSOperations to use
+ - add generic utilies like compressing/decompressing from NSData to NSData
  - add Mac OS X target and support
  - add iOS dynamic framework target
  - add generic utilies like compressing/decompressing from NSData to NSData

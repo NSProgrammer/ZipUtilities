@@ -28,4 +28,4 @@ extern int ZEXPORT unzRepair(const char* file,
                              uLong* nRecovered,
                              uLong* bytesRecovered);
 
-#endif
+#endif // _zip_tools_H

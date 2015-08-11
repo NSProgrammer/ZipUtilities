@@ -12,34 +12,31 @@
 #include "unzip.h"
 
 #define READ_8(adr)  ((unsigned char)*(adr))
-#define READ_16(adr) ((unsigned short)( (unsigned short)READ_8(adr) | ((unsigned short)(READ_8(adr+1)) << 8) ))
-#define READ_32(adr) ((unsigned int)( (unsigned int)READ_16(adr) | ((unsigned int)(READ_16((adr)+2)) << 16) ))
+#define READ_16(adr) ((unsigned short)( (unsigned short)READ_8(adr) | ((unsigned short)(READ_8((adr) + 1)) << 8) ))
+#define READ_32(adr) ((unsigned int)( (unsigned int)READ_16(adr) | ((unsigned int)(READ_16((adr) + 2)) << 16) ))
 
 #define WRITE_8(buff, n) do { \
-  *((unsigned char*)(buff)) = (unsigned char) ((n) & 0xff); \
+  *((unsigned char*)(buff)) = (unsigned char)((n) & 0xff); \
 } while(0)
+
 #define WRITE_16(buff, n) do { \
   WRITE_8((unsigned char*)(buff), n); \
-  WRITE_8(((unsigned char*)(buff)) + 1, (n) >> 8); \
+  WRITE_8((unsigned char*)(buff) + 1, (n) >> 8); \
 } while(0)
+
 #define WRITE_32(buff, n) do { \
   WRITE_16((unsigned char*)(buff), (n) & 0xffff); \
   WRITE_16((unsigned char*)(buff) + 2, (n) >> 16); \
 } while(0)
 
 extern int ZEXPORT unzRepair(const char *file, const char *fileOut, const char *fileOutTmp, uLong *nRecovered, uLong *bytesRecovered);
-extern int ZEXPORT unzRepair(file, fileOut, fileOutTmp, nRecovered, bytesRecovered)
-const char* file;
-const char* fileOut;
-const char* fileOutTmp;
-uLong* nRecovered;
-uLong* bytesRecovered;
+int ZEXPORT unzRepair(const char *file, const char *fileOut, const char *fileOutTmp, uLong *nRecovered, uLong *bytesRecovered)
 {
   int err = Z_OK;
   FILE* fpZip = fopen(file, "rb");
   FILE* fpOut = fopen(fileOut, "wb");
   FILE* fpOutCD = fopen(fileOutTmp, "wb");
-  if (fpZip != NULL &&  fpOut != NULL) {
+  if (fpZip != NULL && fpOut != NULL) {
     int entries = 0;
     uLong totalBytes = 0;
     // file entry is 30
@@ -216,7 +213,7 @@ uLong* bytesRecovered;
     {
       int entriesZip = entries;
       char* comment = ""; // "ZIP File recovered by zlib/minizip/mztools";
-      int comsize = (int) strlen(comment);
+      int comsize = (int)strlen(comment);
       if (entriesZip > 0xffff) {
         entriesZip = 0xffff;
       }

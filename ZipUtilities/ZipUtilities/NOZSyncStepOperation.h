@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  Return the weight of a given _step_.
  This can make it so that you can specify the amount of progress attributed to a particular step.
  For example: reading the header of a JPEG is light weight while decoding the image is heavy.
-   You could have header reading be `500ULL` and decoding be `9500ULL` so that 95% goes to decoding.
+   You could have header reading be `500LL` and decoding be `9500LL` so that 95% goes to decoding.
  SHOULD override in subclass.
  Default distributes weight equally amoung all steps.
  */
