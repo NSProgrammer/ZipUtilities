@@ -1605,9 +1605,8 @@ local int zip64FlushWriteBuffer(zip64_internal* zi)
 
     if (zi->ci.encrypt != 0) {
 #ifndef NOCRYPT
-        int t;
         for (uInt i = 0; i < zi->ci.pos_in_buffered_data; i++) {
-            zi->ci.buffered_data[i] = (Byte)zencode(zi->ci.keys, zi->ci.pcrc_32_tab, zi->ci.buffered_data[i], t);
+            zi->ci.buffered_data[i] = (Byte)zencode(zi->ci.keys, zi->ci.pcrc_32_tab, zi->ci.buffered_data[i]);
         }
 #endif
     }

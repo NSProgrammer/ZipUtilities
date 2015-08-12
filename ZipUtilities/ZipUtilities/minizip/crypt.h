@@ -45,9 +45,9 @@ static int decrypt_byte(unsigned long* pkeys, const unsigned long* pcrc_32_tab)
 /***********************************************************************
  * Update the encryption keys with the next byte of plain text
  */
-static int update_keys(unsigned long* pkeys, const unsigned long* pcrc_32_tab, int c)
+static void update_keys(unsigned long* pkeys, const unsigned long* pcrc_32_tab, int c)
 {
-#define update_keys_CRC32(c, b) ((*(pcrc_32_tab+(((int)(c) ^ (b)) & 0xff))) ^ ((c) >> 8))
+#define update_keys_CRC32(a, b) ((*(pcrc_32_tab+(((int)(a) ^ (b)) & 0xff))) ^ ((a) >> 8))
 
     (*(pkeys+0)) = update_keys_CRC32((*(pkeys+0)), c);
     (*(pkeys+1)) += (*(pkeys+0)) & 0xff;
@@ -56,7 +56,6 @@ static int update_keys(unsigned long* pkeys, const unsigned long* pcrc_32_tab, i
       register int keyshift = (int)((*(pkeys+1)) >> 24);
       (*(pkeys+2)) = update_keys_CRC32((*(pkeys+2)), keyshift);
     }
-    return c;
 
 #undef update_keys_CRC32
 }
@@ -77,12 +76,24 @@ static void init_keys(const char* passwd, unsigned long* pkeys, const unsigned l
     }
 }
 
-#define zdecode(pkeys, pcrc_32_tab, c) \
-    (update_keys(pkeys, pcrc_32_tab, c ^= decrypt_byte(pkeys, pcrc_32_tab)))
+static inline int zdecode(unsigned long* pkeys,
+                          const unsigned long* pcrc_32_tab,
+                          int c)
+{
+    c ^= decrypt_byte(pkeys, pcrc_32_tab);
+    update_keys(pkeys, pcrc_32_tab, c);
+    return c;
+}
 
-#warning what's this?  How is this even code?
-#define zencode(pkeys,pcrc_32_tab, c, t) \
-    (t = decrypt_byte(pkeys, pcrc_32_tab), update_keys(pkeys, pcrc_32_tab, c), t^(c))
+static inline int zencode(unsigned long* pkeys,
+                          const unsigned long* pcrc_32_tab,
+                          int c)
+{
+    int t = decrypt_byte(pkeys, pcrc_32_tab);
+    update_keys(pkeys, pcrc_32_tab, c);
+    t ^= c;
+    return t;
+}
 
 #ifdef INCLUDECRYPTINGCODE_IFCRYPTALLOWED
 
@@ -107,7 +118,7 @@ static int crypthead(const char* passwd,      /* password string */
                      unsigned long crcForCrypting)
 {
     int n; /* index */
-    int t; /* temporary */
+//    int t; /* temporary */
     unsigned char header[RAND_HEAD_LEN-2]; /* random header */
 
     if (bufSize < RAND_HEAD_LEN) {
@@ -132,7 +143,7 @@ static int crypthead(const char* passwd,      /* password string */
     for (n = 0; n < RAND_HEAD_LEN-2; n++)
     {
         c = (rand() >> 7) & 0xff;
-        header[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, c, t);
+        header[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, c);
     }
 #endif
 
@@ -140,10 +151,10 @@ static int crypthead(const char* passwd,      /* password string */
     init_keys(passwd, pkeys, pcrc_32_tab);
     for (n = 0; n < RAND_HEAD_LEN-2; n++)
     {
-        buf[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, header[n], t);
+        buf[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, header[n]);
     }
-    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 16) & 0xff, t);
-    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 24) & 0xff, t);
+    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 16) & 0xff);
+    buf[n++] = (unsigned char)zencode(pkeys, pcrc_32_tab, (int)(crcForCrypting >> 24) & 0xff);
     return n;
 }
 
