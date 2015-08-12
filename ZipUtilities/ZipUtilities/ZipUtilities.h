@@ -100,6 +100,10 @@
 
  ## History
 
+ ### 1.0.1b (Aug 11, 2015) - Nolan O'Brien
+
+ - Straighten out some minizip code
+
  ### 1.0.1 (Aug 10, 2015) - Nolan O'Brien
 
  - Added comments/documentation throughout headers
