@@ -180,6 +180,9 @@ static NSOperationQueue *sQueue = nil;
 
 - (void)runGambitWithRequest:(NOZCompressRequest *)request expectedOutputZipName:(NSString *)zipName
 {
+    request.comment = @"This is a comment on the ZIP archive.  Nothing special...just some extra text.";
+    NOZAbstractZipEntry *lastEntry = [[request mutableEntries] lastObject];
+    lastEntry.comment = @"This is a comment on a specific entry in a ZIP archive.";
     [self runCompressRequest:request withQueue:sQueue expectedOutputZipName:zipName];
     [self runCompressRequest:request withQueue:nil expectedOutputZipName:zipName];
     [self runCompressRequest:request cancelling:YES];

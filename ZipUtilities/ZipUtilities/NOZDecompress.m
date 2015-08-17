@@ -7,6 +7,7 @@
 
 #import "NOZ_Project.h"
 #import "NOZDecompress.h"
+#import "NOZUnzipper.h"
 #include "unzip.h"
 
 #define kWEIGHT (1000ll)
@@ -19,12 +20,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     NOZDecompressStepClose,
 };
 
-#define kCancelledError NOZDecompressError(NOZErrorCodeDecompressCancelled, nil)
-
-NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary * __nullable ui)
-{
-    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
-}
+#define kCancelledError NOZError(NOZErrorCodeDecompressCancelled, nil)
 
 @interface NOZDecompressResult ()
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
@@ -221,7 +217,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     noz_defer(^{ [self updateProgress:1.f forStep:NOZDecompressStepOpen]; });
     _unzipFile = unzOpen( (const char*)self.request.sourceFilePath.UTF8String );
     if (!_unzipFile) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToOpenZipArchive, (self.request.sourceFilePath) ? @{ @"souceFilePath" : self.request.sourceFilePath } : nil);
+        return NOZError(NOZErrorCodeDecompressFailedToOpenZipArchive, (self.request.sourceFilePath) ? @{ @"souceFilePath" : self.request.sourceFilePath } : nil);
     }
 
     _sanitizedDestinationDirectoryPath = _request.destinationDirectoryPath;
@@ -231,7 +227,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     _sanitizedDestinationDirectoryPath = [_sanitizedDestinationDirectoryPath stringByStandardizingPath];
 
     if (![[NSFileManager defaultManager] createDirectoryAtPath:_sanitizedDestinationDirectoryPath withIntermediateDirectories:YES attributes:nil error:NULL]) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: @"<null>") });
+        return NOZError(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: @"<null>") });
     }
 
     return nil;
@@ -241,7 +237,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 {
     noz_defer(^{ [self updateProgress:1.f forStep:NOZDecompressStepReadEntrySizes]; });
     if (UNZ_OK != unzGoToFirstFile(_unzipFile)) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
 
     unz_file_info fileInfo = {0};
@@ -256,7 +252,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
                                             NULL,       // comment buffer
                                             0           // comment buffer size
                                             )) {
-            return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+            return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
         }
 
         _expectedEntryCount++;
@@ -265,7 +261,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     } while ((nextFileError = unzGoToNextFile(_unzipFile)) == UNZ_OK);
 
     if (nextFileError != UNZ_END_OF_LIST_OF_FILE) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
 
     _entryPaths = [[NSMutableArray alloc] initWithCapacity:_expectedEntryCount];
@@ -276,7 +272,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 - (NSError *)private_unzipAllEntries
 {
     if (UNZ_OK != unzGoToFirstFile(_unzipFile)) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
 
     NSError *error = nil;
@@ -289,7 +285,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     } while ((nextFileError = unzGoToNextFile(_unzipFile)) == UNZ_OK);
 
     if (nextFileError != UNZ_END_OF_LIST_OF_FILE) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
     
     return error;
@@ -319,7 +315,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
                                         NULL,       // comment buffer
                                         0           // comment buffer size
                                         )) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
 
     char *fileNameBuffer = (char *)malloc(fileInfo.size_filename);
@@ -334,7 +330,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
                                         NULL,       // comment buffer
                                         0           // comment buffer size
                                         )) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
     fileNameBuffer[fileInfo.size_filename] = '\0'; // null terminate
 
@@ -343,22 +339,22 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     NSString *fileDir = [filePath stringByDeletingLastPathComponent];
 
     if (filePath.length == 0 || filePathRelative.length == 0 || fileDir.length == 0) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
 
     if (![[NSFileManager defaultManager] createDirectoryAtPath:fileDir withIntermediateDirectories:YES attributes:nil error:NULL]) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+        return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
     }
 
     if (UNZ_OK != unzOpenCurrentFile(_unzipFile)) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
     }
     noz_defer(^{ unzCloseCurrentFile(_unzipFile); /* if this fails, nothing we can really do */ });
 
     BOOL isDir = NO;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir]) {
         if (isDir || !_flags.delegateHasOverwriteCheck || ![self.delegate shouldDecompressOperation:self overwriteFileAtPath:filePath]) {
-            return NOZDecompressError(NOZErrorCodeDecompressCannotOverwriteExistingFile, @{ @"filePath" : filePath });
+            return NOZError(NOZErrorCodeDecompressCannotOverwriteExistingFile, @{ @"filePath" : filePath });
         }
     }
 
@@ -376,7 +372,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     char buffer[bufferSize];
     FILE* file = fopen(filePath.UTF8String, "w");
     if (!file) {
-        return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+        return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
     }
     noz_defer(^{ fclose(file); });
 
@@ -386,11 +382,11 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
         @autoreleasepool {
             bytesRead = unzReadCurrentFile(_unzipFile, buffer, bufferSize);
             if (bytesRead < 0) {
-                return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+                return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
             }
             bytesWritten = fwrite(buffer, sizeof(char), (size_t)bytesRead, file);
             if (bytesWritten != (size_t)bytesRead) {
-                return NOZDecompressError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
+                return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
             }
             [self private_didDecompressBytes:bytesRead];
 

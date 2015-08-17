@@ -19,20 +19,6 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 static void noz_dos_date_from_NSDate(NSDate *__nonnull dateObj, UInt16* __nonnull dateOut, UInt16* __nonnull timeOut);
 
-static const UInt32 NOZMagicNumberLocalFileHeader               = 0x04034b50;
-static const UInt32 NOZMagicNumberDataDescriptor                = 0x08074b50;
-static const UInt32 NOZMagicNumberCentralDirectoryFileRecord    = 0x02014b50;
-static const UInt32 NOZMagicNumberEndOfCentralDirectoryRecord   = 0x06054b50;
-
-static const UInt32 NOZVersionForCreation   = 20; // Zip 2.0
-static const UInt32 NOZVersionForExtraction = 20; // Zip 2.0
-
-static const UInt16 NOZFlagBitsNormalDeflate    = 0b000000;
-static const UInt16 NOZFlagBitsMaxDeflate       = 0b000010;
-static const UInt16 NOZFlagBitsFastDeflate      = 0b000100;
-static const UInt16 NOZFlagBitsSuperFastDeflate = 0b000110;
-static const UInt16 NOZFlagBitUseDescriptor     = 0b001000;
-
 typedef struct _NOZLocalFileDescriptorT
 {
     // Optionally starts with NOZMagicNumberDataDescriptor
@@ -134,11 +120,6 @@ typedef struct _NOZCurrentEntryInfoT
 
 } NOZCurrentEntryInfoT;
 
-NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nullable ui)
-{
-    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
-}
-
 @interface NOZZipper (Private)
 
 // Top level methods
@@ -232,7 +213,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
     });
 
     if (!_standardizedZipFilePath.UTF8String) {
-        stackError = NOZZipError(NOZErrorCodeZipInvalidFilePath, _zipFilePath ? @{ @"zipFilePath" : _zipFilePath } : nil);
+        stackError = NOZError(NOZErrorCodeZipInvalidFilePath, _zipFilePath ? @{ @"zipFilePath" : _zipFilePath } : nil);
         return NO;
     }
 
@@ -252,7 +233,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
 //        {
 //            fopenMode = "r+";
 //            if (![fm fileExistsAtPath:_standardizedZipFilePath]) {
-//                stackError = NOZZipError(NOZErrorCodeZipCannotOpenExistingZip, @{ @"zipFilePath" : _zipFilePath });
+//                stackError = NOZError(NOZErrorCodeZipCannotOpenExistingZip, @{ @"zipFilePath" : _zipFilePath });
 //                return NO;
 //            }
 //            break;
@@ -261,7 +242,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
         default:
         {
             if ([fm fileExistsAtPath:_standardizedZipFilePath]) {
-                stackError = NOZZipError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+                stackError = NOZError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
                 return NO;
             }
             break;
@@ -270,8 +251,8 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
 
     _internal.file = fopen(_standardizedZipFilePath.UTF8String, fopenMode);
     if (!_internal.file) {
-        // stackError = NOZZipError((NOZZipperModeOpenExisting == mode) ? NOZErrorCodeZipCannotOpenExistingZip : NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
-        stackError = NOZZipError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+        // stackError = NOZError((NOZZipperModeOpenExisting == mode) ? NOZErrorCodeZipCannotOpenExistingZip : NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+        stackError = NOZError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
         return NO;
     }
     noz_defer(^{
@@ -349,8 +330,19 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
         [self private_freeLinkedList];
         return NO;
     } else if (!forceClose && _internal.currentEntryInfo.isOpen) {
-        stackError = NOZZipError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
+        stackError = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
         return NO;
+    }
+
+    NSUInteger globalCommentSize = [self.globalComment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    if (globalCommentSize > UINT16_MAX) {
+        globalCommentSize = 0;
+    }
+    if (globalCommentSize > 0) {
+        _internal.endOfCentralDirectoryRecord.commentSize = (UInt16)globalCommentSize;
+        _internal.comment = malloc(globalCommentSize);
+        memcpy(_internal.comment, self.globalComment.UTF8String, globalCommentSize);
+        _internal.ownsComment = YES;
     }
 
     noz_defer(^{
@@ -364,12 +356,12 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
     });
 
     if (![self private_writeCentralDirectoryRecords]) {
-        stackError = NOZZipError(NOZErrorCodeZipFailedToWriteZip, nil);
+        stackError = NOZError(NOZErrorCodeZipFailedToWriteZip, nil);
         return NO;
     }
 
     if (![self private_writeEndOfCentralDirectoryRecord]) {
-        stackError = NOZZipError(NOZErrorCodeZipFailedToWriteZip, nil);
+        stackError = NOZError(NOZErrorCodeZipFailedToWriteZip, nil);
         return NO;
     }
 
@@ -380,7 +372,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
                     error:(out NSError * __nullable * __nullable)error
 {
     __block BOOL errorEncountered = NO;
-    noz_defer(^{ if (errorEncountered && error) { *error = NOZZipError(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
+    noz_defer(^{ if (errorEncountered && error) { *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
 
     NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX || nameSize == 0) {
@@ -440,7 +432,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
             if ((*abort)) {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
             } else if (!success) {
-                *error = NOZZipError(NOZErrorCodeZipFailedToWriteEntry, nil);
+                *error = NOZError(NOZErrorCodeZipFailedToWriteEntry, nil);
             }
         }
     });
@@ -531,7 +523,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
     _internal.currentEntryInfo.entry = NULL;
 
     if (!success && error) {
-        *error = NOZZipError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
+        *error = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
     }
     
     return success;
@@ -587,14 +579,14 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
 
     if (0 == nameSize) {
         if (error) {
-            *error = NOZZipError(NOZErrorCodeZipCannotOpenNewEntry, nil);
+            *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil);
         }
         return NO;
     }
 
     if (entry.sizeInBytes > UINT32_MAX || (ftello(_internal.file) - _internal.beginBytePosition) > (UINT32_MAX - UINT8_MAX)) {
         if (error) {
-            *error = NOZZipError(NOZErrorCodeZipDoesNotSupportZip64, nil);
+            *error = NOZError(NOZErrorCodeZipDoesNotSupportZip64, nil);
         }
         return NO;
     }
@@ -719,7 +711,7 @@ NS_INLINE NSError * __nonnull NOZZipError(NOZErrorCode code, NSDictionary * __nu
     }
 
     if (!success && error) {
-        *error = NOZZipError(NOZErrorCodeZipCannotOpenNewEntry, nil);
+        *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil);
     }
 
     return success;

@@ -63,8 +63,18 @@
 __strong noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock
 
 typedef void(^noz_defer_block_t)();
-NS_INLINE void noz_deferFunc(__strong noz_defer_block_t *blockRef)
+NS_INLINE void noz_deferFunc(__strong noz_defer_block_t __nonnull * __nonnull blockRef)
 {
     noz_defer_block_t actualBlock = *blockRef;
     actualBlock();
 }
+
+#pragma mark Error
+
+#import "NOZError.h"
+
+NS_INLINE NSError * __nonnull NOZError(NOZErrorCode code, NSDictionary * __nullable ui)
+{
+    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
+}
+

@@ -56,3 +56,17 @@ static const size_t NOZPointerByteSize = 4;
 #endif
 
 static const size_t NOZPageSize = (NOZPointerByteSize * 1024);
+
+static const UInt32 NOZMagicNumberLocalFileHeader               = 0x04034b50;
+static const UInt32 NOZMagicNumberDataDescriptor                = 0x08074b50;
+static const UInt32 NOZMagicNumberCentralDirectoryFileRecord    = 0x02014b50;
+static const UInt32 NOZMagicNumberEndOfCentralDirectoryRecord   = 0x06054b50;
+
+static const UInt32 NOZVersionForCreation   = 20; // Zip 2.0
+static const UInt32 NOZVersionForExtraction = 20; // Zip 2.0
+
+static const UInt16 NOZFlagBitsNormalDeflate    = 0b000000;
+static const UInt16 NOZFlagBitsMaxDeflate       = 0b000010;
+static const UInt16 NOZFlagBitsFastDeflate      = 0b000100;
+static const UInt16 NOZFlagBitsSuperFastDeflate = 0b000110;
+static const UInt16 NOZFlagBitUseDescriptor     = 0b001000;

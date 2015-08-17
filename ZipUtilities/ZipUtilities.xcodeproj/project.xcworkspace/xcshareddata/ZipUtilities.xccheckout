@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>DF060FCA-2673-42C7-83BA-0BC13DAD8C96</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>ZipUtilities</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1B7D3B549F0E9F9E95AF5466865BAC8AD15BAEAF</key>
 		<string>https://github.com/NSProgrammer/ZipUtilities.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ZipUtilities/ZipUtilities.xcodeproj/project.xcworkspace</string>
+	<string>ZipUtilities/ZipUtilities.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1B7D3B549F0E9F9E95AF5466865BAC8AD15BAEAF</key>
