@@ -105,6 +105,13 @@
 
  ## History
 
+ ### 1.1.0  (Aug 15, 2015) - Nolan O'Brien
+
+ - Introduce NOZZipper for compression
+ - Remove minizip dependency for compression
+ - TODO: implement NOZUnzipper and remove minizip dependency completely
+ - NOTE: loses support for password encryption and ZIP64 support
+
  ### 1.0.1b (Aug 11, 2015) - Nolan O'Brien
 
  - Straighten out some minizip code

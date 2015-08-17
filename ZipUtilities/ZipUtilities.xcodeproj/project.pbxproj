@@ -105,7 +105,8 @@
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
-		1C8A4A151B8191B600C8FFB5 /* maniac-mansion.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "maniac-mansion.zip"; path = "../../../Library/Developer/CoreSimulator/Devices/AC045E73-0412-4170-94E4-1CEF6F989AD2/data/tmp/maniac-mansion.zip"; sourceTree = "<group>"; };
+		1C8A4A171B81BC7100C8FFB5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
+		1C8A4A181B81BC7100C8FFB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		1CD9BAB31B757A38000B93C4 /* Aesop.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aesop.txt; sourceTree = "<group>"; };
 		1CD9BAB51B757E3F000B93C4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1CD9BAB81B75B419000B93C4 /* Directory.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Directory.zip; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		1C6BF7671B74086000969629 = {
 			isa = PBXGroup;
 			children = (
-				1C8A4A151B8191B600C8FFB5 /* maniac-mansion.zip */,
 				1CD9BAB51B757E3F000B93C4 /* libz.dylib */,
 				1C6BF7721B74086000969629 /* ZipUtilities */,
 				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
@@ -193,13 +193,15 @@
 		1C6BF7801B74086000969629 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1C16F4F01B787EC100963AB3 /* maniac-mansion */,
+				1CD9BAB31B757A38000B93C4 /* Aesop.txt */,
 				1C3223841B78501A00DC0A33 /* Data.zip */,
 				1CD9BAB81B75B419000B93C4 /* Directory.zip */,
 				1CD9BAB91B75B419000B93C4 /* File.zip */,
-				1CD9BABA1B75B419000B93C4 /* Mixed.zip */,
-				1CD9BAB31B757A38000B93C4 /* Aesop.txt */,
 				1C6BF7811B74086000969629 /* Info.plist */,
+				1C8A4A171B81BC7100C8FFB5 /* LICENSE */,
+				1C16F4F01B787EC100963AB3 /* maniac-mansion */,
+				1CD9BABA1B75B419000B93C4 /* Mixed.zip */,
+				1C8A4A181B81BC7100C8FFB5 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
