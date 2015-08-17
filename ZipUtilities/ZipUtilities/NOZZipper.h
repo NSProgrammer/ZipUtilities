@@ -1,5 +1,5 @@
 //
-//  NOZUtils.h
+//  NOZZipper.h
 //  ZipUtilities
 //
 //  The MIT License (MIT)
@@ -27,32 +27,37 @@
 
 @import Foundation;
 
-/**
- The compression level to use.
- Lower levels execute faster, while higher levels will achieve a higher compression ratio.
- */
-typedef NS_ENUM(NSInteger, NOZCompressionLevel)
-{
-    NOZCompressionLevelNone = 0,
-    NOZCompressionLevelMin = 1,
-    NOZCompressionLevelVeryLow = 2,
-    NOZCompressionLevelLow = 3,
-    NOZCompressionLevelMediumLow = 4,
-    NOZCompressionLevelMedium = 5,
-    NOZCompressionLevelMediumHigh = 6,
-    NOZCompressionLevelHigh = 7,
-    NOZCompressionLevelVeryHigh = 8,
-    NOZCompressionLevelMax = 9,
+#import "NOZZipEntry.h"
 
-    NOZCompressionLevelDefault = -1,
+@class NOZEncrytion;
+
+typedef NS_ENUM(NSInteger, NOZZipperMode)
+{
+    NOZZipperModeCreate,
+// TODO: add support for adding to an existing file
+//    NOZZipperModeOpenExisting,
+//    NOZZipperModeOpenExistingOrCreate,
 };
 
-typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort);
+@interface NOZZipper : NSObject
 
-#if __LP64__
-static const size_t NOZPointerByteSize = 8;
-#else
-static const size_t NOZPointerByteSize = 4;
-#endif
+@property (nonatomic, readonly, nonnull) NSString *zipFilePath;
 
-static const size_t NOZPageSize = (NOZPointerByteSize * 1024);
+@property (nonatomic, copy, nullable) NSString *globalComment; // set "before" closing the Zipper
+
+// Constructor
+- (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)init NS_UNAVAILABLE;
++ (nullable instancetype)new NS_UNAVAILABLE;
+
+// Open/close the zipped file
+- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError * __nullable * __nullable)error;
+- (BOOL)closeAndReturnError:(out NSError * __nullable * __nullable)error;
+- (BOOL)forciblyCloseAndReturnError:(out NSError * __nullable * __nullable)error;
+
+// Add entries
+- (BOOL)addEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+   progressBlock:(__attribute__((noescape)) NOZProgressBlock __nullable)progressBlock
+           error:(out NSError * __nullable * __nullable)error;
+
+@end

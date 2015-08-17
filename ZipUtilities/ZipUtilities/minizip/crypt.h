@@ -97,19 +97,19 @@ static inline int zencode(unsigned long* pkeys,
 
 #ifdef INCLUDECRYPTINGCODE_IFCRYPTALLOWED
 
-#define RAND_HEAD_LEN  12
+#define RAND_HEAD_LEN  (12)
 
 /* "last resort" source for second part of crypt seed pattern */
 #ifndef ZCR_SEED2
-#define ZCR_SEED2 3141592654UL  /* use PI as default pattern */
+#define ZCR_SEED2 (3141592654UL)  /* use PI as default pattern */
 #endif
 
-#if !defined(_ANSI_SOURCE) && (!defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE))
-#define USE_ARC4RANDOM 1
-#else
-#define USE_ARC4RANDOM 0
-#endif
-
+static int crypthead(const char* passwd,      /* password string */
+                     unsigned char* buf,      /* where to write header */
+                     int bufSize,
+                     unsigned long* pkeys,
+                     const unsigned long* pcrc_32_tab,
+                     unsigned long crcForCrypting);
 static int crypthead(const char* passwd,      /* password string */
                      unsigned char* buf,      /* where to write header */
                      int bufSize,
@@ -118,7 +118,6 @@ static int crypthead(const char* passwd,      /* password string */
                      unsigned long crcForCrypting)
 {
     int n; /* index */
-//    int t; /* temporary */
     unsigned char header[RAND_HEAD_LEN-2]; /* random header */
 
     if (bufSize < RAND_HEAD_LEN) {
@@ -130,22 +129,7 @@ static int crypthead(const char* passwd,      /* password string */
      * output of rand() to get less predictability, since rand() is
      * often poorly implemented.
      */
-#if USE_ARC4RANDOM
     arc4random_buf(&header, sizeof(header));
-#else
-    static bool sSeeded = false;
-    if (!sSeeded) {
-        sSeeded = true;
-        srand((unsigned)((unsigned long)time(NULL) ^ ZCR_SEED2));
-    }
-    int c;
-    init_keys(passwd, pkeys, pcrc_32_tab);
-    for (n = 0; n < RAND_HEAD_LEN-2; n++)
-    {
-        c = (rand() >> 7) & 0xff;
-        header[n] = (unsigned char)zencode(pkeys, pcrc_32_tab, c);
-    }
-#endif
 
     /* Encrypt random header (last two bytes is high word of crc) */
     init_keys(passwd, pkeys, pcrc_32_tab);

@@ -7,7 +7,7 @@
 
 #import "NOZ_Project.h"
 #import "NOZCompress.h"
-#include "zip.h"
+#import "NOZZipper.h"
 
 #define kWEIGHT (1000ll)
 
@@ -35,13 +35,17 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
+@interface NOZCompressRequest ()
+@property (nonatomic, nonnull) NSMutableArray *mutableEntries;
+@end
+
 @interface NOZCompressResult ()
 @property (nonatomic, copy) NSString *destinationPath;
 @property (nonatomic, nullable) NSError *operationError;
 @property (nonatomic) BOOL didSucceed;
 @property (nonatomic) NSTimeInterval duration;
-@property (nonatomic) int64_t uncompressedSize;
-@property (nonatomic) int64_t compressedSize;
+@property (nonatomic) SInt64 uncompressedSize;
+@property (nonatomic) SInt64 compressedSize;
 @end
 
 @interface NOZCompressOperation (Private)
@@ -53,20 +57,20 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (nullable NSError *)private_closeFile;
 
 #pragma mark Helpers
-- (nullable NSError *)private_addEntry:(nonnull NOZCompressEntry *)entry;
-- (void)private_didCompressBytes:(int64_t)byteCount;
+- (nullable NSError *)private_addEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry;
+- (void)private_didCompressBytes:(SInt64)byteCount;
 
 @end
 
 @implementation NOZCompressOperation
 {
-    zipFile _zipFile;
+    NOZZipper *_zipper;
     __strong id<NOZCompressDelegate> _strongDelegate;
     __weak id<NOZCompressDelegate> _weakDelegate;
     NOZCompressRequest *_request;
     CFAbsoluteTime _startTime;
-    int64_t _totalUncompressedBytes;
-    int64_t _finishedUncompressedBytes;
+    SInt64 _totalUncompressedBytes;
+    SInt64 _finishedUncompressedBytes;
 
     struct {
         BOOL delegateUpdatesProgress:1;
@@ -124,7 +128,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
     return 4;
 }
 
-- (int64_t)weightForStep:(NSUInteger)stepIndex
+- (SInt64)weightForStep:(NSUInteger)stepIndex
 {
     NOZCompressStep step = stepIndex;
     switch (step) {
@@ -181,14 +185,14 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
         result.operationError = error;
 
         // Clean up
-        if (_zipFile) {
+        if (_zipper) {
             [self private_closeFile];
             [[NSFileManager defaultManager] removeItemAtPath:result.destinationPath error:NULL];
         }
     } else {
         result.didSucceed = YES;
         result.uncompressedSize = _totalUncompressedBytes;
-        result.compressedSize = (int64_t)[[[NSFileManager defaultManager] attributesOfItemAtPath:result.destinationPath error:NULL] fileSize];
+        result.compressedSize = (SInt64)[[[NSFileManager defaultManager] attributesOfItemAtPath:result.destinationPath error:NULL] fileSize];
     }
     _result = result;
 
@@ -207,7 +211,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 - (NSError *)private_prepareProgress
 {
-    for (NOZCompressEntry *entry in _request.entries) {
+    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in _request.entries) {
         _totalUncompressedBytes += entry.sizeInBytes;
     }
     if (!_totalUncompressedBytes) {
@@ -221,11 +225,14 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 {
     NSString *path = [_request.destinationPath stringByStandardizingPath];
     [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:NULL];
-    _zipFile = zipOpen(path.UTF8String, zip_append_status_create);
+    _zipper = [[NOZZipper alloc] initWithZipFile:path];
+    NSError *error = nil;
+    [_zipper openWithMode:NOZZipperModeCreate error:&error];
     [self updateProgress:1.f forStep:NOZCompressStepOpen];
 
-    if (!_zipFile) {
-        return NOZCompressError(NOZErrorCodeCompressFailedToOpenNewZipFile, @{ @"path" : _request.destinationPath ?: @"<null>" });
+    if (error) {
+        _zipper = nil;
+        return NOZCompressError(NOZErrorCodeCompressFailedToOpenNewZipFile, @{ @"path" : _request.destinationPath ?: @"<null>", NSUnderlyingErrorKey : error });
     }
     return nil;
 }
@@ -233,7 +240,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (NSError *)private_addEntries
 {
     NSError *error = NOZCompressError(NOZErrorCodeCompressNoEntriesToCompress, nil);
-    for (NOZCompressEntry *entry in _request.entries) {
+    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in _request.entries) {
         @autoreleasepool {
             if (self.isCancelled) {
                 return kCancelledError;
@@ -250,12 +257,13 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 - (NSError *)private_closeFile
 {
-    if (_zipFile) {
+    if (_zipper) {
         noz_defer(^{ [self updateProgress:1.f forStep:NOZCompressStepClose]; });
-        if (Z_OK == zipClose(_zipFile, NULL)) {
-            _zipFile = NULL;
+        NSError *error;
+        if ([_zipper closeAndReturnError:&error]) {
+            _zipper = nil;
         } else {
-            return NOZCompressError(NOZErrorCodeCompressFailedToFinalizeNewZipFile, nil);
+            return NOZCompressError(NOZErrorCodeCompressFailedToFinalizeNewZipFile, @{ NSUnderlyingErrorKey : error });            return error;
         }
     }
     return nil;
@@ -263,113 +271,91 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 #pragma mark Helpers
 
-- (NSError *)private_addEntry:(NOZCompressEntry *)entry
+- (NSError *)private_addEntry:(NOZAbstractZipEntry<NOZZippableEntry> *)entry
 {
     // Start
     if (!entry.name) {
         return NOZCompressError(NOZErrorCodeCompressMissingEntryName, @{ @"entry" : entry });
     }
-    if (!entry.hasDataOrFile) {
-        return NOZCompressError(NOZErrorCodeCompressMissingEntryDataOrFile, @{ @"entry" : entry });
+    if (!entry.canBeZipped) {
+        return NOZCompressError(NOZErrorCodeCompressEntryCannotBeZipped, @{ @"entry" : entry });
     }
 
-    zip_fileinfo zipInfo = { 0 };
-
-    NSDate* fileDate = entry.fileDate ?: [NSDate date];
-
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents* components = [gregorianCalendar components:   NSCalendarUnitYear |
-                                                                    NSCalendarUnitMonth |
-                                                                    NSCalendarUnitDay |
-                                                                    NSCalendarUnitHour |
-                                                                    NSCalendarUnitMinute |
-                                                                    NSCalendarUnitSecond
-                                                        fromDate:fileDate];
-
-    zipInfo.tmz_date.tm_sec = (uInt)components.second;
-    zipInfo.tmz_date.tm_min = (uInt)components.minute;
-    zipInfo.tmz_date.tm_hour = (uInt)components.hour;
-    zipInfo.tmz_date.tm_mday = (uInt)components.day;
-    zipInfo.tmz_date.tm_mon = (uInt)components.month;
-    zipInfo.tmz_date.tm_year = (uInt)components.year;
-
-
-    __block int status = zipOpenNewFileInZip(_zipFile,                  // file
-                                             entry.name.UTF8String,     // name
-                                             &zipInfo,                  // info
-                                             NULL,                      // extra local
-                                             0,                         // extra local size
-                                             NULL,                      // extra global
-                                             0,                         // extra global size
-                                             NULL,                      // comment
-                                             Z_DEFLATED,                // compression
-                                             _request.compressionLevel  // compression level
-                                             );
-    if (status != Z_OK) {
-        return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry });
-    }
-    noz_defer(^{
-        zipCloseFileInZip(_zipFile);
-    });
-
-    if (self.isCancelled) {
-        return NOZCompressError(NOZErrorCodeCompressCancelled, nil);
-    }
-
-    // Add data (from NSData or from file)
-
-    if (entry.data) {
-        [entry.data enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-            status = zipWriteInFileInZip(_zipFile, bytes, (unsigned int)byteRange.length);
-            if (status != Z_OK || self.isCancelled) {
-                *stop = YES;
-            } else {
-                [self private_didCompressBytes:(int64_t)byteRange.length];
-            }
-        }];
-    } else if (entry.path) {
-        NSString *path = [entry.path stringByStandardizingPath];
-        FILE *file = fopen(path.UTF8String, "r");
-        noz_defer(^{ if (file) { fclose(file); } });
-
-        if (!file) {
-            status = Z_DATA_ERROR;
-        } else {
-            const size_t bufferSize = 4096;
-            unsigned char buffer[bufferSize];
-            size_t bytesRead;
-            do {
-                @autoreleasepool {
-                    bytesRead = fread(buffer, sizeof(unsigned char), bufferSize, file);
-                    if (bytesRead > 0) {
-                        status = zipWriteInFileInZip(_zipFile, buffer, (unsigned int)bytesRead);
-                        if (status == Z_OK) {
-                            [self private_didCompressBytes:(int64_t)bytesRead];
-                        }
-                    }
-
-                    if (self.isCancelled) {
-                        return kCancelledError;
-                    }
-                }
-            } while (bytesRead == bufferSize && status == Z_OK);
-
-            if (status == Z_OK && !feof(file)) {
-                status = Z_DATA_ERROR;
+    NSError *error = nil;
+    [_zipper addEntry:entry
+        progressBlock:^(SInt64 totalBytesToWrite, SInt64 bytesWritten, SInt64 bytesThisPass, BOOL *abort) {
+            [self private_didCompressBytes:bytesThisPass];
+            if (self.isCancelled) {
+                *abort = YES;
             }
         }
-    }
-
-    if (status != Z_OK) {
-        return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry });
-    } else if (self.isCancelled) {
-        return kCancelledError;
+                error:&error];
+    if (error) {
+        return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry, NSUnderlyingErrorKey : error });
     }
 
     return nil;
+
+//    __block int status = zipOpenNewFileInZip(_zipFile,                  // file
+//                                             entry.name.UTF8String,     // name
+//                                             &zipInfo,                  // info
+//                                             entry.extra.bytes,         // extra local
+//                                             (uInt)entry.extra.length,  // extra local size
+//                                             NULL,                      // extra global
+//                                             0,                         // extra global size
+//                                             entry.comment.UTF8String,  // comment
+//                                             Z_DEFLATED,                // compression
+//                                             entry.compressionLevel     // compression level
+//                                             );
+//    if (status != Z_OK) {
+//        return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry });
+//    }
+//    noz_defer(^{
+//        zipCloseFileInZip(_zipFile);
+//    });
+//
+//    if (self.isCancelled) {
+//        return NOZCompressError(NOZErrorCodeCompressCancelled, nil);
+//    }
+//
+//    // Add data to zip file
+//
+//    NSInputStream *stream = [entry inputStream];
+//    if (!stream) {
+//        status = Z_DATA_ERROR;
+//    } else {
+//        const NSUInteger bufferSize = 4096;
+//        Byte buffer[bufferSize];
+//
+//        [stream open];
+//        noz_defer(^{ [stream close]; });
+//
+//        NSInteger bytesRead = bufferSize;
+//        while (stream.hasBytesAvailable && bytesRead == bufferSize && Z_OK == status) {
+//            bytesRead = [stream read:buffer maxLength:bufferSize];
+//            if (bytesRead > 0) {
+//                status = zipWriteInFileInZip(_zipFile, buffer, (unsigned int)bytesRead);
+//                if (Z_OK == status) {
+//                    [self private_didCompressBytes:bytesRead];
+//                }
+//            }
+//
+//            if (self.isCancelled) {
+//                return kCancelledError;
+//            }
+//        }
+//    }
+//
+//    if (status != Z_OK) {
+//        return NOZCompressError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry });
+//    } else if (self.isCancelled) {
+//        return kCancelledError;
+//    }
+//
+//    return nil;
 }
 
-- (void)private_didCompressBytes:(int64_t)byteCount
+- (void)private_didCompressBytes:(SInt64)byteCount
 {
     _finishedUncompressedBytes += byteCount;
     float progress = 1.f;
@@ -449,9 +435,6 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 @end
 
 @implementation NOZCompressRequest
-{
-    NSMutableArray *_entries;
-}
 
 - (instancetype)init
 {
@@ -462,9 +445,8 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (instancetype)initWithDestinationPath:(NSString *)path
 {
     if (self = [super init]) {
-        _compressionLevel = NOZCompressionLevelDefault;
         _destinationPath = [path copy];
-        _entries = [[NSMutableArray alloc] init];
+        _mutableEntries = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -473,15 +455,14 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 {
     NOZCompressRequest *copy = [[[self class] allocWithZone:zone] initWithDestinationPath:self.destinationPath];
     copy.destinationPath = self.destinationPath;
-    copy->_entries = [self.entries mutableCopy];
-    copy->_compressionLevel = self.compressionLevel;
+    copy->_mutableEntries = [self.entries mutableCopy];
     return copy;
 }
 
 - (NSArray *)entries
 {
-    NSMutableArray *entries = [[NSMutableArray alloc] initWithCapacity:_entries.count];
-    for (NOZCompressEntry *entry in _entries) {
+    NSMutableArray *entries = [[NSMutableArray alloc] initWithCapacity:_mutableEntries.count];
+    for (NOZAbstractZipEntry *entry in _mutableEntries) {
         [entries addObject:[entry copy]];
     }
     return [entries copy];
@@ -489,20 +470,23 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 - (void)setEntries:(NSArray *)entries
 {
-    [_entries removeAllObjects];
-    for (NOZCompressEntry *entry in entries) {
+    [_mutableEntries removeAllObjects];
+    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in entries) {
         [self addEntry:entry];
     }
 }
 
-- (void)addEntry:(NOZCompressEntry *)entry
+- (void)addEntry:(NOZAbstractZipEntry *)entry
 {
-    [_entries addObject:[entry copy]];
+    [_mutableEntries addObject:[entry copy]];
 }
 
-- (void)addEntriesInDirectory:(NSString *)directoryPath
+- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)block
 {
-    for (NOZCompressEntry *entry in NOZEntriesFromDirectory(directoryPath)) {
+    for (NOZFileZipEntry *entry in NOZEntriesFromDirectory(directoryPath)) {
+        if (block) {
+            entry.compressionLevel = block(entry.filePath);
+        }
         [self addEntry:entry];
     }
 }
@@ -514,106 +498,23 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 - (void)addFileEntry:(NSString *)filePath name:(NSString *)name
 {
-    NOZCompressEntry *entry = [[NOZCompressEntry alloc] initWithFilePath:filePath name:name];
+    NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:filePath name:name];
     [self addEntry:entry];
 }
 
 - (void)addDataEntry:(NSData *)data name:(NSString *)name
 {
-    NOZCompressEntry *entry = [[NOZCompressEntry alloc] initWithData:data name:name];
+    NOZDataZipEntry *entry = [[NOZDataZipEntry alloc] initWithData:data name:name];
     [self addEntry:entry];
 }
 
 - (NSString *)description
 {
-    NSMutableString *string = [NSMutableString stringWithFormat:@"<%@ %p : compressionLevel=%zi", NSStringFromClass([self class]), self, self.compressionLevel];
+    NSMutableString *string = [NSMutableString stringWithFormat:@"<%@ %p :", NSStringFromClass([self class]), self];
     if (self.destinationPath) {
         [string appendFormat:@", dstPath='%@'", self.destinationPath];
     }
     [string appendFormat:@", entries=%@", self.entries];
-    [string appendString:@">"];
-    return string;
-}
-
-@end
-
-@implementation NOZCompressEntry
-
-- (instancetype)initWithFilePath:(NSString * __nonnull)path
-{
-    return [self initWithFilePath:path name:path.lastPathComponent];
-}
-
-- (instancetype)initWithFilePath:(NSString * __nonnull)path name:(NSString * __nonnull)name
-{
-    if (self = [self init]) {
-        _path = [path copy];
-        _name = [name copy];
-    }
-    return self;
-}
-
-- (instancetype)initWithData:(NSData * __nonnull)data name:(NSString * __nonnull)name
-{
-    if (self = [self init]) {
-        _data = data;
-        _name = [name copy];
-    }
-    return self;
-}
-
-- (BOOL)hasDataOrFile
-{
-    if (_data != nil) {
-        return YES;
-    }
-
-    BOOL isDir = NO;
-    if (_path != nil && [[NSFileManager defaultManager] fileExistsAtPath:_path isDirectory:&isDir] && !isDir) {
-        return YES;
-    }
-
-    return NO;
-}
-
-- (int64_t)sizeInBytes
-{
-    if (_data) {
-        return (int64_t)[_data length];
-    }
-
-    return (int64_t)[[[NSFileManager defaultManager] attributesOfItemAtPath:_path error:NULL] fileSize];
-}
-
-- (NSDate *)fileDate
-{
-    if (!_path) {
-        return nil;
-    }
-
-    return [[[NSFileManager defaultManager] attributesOfItemAtPath:_path error:NULL] fileModificationDate];
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    NOZCompressEntry *entry = [[[self class] allocWithZone:zone] init];
-    entry->_path = _path;
-    entry->_name = _name;
-    entry->_data = _data;
-    return entry;
-}
-
-- (NSString *)description
-{
-    NSMutableString *string = [NSMutableString stringWithFormat:@"<%@ %p", NSStringFromClass([self class]), self];
-    if (_name) {
-        [string appendFormat:@", name='%@'", _name];
-    }
-    if (_data) {
-        [string appendFormat:@", data.length=%tu", _data.length];
-    } else if (_path) {
-        [string appendFormat:@", path='%@'", _path];
-    }
     [string appendString:@">"];
     return string;
 }
@@ -630,7 +531,7 @@ static NSArray * NOZEntriesFromDirectory(NSString * directoryPath)
         NSString *fullPath = [directoryPath stringByAppendingPathComponent:filePath];
         BOOL isDir = NO;
         if ([fm fileExistsAtPath:fullPath isDirectory:&isDir] && !isDir) {
-            NOZCompressEntry *entry = [[NOZCompressEntry alloc] initWithFilePath:fullPath name:filePath];
+            NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:fullPath name:filePath];
             [entries addObject:entry];
         }
     }

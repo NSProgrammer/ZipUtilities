@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  SHOULD override in subclass.
  Default distributes weight equally amoung all steps.
  */
-- (int64_t)weightForStep:(NSUInteger)step;
+- (SInt64)weightForStep:(NSUInteger)step;
 
 /**
  Run the specified _step_.

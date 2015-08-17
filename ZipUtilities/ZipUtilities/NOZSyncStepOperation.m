@@ -15,9 +15,9 @@
 @implementation NOZSyncStepOperation
 {
     NSUInteger _stepCount;
-    int64_t *_stepWeights;
+    SInt64 *_stepWeights;
     float *_currentStepProgress;
-    int64_t _totalWeight;
+    SInt64 _totalWeight;
 }
 
 - (void)dealloc
@@ -31,12 +31,12 @@
     _stepCount = [self numberOfSteps];
 
     if (_stepCount > 0) {
-        _stepWeights = (int64_t *)malloc(sizeof(int64_t) * _stepCount);
+        _stepWeights = (SInt64 *)malloc(sizeof(SInt64) * _stepCount);
         _currentStepProgress = (float *)malloc(sizeof(float) * _stepCount);
     }
 
     for (NSUInteger step = 0; step < _stepCount; step++) {
-        int64_t weight = [self weightForStep:step];
+        SInt64 weight = [self weightForStep:step];
         _stepWeights[step] = weight;
         _currentStepProgress[step] = 0.f;
         _totalWeight += weight;
@@ -87,7 +87,7 @@
     return 0;
 }
 
-- (int64_t)weightForStep:(NSUInteger)stepIndex
+- (SInt64)weightForStep:(NSUInteger)stepIndex
 {
     if (!_stepCount) {
         return 0ll;
@@ -138,7 +138,7 @@
 
     _currentStepProgress[step] = MIN(progress, 1.f);
 
-    int64_t currentWeight = 0;
+    SInt64 currentWeight = 0;
     for (NSUInteger iStep = 0; iStep < _stepCount; iStep++) {
         currentWeight += _currentStepProgress[iStep] * _stepWeights[iStep];
         if (_currentStepProgress[iStep] < 0.f) {

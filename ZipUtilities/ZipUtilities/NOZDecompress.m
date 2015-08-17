@@ -33,8 +33,8 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 @property (nonatomic) BOOL didSucceed;
 
 @property (nonatomic) NSTimeInterval duration;
-@property (nonatomic) int64_t uncompressedSize;
-@property (nonatomic) int64_t compressedSize;
+@property (nonatomic) SInt64 uncompressedSize;
+@property (nonatomic) SInt64 compressedSize;
 @end
 
 @interface NOZDecompressDelegateInternal : NSObject <NOZDecompressDelegate>
@@ -59,7 +59,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 #pragma mark Helpers
 - (nullable NSError *)private_unzipCurrentEntry;
 - (nullable NSError *)private_unzipCurrentOpenEntry:(nonnull unz_file_info *)fileInfoPtr toFilePath:(nonnull NSString *)filePath;
-- (void)private_didDecompressBytes:(int64_t)bytes;
+- (void)private_didDecompressBytes:(SInt64)bytes;
 
 @end
 
@@ -72,8 +72,8 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     NSString *_sanitizedDestinationDirectoryPath;
     CFAbsoluteTime _startTime;
     NSUInteger _expectedEntryCount;
-    int64_t _expectedUncompressedSize;
-    int64_t _bytesUncompressed;
+    SInt64 _expectedUncompressedSize;
+    SInt64 _bytesUncompressed;
     NSMutableArray *_entryPaths;
 
     struct {
@@ -134,7 +134,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     return 4;
 }
 
-- (int64_t)weightForStep:(NSUInteger)stepIndex
+- (SInt64)weightForStep:(NSUInteger)stepIndex
 {
     NOZDecompressStep step = stepIndex;
     switch (step) {
@@ -198,7 +198,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
         result.didSucceed = YES;
         result.destinationFiles = _entryPaths;
 
-        result.uncompressedSize = (int64_t)[[fm attributesOfItemAtPath:_request.sourceFilePath error:NULL] fileSize];
+        result.uncompressedSize = (SInt64)[[fm attributesOfItemAtPath:_request.sourceFilePath error:NULL] fileSize];
         result.compressedSize = _expectedUncompressedSize;
     }
     _result = result;
@@ -402,12 +402,12 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
 
     if (fileInfoPtr->tmu_date.tm_year > 0) {
         NSDateComponents* components = [[NSDateComponents alloc] init];
-        components.second = fileInfoPtr->tmu_date.tm_sec;
-        components.minute = fileInfoPtr->tmu_date.tm_min;
-        components.hour = fileInfoPtr->tmu_date.tm_hour;
-        components.day = fileInfoPtr->tmu_date.tm_mday;
-        components.month = fileInfoPtr->tmu_date.tm_mon + 1;
-        components.year = fileInfoPtr->tmu_date.tm_year;
+        components.second = (NSInteger)fileInfoPtr->tmu_date.tm_sec;
+        components.minute = (NSInteger)fileInfoPtr->tmu_date.tm_min;
+        components.hour = (NSInteger)fileInfoPtr->tmu_date.tm_hour;
+        components.day = (NSInteger)fileInfoPtr->tmu_date.tm_mday;
+        components.month = (NSInteger)fileInfoPtr->tmu_date.tm_mon + 1;
+        components.year = (NSInteger)fileInfoPtr->tmu_date.tm_year;
 
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDate* date = [calendar dateFromComponents:components];
@@ -421,7 +421,7 @@ NS_INLINE NSError * __nonnull NOZDecompressError(NOZErrorCode code, NSDictionary
     return nil;
 }
 
-- (void)private_didDecompressBytes:(int64_t)bytes
+- (void)private_didDecompressBytes:(SInt64)bytes
 {
     _bytesUncompressed += bytes;
     float progress = 1.f;

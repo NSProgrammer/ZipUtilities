@@ -29,36 +29,17 @@
 
 #import "NOZError.h"
 #import "NOZSyncStepOperation.h"
+#import "NOZZipEntry.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NOZCompressEntry;
 @class NOZCompressOperation;
 @class NOZCompressRequest;
 @class NOZCompressResult;
 @protocol NOZCompressDelegate;
 
-/**
- The compression level to use.
- Lower levels execute faster, while higher levels will achieve a higher compression ratio.
- */
-typedef NS_ENUM(NSInteger, NOZCompressionLevel)
-{
-    NOZCompressionLevelNone = 0,
-    NOZCompressionLevelMin = 1,
-    NOZCompressionLevelVeryLow = 2,
-    NOZCompressionLevelLow = 3,
-    NOZCompressionLevelMediumLow = 4,
-    NOZCompressionLevelMedium = 5,
-    NOZCompressionLevelMediumHigh = 6,
-    NOZCompressionLevelHigh = 7,
-    NOZCompressionLevelVeryHigh = 8,
-    NOZCompressionLevelMax = 9,
-
-    NOZCompressionLevelDefault = -1,
-};
-
 typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompressResult * result);
+typedef NOZCompressionLevel(^NOZCompressionSelectionBlock)(NSString *filePath);
 
 /**
  `NOZCompressOperation` is an `NSOperation` for compressing one or more sources (`NSData` objects
@@ -133,13 +114,11 @@ typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompress
 
 /** The on disk file to archive to */
 @property (nonatomic, copy) NSString *destinationPath;
-/** The array of `NOZCompressEntry` objects to compress.  Read and write of perform a deep copy. */
+/** The array of `NOZAbstractZipEntry` objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
 @property (nonatomic, copy) NSArray *entries;
-/** The `NOZCompressionLevel` to compress at.  Default is `NOZCompressionLevelDefault`. */
-@property (nonatomic) NOZCompressionLevel compressionLevel;
 
-/** Add a `NOZCompressEntry` */
-- (void)addEntry:(NOZCompressEntry *)entry;
+/** Add a `NOZAbstractiZipEntry` conforming to `NOZZippableEntry` */
+- (void)addEntry:(NOZAbstractZipEntry<NOZZippableEntry> *)entry;
 /** Add an entry via a _filePath_.  _name will be `filePath.lastPathComponent`. */
 - (void)addFileEntry:(NSString *)filePath;
 /** Add an entry via a _filePath_ with a _name_ for the entry (used as the file name when decompressed) */
@@ -147,7 +126,7 @@ typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompress
 /** Add an entry via `NSData` with a _name_ for the entry (used as the file name when decompressed) */
 - (void)addDataEntry:(NSData *)data name:(NSString *)name;
 /** Recursively add a directory of files as entries */
-- (void)addEntriesInDirectory:(NSString *)directoryPath;
+- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)block;
 
 /**
  Designated initializer
@@ -159,34 +138,6 @@ typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompress
 - (instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
 + (instancetype)new NS_UNAVAILABLE;
-
-@end
-
-/**
- `NOZCompressEntry` encapsulates the information needed for an entry of a zip archive
- */
-@interface NOZCompressEntry : NSObject <NSCopying>
-
-/** The name of the entry.  Cannot be `nil`. */
-@property (nonatomic, copy) NSString *name;
-/** The path to a file for the entry.  Must provide either `path` or `data`. */
-@property (nonatomic, copy, nullable) NSString *path;
-/** The data for the entry.  Must provide either `path` or `data`. */
-@property (nonatomic, copy, nullable) NSData *data;
-
-/** Timestamp for the entry.  `nil` for `data`, read from the modification date of the file at `path`. */
-- (NSDate *)fileDate;
-/** The size in bytes of the entry */
-- (int64_t)sizeInBytes;
-/** Method to validate the entry has either `data` or `path` with `path` being a valid file on disk. */
-- (BOOL)hasDataOrFile;
-
-/** Convenience initializer.  `name` will be set to `path.lastPathComponent` */
-- (instancetype)initWithFilePath:(NSString *)path;
-/** Convenience initializer */
-- (instancetype)initWithFilePath:(NSString *)path name:(NSString *)name;
-/** Convenience initializer */
-- (instancetype)initWithData:(NSData *)data name:(NSString *)name;
 
 @end
 
@@ -205,9 +156,9 @@ typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompress
 /** The duration that the operation took from start to finish.  Does not included wait time in a queue. */
 @property (nonatomic, readonly) NSTimeInterval duration;
 /** The size of the archive uncompressed */
-@property (nonatomic, readonly) int64_t uncompressedSize;
+@property (nonatomic, readonly) SInt64 uncompressedSize;
 /** The size of the archive compressed */
-@property (nonatomic, readonly) int64_t compressedSize;
+@property (nonatomic, readonly) SInt64 compressedSize;
 /** Computed from the uncompressed and compressed sizes.  `_uncompressedSize_ / _compressedSize_`. */
 - (float)compressionRatio;
 

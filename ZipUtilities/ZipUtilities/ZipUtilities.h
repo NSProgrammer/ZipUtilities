@@ -30,6 +30,11 @@
 #import "NOZCompress.h"
 #import "NOZDecompress.h"
 
+#pragma mark Zip/Unzip Objects
+
+#import "NOZUnzipper.h"
+#import "NOZZipper.h"
+
 #pragma mark Errors
 
 #import "NOZError.h"

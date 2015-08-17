@@ -108,13 +108,11 @@ typedef struct
 {
     tm_zip      tmz_date;       /* date in understandable format           */
     uLong       dosDate;       /* if dos_date == 0, tmu_date is used      */
-/*    uLong       flag;        */   /* general purpose bit flag        2 bytes */
+/*    ushort       flag;        */   /* general purpose bit flag        2 bytes */
 
-    uLong       internal_fa;    /* internal file attributes        2 bytes */
+    ushort      internal_fa;    /* internal file attributes        2 bytes */
     uLong       external_fa;    /* external file attributes        4 bytes */
 } zip_fileinfo;
-
-typedef const char* zipcharpc;
 
 typedef enum {
     zip_append_status_create        = 0,
@@ -122,13 +120,11 @@ typedef enum {
     zip_append_status_addinzip      = 2,
 } zip_append_status;
 
-extern zipFile ZEXPORT zipOpen OF((const char *pathname, int append));
-extern zipFile ZEXPORT zipOpen64 OF((const void *pathname, int append));
+extern zipFile ZEXPORT zipOpen OF((const char *pathname, zip_append_status append));
 /*
   Create a zipfile.
-     pathname contain on Windows XP a filename like "c:\\zlib\\zlib113.zip" or on
-       an Unix computer "zlib/zlib113.zip".
-     if the file pathname exist and append==zip_append_status_createAFTER, the zip
+     pathname contain on an Unix computer "zlib/zlib113.zip".
+     if the file pathname exist and append==zip_append_status_createafter, the zip
        will be created at the end of the file.
          (useful if the file contain a self extractor code)
      if the file pathname exist and append==zip_append_status_addinzip, we will
@@ -144,14 +140,8 @@ extern zipFile ZEXPORT zipOpen64 OF((const void *pathname, int append));
 */
 
 extern zipFile ZEXPORT zipOpen2 OF((const char *pathname,
-                                    int append,
-                                    zipcharpc* globalcomment,
-                                    zlib_filefunc_def* pzlib_filefunc_def));
-
-extern zipFile ZEXPORT zipOpen2_64 OF((const void *pathname,
-                                       int append,
-                                       zipcharpc* globalcomment,
-                                       zlib_filefunc64_def* pzlib_filefunc_def));
+                                    zip_append_status append,
+                                    const char** globalcomment));
 
 extern int ZEXPORT zipOpenNewFileInZip OF((zipFile file,
                                            const char* filename,

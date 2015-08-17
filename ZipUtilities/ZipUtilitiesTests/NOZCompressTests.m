@@ -35,6 +35,10 @@
 
 static NSOperationQueue *sQueue = nil;
 
+@interface NOZCompressRequest (TestExposure)
+- (nonnull NSMutableArray *)mutableEntries;
+@end
+
 @interface NOZCompressTests : XCTestCase <NOZCompressDelegate>
 @end
 
@@ -63,10 +67,56 @@ static NSOperationQueue *sQueue = nil;
     [super tearDown];
 }
 
++ (void)forceCompressionLevel:(NOZCompressionLevel)level forAllEntriesOnRequest:(NOZCompressRequest *)request
+{
+    static NSSet *sAlreadyCompressedExtensions = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sAlreadyCompressedExtensions = [NSSet setWithArray:@[
+                                                             @"lfl",
+                                                             @"zip",
+                                                             @"jpg",
+                                                             @"jpeg",
+                                                             @"j2k",
+                                                             @"j2000",
+                                                             @"gif",
+                                                             @"png",
+                                                             @"webp",
+                                                             @"mov",
+                                                             @"mp4",
+                                                             @"mp3",
+                                                             @"aac",
+                                                             @"mkv",
+                                                             @"rar",
+                                                             @"ipa",
+                                                             @"pkg",
+                                                             @"jar",
+                                                             @"cab",
+                                                             @"iwa",
+                                                             @"webarchive",
+                                                             @"tgz",
+                                                             @"htmlz",
+                                                             @"gz",
+                                                             @"lz",
+                                                             @"bz2"
+                                                             ]];
+    });
+
+    for (NOZAbstractZipEntry *entry in request.mutableEntries) {
+        if ([entry isKindOfClass:[NOZFileZipEntry class]]) {
+            NSString *extension = [[(NOZFileZipEntry *)entry filePath].pathExtension lowercaseString];
+            if ([sAlreadyCompressedExtensions containsObject:extension]) {
+                entry.compressionLevel = NOZCompressionLevelNone;
+            }
+        }
+        entry.compressionLevel = level;
+    }
+}
+
 - (void)runCompressRequest:(NOZCompressRequest *)request withQueue:(NSOperationQueue *)queue expectedOutputZipName:(NSString *)zipName
 {
     for (NOZCompressionLevel level = -1; level <= NOZCompressionLevelMax; level++) {
-        request.compressionLevel = level;
+        [[self class] forceCompressionLevel:level forAllEntriesOnRequest:request];
         NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
         if (queue) {
             [queue addOperation:op];
@@ -83,7 +133,7 @@ static NSOperationQueue *sQueue = nil;
         XCTAssertTrue(result.didSucceed);
         XCTAssertEqualObjects(result.destinationPath, request.destinationPath);
         XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:request.destinationPath]);
-        if (NOZCompressionLevelDefault == request.compressionLevel && zipName) {
+        if (NOZCompressionLevelDefault == level && zipName) {
             NSString *compZipPath = [[NSBundle bundleForClass:[self class]] pathForResource:zipName ofType:@"zip"];
             XCTAssertNotNil(compZipPath);
             NSData *compData = [NSData dataWithContentsOfFile:compZipPath];
@@ -96,7 +146,7 @@ static NSOperationQueue *sQueue = nil;
 
 - (void)runCompressRequest:(NOZCompressRequest *)request cancelling:(BOOL)yesBeforeEnqueueNoAfterEnqueue
 {
-    request.compressionLevel = NOZCompressionLevelMax;
+    [[self class] forceCompressionLevel:NOZCompressionLevelMax forAllEntriesOnRequest:request];
     NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
     if (yesBeforeEnqueueNoAfterEnqueue) {
         [op cancel];
@@ -165,7 +215,7 @@ static NSOperationQueue *sQueue = nil;
     NSString *zipFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"maniac-mansion.zip"];
 
     NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:zipFilePath];
-    [request addEntriesInDirectory:sourceDirectoryPath];
+    [request addEntriesInDirectory:sourceDirectoryPath compressionSelectionBlock:NULL];
 
     [self runGambitWithRequest:request expectedOutputZipName:nil];
 }
@@ -178,7 +228,7 @@ static NSOperationQueue *sQueue = nil;
     NSString *zipFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Mixed.zip"];
 
     NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:zipFilePath];
-    [request addEntriesInDirectory:sourceDirectoryPath];
+    [request addEntriesInDirectory:sourceDirectoryPath compressionSelectionBlock:NULL];
     [request addDataEntry:data name:@"Aesop.txt"];
 
     [self runGambitWithRequest:request expectedOutputZipName:nil];

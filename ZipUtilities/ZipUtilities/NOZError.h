@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeCompressFailedToOpenNewZipFile,
     NOZErrorCodeCompressNoEntriesToCompress,
     NOZErrorCodeCompressMissingEntryName,
-    NOZErrorCodeCompressMissingEntryDataOrFile,
+    NOZErrorCodeCompressEntryCannotBeZipped,
     NOZErrorCodeCompressFailedToAppendEntryToZip,
     NOZErrorCodeCompressFailedToFinalizeNewZipFile,
     NOZErrorCodeCompressCancelled = NOZErrorPageCompress + NOZErrorPageSize - 1,
@@ -87,6 +87,14 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeDecompressCancelled = NOZErrorPageDecompress + NOZErrorPageSize - 1,
 
     NOZErrorCodeZipUnknown = NOZErrorPageZip,
+    NOZErrorCodeZipInvalidFilePath,
+    NOZErrorCodeZipCannotOpenExistingZip,
+    NOZErrorCodeZipCannotCreateZip,
+    NOZErrorCodeZipFailedToCloseCurrentEntry,
+    NOZErrorCodeZipFailedToWriteZip,
+    NOZErrorCodeZipCannotOpenNewEntry,
+    NOZErrorCodeZipDoesNotSupportZip64,
+    NOZErrorCodeZipFailedToWriteEntry,
 
     NOZErrorCodeUnzipUnknown = NOZErrorPageUnzip,
 };

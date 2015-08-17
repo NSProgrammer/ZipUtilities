@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542291B7BDD97007CE7BA /* NOZZipper.h */; };
+		1C05422C1B7BDD97007CE7BA /* NOZZipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C05422A1B7BDD97007CE7BA /* NOZZipper.m */; };
+		1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */; };
+		1C0542301B7BDDBA007CE7BA /* NOZUnzipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */; };
+		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; };
+		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
 		1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; };
@@ -64,6 +70,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C0542291B7BDD97007CE7BA /* NOZZipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZZipper.h; sourceTree = "<group>"; };
+		1C05422A1B7BDD97007CE7BA /* NOZZipper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZZipper.m; sourceTree = "<group>"; };
+		1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZUnzipper.h; sourceTree = "<group>"; };
+		1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZUnzipper.m; sourceTree = "<group>"; };
+		1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZZipEntry.h; sourceTree = "<group>"; };
+		1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZZipEntry.m; sourceTree = "<group>"; };
 		1C16F4F01B787EC100963AB3 /* maniac-mansion */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "maniac-mansion"; sourceTree = "<group>"; };
 		1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDecompressTests.m; sourceTree = "<group>"; };
 		1C3223781B77BE9F00DC0A33 /* NOZError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZError.h; sourceTree = "<group>"; };
@@ -93,6 +105,7 @@
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
+		1C8A4A151B8191B600C8FFB5 /* maniac-mansion.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "maniac-mansion.zip"; path = "../../../Library/Developer/CoreSimulator/Devices/AC045E73-0412-4170-94E4-1CEF6F989AD2/data/tmp/maniac-mansion.zip"; sourceTree = "<group>"; };
 		1CD9BAB31B757A38000B93C4 /* Aesop.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aesop.txt; sourceTree = "<group>"; };
 		1CD9BAB51B757E3F000B93C4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1CD9BAB81B75B419000B93C4 /* Directory.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Directory.zip; sourceTree = "<group>"; };
@@ -123,6 +136,7 @@
 		1C6BF7671B74086000969629 = {
 			isa = PBXGroup;
 			children = (
+				1C8A4A151B8191B600C8FFB5 /* maniac-mansion.zip */,
 				1CD9BAB51B757E3F000B93C4 /* libz.dylib */,
 				1C6BF7721B74086000969629 /* ZipUtilities */,
 				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
@@ -152,8 +166,14 @@
 				1C3223791B77BE9F00DC0A33 /* NOZError.m */,
 				1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */,
 				1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */,
+				1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */,
+				1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */,
 				1C6BF7981B740ACF00969629 /* NOZUtils.h */,
 				1C6BF7991B740ACF00969629 /* NOZUtils.m */,
+				1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */,
+				1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */,
+				1C0542291B7BDD97007CE7BA /* NOZZipper.h */,
+				1C05422A1B7BDD97007CE7BA /* NOZZipper.m */,
 				1C6BF7AF1B74769400969629 /* Project */,
 				1C6BF7731B74086000969629 /* ZipUtilities.h */,
 			);
@@ -216,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C6BF7AA1B746D3900969629 /* mztools.h in Headers */,
+				1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
 				1C6BF7AC1B746D3900969629 /* unzip.h in Headers */,
@@ -224,9 +245,11 @@
 				1C6BF7971B740AA400969629 /* ZipUtilities.h in Headers */,
 				1C6BF7A81B746D3900969629 /* ioapi.h in Headers */,
 				1C6BF7AE1B746D3900969629 /* zip.h in Headers */,
+				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
 				1C6BF7A61B746D3900969629 /* crypt.h in Headers */,
+				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,11 +352,14 @@
 				1C6BF7AB1B746D3900969629 /* unzip.c in Sources */,
 				1C6BF7911B74095500969629 /* NOZDecompress.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
+				1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */,
 				1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */,
 				1C6BF7A71B746D3900969629 /* ioapi.c in Sources */,
 				1C6BF7AD1B746D3900969629 /* zip.c in Sources */,
 				1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */,
+				1C0542301B7BDDBA007CE7BA /* NOZUnzipper.m in Sources */,
 				1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */,
+				1C05422C1B7BDD97007CE7BA /* NOZZipper.m in Sources */,
 				1C6BF7A91B746D3900969629 /* mztools.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

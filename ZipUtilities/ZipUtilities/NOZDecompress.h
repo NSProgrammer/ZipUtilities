@@ -164,9 +164,9 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
 /** The duration that the operation took from start to finish.  Does not included wait time in a queue. */
 @property (nonatomic, readonly) NSTimeInterval duration;
 /** The size of the archive uncompressed */
-@property (nonatomic, readonly) int64_t uncompressedSize;
+@property (nonatomic, readonly) SInt64 uncompressedSize;
 /** The size of the archive compressed */
-@property (nonatomic, readonly) int64_t compressedSize;
+@property (nonatomic, readonly) SInt64 compressedSize;
 /** Computed from the uncompressed and compressed sizes.  `_uncompressedSize_ / _compressedSize_`. */
 - (float)compressionRatio;
 
