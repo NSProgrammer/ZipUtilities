@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542291B7BDD97007CE7BA /* NOZZipper.h */; };
+		1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542291B7BDD97007CE7BA /* NOZZipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C05422C1B7BDD97007CE7BA /* NOZZipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C05422A1B7BDD97007CE7BA /* NOZZipper.m */; };
-		1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */; };
+		1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542301B7BDDBA007CE7BA /* NOZUnzipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */; };
-		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; };
+		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
 		1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
-		1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; };
+		1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223791B77BE9F00DC0A33 /* NOZError.m */; };
-		1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */; };
+		1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */; };
 		1C3223851B78501A00DC0A33 /* Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C3223841B78501A00DC0A33 /* Data.zip */; };
 		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
