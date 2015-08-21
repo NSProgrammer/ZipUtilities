@@ -114,13 +114,13 @@ typedef NOZCompressionLevel(^NOZCompressionSelectionBlock)(NSString *filePath);
 
 /** The on disk file to archive to */
 @property (nonatomic, copy) NSString *destinationPath;
-/** The array of `NOZAbstractZipEntry` objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
+/** The array of objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
 @property (nonatomic, copy) NSArray *entries;
 /** A comment embedded in the resulting zip file */
 @property (nonatomic, copy, nullable) NSString *comment;
 
-/** Add a `NOZAbstractiZipEntry` conforming to `NOZZippableEntry` */
-- (void)addEntry:(NOZAbstractZipEntry<NOZZippableEntry> *)entry;
+/** Add an object conforming to `NOZZippableEntry` */
+- (void)addEntry:(id<NOZZippableEntry>)entry;
 /** Add an entry via a _filePath_.  _name will be `filePath.lastPathComponent`. */
 - (void)addFileEntry:(NSString *)filePath;
 /** Add an entry via a _filePath_ with a _name_ for the entry (used as the file name when decompressed) */

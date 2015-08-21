@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>NOZUnzipper Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ZipUtilities </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Nolan O&apos;Brien</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/zipFilePath">zipFilePath</option>
+		
+		<option value="//api/name/centralDirectory">centralDirectory</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/new">+ new</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithZipFile:">- initWithZipFile:</option>
+		
+		<option value="//api/name/init">- init</option>
+		
+		<option value="//api/name/openAndReturnError:">- openAndReturnError:</option>
+		
+		<option value="//api/name/closeAndReturnError:">- closeAndReturnError:</option>
+		
+		<option value="//api/name/readCentralDirectoryAndReturnError:">- readCentralDirectoryAndReturnError:</option>
+		
+		<option value="//api/name/readRecordAtIndex:error:">- readRecordAtIndex:error:</option>
+		
+		<option value="//api/name/indexForRecordWithName:">- indexForRecordWithName:</option>
+		
+		<option value="//api/name/enumerateManifestEntriesUsingBlock:">- enumerateManifestEntriesUsingBlock:</option>
+		
+		<option value="//api/name/readDataFromRecord:progressBlock:error:">- readDataFromRecord:progressBlock:error:</option>
+		
+		<option value="//api/name/enumerateByteRangesOfRecord:progressBlock:usingBlock:">- enumerateByteRangesOfRecord:progressBlock:usingBlock:</option>
+		
+		<option value="//api/name/saveRecord:toDirectory:shouldOverwrite:progressBlock:error:">- saveRecord:toDirectory:shouldOverwrite:progressBlock:error:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">NOZUnzipper Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>NOZUnzipper.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p><code>NOZUnzipper</code> unzips an archive.</p>
+
+<p>  Uses <strong>zlib</strong> to decompress and therefore only supports <strong>deflate</strong> compressed entries/record.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/zipFilePath" title="zipFilePath"></a>
+	<h3 class="method-title"><code><a href="#//api/name/zipFilePath">&nbsp;&nbsp;zipFilePath</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The path to the zip archive</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/centralDirectory" title="centralDirectory"></a>
+	<h3 class="method-title"><code><a href="#//api/name/centralDirectory">&nbsp;&nbsp;centralDirectory</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The central directory object.  <code>nil</code> if it hasn&rsquo;t been parsed (or failed to be read).</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, nullable) NOZCentralDirectory *centralDirectory</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithZipFile:" title="initWithZipFile:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithZipFile:">&ndash;&nbsp;initWithZipFile:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Designated initializer</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nonnull instancetype)initWithZipFile:(nonnull NSString *)<em>zipFilePath</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/init" title="init"></a>
+	<h3 class="method-title"><code><a href="#//api/name/init">&ndash;&nbsp;init</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Unavailable</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable instancetype)init</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/new" title="new"></a>
+	<h3 class="method-title"><code><a href="#//api/name/new">+&nbsp;new</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Unavailable</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (nullable instancetype)new</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/openAndReturnError:" title="openAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/openAndReturnError:">&ndash;&nbsp;openAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Open the zip archive.
+Must open before performing another action.
+Should be balanced with a <a href="#//api/name/closeAndReturnError:"><code>closeAndReturnError:</code></a> call</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)openAndReturnError:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/closeAndReturnError:" title="closeAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/closeAndReturnError:">&ndash;&nbsp;closeAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Close the open archive.
+Harmless to call redundantly.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)closeAndReturnError:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/readCentralDirectoryAndReturnError:" title="readCentralDirectoryAndReturnError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/readCentralDirectoryAndReturnError:">&ndash;&nbsp;readCentralDirectoryAndReturnError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Read the central directory.
+Must read the central directory before doing anything with specific entries.
+If successful, <a href="#//api/name/centralDirectory"><code>[NOZUnzipper centralDirectory]</code></a> will be populated (and no longer <code>nil</code>).</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/readRecordAtIndex:error:" title="readRecordAtIndex:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/readRecordAtIndex:error:">&ndash;&nbsp;readRecordAtIndex:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Read a central directory record at a specific <em>index</em>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NOZCentralDirectoryRecord *)readRecordAtIndex:(NSUInteger)<em>index</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/indexForRecordWithName:" title="indexForRecordWithName:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/indexForRecordWithName:">&ndash;&nbsp;indexForRecordWithName:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Find the index for a record matching the <em>name</em> provided.  <code>NSNotFound</code> if no match was found.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSUInteger)indexForRecordWithName:(nonnull NSString *)<em>name</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enumerateManifestEntriesUsingBlock:" title="enumerateManifestEntriesUsingBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enumerateManifestEntriesUsingBlock:">&ndash;&nbsp;enumerateManifestEntriesUsingBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Enumerate all the records.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)enumerateManifestEntriesUsingBlock:(__attribute__ ( ( noescape ) ) NOZUnzipRecordEnumerationBlock __nonnull)<em>block</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/readDataFromRecord:progressBlock:error:" title="readDataFromRecord:progressBlock:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/readDataFromRecord:progressBlock:error:">&ndash;&nbsp;readDataFromRecord:progressBlock:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Read a record as NSData.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NSData *)readDataFromRecord:(nonnull NOZCentralDirectoryRecord *)<em>record</em> progressBlock:(nullable NOZProgressBlock)<em>progressBlock</em> error:(out NSError *__autoreleasing __nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enumerateByteRangesOfRecord:progressBlock:usingBlock:" title="enumerateByteRangesOfRecord:progressBlock:usingBlock:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enumerateByteRangesOfRecord:progressBlock:usingBlock:">&ndash;&nbsp;enumerateByteRangesOfRecord:progressBlock:usingBlock:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Stream a record&rsquo;s data to <em>block</em>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NSError *)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)<em>record</em> progressBlock:(nullable NOZProgressBlock)<em>progressBlock</em> usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)<em>block</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/saveRecord:toDirectory:shouldOverwrite:progressBlock:error:" title="saveRecord:toDirectory:shouldOverwrite:progressBlock:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/saveRecord:toDirectory:shouldOverwrite:progressBlock:error:">&ndash;&nbsp;saveRecord:toDirectory:shouldOverwrite:progressBlock:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Save a record to disk.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)<em>record</em> toDirectory:(nonnull NSString *)<em>destinationRootDirectory</em> shouldOverwrite:(BOOL)<em>overwrite</em> progressBlock:(nullable NOZProgressBlock)<em>progressBlock</em> error:(out NSError *__autoreleasing __nullable *__nullable)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">NOZUnzipper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-08-21</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

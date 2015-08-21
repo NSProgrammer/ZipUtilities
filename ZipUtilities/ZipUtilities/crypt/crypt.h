@@ -95,7 +95,7 @@ static inline int zencode(unsigned long* pkeys,
     return t;
 }
 
-#ifdef INCLUDECRYPTINGCODE_IFCRYPTALLOWED
+#if INCLUDECRYPTINGCODE_IFCRYPTALLOWED
 
 #define RAND_HEAD_LEN  (12)
 

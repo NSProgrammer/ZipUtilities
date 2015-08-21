@@ -55,6 +55,7 @@ static NSOperationQueue *sQueue = nil;
     for (NSString *fileName in sFileNames) {
         NSString *zipFile = [bundle pathForResource:fileName ofType:@"zip"];
         NSString *dstZipFile = [NSTemporaryDirectory() stringByAppendingPathComponent:zipFile.lastPathComponent];
+        [fm removeItemAtPath:dstZipFile error:NULL];
         [fm copyItemAtPath:zipFile toPath:dstZipFile error:NULL];
     }
 
@@ -117,7 +118,7 @@ static NSOperationQueue *sQueue = nil;
         if (compFilePath) {
             NSData *compData = [NSData dataWithContentsOfFile:compFilePath];
             NSData *unzipData = [NSData dataWithContentsOfFile:unzipFilePath];
-            XCTAssertEqualObjects(compData, unzipData);
+            XCTAssertEqualObjects(compData, unzipData, @"%@ not equal to %@", compFilePath, unzipFilePath);
         }
     }
 

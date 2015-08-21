@@ -20,23 +20,15 @@
 		1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */; };
 		1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */; };
 		1C3223851B78501A00DC0A33 /* Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C3223841B78501A00DC0A33 /* Data.zip */; };
+		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
 		1C6BF77C1B74086000969629 /* libZipUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6BF7701B74086000969629 /* libZipUtilities.a */; };
 		1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF78D1B74093B00969629 /* NOZCompress.m */; };
-		1C6BF7911B74095500969629 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
 		1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78C1B74093B00969629 /* NOZCompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78F1B74095500969629 /* NOZDecompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF7971B740AA400969629 /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7731B74086000969629 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7981B740ACF00969629 /* NOZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7991B740ACF00969629 /* NOZUtils.m */; };
 		1C6BF7A61B746D3900969629 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF79D1B746D3900969629 /* crypt.h */; };
-		1C6BF7A71B746D3900969629 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF79E1B746D3900969629 /* ioapi.c */; };
-		1C6BF7A81B746D3900969629 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF79F1B746D3900969629 /* ioapi.h */; };
-		1C6BF7A91B746D3900969629 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7A01B746D3900969629 /* mztools.c */; };
-		1C6BF7AA1B746D3900969629 /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7A11B746D3900969629 /* mztools.h */; };
-		1C6BF7AB1B746D3900969629 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7A21B746D3900969629 /* unzip.c */; };
-		1C6BF7AC1B746D3900969629 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7A31B746D3900969629 /* unzip.h */; };
-		1C6BF7AD1B746D3900969629 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7A41B746D3900969629 /* zip.c */; };
-		1C6BF7AE1B746D3900969629 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7A51B746D3900969629 /* zip.h */; };
 		1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B31B7476BB00969629 /* NOZ_Project.m */; };
 		1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
@@ -45,6 +37,7 @@
 		1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB81B75B419000B93C4 /* Directory.zip */; };
 		1CD9BABD1B75B419000B93C4 /* File.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB91B75B419000B93C4 /* File.zip */; };
 		1CD9BABE1B75B419000B93C4 /* Mixed.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BABA1B75B419000B93C4 /* Mixed.zip */; };
+		1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CF2F7ED1B87ABE9005E7C77 /* NOZUtils_Project.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,15 +86,7 @@
 		1C6BF7901B74095500969629 /* NOZDecompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDecompress.m; sourceTree = "<group>"; };
 		1C6BF7981B740ACF00969629 /* NOZUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZUtils.h; sourceTree = "<group>"; };
 		1C6BF7991B740ACF00969629 /* NOZUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZUtils.m; sourceTree = "<group>"; };
-		1C6BF79D1B746D3900969629 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = minizip/crypt.h; sourceTree = "<group>"; };
-		1C6BF79E1B746D3900969629 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = minizip/ioapi.c; sourceTree = "<group>"; };
-		1C6BF79F1B746D3900969629 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = minizip/ioapi.h; sourceTree = "<group>"; };
-		1C6BF7A01B746D3900969629 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mztools.c; path = minizip/mztools.c; sourceTree = "<group>"; };
-		1C6BF7A11B746D3900969629 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mztools.h; path = minizip/mztools.h; sourceTree = "<group>"; };
-		1C6BF7A21B746D3900969629 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = minizip/unzip.c; sourceTree = "<group>"; };
-		1C6BF7A31B746D3900969629 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = minizip/unzip.h; sourceTree = "<group>"; };
-		1C6BF7A41B746D3900969629 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zip.c; path = minizip/zip.c; sourceTree = "<group>"; };
-		1C6BF7A51B746D3900969629 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zip.h; path = minizip/zip.h; sourceTree = "<group>"; };
+		1C6BF79D1B746D3900969629 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = crypt/crypt.h; sourceTree = "<group>"; };
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
@@ -112,6 +97,7 @@
 		1CD9BAB81B75B419000B93C4 /* Directory.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Directory.zip; sourceTree = "<group>"; };
 		1CD9BAB91B75B419000B93C4 /* File.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = File.zip; sourceTree = "<group>"; };
 		1CD9BABA1B75B419000B93C4 /* Mixed.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Mixed.zip; sourceTree = "<group>"; };
+		1CF2F7ED1B87ABE9005E7C77 /* NOZUtils_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZUtils_Project.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +142,7 @@
 		1C6BF7721B74086000969629 /* ZipUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				1C6BF79C1B746D1300969629 /* minizip */,
+				1C6BF79C1B746D1300969629 /* crypt */,
 				1C6BF7B31B7476BB00969629 /* NOZ_Project.m */,
 				1C6BF78C1B74093B00969629 /* NOZCompress.h */,
 				1C6BF78D1B74093B00969629 /* NOZCompress.m */,
@@ -206,26 +192,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		1C6BF79C1B746D1300969629 /* minizip */ = {
+		1C6BF79C1B746D1300969629 /* crypt */ = {
 			isa = PBXGroup;
 			children = (
 				1C6BF79D1B746D3900969629 /* crypt.h */,
-				1C6BF79E1B746D3900969629 /* ioapi.c */,
-				1C6BF79F1B746D3900969629 /* ioapi.h */,
-				1C6BF7A01B746D3900969629 /* mztools.c */,
-				1C6BF7A11B746D3900969629 /* mztools.h */,
-				1C6BF7A21B746D3900969629 /* unzip.c */,
-				1C6BF7A31B746D3900969629 /* unzip.h */,
-				1C6BF7A41B746D3900969629 /* zip.c */,
-				1C6BF7A51B746D3900969629 /* zip.h */,
 			);
-			name = minizip;
+			name = crypt;
 			sourceTree = "<group>";
 		};
 		1C6BF7AF1B74769400969629 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				1C6BF7B21B7476BB00969629 /* NOZ_Project.h */,
+				1CF2F7ED1B87ABE9005E7C77 /* NOZUtils_Project.h */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -237,16 +216,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C6BF7AA1B746D3900969629 /* mztools.h in Headers */,
 				1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
-				1C6BF7AC1B746D3900969629 /* unzip.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
 				1C6BF7971B740AA400969629 /* ZipUtilities.h in Headers */,
-				1C6BF7A81B746D3900969629 /* ioapi.h in Headers */,
-				1C6BF7AE1B746D3900969629 /* zip.h in Headers */,
+				1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */,
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
@@ -351,18 +327,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */,
-				1C6BF7AB1B746D3900969629 /* unzip.c in Sources */,
-				1C6BF7911B74095500969629 /* NOZDecompress.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
 				1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */,
 				1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */,
-				1C6BF7A71B746D3900969629 /* ioapi.c in Sources */,
-				1C6BF7AD1B746D3900969629 /* zip.c in Sources */,
 				1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */,
 				1C0542301B7BDDBA007CE7BA /* NOZUnzipper.m in Sources */,
 				1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */,
 				1C05422C1B7BDD97007CE7BA /* NOZZipper.m in Sources */,
-				1C6BF7A91B746D3900969629 /* mztools.c in Sources */,
+				1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

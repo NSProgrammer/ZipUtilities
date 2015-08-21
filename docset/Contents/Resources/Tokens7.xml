@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/NOZDecompressResult.html">
+	<File path="Classes/NOZDataZipEntry.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/NOZDecompressResult</TokenIdentifier>
-			<Abstract type="html">NOZDecompressResult encapsulates the result of a decompression operation</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZDataZipEntry</TokenIdentifier>
+			<Abstract type="html">    Zippable entry from NSData</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
             
 			
 			<NodeRef refid="7"/>
@@ -13,266 +13,62 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setDestinationDirectoryPath:</TokenIdentifier>
-			<Abstract type="html">The path that acts as the root for all files to be unarchived to</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDataZipEntry/setData:</TokenIdentifier>
+			<Abstract type="html">The data to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *destinationDirectoryPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
 			
 			
-			<Anchor>//api/name/destinationDirectoryPath</Anchor>
+			<Anchor>//api/name/data</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/destinationDirectoryPath</TokenIdentifier>
-			<Abstract type="html">The path that acts as the root for all files to be unarchived to</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDataZipEntry/data</TokenIdentifier>
+			<Abstract type="html">The data to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *destinationDirectoryPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
 			
 			
-			<Anchor>//api/name/destinationDirectoryPath</Anchor>
+			<Anchor>//api/name/data</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/destinationDirectoryPath</TokenIdentifier>
-			<Abstract type="html">The path that acts as the root for all files to be unarchived to</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZDataZipEntry/data</TokenIdentifier>
+			<Abstract type="html">The data to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *destinationDirectoryPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
 			
 			
-			<Anchor>//api/name/destinationDirectoryPath</Anchor>
+			<Anchor>//api/name/data</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setDestinationFiles:</TokenIdentifier>
-			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDataZipEntry/initWithData:name:</TokenIdentifier>
+			<Abstract type="html">Designated initializer</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
+			<Declaration>- (instancetype)initWithData:(NSData *)data name:(NSString *)name</Declaration>
 			
 			
-			<Anchor>//api/name/destinationFiles</Anchor>
+			<Anchor>//api/name/initWithData:name:</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/destinationFiles</TokenIdentifier>
-			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZDataZipEntry/initWithName:</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
-			
-			
-			<Anchor>//api/name/destinationFiles</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/destinationFiles</TokenIdentifier>
-			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
+			<Declaration>- (instancetype)initWithName:(NSString *)name</Declaration>
 			
 			
-			<Anchor>//api/name/destinationFiles</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setOperationError:</TokenIdentifier>
-			<Abstract type="html">Any error that was encountered during the operation</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
-			
-			
-			<Anchor>//api/name/operationError</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/operationError</TokenIdentifier>
-			<Abstract type="html">Any error that was encountered during the operation</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
-			
-			
-			<Anchor>//api/name/operationError</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/operationError</TokenIdentifier>
-			<Abstract type="html">Any error that was encountered during the operation</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
-			
-			
-			<Anchor>//api/name/operationError</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setDidSucceed:</TokenIdentifier>
-			<Abstract type="html">Whether or not the operation did succeed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) BOOL didSucceed</Declaration>
-			
-			
-			<Anchor>//api/name/didSucceed</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/didSucceed</TokenIdentifier>
-			<Abstract type="html">Whether or not the operation did succeed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) BOOL didSucceed</Declaration>
-			
-			
-			<Anchor>//api/name/didSucceed</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/didSucceed</TokenIdentifier>
-			<Abstract type="html">Whether or not the operation did succeed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) BOOL didSucceed</Declaration>
-			
-			
-			<Anchor>//api/name/didSucceed</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setDuration:</TokenIdentifier>
-			<Abstract type="html">The duration that the operation took from start to finish.  Does not included wait time in a queue.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSTimeInterval duration</Declaration>
-			
-			
-			<Anchor>//api/name/duration</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/duration</TokenIdentifier>
-			<Abstract type="html">The duration that the operation took from start to finish.  Does not included wait time in a queue.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSTimeInterval duration</Declaration>
-			
-			
-			<Anchor>//api/name/duration</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/duration</TokenIdentifier>
-			<Abstract type="html">The duration that the operation took from start to finish.  Does not included wait time in a queue.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSTimeInterval duration</Declaration>
-			
-			
-			<Anchor>//api/name/duration</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setUncompressedSize:</TokenIdentifier>
-			<Abstract type="html">The size of the archive uncompressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t uncompressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/uncompressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/uncompressedSize</TokenIdentifier>
-			<Abstract type="html">The size of the archive uncompressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t uncompressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/uncompressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/uncompressedSize</TokenIdentifier>
-			<Abstract type="html">The size of the archive uncompressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t uncompressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/uncompressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/setCompressedSize:</TokenIdentifier>
-			<Abstract type="html">The size of the archive compressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t compressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/compressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/compressedSize</TokenIdentifier>
-			<Abstract type="html">The size of the archive compressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t compressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/compressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZDecompressResult/compressedSize</TokenIdentifier>
-			<Abstract type="html">The size of the archive compressed</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int64_t compressedSize</Declaration>
-			
-			
-			<Anchor>//api/name/compressedSize</Anchor>
-            <NodeRef refid="7"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZDecompressResult/compressionRatio</TokenIdentifier>
-			<Abstract type="html">Computed from the uncompressed and compressed sizes.  uncompressedSize / compressedSize.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>- (float)compressionRatio</Declaration>
-			
-			
-			<Anchor>//api/name/compressionRatio</Anchor>
+			<Anchor>//api/name/initWithName:</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		

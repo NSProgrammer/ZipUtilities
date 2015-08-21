@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressDelegate.html">
+	<File path="Classes/NOZSyncStepOperation.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressDelegate</TokenIdentifier>
-			<Abstract type="html">NOZCompressDelegate is the delegate to the NOZCompressOperation for callbacks.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZSyncStepOperation</TokenIdentifier>
+			<Abstract type="html">NOZSyncStepOperation is an NSOperation subclass for dealing with a lot of boiler plate code
+associated with creating a synchronous operation that performs multiple steps in sequential order.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
             
 			
 			<NodeRef refid="12"/>
@@ -13,58 +14,80 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/requiresStrongReference</TokenIdentifier>
-			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/setProgress:</TokenIdentifier>
+			<Abstract type="html">Indicates how much progress has passed.
+Supports KVO.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)requiresStrongReference</Declaration>
+			<Declaration>@property (nonatomic, readonly) float progress</Declaration>
 			
 			
-			<Anchor>//api/name/requiresStrongReference</Anchor>
+			<Anchor>//api/name/progress</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/completionQueue</TokenIdentifier>
-			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/progress</TokenIdentifier>
+			<Abstract type="html">Indicates how much progress has passed.
+Supports KVO.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			<Declaration>@property (nonatomic, readonly) float progress</Declaration>
 			
 			
-			<Anchor>//api/name/completionQueue</Anchor>
+			<Anchor>//api/name/progress</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didCompleteWithResult:</TokenIdentifier>
-			<Abstract type="html">Called when the operation is finished.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZSyncStepOperation/progress</TokenIdentifier>
+			<Abstract type="html">Indicates how much progress has passed.
+Supports KVO.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZCompressOperation that finished.</Abstract>
-				</Parameter><Parameter>
-					<Name>result</Name>
-					<Abstract type="html">The NOZCompressResult for the operation.</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, readonly) float progress</Declaration>
 			
-			<Anchor>//api/name/compressOperation:didCompleteWithResult:</Anchor>
+			
+			<Anchor>//api/name/progress</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didUpdateProgress:</TokenIdentifier>
-			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/setOperationError:</TokenIdentifier>
+			<Abstract type="html">Stores any NSError encountered while running.
+Useful for subclasses to examine during handleFinishing.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress</Declaration>
+			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
 			
 			
-			<Anchor>//api/name/compressOperation:didUpdateProgress:</Anchor>
+			<Anchor>//api/name/operationError</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/operationError</TokenIdentifier>
+			<Abstract type="html">Stores any NSError encountered while running.
+Useful for subclasses to examine during handleFinishing.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
+			
+			
+			<Anchor>//api/name/operationError</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZSyncStepOperation/operationError</TokenIdentifier>
+			<Abstract type="html">Stores any NSError encountered while running.
+Useful for subclasses to examine during handleFinishing.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
+			
+			
+			<Anchor>//api/name/operationError</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		

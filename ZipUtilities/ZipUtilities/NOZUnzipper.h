@@ -30,93 +30,136 @@
 #import "NOZZipEntry.h"
 
 @class NOZGlobalInfo;
-@class NOZManifest;
+@class NOZCentralDirectory;
+@class NOZCentralDirectoryRecord;
 
-typedef NS_OPTIONS(NSInteger, NOZUnzipManifestReadOptions)
-{
-#define NOZUnzipManifestReadOptionReserved(bit) \
-NOZUnzipManifestReadOptionReserved##bit = 1 << bit
-
-    NOZUnzipManifestReadOptionsNone = 0,
-
-    // Global
-    NOZUnzipManifestReadOptionLoadGlobalInfo = 1 << 0,
-    NOZUnzipManifestReadOptionLoadGlobalComment = 1 << 1,
-    NOZUnzipManifestReadOptionReserved(2),
-    NOZUnzipManifestReadOptionReserved(3),
-    NOZUnzipManifestReadOptionReserved(4),
-    NOZUnzipManifestReadOptionReserved(5),
-    NOZUnzipManifestReadOptionReserved(6),
-    NOZUnzipManifestReadOptionReserved(7),
-
-    // Entries
-    NOZUnzipManifestReadOptionLoadEntries = 1 << 8,
-    NOZUnzipManifestReadOptionLoadCommentsOnEntries = 1 << 9,
-    NOZUnzipManifestReadOptionLoadExtraInfoOnEntries = 1 << 10,
-    NOZUnzipManifestReadOptionReserved(11),
-    NOZUnzipManifestReadOptionReserved(12),
-    NOZUnzipManifestReadOptionReserved(13),
-    NOZUnzipManifestReadOptionReserved(14),
-    NOZUnzipManifestReadOptionReserved(15),
-
-#undef NOZUnzipManifestReadOptionReserved
-};
-
-typedef void(^NOZUnzipEntryEnumerationBlock)(NOZManifestZipEntry * __nonnull entry, NSUInteger index, BOOL * __nonnull stop);
+typedef void(^NOZUnzipRecordEnumerationBlock)(NOZCentralDirectoryRecord * __nonnull record, NSUInteger index, BOOL * __nonnull stop);
 typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop);
 
 /**
- NOT THREAD SAFE
+ `NOZUnzipper` unzips an archive.
+
+  Uses **zlib** to decompress and therefore only supports **deflate** compressed entries/record.
  */
-@interface NOZUnzipper : NSObject <NSFastEnumeration>
+@interface NOZUnzipper : NSObject
 
+/** The path to the zip archive */
 @property (nonatomic, readonly, nonnull) NSString *zipFilePath;
-@property (nonatomic, readonly, nullable) NOZManifestZipEntry *manifestEntry;
+/** The central directory object.  `nil` if it hasn't been parsed (or failed to be read). */
+@property (nonatomic, readonly, nullable) NOZCentralDirectory *centralDirectory;
 
-// Constructor
+/** Designated initializer */
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath;
+
+/** Unavailable */
 - (nullable instancetype)init NS_UNAVAILABLE;
+/** Unavailable */
 + (nullable instancetype)new NS_UNAVAILABLE;
 
-// Open/close the zipped file
+/**
+ Open the zip archive.
+ Must open before performing another action.
+ Should be balanced with a `closeAndReturnError:` call
+ */
 - (BOOL)openAndReturnError:(out NSError * __nullable * __nullable)error;
+
+/**
+ Close the open archive.
+ Harmless to call redundantly.
+ */
 - (BOOL)closeAndReturnError:(out NSError * __nullable * __nullable)error;
-- (BOOL)forciblyCloseAndReturnError:(out NSError * __nullable * __nullable)error;
 
-// Read manifest
-- (nullable NOZManifest *)readManifest:(NOZUnzipManifestReadOptions)options
-                                 error:(out NSError * __nullable * __nullable)error;
+/**
+ Read the central directory.
+ Must read the central directory before doing anything with specific entries.
+ If successful, `[NOZUnzipper centralDirectory]` will be populated (and no longer `nil`).
+ */
+- (nullable NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError * __nullable * __nullable)error;
 
-// Read entry
-- (nullable NOZManifestZipEntry *)readManifestEntryAtIndex:(NSUInteger)entryIndex
-                                                options:(NOZUnzipManifestReadOptions)options
-                                                  error:(out NSError * __nullable * __nullable)error;
+/**
+ Read a central directory record at a specific _index_.
+ */
+- (nullable NOZCentralDirectoryRecord *)readRecordAtIndex:(NSUInteger)index
+                                                    error:(out NSError * __nullable * __nullable)error;
 
-// Index of entry with name
-- (NSUInteger)indexForManfiestEntryWithName:(nonnull NSString *)name;
+/**
+ Find the index for a record matching the _name_ provided.  `NSNotFound` if no match was found.
+ */
+- (NSUInteger)indexForRecordWithName:(nonnull NSString *)name;
 
-// Enumerate all entries
-- (void)enumerateManifestEntriesWithOptions:(NOZUnzipManifestReadOptions)options usingBlock:(nonnull NOZUnzipEntryEnumerationBlock)block;
+/**
+ Enumerate all the records.
+ */
+- (void)enumerateManifestEntriesUsingBlock:(__attribute__((noescape)) NOZUnzipRecordEnumerationBlock __nonnull)block;
 
-// Open/close an entry
-- (BOOL)openManifestEntry:(nonnull NOZManifestZipEntry *)entry
-                    error:(out NSError * __nullable * __nullable)error;
-- (BOOL)closeCurrentlyOpenManifestEntryAndReturnError:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
-// Read the entry
+/**
+ Read a record as NSData.
+ */
+- (nullable NSData *)readDataFromRecord:(nonnull NOZCentralDirectoryRecord *)record
+                          progressBlock:(nullable NOZProgressBlock)progressBlock
+                                  error:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
-// Load to NSData
-- (nullable NSData *)readDataFromCurrentlyOpenManifestEntry:(nullable NOZProgressBlock)progressBlock
-                                                      error:(out NSError *__autoreleasing  __nullable * __nullable)error;
-// Stream the bytes
-- (nullable NSError *)enumerateByteRanges:(nullable NOZProgressBlock)progressBlock
-                               usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
-// Save to disk
-- (BOOL)saveCurrentlyOpenManifestEntryToDirectory:(nonnull NSString *)destinationRootDirectory
-                                  shouldOverwrite:(BOOL)overwrite
+/**
+ Stream a record's data to _block_.
+ */
+- (nullable NSError *)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)record
                                     progressBlock:(nullable NOZProgressBlock)progressBlock
-                                            error:(out NSError *__autoreleasing  __nullable * __nullable)error;
+                                       usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
+
+/**
+ Save a record to disk.
+ */
+- (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)record
+       toDirectory:(nonnull NSString *)destinationRootDirectory
+   shouldOverwrite:(BOOL)overwrite
+     progressBlock:(nullable NOZProgressBlock)progressBlock
+             error:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
 
 
 @end
+
+/**
+ A central directory record is a zip entry populated with all the pertinent central directory info.
+ */
+@interface NOZCentralDirectoryRecord : NSObject <NOZZipEntry>
+@property (nonatomic, readonly, nonnull) NSString *name;
+@property (nonatomic, readonly, nullable) NSString *comment;
+@property (nonatomic, readonly) NOZCompressionLevel compressionLevel; // a best guess
+@property (nonatomic, readonly) SInt64 compressedSize;
+@property (nonatomic, readonly) SInt64 uncompressedSize;
+
+/** Unavailable */
+- (nullable instancetype)init NS_UNAVAILABLE;
+/** Unavailable */
++ (nullable instancetype)new NS_UNAVAILABLE;
+@end
+
+/**
+ `NOZCentralDirectoryRecord(Attributes)` has methods to identify if a record has any specific attributes.
+ */
+@interface NOZCentralDirectoryRecord (Attributes)
+/** Record is empty */
+- (BOOL)isZeroLength;
+/** Record is a Mac OS X attribute entry.  `"__MACOSX/"` entries are not automatically supported by **ZipUtilities**. */
+- (BOOL)isMacOSXAttribute;
+/** Record is a `".DS_Store"` file for Mac OS X. */
+- (BOOL)isMacOSXDSStore;
+@end
+
+/**
+ The central directory houses all the records for entries in the zip as well as global info.
+ */
+@interface NOZCentralDirectory : NSObject
+@property (nonatomic, copy, readonly, nullable) NSString *globalComment;
+@property (nonatomic, readonly) NSUInteger recordCount;
+@property (nonatomic, readonly) SInt64 totalCompressedSize;
+@property (nonatomic, readonly) SInt64 totalUncompressedSize;
+
+/** Unavailable */
+- (nullable instancetype)init NS_UNAVAILABLE;
+/** Unavailable */
++ (nullable instancetype)new NS_UNAVAILABLE;
+@end
+

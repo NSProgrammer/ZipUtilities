@@ -32,24 +32,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- `NOZAbstractZipEntry` is the base class for all entries
+ Protocol for a Zip Entry
  */
-@interface NOZAbstractZipEntry : NSObject <NSCopying>
+@protocol NOZZipEntry <NSObject, NSCopying>
 
-/** The name of the entry.  Cannot be `nil`. */
-@property (nonatomic, copy) NSString *name;
-/** A comment associated with the entry. */
-@property (nonatomic, copy, nullable) NSString *comment;
-/** The `NOZCompressionLevel` to compress at.  Default is `NOZCompressionLevelDefault`. */
-@property (nonatomic) NOZCompressionLevel compressionLevel;
-
-- (instancetype)initWithName:(NSString *)name NS_DESIGNATED_INITIALIZER;
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+/** Name of entry */
+- (nonnull NSString *)name;
+/** Optional comment for entry */
+- (nullable NSString *)comment;
+/** Compression level for entry */
+- (NOZCompressionLevel)compressionLevel;
+/** Copiable */
+- (id)copy;
 
 @end
 
-@protocol NOZZippableEntry <NSObject>
+/**
+ Protocol for a Zip Entry that can be Zipped
+ */
+@protocol NOZZippableEntry <NOZZipEntry>
 
 /** Timestamp for the entry. */
 - (nullable NSDate *)timestamp;
@@ -62,27 +63,60 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/**
+ `NOZAbstractZipEntry` is the base class for all entries
+ */
+@interface NOZAbstractZipEntry : NSObject <NOZZipEntry>
+
+/** The name of the entry.  Cannot be `nil`. */
+@property (nonatomic, copy) NSString *name;
+/** A comment associated with the entry. */
+@property (nonatomic, copy, nullable) NSString *comment;
+/** The `NOZCompressionLevel` to compress at.  Default is `NOZCompressionLevelDefault`. */
+@property (nonatomic) NOZCompressionLevel compressionLevel;
+
+/** Designated initializer */
+- (instancetype)initWithName:(NSString *)name NS_DESIGNATED_INITIALIZER;
+
+/** Unavailable */
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+/**
+    Zippable entry from a file
+ */
 @interface NOZFileZipEntry : NOZAbstractZipEntry <NOZZippableEntry>
 
+/** Path to file to zip */
 @property (nonatomic, copy, readonly, nonnull) NSString *filePath;
 
+/** Designated initializer */
 - (instancetype)initWithFilePath:(NSString *)filePath name:(NSString *)name NS_DESIGNATED_INITIALIZER;
+
+/** Uses `filePath.lastPathComponent` for the _name_ */
 - (instancetype)initWithFilePath:(NSString *)filePath;
+
+/** Unavailable */
 - (instancetype)initWithName:(NSString *)name NS_UNAVAILABLE;
 
 @end
 
+/**
+    Zippable entry from NSData
+ */
 @interface NOZDataZipEntry : NOZAbstractZipEntry <NOZZippableEntry>
 
+/** The data to zip */
 @property (nonatomic, readonly, nonnull) NSData *data;
 
+/** Designated initializer */
 - (instancetype)initWithData:(NSData *)data name:(NSString *)name NS_DESIGNATED_INITIALIZER;
+
+/** Unavailable */
 - (instancetype)initWithName:(NSString *)name NS_UNAVAILABLE;
 
-@end
-
-// Doesn't support being zipped
-@interface NOZManifestZipEntry : NOZAbstractZipEntry
 @end
 
 NS_ASSUME_NONNULL_END

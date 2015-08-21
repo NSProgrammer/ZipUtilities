@@ -1,128 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZCompressionLevel.html">
+	<File path="Classes/NOZZipper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionLevel</TokenIdentifier>
-			<Abstract type="html">The compression level to use.
-Lower levels execute faster, while higher levels will achieve a higher compression ratio.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZZipper</TokenIdentifier>
+			<Abstract type="html">NOZZipper encapsulates zipping sources into a zip archive.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
             
 			
 			<NodeRef refid="14"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelNone</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelNone</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/setZipFilePath:</TokenIdentifier>
+			<Abstract type="html">The path to the zip file</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
+			
+			
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMin</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMin</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/zipFilePath</TokenIdentifier>
+			<Abstract type="html">The path to the zip file</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
+			
+			
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryLow</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZZipper/zipFilePath</TokenIdentifier>
+			<Abstract type="html">The path to the zip file</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
+			
+			
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelLow</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/setGlobalComment:</TokenIdentifier>
+			<Abstract type="html">An optional global comment for the zip archive.  Must be set before closing the Zipper.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *globalComment</Declaration>
+			
+			
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumLow</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/globalComment</TokenIdentifier>
+			<Abstract type="html">An optional global comment for the zip archive.  Must be set before closing the Zipper.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *globalComment</Declaration>
+			
+			
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMedium</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMedium</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZZipper/globalComment</TokenIdentifier>
+			<Abstract type="html">An optional global comment for the zip archive.  Must be set before closing the Zipper.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, nullable) NSString *globalComment</Declaration>
+			
+			
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumHigh</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/initWithZipFile:</TokenIdentifier>
+			<Abstract type="html">Designated initializer</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath</Declaration>
+			
+			
+			<Anchor>//api/name/initWithZipFile:</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelHigh</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/init</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable instancetype)init</Declaration>
+			
+			
+			<Anchor>//api/name/init</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryHigh</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/NOZZipper/new</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>+ (nullable instancetype)new</Declaration>
+			
+			
+			<Anchor>//api/name/new</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMax</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMax</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/openWithMode:error:</TokenIdentifier>
+			<Abstract type="html">Open the Zipper.
+This is the first step before any other method can be called.
+Should be balanced with a call to closeAndReturnError:.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/openWithMode:error:</Anchor>
             <NodeRef refid="14"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelDefault</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelDefault</Declaration>
-            
-            <DeclaredIn>NOZCompress.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/closeAndReturnError:</TokenIdentifier>
+			<Abstract type="html">Close the Zipper.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)closeAndReturnError:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/closeAndReturnError:</Anchor>
             <NodeRef refid="14"/>
-        </Token>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/forciblyCloseAndReturnError:</TokenIdentifier>
+			<Abstract type="html">Close the Zipper, but more aggressively.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)forciblyCloseAndReturnError:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/forciblyCloseAndReturnError:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZZipper/addEntry:progressBlock:error:</TokenIdentifier>
+			<Abstract type="html">Add an entry to the Zipper.</Abstract>
+			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)addEntry:(nonnull id&lt;NOZZippableEntry&gt;)entry progressBlock:(__attribute__ ( ( noescape ) ) NOZProgressBlock __nullable)progressBlock error:(out NSError *__nullable *__nullable)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>entry</Name>
+					<Abstract type="html">The entry to zip.</Abstract>
+				</Parameter><Parameter>
+					<Name>progressBlock</Name>
+					<Abstract type="html">The optional block for observing progress.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">The error will be set if an error is encountered.  Pass NULL if you don&apos;t care.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">YES on success, NO on failure.</Abstract></ReturnValue>
+			<Anchor>//api/name/addEntry:progressBlock:error:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
         
         
 	</File>

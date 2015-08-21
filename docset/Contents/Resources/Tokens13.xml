@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZDecompressDelegate.html">
+	<File path="Classes/NOZUnzipper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZDecompressDelegate</TokenIdentifier>
-			<Abstract type="html">NOZDecompressDelegate is the delegate to the NOZDecompressOperation for callbacks.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZUnzipper</TokenIdentifier>
+			<Abstract type="html">NOZUnzipper unzips an archive.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
             
 			
 			<NodeRef refid="13"/>
@@ -13,79 +13,223 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/requiresStrongReference</TokenIdentifier>
-			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/setZipFilePath:</TokenIdentifier>
+			<Abstract type="html">The path to the zip archive</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)requiresStrongReference</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
 			
 			
-			<Anchor>//api/name/requiresStrongReference</Anchor>
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/completionQueue</TokenIdentifier>
-			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/zipFilePath</TokenIdentifier>
+			<Abstract type="html">The path to the zip archive</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
 			
 			
-			<Anchor>//api/name/completionQueue</Anchor>
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didCompleteWithResult:</TokenIdentifier>
-			<Abstract type="html">Called when the operation is finished.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZUnzipper/zipFilePath</TokenIdentifier>
+			<Abstract type="html">The path to the zip archive</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZDecompressOperation that finished.</Abstract>
-				</Parameter><Parameter>
-					<Name>result</Name>
-					<Abstract type="html">The NOZDecompressResult for the operation.</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *zipFilePath</Declaration>
 			
-			<Anchor>//api/name/decompressOperation:didCompleteWithResult:</Anchor>
+			
+			<Anchor>//api/name/zipFilePath</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didUpdateProgress:</TokenIdentifier>
-			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/setCentralDirectory:</TokenIdentifier>
+			<Abstract type="html">The central directory object.  nil if it hasn&apos;t been parsed (or failed to be read).</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress</Declaration>
+			<Declaration>@property (nonatomic, readonly, nullable) NOZCentralDirectory *centralDirectory</Declaration>
 			
 			
-			<Anchor>//api/name/decompressOperation:didUpdateProgress:</Anchor>
+			<Anchor>//api/name/centralDirectory</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/shouldDecompressOperation:overwriteFileAtPath:</TokenIdentifier>
-			<Abstract type="html">Called when unarchive a file would overwrite an existing file on disk.
-By default, returns NO and the operation fails with an error.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/centralDirectory</TokenIdentifier>
+			<Abstract type="html">The central directory object.  nil if it hasn&apos;t been parsed (or failed to be read).</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZDecompressOperation that is running.</Abstract>
-				</Parameter><Parameter>
-					<Name>path</Name>
-					<Abstract type="html">The path to the file on disk that would be overwritten.</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">YES to overwrite.</Abstract></ReturnValue>
-			<Anchor>//api/name/shouldDecompressOperation:overwriteFileAtPath:</Anchor>
+			<Declaration>@property (nonatomic, readonly, nullable) NOZCentralDirectory *centralDirectory</Declaration>
+			
+			
+			<Anchor>//api/name/centralDirectory</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZUnzipper/centralDirectory</TokenIdentifier>
+			<Abstract type="html">The central directory object.  nil if it hasn&apos;t been parsed (or failed to be read).</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, nullable) NOZCentralDirectory *centralDirectory</Declaration>
+			
+			
+			<Anchor>//api/name/centralDirectory</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/initWithZipFile:</TokenIdentifier>
+			<Abstract type="html">Designated initializer</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath</Declaration>
+			
+			
+			<Anchor>//api/name/initWithZipFile:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/init</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable instancetype)init</Declaration>
+			
+			
+			<Anchor>//api/name/init</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/NOZUnzipper/new</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>+ (nullable instancetype)new</Declaration>
+			
+			
+			<Anchor>//api/name/new</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/openAndReturnError:</TokenIdentifier>
+			<Abstract type="html">Open the zip archive.
+Must open before performing another action.
+Should be balanced with a closeAndReturnError: call</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)openAndReturnError:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/openAndReturnError:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/closeAndReturnError:</TokenIdentifier>
+			<Abstract type="html">Close the open archive.
+Harmless to call redundantly.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)closeAndReturnError:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/closeAndReturnError:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/readCentralDirectoryAndReturnError:</TokenIdentifier>
+			<Abstract type="html">Read the central directory.
+Must read the central directory before doing anything with specific entries.
+If successful, [NOZUnzipper centralDirectory] will be populated (and no longer nil).</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/readCentralDirectoryAndReturnError:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/readRecordAtIndex:error:</TokenIdentifier>
+			<Abstract type="html">Read a central directory record at a specific index.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable NOZCentralDirectoryRecord *)readRecordAtIndex:(NSUInteger)index error:(out NSError *__nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/readRecordAtIndex:error:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/indexForRecordWithName:</TokenIdentifier>
+			<Abstract type="html">Find the index for a record matching the name provided.  NSNotFound if no match was found.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (NSUInteger)indexForRecordWithName:(nonnull NSString *)name</Declaration>
+			
+			
+			<Anchor>//api/name/indexForRecordWithName:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/enumerateManifestEntriesUsingBlock:</TokenIdentifier>
+			<Abstract type="html">Enumerate all the records.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (void)enumerateManifestEntriesUsingBlock:(__attribute__ ( ( noescape ) ) NOZUnzipRecordEnumerationBlock __nonnull)block</Declaration>
+			
+			
+			<Anchor>//api/name/enumerateManifestEntriesUsingBlock:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/readDataFromRecord:progressBlock:error:</TokenIdentifier>
+			<Abstract type="html">Read a record as NSData.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable NSData *)readDataFromRecord:(nonnull NOZCentralDirectoryRecord *)record progressBlock:(nullable NOZProgressBlock)progressBlock error:(out NSError *__autoreleasing __nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/readDataFromRecord:progressBlock:error:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/enumerateByteRangesOfRecord:progressBlock:usingBlock:</TokenIdentifier>
+			<Abstract type="html">Stream a record&apos;s data to block.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (nullable NSError *)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)record progressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block</Declaration>
+			
+			
+			<Anchor>//api/name/enumerateByteRangesOfRecord:progressBlock:usingBlock:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/saveRecord:toDirectory:shouldOverwrite:progressBlock:error:</TokenIdentifier>
+			<Abstract type="html">Save a record to disk.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)record toDirectory:(nonnull NSString *)destinationRootDirectory shouldOverwrite:(BOOL)overwrite progressBlock:(nullable NOZProgressBlock)progressBlock error:(out NSError *__autoreleasing __nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/saveRecord:toDirectory:shouldOverwrite:progressBlock:error:</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		

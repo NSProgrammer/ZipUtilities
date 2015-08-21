@@ -39,24 +39,48 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 //    NOZZipperModeOpenExistingOrCreate,
 };
 
+/**
+ `NOZZipper` encapsulates zipping sources into a zip archive.
+ 
+ Uses **zlib** to compress with **deflate** encoding.
+ */
 @interface NOZZipper : NSObject
 
+/** The path to the zip file */
 @property (nonatomic, readonly, nonnull) NSString *zipFilePath;
 
-@property (nonatomic, copy, nullable) NSString *globalComment; // set "before" closing the Zipper
+/** An optional global comment for the zip archive.  Must be set _before_ closing the Zipper. */
+@property (nonatomic, copy, nullable) NSString *globalComment;
 
-// Constructor
+/** Designated initializer */
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath NS_DESIGNATED_INITIALIZER;
+
+/** Unavailable */
 - (nullable instancetype)init NS_UNAVAILABLE;
+/** Unavailable */
 + (nullable instancetype)new NS_UNAVAILABLE;
 
-// Open/close the zipped file
+/** 
+ Open the Zipper.
+ This is the first step before any other method can be called.
+ Should be balanced with a call to `closeAndReturnError:`.
+ */
 - (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError * __nullable * __nullable)error;
+
+/** Close the Zipper. */
 - (BOOL)closeAndReturnError:(out NSError * __nullable * __nullable)error;
+
+/** Close the Zipper, but more aggressively. */
 - (BOOL)forciblyCloseAndReturnError:(out NSError * __nullable * __nullable)error;
 
-// Add entries
-- (BOOL)addEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+/**
+ Add an entry to the Zipper.
+ @param entry The entry to zip.
+ @param progressBlock The optional block for observing progress.
+ @param error The error will be set if an error is encountered.  Pass `NULL` if you don't care.
+ @return `YES` on success, `NO` on failure.
+ */
+- (BOOL)addEntry:(nonnull id<NOZZippableEntry>)entry
    progressBlock:(__attribute__((noescape)) NOZProgressBlock __nullable)progressBlock
            error:(out NSError * __nullable * __nullable)error;
 

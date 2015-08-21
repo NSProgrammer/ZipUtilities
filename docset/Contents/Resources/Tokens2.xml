@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/NOZCompressOperation.html">
+	<File path="Classes/NOZCentralDirectory.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/NOZCompressOperation</TokenIdentifier>
-			<Abstract type="html">NOZCompressOperation is an NSOperation for compressing one or more sources (NSData objects
-and/or files) into a zip archive on disk.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZCentralDirectory</TokenIdentifier>
+			<Abstract type="html">The central directory houses all the records for entries in the zip as well as global info.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
             
 			
 			<NodeRef refid="2"/>
@@ -14,159 +13,155 @@ and/or files) into a zip archive on disk.</Abstract>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/setRequest:</TokenIdentifier>
-			<Abstract type="html">The NOZCompressRequest of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/setGlobalComment:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressRequest *request</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nullable) NSString *globalComment</Declaration>
 			
 			
-			<Anchor>//api/name/request</Anchor>
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/request</TokenIdentifier>
-			<Abstract type="html">The NOZCompressRequest of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/globalComment</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressRequest *request</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nullable) NSString *globalComment</Declaration>
 			
 			
-			<Anchor>//api/name/request</Anchor>
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressOperation/request</TokenIdentifier>
-			<Abstract type="html">The NOZCompressRequest of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectory/globalComment</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressRequest *request</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nullable) NSString *globalComment</Declaration>
 			
 			
-			<Anchor>//api/name/request</Anchor>
+			<Anchor>//api/name/globalComment</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/setDelegate:</TokenIdentifier>
-			<Abstract type="html">The NOZCompressDelegate of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/setRecordCount:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZCompressDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSUInteger recordCount</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/recordCount</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/delegate</TokenIdentifier>
-			<Abstract type="html">The NOZCompressDelegate of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/recordCount</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZCompressDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSUInteger recordCount</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/recordCount</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressOperation/delegate</TokenIdentifier>
-			<Abstract type="html">The NOZCompressDelegate of the operation</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectory/recordCount</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, weak, nullable) id&lt;NOZCompressDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSUInteger recordCount</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/recordCount</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/setResult:</TokenIdentifier>
-			<Abstract type="html">The NOZCompressResult of the operation.  Populated upon completion.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/setTotalCompressedSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressResult *result</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 totalCompressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/result</Anchor>
+			<Anchor>//api/name/totalCompressedSize</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/result</TokenIdentifier>
-			<Abstract type="html">The NOZCompressResult of the operation.  Populated upon completion.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/totalCompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressResult *result</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 totalCompressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/result</Anchor>
+			<Anchor>//api/name/totalCompressedSize</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressOperation/result</TokenIdentifier>
-			<Abstract type="html">The NOZCompressResult of the operation.  Populated upon completion.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectory/totalCompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NOZCompressResult *result</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 totalCompressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/result</Anchor>
+			<Anchor>//api/name/totalCompressedSize</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/initWithRequest:delegate:</TokenIdentifier>
-			<Abstract type="html">Designated initializer</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/setTotalUncompressedSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithRequest:(NOZCompressRequest *)request delegate:(nullable id&lt;NOZCompressDelegate&gt;)delegate</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>request</Name>
-					<Abstract type="html">The NOZCompressRequest of the what and how for compressing.</Abstract>
-				</Parameter><Parameter>
-					<Name>delegate</Name>
-					<Abstract type="html">The NOZCompressDelegate for callbacks.</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, readonly) SInt64 totalUncompressedSize</Declaration>
 			
-			<Anchor>//api/name/initWithRequest:delegate:</Anchor>
+			
+			<Anchor>//api/name/totalUncompressedSize</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/initWithRequest:completion:</TokenIdentifier>
-			<Abstract type="html">Convenience initializer</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/totalUncompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithRequest:(NOZCompressRequest *)request completion:(nullable NOZCompressCompletionBlock)completion</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>request</Name>
-					<Abstract type="html">The NOZCompressRequest of the what and how for compressing.</Abstract>
-				</Parameter><Parameter>
-					<Name>delegate</Name>
-					<Abstract type="html">The NOZCompressCompletionBlock to call once operation is finished.</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, readonly) SInt64 totalUncompressedSize</Declaration>
 			
-			<Anchor>//api/name/initWithRequest:completion:</Anchor>
+			
+			<Anchor>//api/name/totalUncompressedSize</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressOperation/init</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectory/totalUncompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) SInt64 totalUncompressedSize</Declaration>
+			
+			
+			<Anchor>//api/name/totalUncompressedSize</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectory/init</TokenIdentifier>
 			<Abstract type="html">Unavailable</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)init</Declaration>
+			<Declaration>- (nullable instancetype)init</Declaration>
 			
 			
 			<Anchor>//api/name/init</Anchor>
@@ -174,11 +169,11 @@ and/or files) into a zip archive on disk.</Abstract>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/NOZCompressOperation/new</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/NOZCentralDirectory/new</TokenIdentifier>
 			<Abstract type="html">Unavailable</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>+ (instancetype)new</Declaration>
+			<Declaration>+ (nullable instancetype)new</Declaration>
 			
 			
 			<Anchor>//api/name/new</Anchor>

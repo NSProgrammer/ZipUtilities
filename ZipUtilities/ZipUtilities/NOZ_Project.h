@@ -78,3 +78,7 @@ NS_INLINE NSError * __nonnull NOZError(NOZErrorCode code, NSDictionary * __nulla
     return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
 }
 
+#pragma mark DOS Time
+
+FOUNDATION_EXTERN void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16*__nonnull dateOut, UInt16*__nonnull timeOut);
+FOUNDATION_EXTERN NSDate * __nullable noz_NSDate_from_dos_date(UInt16 dosDate, UInt16 dosTime);

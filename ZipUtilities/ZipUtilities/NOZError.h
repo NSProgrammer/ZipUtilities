@@ -44,9 +44,9 @@ typedef NS_ENUM(NSInteger, NOZErrorPage)
     NOZErrorPageCompress,
     /** For `NOZDecompressOperation` errors */
     NOZErrorPageDecompress,
-    /** Future */
+    /** For `NOZZipper` errors */
     NOZErrorPageZip,
-    /** Future */
+    /** For `NOZUnzipper` errors */
     NOZErrorPageUnzip,
 };
 
@@ -97,6 +97,20 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeZipFailedToWriteEntry,
 
     NOZErrorCodeUnzipUnknown = NOZErrorPageUnzip,
+    NOZErrorCodeUnzipCannotOpenZip,
+    NOZErrorCodeUnzipInvalidZipFile,
+    NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating,
+    NOZErrorCodeUnzipCannotReadCentralDirectory,
+    NOZErrorCodeUnzipCentralDirectoryRecordCountsDoNotAlign,
+    NOZErrorCodeUnzipCentralDirectoryRecordsDoNotCompleteWithEOCDRecord, // EOCD == End of Central Directory
+    NOZErrorCodeUnzipMultipleDiskZipArchivesNotSupported,
+    NOZErrorCodeUnzipCouldNotReadCentralDirectoryRecord,
+    NOZErrorCodeUnzipUnsupportedRecordVersion,
+    NOZErrorCodeUnzipDecompressionMethodNotSupported,
+    NOZErrorCodeUnzipDecompressionEncryptionNotSupported,
+    NOZErrorCodeUnzipIndexOutOfBounds,
+    NOZErrorCodeUnzipCannotReadFileEntry,
+    NOZErrorCodeUnzipCannotDecompressFileEntry,
 };
 
 NS_INLINE BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page)

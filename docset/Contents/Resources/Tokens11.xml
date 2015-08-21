@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NOZSyncStepOperation+Protected.html">
+	<File path="Classes/NOZFileZipEntry.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(Protected)</TokenIdentifier>
-			<Abstract type="html">Methods for subclasses to override or call.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZFileZipEntry</TokenIdentifier>
+			<Abstract type="html">    Zippable entry from a file</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
             
 			
 			<NodeRef refid="11"/>
@@ -13,101 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/numberOfSteps</TokenIdentifier>
-			<Abstract type="html">Number of steps in the operation.
-MUST override in subclass.
-When other methods are called with an NSUInteger step, the step is 0-based (like an index).</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZFileZipEntry/setFilePath:</TokenIdentifier>
+			<Abstract type="html">Path to file to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (NSUInteger)numberOfSteps</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
 			
 			
-			<Anchor>//api/name/numberOfSteps</Anchor>
+			<Anchor>//api/name/filePath</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/weightForStep:</TokenIdentifier>
-			<Abstract type="html">Return the weight of a given step.
-This can make it so that you can specify the amount of progress attributed to a particular step.
-For example: reading the header of a JPEG is light weight while decoding the image is heavy.
-   You could have header reading be 500ULL and decoding be 9500ULL so that 95% goes to decoding.
-SHOULD override in subclass.
-Default distributes weight equally amoung all steps.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZFileZipEntry/filePath</TokenIdentifier>
+			<Abstract type="html">Path to file to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (int64_t)weightForStep:(NSUInteger)step</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
 			
 			
-			<Anchor>//api/name/weightForStep:</Anchor>
+			<Anchor>//api/name/filePath</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/runStep:</TokenIdentifier>
-			<Abstract type="html">Run the specified step.
-MUST override in subclass.
-Return an NSError if an error was encountered, otherwise return nil.
-Implementers should check [self isCancelled] for any indication that the operation was cancelled
-and return [[self class] operationCancelledError].</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZFileZipEntry/filePath</TokenIdentifier>
+			<Abstract type="html">Path to file to zip</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (nullable NSError *)runStep:(NSUInteger)step</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
 			
 			
-			<Anchor>//api/name/runStep:</Anchor>
+			<Anchor>//api/name/filePath</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/operationCancelledError</TokenIdentifier>
-			<Abstract type="html">Return the NSError that represents when this operation was cancelled.
-MUST override in subclass.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZFileZipEntry/initWithFilePath:name:</TokenIdentifier>
+			<Abstract type="html">Designated initializer</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>+ (nonnull NSError *)operationCancelledError</Declaration>
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)filePath name:(NSString *)name</Declaration>
 			
 			
-			<Anchor>//api/name/operationCancelledError</Anchor>
+			<Anchor>//api/name/initWithFilePath:name:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleProgressUpdated:</TokenIdentifier>
-			<Abstract type="html">Subclasses can override this method to handle when progress was updated.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZFileZipEntry/initWithFilePath:</TokenIdentifier>
+			<Abstract type="html">Uses filePath.lastPathComponent for the name</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (void)handleProgressUpdated:(float)progress</Declaration>
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)filePath</Declaration>
 			
 			
-			<Anchor>//api/name/handleProgressUpdated:</Anchor>
+			<Anchor>//api/name/initWithFilePath:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleFinishing</TokenIdentifier>
-			<Abstract type="html">Subclasses can override this method to handle when the operation is finishing.
-Useful for aggregating results.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZFileZipEntry/initWithName:</TokenIdentifier>
+			<Abstract type="html">Unavailable</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (void)handleFinishing</Declaration>
-			
-			
-			<Anchor>//api/name/handleFinishing</Anchor>
-            <NodeRef refid="11"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/updateProgress:forStep:</TokenIdentifier>
-			<Abstract type="html">Subclasses SHOULD call this method with the progress of a given step.
-Simplest option is to just to call this method when a step completes with 1.f for the progress.
-DO NOT Override.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
-			
-			<Declaration>- (void)updateProgress:(float)progress forStep:(NSUInteger)step</Declaration>
+			<Declaration>- (instancetype)initWithName:(NSString *)name</Declaration>
 			
 			
-			<Anchor>//api/name/updateProgress:forStep:</Anchor>
+			<Anchor>//api/name/initWithName:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		

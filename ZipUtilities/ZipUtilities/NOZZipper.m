@@ -7,6 +7,7 @@
 
 #import "NOZ_Project.h"
 #import "NOZError.h"
+#import "NOZUtils_Project.h"
 #import "NOZZipper.h"
 
 #include "zlib.h"
@@ -16,88 +17,6 @@ static UInt8 noz_store_value(UInt64 x, const UInt8 byteCount, Byte *buffer, cons
 
 #define PRIVATE_WRITE(v) \
 noz_fwrite_value((v), sizeof(v), _internal.file)
-
-static void noz_dos_date_from_NSDate(NSDate *__nonnull dateObj, UInt16* __nonnull dateOut, UInt16* __nonnull timeOut);
-
-typedef struct _NOZLocalFileDescriptorT
-{
-    // Optionally starts with NOZMagicNumberDataDescriptor
-
-    UInt32 crc32;
-    UInt32 compressedSize;
-    UInt32 uncompressedSize;
-} NOZLocalFileDescriptorT;
-
-typedef struct _NOZLocalFileHeaderT
-{
-    // starts with NOZMagicNumberLocalFileHeader
-
-    UInt16 versionForExtraction;
-    UInt16 bitFlag;
-    UInt16 compressionMethod;
-    UInt16 dosTime;
-    UInt16 dosDate;
-    NOZLocalFileDescriptorT *fileDescriptor;
-    UInt16 nameSize;
-    UInt16 extraFieldSize;
-
-    // ends with:
-    // const Byte* name;
-    // const Byte* extraField;
-} NOZLocalFileHeaderT;
-
-typedef struct _NOZCentralDirectoryFileRecordT
-{
-    // Starts with NOZMagicNumberCentralDirectoryFileRecord
-
-    UInt16 versionMadeBy;
-    NOZLocalFileHeaderT *fileHeader;
-    UInt16 commentSize;
-    UInt16 fileStartDiskNumber;
-    UInt16 internalFileAttributes;
-    UInt32 externalFileAttributes;
-    UInt32 localFileHeaderOffsetFromStartOfDisk;
-
-    // ends with:
-    // const Byte* name;
-    // const Byte* extraField;
-    // const Byte* fileComment;
-} NOZCentralDirectoryFileRecordT;
-
-typedef struct _NOZEndOfCentralDirectoryRecordT
-{
-    // starts with NOZMagicNumberEndOfCentralDirectoryRecord
-
-    UInt16 diskNumber;
-    UInt16 startDiskNumber;
-    UInt16 recordCountForDisk;
-    UInt16 totalRecordCount;
-    UInt32 centralDirectorySize;
-    UInt32 archiveStartToCentralDirectoryStartOffset;
-    UInt16 commentSize;
-
-    // ends with:
-    // const Byte* comment
-} NOZEndOfCentralDirectoryRecordT;
-
-typedef struct _NOZFileEntryT
-{
-    NOZLocalFileDescriptorT fileDescriptor;
-    NOZLocalFileHeaderT fileHeader;
-    NOZCentralDirectoryFileRecordT centralDirectoryRecord;
-    const Byte* name;
-    const Byte* extraField;
-    const Byte* comment;
-
-    struct _NOZFileEntryT *nextEntry;
-
-    BOOL ownsName:1;
-    BOOL ownsExtraField:1;
-    BOOL ownsComment:1;
-} NOZFileEntryT;
-
-static NOZFileEntryT* NOZFileEntryAlloc();
-static void NOZFileEntryFree(NOZFileEntryT* entry);
 
 typedef struct _NOZCurrentEntryInfoT
 {
@@ -126,9 +45,9 @@ typedef struct _NOZCurrentEntryInfoT
 - (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError * __nullable * __nullable)error;
 
 // Entry methods
-- (BOOL)private_openEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (BOOL)private_openEntry:(nonnull id<NOZZippableEntry>)entry
                     error:(out NSError * __nullable * __nullable)error;
-- (BOOL)private_writeEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (BOOL)private_writeEntry:(nonnull id<NOZZippableEntry>)entry
              progressBlock:(nullable NOZProgressBlock)progressBlock
                      error:(out NSError * __nullable * __nullable)error
                   abortRef:(nonnull BOOL *)abort;
@@ -141,7 +60,7 @@ typedef struct _NOZCurrentEntryInfoT
 - (void)private_freeLinkedList;
 
 // Records
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry error:(out NSError * __nullable * __nullable)error;
+- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry error:(out NSError * __nullable * __nullable)error;
 - (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError * __nullable * __nullable)error;
 - (BOOL)private_writeLocalFileHeaderForEntry:(NOZFileEntryT *)entry signature:(BOOL)writeSig;
 - (BOOL)private_writeCurrentLocalFileDescriptor:(BOOL)writeSignature;
@@ -288,7 +207,7 @@ typedef struct _NOZCurrentEntryInfoT
     return [self private_forciblyClose:YES error:error];
 }
 
-- (BOOL)addEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (BOOL)addEntry:(nonnull id<NOZZippableEntry>)entry
    progressBlock:(__attribute__((noescape)) NOZProgressBlock __nullable)progressBlock
            error:(out NSError * __nullable * __nullable)error
 {
@@ -368,7 +287,7 @@ typedef struct _NOZCurrentEntryInfoT
     return YES;
 }
 
-- (BOOL)private_openEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (BOOL)private_openEntry:(nonnull id<NOZZippableEntry>)entry
                     error:(out NSError * __nullable * __nullable)error
 {
     __block BOOL errorEncountered = NO;
@@ -389,7 +308,7 @@ typedef struct _NOZCurrentEntryInfoT
         return NO;
     }
 
-    NOZFileEntryT *newEntry = NOZFileEntryAlloc();
+    NOZFileEntryT *newEntry = NOZFileEntryAllocInit();
     if (!newEntry) {
         errorEncountered = YES;
         return NO;
@@ -421,7 +340,7 @@ typedef struct _NOZCurrentEntryInfoT
     return YES;
 }
 
-- (BOOL)private_writeEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (BOOL)private_writeEntry:(nonnull id<NOZZippableEntry>)entry
              progressBlock:(nullable NOZProgressBlock)progressBlock
                      error:(out NSError * __nullable * __nullable)error
                   abortRef:(nonnull BOOL *)abort
@@ -531,7 +450,7 @@ typedef struct _NOZCurrentEntryInfoT
 
 - (void)private_freeLinkedList
 {
-    NOZFileEntryFree(_internal.firstEntry);
+    NOZFileEntryCleanFree(_internal.firstEntry);
     _internal.firstEntry = _internal.lastEntry = NULL;
 }
 
@@ -560,7 +479,7 @@ typedef struct _NOZCurrentEntryInfoT
     return success;
 }
 
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry error:(out NSError * __nullable * __nullable)error
+- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry error:(out NSError * __nullable * __nullable)error
 {
     NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX) {
@@ -948,83 +867,4 @@ static UInt8 noz_fwrite_value(UInt64 x, const UInt8 byteCount, FILE *file)
     fflush(file);
 #endif
     return bytesWritten;
-}
-
-static void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16* dateOut, UInt16* timeOut)
-{
-    if (!dateObject) {
-        *dateOut = 0;
-        *timeOut = 0;
-        return;
-    }
-
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents* components = [gregorianCalendar components:   NSCalendarUnitYear |
-                                                                    NSCalendarUnitMonth |
-                                                                    NSCalendarUnitDay |
-                                                                    NSCalendarUnitHour |
-                                                                    NSCalendarUnitMinute |
-                                                                    NSCalendarUnitSecond
-                                                        fromDate:dateObject];
-
-    UInt16 date;
-    UInt16 time;
-
-    UInt16 years = (UInt16)components.year;
-    if (years >= 1980) {
-        years -= 1980;
-    }
-    if (years > 0b01111111) {
-        years = 0b01111111;
-    }
-    UInt16 months = (UInt16)components.month;
-    UInt16 days = (UInt16)components.day;
-    date = (UInt16)((years << 9) | (months << 5) | (days << 0));
-
-    UInt16 hours = (UInt16)components.hour;
-    UInt16 mins = (UInt16)components.minute;
-    UInt16 secs = (UInt16)components.second >> 2;  // cut seconds in half
-
-    time = (UInt16)((hours <<  11) | (mins << 5) | (secs << 0));
-
-    *dateOut = date;
-    *timeOut = time;
-}
-
-static NOZFileEntryT* NOZFileEntryAlloc()
-{
-    NOZFileEntryT *entry = (NOZFileEntryT *)malloc(sizeof(NOZFileEntryT));
-    if (entry) {
-        bzero(entry, sizeof(NOZFileEntryT));
-
-        entry->centralDirectoryRecord.versionMadeBy = NOZVersionForCreation;
-        entry->centralDirectoryRecord.fileHeader = &entry->fileHeader;
-
-        entry->fileHeader.bitFlag = NOZFlagBitUseDescriptor;
-        entry->fileHeader.compressionMethod = Z_DEFLATED;
-        entry->fileHeader.versionForExtraction = NOZVersionForExtraction;
-        entry->fileHeader.fileDescriptor = &entry->fileDescriptor;
-    }
-    return entry;
-}
-
-static void NOZFileEntryFree(NOZFileEntryT* entry)
-{
-    while (entry) {
-        NOZFileEntryT* nextEntry = entry->nextEntry;
-
-        if (entry->ownsName) {
-            free((void*)entry->name);
-        }
-        if (entry->ownsExtraField) {
-            free((void*)entry->extraField);
-        }
-        if (entry->ownsComment) {
-            free((void*)entry->comment);
-        }
-
-        free(entry);
-
-        entry = nextEntry;
-    }
 }

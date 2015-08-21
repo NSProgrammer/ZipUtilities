@@ -8,7 +8,6 @@
 #import "NOZ_Project.h"
 #import "NOZDecompress.h"
 #import "NOZUnzipper.h"
-#include "unzip.h"
 
 #define kWEIGHT (1000ll)
 
@@ -53,15 +52,13 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (nullable NSError *)private_closeFile;
 
 #pragma mark Helpers
-- (nullable NSError *)private_unzipCurrentEntry;
-- (nullable NSError *)private_unzipCurrentOpenEntry:(nonnull unz_file_info *)fileInfoPtr toFilePath:(nonnull NSString *)filePath;
 - (void)private_didDecompressBytes:(SInt64)bytes;
 
 @end
 
 @implementation NOZDecompressOperation
 {
-    unzFile _unzipFile;
+    NOZUnzipper *_unzipper;
     __weak id<NOZDecompressDelegate> _weakDelegate;
     __strong id<NOZDecompressDelegate> _strongDelegate;
     NOZDecompressRequest *_request;
@@ -135,9 +132,9 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     NOZDecompressStep step = stepIndex;
     switch (step) {
         case NOZDecompressStepOpen:
-            return kWEIGHT / 2;
-        case NOZDecompressStepReadEntrySizes:
             return (kWEIGHT * 3) / 2;
+        case NOZDecompressStepReadEntrySizes:
+            return kWEIGHT / 2;
         case NOZDecompressStepUnzip:
             return kWEIGHT * 95;
         case NOZDecompressStepClose:
@@ -215,9 +212,11 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (NSError *)private_openFile
 {
     noz_defer(^{ [self updateProgress:1.f forStep:NOZDecompressStepOpen]; });
-    _unzipFile = unzOpen( (const char*)self.request.sourceFilePath.UTF8String );
-    if (!_unzipFile) {
-        return NOZError(NOZErrorCodeDecompressFailedToOpenZipArchive, (self.request.sourceFilePath) ? @{ @"souceFilePath" : self.request.sourceFilePath } : nil);
+
+    NSError *error = nil;
+    _unzipper = [[NOZUnzipper alloc] initWithZipFile:_request.sourceFilePath];
+    if (![_unzipper openAndReturnError:&error]) {
+        return NOZError(NOZErrorCodeDecompressFailedToOpenZipArchive, @{ NSUnderlyingErrorKey : error });
     }
 
     _sanitizedDestinationDirectoryPath = _request.destinationDirectoryPath;
@@ -227,7 +226,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     _sanitizedDestinationDirectoryPath = [_sanitizedDestinationDirectoryPath stringByStandardizingPath];
 
     if (![[NSFileManager defaultManager] createDirectoryAtPath:_sanitizedDestinationDirectoryPath withIntermediateDirectories:YES attributes:nil error:NULL]) {
-        return NOZError(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: @"<null>") });
+        return NOZError(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: [NSNull null]) });
     }
 
     return nil;
@@ -236,33 +235,14 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (NSError *)private_readExpectedSizes
 {
     noz_defer(^{ [self updateProgress:1.f forStep:NOZDecompressStepReadEntrySizes]; });
-    if (UNZ_OK != unzGoToFirstFile(_unzipFile)) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+
+    NSError *error;
+    if (![_unzipper readCentralDirectoryAndReturnError:&error]) {
+        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, @{ NSUnderlyingErrorKey : error });
     }
 
-    unz_file_info fileInfo = {0};
-    int nextFileError = UNZ_OK;
-    do {
-        if (UNZ_OK != unzGetCurrentFileInfo(_unzipFile, // unzFile
-                                            &fileInfo,  // fileInfo ptr
-                                            NULL,       // fileName buffer
-                                            0,          // fileName buffer size
-                                            NULL,       // extraField buffer
-                                            0,          // extraField buffer size
-                                            NULL,       // comment buffer
-                                            0           // comment buffer size
-                                            )) {
-            return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-        }
-
-        _expectedEntryCount++;
-        _expectedUncompressedSize += fileInfo.uncompressed_size;
-
-    } while ((nextFileError = unzGoToNextFile(_unzipFile)) == UNZ_OK);
-
-    if (nextFileError != UNZ_END_OF_LIST_OF_FILE) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
+    _expectedEntryCount = _unzipper.centralDirectory.recordCount;
+    _expectedUncompressedSize = _unzipper.centralDirectory.totalUncompressedSize;
 
     _entryPaths = [[NSMutableArray alloc] initWithCapacity:_expectedEntryCount];
 
@@ -271,151 +251,68 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 - (NSError *)private_unzipAllEntries
 {
-    if (UNZ_OK != unzGoToFirstFile(_unzipFile)) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
+    __block NSError *stackError = nil;
+    [_unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord * __nonnull record, NSUInteger index, BOOL * __nonnull stop) {
 
-    NSError *error = nil;
-    int nextFileError = UNZ_OK;
-    do {
-        error = [self private_unzipCurrentEntry];
-        if (self.isCancelled) {
-            return kCancelledError;
+        // Skip these entries
+        if (record.isZeroLength || record.isMacOSXDSStore || record.isMacOSXAttribute) {
+            return;
         }
-    } while ((nextFileError = unzGoToNextFile(_unzipFile)) == UNZ_OK);
 
-    if (nextFileError != UNZ_END_OF_LIST_OF_FILE) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
+        BOOL overwrite = NO;
+        if (_flags.delegateHasOverwriteCheck) {
+            overwrite = [self.delegate shouldDecompressOperation:self overwriteFileAtPath:[_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:record.name]];
+        }
+
+        NSError *innerError = nil;
+        [_unzipper saveRecord:record
+                  toDirectory:_sanitizedDestinationDirectoryPath
+              shouldOverwrite:overwrite
+                progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort) {
+                    if (self.isCancelled) {
+                        stackError = kCancelledError;
+                        *abort = YES;
+                    } else {
+                        [self private_didDecompressBytes:byteWrittenThisPass];
+                    }
+                }
+                        error:&innerError];
+
+        if (!stackError) {
+            if (innerError) {
+                stackError = innerError;
+            } else if (self.isCancelled) {
+                stackError = kCancelledError;
+            }
+        }
+
+        if (stackError) {
+            *stop = YES;
+        } else {
+            [_entryPaths addObject:record.name];
+        }
+
+    }];
+
+    if (!stackError) {
+        // There can be ignored bytes
+        [self updateProgress:1.f forStep:NOZDecompressStepUnzip];
     }
-    
-    return error;
+
+    return stackError;
 }
 
 - (NSError *)private_closeFile
 {
-    if (_unzipFile) {
+    if (_unzipper) {
         noz_defer(^{ [self updateProgress:1.f forStep:NOZDecompressStepClose]; });
-        unzClose(_unzipFile); // nothing we can do if we fail to close the archive we are extracting
-        _unzipFile = NULL;
+        [_unzipper closeAndReturnError:NULL];
+        _unzipper = nil;
     }
     return nil;
 }
 
 #pragma mark Helpers
-
-- (NSError *)private_unzipCurrentEntry
-{
-    unz_file_info fileInfo = {0};
-    if (UNZ_OK != unzGetCurrentFileInfo(_unzipFile, // unzFile
-                                        &fileInfo,  // fileInfo ptr
-                                        NULL,       // fileName buffer
-                                        0,          // fileName buffer size
-                                        NULL,       // extraField buffer
-                                        0,          // extraField buffer size
-                                        NULL,       // comment buffer
-                                        0           // comment buffer size
-                                        )) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
-
-    char *fileNameBuffer = (char *)malloc(fileInfo.size_filename);
-    noz_defer(^{ free(fileNameBuffer); });
-
-    if (UNZ_OK != unzGetCurrentFileInfo(_unzipFile, // unzFile
-                                        &fileInfo,  // fileInfo ptr
-                                        fileNameBuffer, // fileName buffer
-                                        fileInfo.size_filename, // fileName buffer size
-                                        NULL,       // extraField buffer
-                                        0,          // extraField buffer size
-                                        NULL,       // comment buffer
-                                        0           // comment buffer size
-                                        )) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
-    fileNameBuffer[fileInfo.size_filename] = '\0'; // null terminate
-
-    NSString *filePathRelative = [[NSString alloc] initWithBytes:fileNameBuffer length:fileInfo.size_filename encoding:NSUTF8StringEncoding];
-    NSString *filePath = [_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:filePathRelative];
-    NSString *fileDir = [filePath stringByDeletingLastPathComponent];
-
-    if (filePath.length == 0 || filePathRelative.length == 0 || fileDir.length == 0) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
-
-    if (![[NSFileManager defaultManager] createDirectoryAtPath:fileDir withIntermediateDirectories:YES attributes:nil error:NULL]) {
-        return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
-    }
-
-    if (UNZ_OK != unzOpenCurrentFile(_unzipFile)) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, nil);
-    }
-    noz_defer(^{ unzCloseCurrentFile(_unzipFile); /* if this fails, nothing we can really do */ });
-
-    BOOL isDir = NO;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir]) {
-        if (isDir || !_flags.delegateHasOverwriteCheck || ![self.delegate shouldDecompressOperation:self overwriteFileAtPath:filePath]) {
-            return NOZError(NOZErrorCodeDecompressCannotOverwriteExistingFile, @{ @"filePath" : filePath });
-        }
-    }
-
-    [_entryPaths addObject:filePathRelative];
-    return [self private_unzipCurrentOpenEntry:&fileInfo toFilePath:filePath];
-}
-
-- (NSError *)private_unzipCurrentOpenEntry:(unz_file_info *)fileInfoPtr toFilePath:(NSString *)filePath
-{
-    if (self.isCancelled) {
-        return kCancelledError;
-    }
-
-    const size_t bufferSize = 4096;
-    char buffer[bufferSize];
-    FILE* file = fopen(filePath.UTF8String, "w");
-    if (!file) {
-        return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
-    }
-    noz_defer(^{ fclose(file); });
-
-    int bytesRead = 0;
-    size_t bytesWritten = 0;
-    do {
-        @autoreleasepool {
-            bytesRead = unzReadCurrentFile(_unzipFile, buffer, bufferSize);
-            if (bytesRead < 0) {
-                return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
-            }
-            bytesWritten = fwrite(buffer, sizeof(char), (size_t)bytesRead, file);
-            if (bytesWritten != (size_t)bytesRead) {
-                return NOZError(NOZErrorCodeDecompressFailedToCreateUnarchivedFile, @{ @"filePath" : filePath });
-            }
-            [self private_didDecompressBytes:bytesRead];
-
-            if (self.isCancelled) {
-                return kCancelledError;
-            }
-        }
-    } while (bytesRead > 0);
-
-    if (fileInfoPtr->tmu_date.tm_year > 0) {
-        NSDateComponents* components = [[NSDateComponents alloc] init];
-        components.second = (NSInteger)fileInfoPtr->tmu_date.tm_sec;
-        components.minute = (NSInteger)fileInfoPtr->tmu_date.tm_min;
-        components.hour = (NSInteger)fileInfoPtr->tmu_date.tm_hour;
-        components.day = (NSInteger)fileInfoPtr->tmu_date.tm_mday;
-        components.month = (NSInteger)fileInfoPtr->tmu_date.tm_mon + 1;
-        components.year = (NSInteger)fileInfoPtr->tmu_date.tm_year;
-
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDate* date = [calendar dateFromComponents:components];
-
-        NSError *innerError = nil;
-        if (![[NSFileManager defaultManager] setAttributes:@{ NSFileModificationDate : date } ofItemAtPath:filePath error:&innerError]) {
-            // error occurred, ignore it...it's just the timestamp
-        }
-    }
-
-    return nil;
-}
 
 - (void)private_didDecompressBytes:(SInt64)bytes
 {

@@ -168,6 +168,3 @@
 }
 
 @end
-
-@implementation NOZManifestZipEntry
-@end

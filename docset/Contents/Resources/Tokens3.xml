@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/NOZCompressRequest.html">
+	<File path="Classes/NOZCentralDirectoryRecord.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/NOZCompressRequest</TokenIdentifier>
-			<Abstract type="html">NOZCompressRequest encapusulates the what and how for the compression operation.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/NOZCentralDirectoryRecord</TokenIdentifier>
+			<Abstract type="html">A central directory record is a zip entry populated with all the pertinent central directory info.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
             
 			
 			<NodeRef refid="3"/>
@@ -13,83 +13,83 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/setDestinationPath:</TokenIdentifier>
-			<Abstract type="html">The on disk file to archive to</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setName:</TokenIdentifier>
+			<Abstract type="html">Name of entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *destinationPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/destinationPath</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/destinationPath</TokenIdentifier>
-			<Abstract type="html">The on disk file to archive to</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/name</TokenIdentifier>
+			<Abstract type="html">Name of entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *destinationPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/destinationPath</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressRequest/destinationPath</TokenIdentifier>
-			<Abstract type="html">The on disk file to archive to</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/name</TokenIdentifier>
+			<Abstract type="html">Name of entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *destinationPath</Declaration>
+			<Declaration>@property (nonatomic, readonly, nonnull) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/destinationPath</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/setEntries:</TokenIdentifier>
-			<Abstract type="html">The array of NOZCompressEntry objects to compress.  Read and write of perform a deep copy.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setComment:</TokenIdentifier>
+			<Abstract type="html">Optional comment for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, readonly, nullable) NSString *comment</Declaration>
 			
 			
-			<Anchor>//api/name/entries</Anchor>
+			<Anchor>//api/name/comment</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/entries</TokenIdentifier>
-			<Abstract type="html">The array of NOZCompressEntry objects to compress.  Read and write of perform a deep copy.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/comment</TokenIdentifier>
+			<Abstract type="html">Optional comment for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, readonly, nullable) NSString *comment</Declaration>
 			
 			
-			<Anchor>//api/name/entries</Anchor>
+			<Anchor>//api/name/comment</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressRequest/entries</TokenIdentifier>
-			<Abstract type="html">The array of NOZCompressEntry objects to compress.  Read and write of perform a deep copy.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/comment</TokenIdentifier>
+			<Abstract type="html">Optional comment for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, readonly, nullable) NSString *comment</Declaration>
 			
 			
-			<Anchor>//api/name/entries</Anchor>
+			<Anchor>//api/name/comment</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/setCompressionLevel:</TokenIdentifier>
-			<Abstract type="html">The NOZCompressionLevel to compress at.  Default is NOZCompressionLevelDefault.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setCompressionLevel:</TokenIdentifier>
+			<Abstract type="html">Compression level for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) NOZCompressionLevel compressionLevel</Declaration>
+			<Declaration>@property (nonatomic, readonly) NOZCompressionLevel compressionLevel</Declaration>
 			
 			
 			<Anchor>//api/name/compressionLevel</Anchor>
@@ -97,23 +97,11 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/compressionLevel</TokenIdentifier>
-			<Abstract type="html">The NOZCompressionLevel to compress at.  Default is NOZCompressionLevelDefault.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/compressionLevel</TokenIdentifier>
+			<Abstract type="html">Compression level for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) NOZCompressionLevel compressionLevel</Declaration>
-			
-			
-			<Anchor>//api/name/compressionLevel</Anchor>
-            <NodeRef refid="3"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/NOZCompressRequest/compressionLevel</TokenIdentifier>
-			<Abstract type="html">The NOZCompressionLevel to compress at.  Default is NOZCompressionLevelDefault.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic) NOZCompressionLevel compressionLevel</Declaration>
+			<Declaration>@property (nonatomic, readonly) NOZCompressionLevel compressionLevel</Declaration>
 			
 			
 			<Anchor>//api/name/compressionLevel</Anchor>
@@ -121,88 +109,95 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/addEntry:</TokenIdentifier>
-			<Abstract type="html">Add a NOZCompressEntry</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/compressionLevel</TokenIdentifier>
+			<Abstract type="html">Compression level for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)addEntry:(NOZCompressEntry *)entry</Declaration>
+			<Declaration>@property (nonatomic, readonly) NOZCompressionLevel compressionLevel</Declaration>
 			
 			
-			<Anchor>//api/name/addEntry:</Anchor>
+			<Anchor>//api/name/compressionLevel</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/addFileEntry:</TokenIdentifier>
-			<Abstract type="html">Add an entry via a filePath.  _name will be filePath.lastPathComponent.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setCompressedSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)addFileEntry:(NSString *)filePath</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 compressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/addFileEntry:</Anchor>
+			<Anchor>//api/name/compressedSize</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/addFileEntry:name:</TokenIdentifier>
-			<Abstract type="html">Add an entry via a filePath with a name for the entry (used as the file name when decompressed)</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/compressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)addFileEntry:(NSString *)filePath name:(NSString *)name</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 compressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/addFileEntry:name:</Anchor>
+			<Anchor>//api/name/compressedSize</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/addDataEntry:name:</TokenIdentifier>
-			<Abstract type="html">Add an entry via NSData with a name for the entry (used as the file name when decompressed)</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/compressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)addDataEntry:(NSData *)data name:(NSString *)name</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 compressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/addDataEntry:name:</Anchor>
+			<Anchor>//api/name/compressedSize</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/addEntriesInDirectory:</TokenIdentifier>
-			<Abstract type="html">Recursively add a directory of files as entries</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setUncompressedSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)addEntriesInDirectory:(NSString *)directoryPath</Declaration>
+			<Declaration>@property (nonatomic, readonly) SInt64 uncompressedSize</Declaration>
 			
 			
-			<Anchor>//api/name/addEntriesInDirectory:</Anchor>
+			<Anchor>//api/name/uncompressedSize</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/initWithDestinationPath:</TokenIdentifier>
-			<Abstract type="html">Designated initializer</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/uncompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithDestinationPath:(NSString *)path</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">The on disk file to archive to</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, readonly) SInt64 uncompressedSize</Declaration>
 			
-			<Anchor>//api/name/initWithDestinationPath:</Anchor>
+			
+			<Anchor>//api/name/uncompressedSize</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZCompressRequest/init</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/uncompressedSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) SInt64 uncompressedSize</Declaration>
+			
+			
+			<Anchor>//api/name/uncompressedSize</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/init</TokenIdentifier>
 			<Abstract type="html">Unavailable</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)init</Declaration>
+			<Declaration>- (nullable instancetype)init</Declaration>
 			
 			
 			<Anchor>//api/name/init</Anchor>
@@ -210,11 +205,11 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/NOZCompressRequest/new</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/NOZCentralDirectoryRecord/new</TokenIdentifier>
 			<Abstract type="html">Unavailable</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>+ (instancetype)new</Declaration>
+			<Declaration>+ (nullable instancetype)new</Declaration>
 			
 			
 			<Anchor>//api/name/new</Anchor>

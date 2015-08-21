@@ -52,7 +52,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (nullable NSError *)private_closeFile;
 
 #pragma mark Helpers
-- (nullable NSError *)private_addEntry:(nonnull NOZAbstractZipEntry<NOZZippableEntry> *)entry;
+- (nullable NSError *)private_addEntry:(nonnull id<NOZZippableEntry>)entry;
 - (void)private_didCompressBytes:(SInt64)byteCount;
 
 @end
@@ -206,7 +206,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 - (NSError *)private_prepareProgress
 {
-    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in _request.entries) {
+    for (id<NOZZippableEntry> entry in _request.entries) {
         _totalUncompressedBytes += entry.sizeInBytes;
     }
     if (!_totalUncompressedBytes) {
@@ -237,7 +237,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (NSError *)private_addEntries
 {
     NSError *error = NOZError(NOZErrorCodeCompressNoEntriesToCompress, nil);
-    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in _request.entries) {
+    for (id<NOZZippableEntry> entry in _request.entries) {
         @autoreleasepool {
             if (self.isCancelled) {
                 return kCancelledError;
@@ -268,7 +268,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 #pragma mark Helpers
 
-- (NSError *)private_addEntry:(NOZAbstractZipEntry<NOZZippableEntry> *)entry
+- (NSError *)private_addEntry:(id<NOZZippableEntry>)entry
 {
     // Start
     if (!entry.name) {
@@ -279,6 +279,10 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
     }
 
     NSError *error = nil;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
     [_zipper addEntry:entry
         progressBlock:^(SInt64 totalBytesToWrite, SInt64 bytesWritten, SInt64 bytesThisPass, BOOL *abort) {
             [self private_didCompressBytes:bytesThisPass];
@@ -287,6 +291,9 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
             }
         }
                 error:&error];
+
+#pragma clang diagnostic pop
+
     if (error) {
         return NOZError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry, NSUnderlyingErrorKey : error });
     }
@@ -402,7 +409,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (NSArray *)entries
 {
     NSMutableArray *entries = [[NSMutableArray alloc] initWithCapacity:_mutableEntries.count];
-    for (NOZAbstractZipEntry *entry in _mutableEntries) {
+    for (id<NOZZippableEntry> entry in _mutableEntries) {
         [entries addObject:[entry copy]];
     }
     return [entries copy];
@@ -411,12 +418,12 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 - (void)setEntries:(NSArray *)entries
 {
     [_mutableEntries removeAllObjects];
-    for (NOZAbstractZipEntry<NOZZippableEntry> *entry in entries) {
+    for (id<NOZZippableEntry> entry in entries) {
         [self addEntry:entry];
     }
 }
 
-- (void)addEntry:(NOZAbstractZipEntry *)entry
+- (void)addEntry:(id<NOZZippableEntry>)entry
 {
     [_mutableEntries addObject:[entry copy]];
 }

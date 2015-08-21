@@ -43,6 +43,13 @@
 
 #import "NOZUtils.h"
 
+
+#warning TODO \
+Support single pass zipping (0x08 bitFlag) \
+Handle zero length entries as no-ops \
+Handle zero compression methods as copies
+
+
 /**
  # ZipUtilities
  
@@ -103,7 +110,23 @@
  holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output
  unarchived files and other informative metrics like duration and compression ratio.
 
+ ### `NOZZipper.h`
+
+ `NOZZipper` is an object that encapsulates the work for zipping sources (NSData, streams and/or
+ files) into an on disk zip archive file.
+
+ ### `NOZUnzipper.h`
+
+ `NOZUnzipper` is an object that encapsulates the work for unzipping from a zip archive file on disk
+ into destinations (NSData, streams and/or files).
+
  ## History
+
+ ### 1.2.0  (Aug 21, 2015) - Nolan O'Brien
+
+ - Implement NOZUnzipper
+ - Use NOZUnzipper for decompression
+ - Remove minizip dependency
 
  ### 1.1.0  (Aug 15, 2015) - Nolan O'Brien
 
@@ -135,9 +158,6 @@
  
  ### Near term
 
- - modernize minizip 1.1 into minizip 1.2
- - use simple direct wrappers on minizip for the NSOperations to use
- - add generic utilies like compressing/decompressing from NSData to NSData
  - add Mac OS X target and support
  - add iOS dynamic framework target
  - add generic utilies like compressing/decompressing from NSData to NSData
@@ -145,8 +165,6 @@
  ### Eventually
  
  - add password support
- - add support for the global commment on an archive
- - add support for per entry comments in an archive
  - add support for per entry "extra info" in an archive
  - expand on progress info
    - state transitions

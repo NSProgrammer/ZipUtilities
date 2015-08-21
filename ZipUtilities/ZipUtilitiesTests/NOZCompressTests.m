@@ -51,6 +51,10 @@ static NSOperationQueue *sQueue = nil;
     sQueue.name = @"Zip.Queue";
     sQueue.maxConcurrentOperationCount = 1;
     sQueue.underlyingQueue = q;
+
+    [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"maniac-mansion.zip"] error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"Aesop.zip"] error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"Mixed.zip"] error:NULL];
 }
 
 + (void)tearDown
