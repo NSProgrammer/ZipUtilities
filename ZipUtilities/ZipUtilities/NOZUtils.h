@@ -27,4 +27,4 @@
 
 @import Foundation;
 
-typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort);
+typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort);

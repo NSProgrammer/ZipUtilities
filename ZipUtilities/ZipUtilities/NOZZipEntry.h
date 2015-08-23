@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NOZZipEntry <NSObject, NSCopying>
 
 /** Name of entry */
-- (nonnull NSString *)name;
+- (NSString *)name;
 /** Optional comment for entry */
 - (nullable NSString *)comment;
 /** Compression level for entry */
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** Is the entry valid for zipping. */
 - (BOOL)canBeZipped;
 /** Input Stream for reading the entry into the zip file. */
-- (nullable NSInputStream *)inputStream;
+- (NSInputStream *)inputStream;
 
 @end
 
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NOZFileZipEntry : NOZAbstractZipEntry <NOZZippableEntry>
 
 /** Path to file to zip */
-@property (nonatomic, copy, readonly, nonnull) NSString *filePath;
+@property (nonatomic, copy, readonly) NSString *filePath;
 
 /** Designated initializer */
 - (instancetype)initWithFilePath:(NSString *)filePath name:(NSString *)name NS_DESIGNATED_INITIALIZER;
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NOZDataZipEntry : NOZAbstractZipEntry <NOZZippableEntry>
 
 /** The data to zip */
-@property (nonatomic, readonly, nonnull) NSData *data;
+@property (nonatomic, readonly) NSData *data;
 
 /** Designated initializer */
 - (instancetype)initWithData:(NSData *)data name:(NSString *)name NS_DESIGNATED_INITIALIZER;

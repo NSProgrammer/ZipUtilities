@@ -44,6 +44,10 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
  `NOZZipper` encapsulates zipping sources into a zip archive.
  
  Uses **zlib** to compress with **deflate** encoding.
+ 
+ By default, `NOZZipper` is optimized to compress in a single pass.
+ If you need `NOZZipper` to output without this optimization, define `NOZ_SINGLE_PASS_ZIP` as `0`
+ in your build settings.
  */
 @interface NOZZipper : NSObject
 

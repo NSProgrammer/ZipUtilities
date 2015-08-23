@@ -56,6 +56,11 @@ into destinations (NSData, streams and/or files).
 
 ## History
 
+### 1.3.2  (Aug 23, 2015) - Nolan O'Brien
+
+- Optimize zipping to be done in a single write pass
+  - Can be disabled with NOZ_SINGLE_PASS_ZIP being set to 0
+
 ### 1.3.1  (Aug 23, 2015) - Nolan O'Brien
 
 - Finish modularization of compression with decoders being implemented

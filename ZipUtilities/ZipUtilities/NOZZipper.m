@@ -30,6 +30,10 @@
 #import "NOZUtils_Project.h"
 #import "NOZZipper.h"
 
+#ifndef NOZ_SINGLE_PASS_ZIP
+#define NOZ_SINGLE_PASS_ZIP 1
+#endif
+
 static UInt8 noz_fwrite_value(UInt64 x, const UInt8 byteCount, FILE *file);
 static UInt8 noz_store_value(UInt64 x, const UInt8 byteCount, Byte *buffer, const Byte *bufferEnd);
 
@@ -432,7 +436,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         success = [self private_finishEncoding];
     }
 
-#if 0
+#if NOZ_SINGLE_PASS_ZIP
     if (success) {
         success = [self private_writeCurrentLocalFileDescriptor:YES];
     }
@@ -524,6 +528,9 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
                 if (encoder) {
                     record->fileHeader->bitFlag |= [encoder bitFlagsForEntry:entry];
                 }
+#if NOZ_SINGLE_PASS_ZIP
+                record->fileHeader->bitFlag |= NOZFlagBitUseDescriptor;
+#endif
             }
 
             record->fileHeader->compressionMethod = entry.compressionMethod;
@@ -726,10 +733,12 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         return NO;
     }
 
+#if !NOZ_SINGLE_PASS_ZIP
     if (0 == fseeko(_internal.file, _internal.beginBytePosition + record->localFileHeaderOffsetFromStartOfDisk + 14, SEEK_SET)) {
         [self private_writeLocalFileDescriptorForEntry:entry signature:NO];
     }
     fseeko(_internal.file, 0, SEEK_END);
+#endif
 
     return YES;
 }

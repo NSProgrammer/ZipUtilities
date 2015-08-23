@@ -127,6 +127,7 @@ typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, N
 @interface NOZCentralDirectoryRecord : NSObject <NOZZipEntry>
 @property (nonatomic, readonly, nonnull) NSString *name;
 @property (nonatomic, readonly, nullable) NSString *comment;
+@property (nonatomic, readonly) NOZCompressionMethod compressionMethod;
 @property (nonatomic, readonly) NOZCompressionLevel compressionLevel; // a best guess
 @property (nonatomic, readonly) SInt64 compressedSize;
 @property (nonatomic, readonly) SInt64 uncompressedSize;
