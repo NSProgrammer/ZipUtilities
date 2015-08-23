@@ -30,8 +30,6 @@
 #import "NOZUtils_Project.h"
 #import "NOZZipper.h"
 
-FOUNDATION_EXTERN unsigned long crc32(unsigned long crc, const Byte* buf, UInt32 len);
-
 static UInt8 noz_fwrite_value(UInt64 x, const UInt8 byteCount, FILE *file);
 static UInt8 noz_store_value(UInt64 x, const UInt8 byteCount, Byte *buffer, const Byte *bufferEnd);
 

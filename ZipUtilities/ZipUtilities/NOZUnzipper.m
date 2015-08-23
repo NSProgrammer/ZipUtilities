@@ -30,8 +30,6 @@
 #import "NOZUnzipper.h"
 #import "NOZUtils_Project.h"
 
-#include "zlib.h"
-
 static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 #define PRIVATE_READ(file, value) noz_fread_value(file, (Byte *)&value, sizeof(value))

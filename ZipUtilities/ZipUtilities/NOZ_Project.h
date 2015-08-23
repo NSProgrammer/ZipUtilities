@@ -82,3 +82,7 @@ NS_INLINE NSError * __nonnull NOZError(NOZErrorCode code, NSDictionary * __nulla
 
 FOUNDATION_EXTERN void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16*__nonnull dateOut, UInt16*__nonnull timeOut);
 FOUNDATION_EXTERN NSDate * __nullable noz_NSDate_from_dos_date(UInt16 dosDate, UInt16 dosTime);
+
+#pragma mark CRC32 exposed
+
+FOUNDATION_EXTERN unsigned long crc32(unsigned long crc, const Byte* __nonnull buf, UInt32 len);

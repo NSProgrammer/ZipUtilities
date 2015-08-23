@@ -28,7 +28,6 @@
 		1C6BF7971B740AA400969629 /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7731B74086000969629 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7981B740ACF00969629 /* NOZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7991B740ACF00969629 /* NOZUtils.m */; };
-		1C6BF7A61B746D3900969629 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF79D1B746D3900969629 /* crypt.h */; };
 		1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B31B7476BB00969629 /* NOZ_Project.m */; };
 		1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
@@ -90,7 +89,6 @@
 		1C6BF7901B74095500969629 /* NOZDecompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDecompress.m; sourceTree = "<group>"; };
 		1C6BF7981B740ACF00969629 /* NOZUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZUtils.h; sourceTree = "<group>"; };
 		1C6BF7991B740ACF00969629 /* NOZUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZUtils.m; sourceTree = "<group>"; };
-		1C6BF79D1B746D3900969629 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = crypt/crypt.h; sourceTree = "<group>"; };
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		1C6BF7721B74086000969629 /* ZipUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				1C6BF79C1B746D1300969629 /* crypt */,
 				1C6BF7B31B7476BB00969629 /* NOZ_Project.m */,
 				1C6BF78C1B74093B00969629 /* NOZCompress.h */,
 				1C6BF78D1B74093B00969629 /* NOZCompress.m */,
@@ -204,14 +201,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		1C6BF79C1B746D1300969629 /* crypt */ = {
-			isa = PBXGroup;
-			children = (
-				1C6BF79D1B746D3900969629 /* crypt.h */,
-			);
-			name = crypt;
-			sourceTree = "<group>";
-		};
 		1C6BF7AF1B74769400969629 /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +228,6 @@
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
-				1C6BF7A61B746D3900969629 /* crypt.h in Headers */,
 				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
