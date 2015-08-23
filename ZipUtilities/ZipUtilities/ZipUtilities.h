@@ -73,7 +73,9 @@ Support single pass zipping (0x08 bitFlag)
  NSOperation composition.
  
  ## Overview
- 
+
+ **Primary**
+
  The primary value of *ZipUtilities* is that it provides an easy to use interface for archiving data
  or files into a single zip archive and unarchiving a zip archive to the contained files.  The
  primary approach for *ZipUtilities* is to provide a service oriented pattern for compressing and
@@ -111,6 +113,10 @@ Support single pass zipping (0x08 bitFlag)
  - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It
  holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output
  unarchived files and other informative metrics like duration and compression ratio.
+
+ **Secondary**
+
+ Additional, the underlying objects for zipping and unzipping are exposed for direct use if NSOperation support is not needed.
 
  ### `NOZZipper.h`
 

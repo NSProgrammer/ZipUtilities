@@ -18,6 +18,8 @@ The goal is to provide an easy to use modern interface for archiving and unarchi
 
 ## Overview
 
+**Primary**
+
 The primary value of *ZipUtilities* is that it provides an easy to use interface for archiving data or files into a single zip archive and unarchiving a zip archive to the contained files.  The primary approach for *ZipUtilities* is to provide a service oriented pattern for compressing and decompressing.
 
 ### `NOZCompress.h`
@@ -37,6 +39,10 @@ The primary value of *ZipUtilities* is that it provides an easy to use interface
 - `NOZDecompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
 - `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`.  It provides callbacks for progress, overwriting output files and completion.
 - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
+
+**Secondary**
+
+Additional, the underlying objects for zipping and unzipping are exposed for direct use if NSOperation support is not needed.
 
 ### `NOZZipper.h`
 
