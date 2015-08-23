@@ -387,10 +387,11 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         [inputStream open];
         noz_defer(^{ [inputStream close]; });
         NSInteger bytesRead;
-        Byte buffer[NOZPageSize];
+        const size_t pageSize = NSPageSize();
+        Byte buffer[pageSize];
 
         do {
-            bytesRead = [inputStream read:buffer maxLength:NOZPageSize];
+            bytesRead = [inputStream read:buffer maxLength:pageSize];
 
             if (bytesRead < 0) {
                 success = NO;
@@ -415,7 +416,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
                 }
             }
 
-        } while (bytesRead == NOZPageSize && !(*abort));
+        } while ((size_t)bytesRead == pageSize && !(*abort));
     }
 
     return success;

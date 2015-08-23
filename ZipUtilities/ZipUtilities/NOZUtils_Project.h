@@ -33,8 +33,6 @@ static const size_t NOZPointerByteSize = 8;
 static const size_t NOZPointerByteSize = 4;
 #endif
 
-static const size_t NOZPageSize = (NOZPointerByteSize * 1024);
-
 static const UInt32 NOZMagicNumberLocalFileHeader               = 0x04034b50;
 static const UInt32 NOZMagicNumberDataDescriptor                = 0x08074b50;
 static const UInt32 NOZMagicNumberCentralDirectoryFileRecord    = 0x02014b50;

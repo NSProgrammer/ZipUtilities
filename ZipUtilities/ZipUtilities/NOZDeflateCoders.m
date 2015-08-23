@@ -49,7 +49,7 @@
 {
     struct {
         z_stream zStream;
-        Byte compressedDataBuffer[NOZPageSize];
+        Byte* compressedDataBuffer;
 
         SInt16 compressionLevel;
         BOOL zStreamOpen:1;
@@ -89,8 +89,10 @@
 - (nonnull instancetype)init
 {
     if (self = [super init]) {
+        _internal.compressedDataBuffer = malloc(NSPageSize());
+
         _internal.zStream.avail_in = 0;
-        _internal.zStream.avail_out = sizeof(_internal.compressedDataBuffer);
+        _internal.zStream.avail_out = (UInt32)NSPageSize();
         _internal.zStream.next_out = _internal.compressedDataBuffer;
         _internal.zStream.total_in = 0;
         _internal.zStream.total_out = 0;
@@ -102,6 +104,11 @@
         _internal.compressionLevel = NOZCompressionLevelDefault;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    free(_internal.compressedDataBuffer);
 }
 
 @end
@@ -163,7 +170,7 @@
             }
             zStream->total_in = 0;
             context.compressedDataPosition = 0;
-            zStream->avail_out = NOZPageSize;
+            zStream->avail_out = (UInt32)NSPageSize();
             zStream->next_out = context.compressedDataBuffer;
         }
 
@@ -209,7 +216,7 @@
             }
             zStream->total_in = 0;
             context.compressedDataPosition = 0;
-            zStream->avail_out = NOZPageSize;
+            zStream->avail_out = (UInt32)NSPageSize();
             zStream->next_out = context.compressedDataBuffer;
         }
 

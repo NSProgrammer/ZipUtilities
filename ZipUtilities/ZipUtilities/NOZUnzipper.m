@@ -343,7 +343,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     sig[3] = ((Byte*)(&signature))[3];
 #endif
 
-    Byte buffer[NOZPageSize];
+    const size_t pageSize = NSPageSize();
+    Byte buffer[pageSize];
     size_t bytesRead = 0;
     size_t maxBytes = UINT16_MAX /* max global comment size */ + 22 /* End of Central Directory Record size */;
 
@@ -443,9 +444,10 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block
 {
-    Byte uncompressedBuffer[NOZPageSize];
+    const size_t pageSize = NSPageSize();
+    Byte uncompressedBuffer[pageSize];
     size_t uncompressedBufferSize = sizeof(uncompressedBuffer);
-    Byte compressedBuffer[NOZPageSize];
+    Byte compressedBuffer[pageSize];
     size_t compressedBufferSize = sizeof(compressedBuffer);
 
     SInt64 uncompressedBytesConsumed = 0;
