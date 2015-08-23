@@ -50,7 +50,7 @@ Call this as many times as necessary to get all bytes of a source decoded
 (or until a failure occurs).</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)decodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZCompressionEncoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
+			<Declaration>- (BOOL)decodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
 			
 			
 			<Anchor>//api/name/decodeBytes:length:context:error:</Anchor>

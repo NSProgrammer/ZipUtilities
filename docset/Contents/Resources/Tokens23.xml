@@ -4,7 +4,9 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionEncoderContext</TokenIdentifier>
-			<Abstract type="html">Protocol for encapsulating the context and state of an encoding process.</Abstract>
+			<Abstract type="html">Protocol for encapsulating the context and state of an encoding process.
+A context object must always be able to clean itself up on dealloc and should
+not rely on finalize to clean it up.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			

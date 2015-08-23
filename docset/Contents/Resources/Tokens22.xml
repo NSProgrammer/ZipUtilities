@@ -13,6 +13,18 @@
 		
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/bitFlagsForEntry:</TokenIdentifier>
+			<Abstract type="html">Return any bit flags related to the given entry for hinting at the compression that will be used.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			
+			<Declaration>- (UInt16)bitFlagsForEntry:(nonnull id&lt;NOZZipEntry&gt;)entry</Declaration>
+			
+			
+			<Anchor>//api/name/bitFlagsForEntry:</Anchor>
+            <NodeRef refid="22"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/createContextForEncodingEntry:flushCallback:</TokenIdentifier>
 			<Abstract type="html">Create a new context object to track the encoding process.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>

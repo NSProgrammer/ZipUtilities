@@ -750,6 +750,28 @@
             <Name>NOZCompressionDecoderContext</Name>
             <Path>Protocols/NOZCompressionDecoderContext.html</Path>
             
+                <Subnodes>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoderContext.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoderContext.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoderContext.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
         </Node>
 		<Node id="22" type="file" documentType="reference">
             <Name>NOZCompressionEncoder</Name>

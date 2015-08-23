@@ -4,13 +4,32 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionDecoderContext</TokenIdentifier>
-			<Abstract type="html">Protocol for encapsulating the context and state of a decoding process.</Abstract>
+			<Abstract type="html">Protocol for encapsulating the context and state of a decoding process.
+A context object must always be able to clean itself up on dealloc and should
+not rely on finalize to clean it up.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
 			<NodeRef refid="21"/>
 		</Token>
 		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoderContext/hasFinished</TokenIdentifier>
+			<Abstract type="html">return YES once if the decoding is known to have completed and
+any future call to decodeBytes will be a considered no-op (returning YES).
+If the decoder is provided a zero length buffer to decode, there is no more
+data to decode, but the decoder may continue decoding.
+The decoder will have it&apos;s decode method called until an error is encountered
+or hasFinished returns YES.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)hasFinished</Declaration>
+			
+			
+			<Anchor>//api/name/hasFinished</Anchor>
+            <NodeRef refid="21"/>
+		</Token>
 		
         
         
