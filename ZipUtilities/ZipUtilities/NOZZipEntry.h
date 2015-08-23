@@ -27,7 +27,7 @@
 
 @import Foundation;
 
-#import "NOZUtils.h"
+#import "NOZCompression.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)comment;
 /** Compression level for entry */
 - (NOZCompressionLevel)compressionLevel;
+/** Compression Method for entry */
+- (NOZCompressionMethod)compressionMethod;
 /** Copiable */
 - (id)copy;
 
@@ -74,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *comment;
 /** The `NOZCompressionLevel` to compress at.  Default is `NOZCompressionLevelDefault`. */
 @property (nonatomic) NOZCompressionLevel compressionLevel;
+/** The `NOZCompressionMethod` to compress with.  Default is `NOZCompressionMethodDeflate`. */
+@property (nonatomic) NOZCompressionMethod compressionMethod;
 
 /** Designated initializer */
 - (instancetype)initWithName:(NSString *)name NS_DESIGNATED_INITIALIZER;

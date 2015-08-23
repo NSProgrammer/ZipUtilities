@@ -131,3 +131,17 @@ FOUNDATION_EXTERN void NOZFileEntryInit(NOZFileEntryT* entry);
 
 FOUNDATION_EXTERN void NOZFileEntryCleanFree(NOZFileEntryT* entry);
 FOUNDATION_EXTERN void NOZFileEntryClean(NOZFileEntryT* entry);
+
+#import "NOZCompression.h"
+
+@interface NOZDeflateEncoder : NSObject <NOZCompressionEncoder>
+@end
+
+@interface NOZDeflateDecoder : NSObject <NOZCompressionDecoder>
+@end
+
+@interface NOZRawEncoder : NSObject <NOZCompressionEncoder>
+@end
+
+@interface NOZRawDecoder : NSObject <NOZCompressionDecoder>
+@end

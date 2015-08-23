@@ -117,26 +117,33 @@ static NSOperationQueue *sQueue = nil;
     }
 }
 
+- (void)runValidCompressRequest:(NOZCompressRequest *)request withQueue:(NSOperationQueue *)queue
+{
+    NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    if (queue) {
+        [queue addOperation:op];
+    } else {
+        [op start];
+    }
+    [op waitUntilFinished];
+
+    NOZCompressResult *result = op.result;
+    TESTLOG(@"Compression finished\n%@", @{ @"level" : @(level), @"duration" : @(result.duration), @"ratio" : @(result.compressionRatio) });
+
+    XCTAssertNotNil(result);
+    XCTAssertNil(result.operationError);
+    XCTAssertTrue(result.didSucceed);
+    XCTAssertEqualObjects(result.destinationPath, request.destinationPath);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:request.destinationPath]);
+}
+
 - (void)runCompressRequest:(NOZCompressRequest *)request withQueue:(NSOperationQueue *)queue expectedOutputZipName:(NSString *)zipName
 {
     for (NOZCompressionLevel level = -1; level <= NOZCompressionLevelMax; level++) {
         [[self class] forceCompressionLevel:level forAllEntriesOnRequest:request];
-        NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
-        if (queue) {
-            [queue addOperation:op];
-        } else {
-            [op start];
-        }
-        [op waitUntilFinished];
 
-        NOZCompressResult *result = op.result;
-        TESTLOG(@"Compression finished\n%@", @{ @"level" : @(level), @"duration" : @(result.duration), @"ratio" : @(result.compressionRatio) });
+        [self runValidCompressRequest:request withQueue:queue];
 
-        XCTAssertNotNil(result);
-        XCTAssertNil(result.operationError);
-        XCTAssertTrue(result.didSucceed);
-        XCTAssertEqualObjects(result.destinationPath, request.destinationPath);
-        XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:request.destinationPath]);
         if (NOZCompressionLevelDefault == level && zipName) {
             NSString *compZipPath = [[NSBundle bundleForClass:[self class]] pathForResource:zipName ofType:@"zip"];
             XCTAssertNotNil(compZipPath);
@@ -145,6 +152,28 @@ static NSOperationQueue *sQueue = nil;
             XCTAssertEqualObjects(compData, outputData);
         }
         [[NSFileManager defaultManager] removeItemAtPath:request.destinationPath error:NULL];
+    }
+}
+
+- (void)runAllCompressionMethodsWithRequest:(NOZCompressRequest *)request
+{
+    [[self class] forceCompressionLevel:NOZCompressionLevelDefault forAllEntriesOnRequest:request];
+    for (NOZCompressionMethod method = NOZCompressionMethodNone; method <= NOZCompressionMethodLZ77; method++) {
+        for (NOZAbstractZipEntry *entry in request.mutableEntries) {
+            entry.compressionMethod = method;
+        }
+
+        if (NOZEncoderForCompressionMethod(method) != nil) {
+            [self runValidCompressRequest:request withQueue:sQueue];
+            [[NSFileManager defaultManager] removeItemAtPath:request.destinationPath error:NULL];
+        } else {
+            NSError *error = [self runInvalidRequest:request];
+            XCTAssertEqualObjects(error.domain, NOZErrorDomain);
+            XCTAssertEqual(error.code, NOZErrorCodeCompressFailedToAppendEntryToZip);
+            error = error.userInfo[NSUnderlyingErrorKey];
+            XCTAssertEqualObjects(error.domain, NOZErrorDomain);
+            XCTAssertEqual(error.code, NOZErrorCodeZipDoesNotSupportCompressionMethod);
+        }
     }
 }
 
@@ -169,7 +198,7 @@ static NSOperationQueue *sQueue = nil;
     XCTAssertEqual(op.result.operationError.code, NOZErrorCodeCompressCancelled);
 }
 
-- (void)runInvalidRequest:(NOZCompressRequest *)request
+- (NSError *)runInvalidRequest:(NOZCompressRequest *)request
 {
     NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
     [sQueue addOperation:op];
@@ -180,6 +209,7 @@ static NSOperationQueue *sQueue = nil;
     XCTAssertNotNil(result.operationError);
     XCTAssertFalse(result.didSucceed);
     XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:request.destinationPath]);
+    return result.operationError;
 }
 
 - (void)runGambitWithRequest:(NOZCompressRequest *)request expectedOutputZipName:(NSString *)zipName
@@ -191,6 +221,7 @@ static NSOperationQueue *sQueue = nil;
     [self runCompressRequest:request withQueue:nil expectedOutputZipName:zipName];
     [self runCompressRequest:request cancelling:YES];
     [self runCompressRequest:request cancelling:NO];
+    [self runAllCompressionMethodsWithRequest:request];
 }
 
 - (void)testCompressSingleFile

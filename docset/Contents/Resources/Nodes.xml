@@ -51,15 +51,6 @@
 						<NodeRef refid="20"/>
 						<NodeRef refid="21"/>
 						<NodeRef refid="22"/>
-						
-					</Subnodes>
-				</Node>
-				
-                
-				<Node>
-					<Name>Constants</Name>
-					<Path>index.html</Path>
-					<Subnodes>
 						<NodeRef refid="23"/>
 						<NodeRef refid="24"/>
 						<NodeRef refid="25"/>
@@ -69,16 +60,31 @@
 				</Node>
 				
                 
+				<Node>
+					<Name>Constants</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="27"/>
+						<NodeRef refid="28"/>
+						<NodeRef refid="29"/>
+						<NodeRef refid="30"/>
+						<NodeRef refid="31"/>
+						
+					</Subnodes>
+				</Node>
+				
+                
                 <Node>
                     <Name>Blocks</Name>
                     <Path>index.html</Path>
                     <Subnodes>
-                        <NodeRef refid="27"/>
-                        <NodeRef refid="28"/>
-                        <NodeRef refid="29"/>
-                        <NodeRef refid="30"/>
-                        <NodeRef refid="31"/>
                         <NodeRef refid="32"/>
+                        <NodeRef refid="33"/>
+                        <NodeRef refid="34"/>
+                        <NodeRef refid="35"/>
+                        <NodeRef refid="36"/>
+                        <NodeRef refid="37"/>
+                        <NodeRef refid="38"/>
                         
                     </Subnodes>
                 </Node>
@@ -714,6 +720,92 @@
             
         </Node>
 		<Node id="20" type="file" documentType="reference">
+            <Name>NOZCompressionDecoder</Name>
+            <Path>Protocols/NOZCompressionDecoder.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoder.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoder.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionDecoder.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="21" type="file" documentType="reference">
+            <Name>NOZCompressionDecoderContext</Name>
+            <Path>Protocols/NOZCompressionDecoderContext.html</Path>
+            
+        </Node>
+		<Node id="22" type="file" documentType="reference">
+            <Name>NOZCompressionEncoder</Name>
+            <Path>Protocols/NOZCompressionEncoder.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoder.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoder.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoder.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="23" type="file" documentType="reference">
+            <Name>NOZCompressionEncoderContext</Name>
+            <Path>Protocols/NOZCompressionEncoderContext.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoderContext.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoderContext.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Protocols/NOZCompressionEncoderContext.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="24" type="file" documentType="reference">
             <Name>NOZDecompressDelegate</Name>
             <Path>Protocols/NOZDecompressDelegate.html</Path>
             
@@ -740,7 +832,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="21" type="file" documentType="reference">
+		<Node id="25" type="file" documentType="reference">
             <Name>NOZZipEntry</Name>
             <Path>Protocols/NOZZipEntry.html</Path>
             
@@ -767,7 +859,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="22" type="file" documentType="reference">
+		<Node id="26" type="file" documentType="reference">
             <Name>NOZZippableEntry</Name>
             <Path>Protocols/NOZZippableEntry.html</Path>
             
@@ -795,53 +887,63 @@
             
         </Node>
 		
-        <Node id="23" type="file" documentType="reference">
+        <Node id="27" type="file" documentType="reference">
             <Name>NOZCompressionLevel</Name>
             <Path>Constants/NOZCompressionLevel.html</Path>
             
         </Node>
-		<Node id="24" type="file" documentType="reference">
+		<Node id="28" type="file" documentType="reference">
+            <Name>NOZCompressionMethod</Name>
+            <Path>Constants/NOZCompressionMethod.html</Path>
+            
+        </Node>
+		<Node id="29" type="file" documentType="reference">
             <Name>NOZErrorCode</Name>
             <Path>Constants/NOZErrorCode.html</Path>
             
         </Node>
-		<Node id="25" type="file" documentType="reference">
+		<Node id="30" type="file" documentType="reference">
             <Name>NOZErrorPage</Name>
             <Path>Constants/NOZErrorPage.html</Path>
             
         </Node>
-		<Node id="26" type="file" documentType="reference">
+		<Node id="31" type="file" documentType="reference">
             <Name>NOZZipperMode</Name>
             <Path>Constants/NOZZipperMode.html</Path>
             
         </Node>
 		
-        <Node id="27" type="file" documentType="reference">
+        <Node id="32" type="file" documentType="reference">
             <Name>NOZCompressCompletionBlock</Name>
             <Path>Blocks/NOZCompressCompletionBlock.html</Path>
             
         </Node>
-        <Node id="28" type="file" documentType="reference">
+        <Node id="33" type="file" documentType="reference">
             <Name>NOZCompressionSelectionBlock</Name>
             <Path>Blocks/NOZCompressionSelectionBlock.html</Path>
             
         </Node>
-        <Node id="29" type="file" documentType="reference">
+        <Node id="34" type="file" documentType="reference">
             <Name>NOZDecompressCompletionBlock</Name>
             <Path>Blocks/NOZDecompressCompletionBlock.html</Path>
             
         </Node>
-        <Node id="30" type="file" documentType="reference">
+        <Node id="35" type="file" documentType="reference">
+            <Name>NOZFlushCallback</Name>
+            <Path>Blocks/NOZFlushCallback.html</Path>
+            
+        </Node>
+        <Node id="36" type="file" documentType="reference">
             <Name>NOZProgressBlock</Name>
             <Path>Blocks/NOZProgressBlock.html</Path>
             
         </Node>
-        <Node id="31" type="file" documentType="reference">
+        <Node id="37" type="file" documentType="reference">
             <Name>NOZUnzipByteRangeEnumerationBlock</Name>
             <Path>Blocks/NOZUnzipByteRangeEnumerationBlock.html</Path>
             
         </Node>
-        <Node id="32" type="file" documentType="reference">
+        <Node id="38" type="file" documentType="reference">
             <Name>NOZUnzipRecordEnumerationBlock</Name>
             <Path>Blocks/NOZUnzipRecordEnumerationBlock.html</Path>
             

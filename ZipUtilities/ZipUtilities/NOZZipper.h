@@ -27,6 +27,7 @@
 
 @import Foundation;
 
+#import "NOZUtils.h"
 #import "NOZZipEntry.h"
 
 @class NOZEncrytion;

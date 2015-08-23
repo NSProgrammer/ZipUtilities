@@ -2,7 +2,27 @@
 //  NOZZipper.m
 //  ZipUtilities
 //
-//  Copyright (c) 2015 Nolan O'Brien.
+//  The MIT License (MIT)
+//
+//  Copyright (c) 2015 Nolan O'Brien
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
 //
 
 #import "NOZ_Project.h"
@@ -10,34 +30,13 @@
 #import "NOZUtils_Project.h"
 #import "NOZZipper.h"
 
-#include "zlib.h"
+FOUNDATION_EXTERN unsigned long crc32(unsigned long crc, const Byte* buf, UInt32 len);
 
 static UInt8 noz_fwrite_value(UInt64 x, const UInt8 byteCount, FILE *file);
 static UInt8 noz_store_value(UInt64 x, const UInt8 byteCount, Byte *buffer, const Byte *bufferEnd);
 
 #define PRIVATE_WRITE(v) \
 noz_fwrite_value((v), sizeof(v), _internal.file)
-
-typedef struct _NOZCurrentEntryInfoT
-{
-    // structure of current entry
-    NOZFileEntryT *entry;
-
-    // zlib
-    z_stream zStream;
-    Byte compressedDataBuffer[NOZPageSize];
-    UInt32 compressedDataBufferPosition;
-
-    // Encryption
-    uLong keys[3];
-    const uLong* crc32Table;
-    UInt32 cryptHeaderSize;
-
-    // Flags
-    BOOL isOpen:1;
-    BOOL isZStreamOpen:1;
-
-} NOZCurrentEntryInfoT;
 
 @interface NOZZipper (Private)
 
@@ -54,9 +53,8 @@ typedef struct _NOZCurrentEntryInfoT
 - (BOOL)private_closeCurrentOpenEntryAndReturnError:(out NSError * __nullable * __nullable)error;
 
 // Helpers
-- (BOOL)private_prepareCurrentEntryZStream:(NOZCompressionLevel)compressionLevel;
-- (BOOL)private_finishDeflate;
-- (BOOL)private_flushWriteBuffer;
+- (BOOL)private_finishEncoding;
+- (BOOL)private_flushWriteBuffer:(const Byte*)buffer length:(size_t)length;
 - (void)private_freeLinkedList;
 
 // Records
@@ -74,6 +72,8 @@ typedef struct _NOZCurrentEntryInfoT
 @implementation NOZZipper
 {
     NSString *_standardizedZipFilePath;
+    id<NOZCompressionEncoder> _currentEncoder;
+    id<NOZCompressionEncoderContext> _currentEncoderContext;
 
     struct {
         FILE *file;
@@ -84,7 +84,7 @@ typedef struct _NOZCurrentEntryInfoT
         SInt64 beginBytePosition;
         SInt64 writingPositionOffset;
 
-        NOZCurrentEntryInfoT currentEntryInfo;
+        NOZFileEntryT *currentEntry;
         NOZEndOfCentralDirectoryRecordT endOfCentralDirectoryRecord;
         Byte *comment;
 
@@ -104,10 +104,9 @@ typedef struct _NOZCurrentEntryInfoT
         _zipFilePath = [zipFilePath copy];
         _standardizedZipFilePath = [_zipFilePath stringByStandardizingPath];
 
-        bzero(&_internal.currentEntryInfo, sizeof(NOZCurrentEntryInfoT));
         _internal.beginBytePosition = 0;
         _internal.writingPositionOffset = 0;
-        _internal.firstEntry = _internal.lastEntry = NULL;
+        _internal.firstEntry = _internal.lastEntry = _internal.currentEntry = NULL;
     }
     return self;
 }
@@ -248,7 +247,7 @@ typedef struct _NOZCurrentEntryInfoT
     if (forceClose && ![self private_closeCurrentOpenEntryAndReturnError:&stackError]) {
         [self private_freeLinkedList];
         return NO;
-    } else if (!forceClose && _internal.currentEntryInfo.isOpen) {
+    } else if (!forceClose && NULL != _internal.currentEntry) {
         stackError = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
         return NO;
     }
@@ -314,29 +313,50 @@ typedef struct _NOZCurrentEntryInfoT
         return NO;
     }
 
-
     if (_internal.lastEntry) {
         _internal.lastEntry->nextEntry = newEntry;
         _internal.lastEntry = newEntry;
     } else {
         _internal.firstEntry = _internal.lastEntry = newEntry;
     }
-    _internal.currentEntryInfo.entry = newEntry;
+    _internal.currentEntry = newEntry;
 
     if (![self private_populateRecordsForCurrentOpenEntryWithEntry:entry error:error]) {
+        _internal.currentEntry = NULL;
         return NO;
     }
 
     if (![self private_writeLocalFileHeaderForCurrentEntryAndReturnError:error]) {
+        _internal.currentEntry = NULL;
         return NO;
     }
 
-    if (![self private_prepareCurrentEntryZStream:entry.compressionLevel]) {
-        errorEncountered = YES;
+    __unsafe_unretained typeof(self) rawSelf = self;
+    _currentEncoder = NOZEncoderForCompressionMethod(_internal.currentEntry->fileHeader.compressionMethod);
+    _currentEncoderContext = [_currentEncoder createContextForEncodingEntry:entry
+                                                              flushCallback:^BOOL(id<NOZCompressionEncoder> encoder, id<NOZCompressionEncoderContext> context, const Byte* buffer, size_t length) {
+        if (rawSelf->_currentEncoder != encoder) {
+            return NO;
+        }
+
+        return [rawSelf private_flushWriteBuffer:buffer length:length];
+    }];
+    if (!_currentEncoder || !_currentEncoderContext) {
+        if (error) {
+            *error = NOZError(NOZErrorCodeZipDoesNotSupportCompressionMethod, @{ @"method" : @(_internal.currentEntry->fileHeader.compressionMethod) });
+        }
+        _currentEncoder = nil;
+        _internal.currentEntry = NULL;
         return NO;
     }
 
-    _internal.currentEntryInfo.isOpen = YES;
+    if (![_currentEncoder initializeEncoderContext:_currentEncoderContext error:error]) {
+        _currentEncoderContext = nil;
+        _currentEncoder = nil;
+        _internal.currentEntry = NULL;
+        return NO;
+    }
+
     return YES;
 }
 
@@ -350,19 +370,18 @@ typedef struct _NOZCurrentEntryInfoT
         if (error) {
             if ((*abort)) {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
-            } else if (!success) {
+            } else if (!success && !*error) {
                 *error = NOZError(NOZErrorCodeZipFailedToWriteEntry, nil);
             }
         }
     });
 
-    if (success && (!_internal.currentEntryInfo.isOpen || !entry.inputStream)) {
+    if (success && (!_internal.currentEntry || !entry.inputStream)) {
         success = NO;
         return NO;
     }
 
     const SInt64 totalBytes = entry.sizeInBytes;
-    SInt64 totalBytesRead = 0;
     if (success) {
         NSInputStream *inputStream = entry.inputStream;
         [inputStream open];
@@ -378,40 +397,24 @@ typedef struct _NOZCurrentEntryInfoT
                 break;
             }
 
-            _internal.currentEntryInfo.entry->fileDescriptor.crc32 = (UInt32)crc32(_internal.currentEntryInfo.entry->fileDescriptor.crc32, buffer, (UInt32)bytesRead);
+            if (bytesRead == 0) {
+                break;
+            }
 
-            _internal.currentEntryInfo.zStream.next_in = buffer;
-            _internal.currentEntryInfo.zStream.avail_in = (UInt32)bytesRead;
+            _internal.currentEntry->fileDescriptor.crc32 = (UInt32)crc32(_internal.currentEntry->fileDescriptor.crc32, buffer, (UInt32)bytesRead);
 
-            while (success && _internal.currentEntryInfo.zStream.avail_in > 0 && !(*abort)) {
-                if (_internal.currentEntryInfo.zStream.avail_out == 0) {
-                    if (![self private_flushWriteBuffer]) {
-                        success = NO;
-                    }
-                    _internal.currentEntryInfo.zStream.avail_out = NOZPageSize;
-                    _internal.currentEntryInfo.zStream.next_out = _internal.currentEntryInfo.compressedDataBuffer;
-                }
+            success = [_currentEncoder encodeBytes:buffer length:(size_t)bytesRead context:_currentEncoderContext error:error];
+            if (!success) {
+                break;
+            }
 
-                if (!success) {
-                    break;
+            if (bytesRead != 0) {
+                _internal.currentEntry->fileDescriptor.uncompressedSize += bytesRead;
+                if (progressBlock) {
+                    progressBlock(totalBytes, _internal.currentEntry->fileDescriptor.uncompressedSize, bytesRead, abort);
                 }
+            }
 
-                uLong previousTotalIn = _internal.currentEntryInfo.zStream.total_in;
-                uLong previousTotalOut = _internal.currentEntryInfo.zStream.total_out;
-                success = deflate(&_internal.currentEntryInfo.zStream, Z_NO_FLUSH) == Z_OK;
-                if (previousTotalOut > _internal.currentEntryInfo.zStream.total_out) {
-                    success = NO;
-                } else {
-                    _internal.currentEntryInfo.compressedDataBufferPosition += (UInt32)(_internal.currentEntryInfo.zStream.total_out - previousTotalOut);
-                }
-                uLong additionalBytesRead = _internal.currentEntryInfo.zStream.total_in - previousTotalIn;
-                if (additionalBytesRead != 0) {
-                    totalBytesRead += additionalBytesRead;
-                    if (progressBlock) {
-                        progressBlock(totalBytes, totalBytesRead, (SInt64)additionalBytesRead, abort);
-                    }
-                }
-            } // endwhile
         } while (bytesRead == NOZPageSize && !(*abort));
     }
 
@@ -420,14 +423,14 @@ typedef struct _NOZCurrentEntryInfoT
 
 - (BOOL)private_closeCurrentOpenEntryAndReturnError:(out NSError * __nullable * __nullable)error
 {
-    if (!_internal.currentEntryInfo.isOpen) {
+    if (!_internal.currentEntry) {
         return YES;
     }
 
     BOOL success = YES;
 
     if (success) {
-        success = [self private_finishDeflate];
+        success = [self private_finishEncoding];
     }
 
 #if 0
@@ -438,8 +441,7 @@ typedef struct _NOZCurrentEntryInfoT
 
     _internal.endOfCentralDirectoryRecord.totalRecordCount++;
     _internal.endOfCentralDirectoryRecord.recordCountForDisk++;
-    _internal.currentEntryInfo.isOpen = NO;
-    _internal.currentEntryInfo.entry = NULL;
+    _internal.currentEntry = NULL;
 
     if (!success && error) {
         *error = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
@@ -454,28 +456,24 @@ typedef struct _NOZCurrentEntryInfoT
     _internal.firstEntry = _internal.lastEntry = NULL;
 }
 
-- (BOOL)private_flushWriteBuffer
+- (BOOL)private_flushWriteBuffer:(const Byte*)buffer length:(size_t)length
 {
-    if (0 == _internal.currentEntryInfo.compressedDataBufferPosition) {
+    if (0 == length) {
         return YES;
     }
 
     BOOL success = YES;
 
-    size_t bytesWritten = fwrite(_internal.currentEntryInfo.compressedDataBuffer,
+    size_t bytesWritten = fwrite(buffer,
                                  1,
-                                 _internal.currentEntryInfo.compressedDataBufferPosition,
+                                 length,
                                  _internal.file);
-    if (bytesWritten != _internal.currentEntryInfo.compressedDataBufferPosition) {
+    if (bytesWritten != length) {
         success = NO;
     }
 
-    _internal.currentEntryInfo.entry->fileDescriptor.compressedSize += bytesWritten;
-    _internal.currentEntryInfo.entry->fileDescriptor.uncompressedSize += _internal.currentEntryInfo.zStream.total_in;
-    _internal.currentEntryInfo.zStream.total_in = 0;
+    _internal.currentEntry->fileDescriptor.compressedSize += bytesWritten;
 
-    _internal.currentEntryInfo.compressedDataBufferPosition = 0;
-    
     return success;
 }
 
@@ -510,7 +508,7 @@ typedef struct _NOZCurrentEntryInfoT
         return NO;
     }
 
-    NOZCentralDirectoryFileRecordT *record = &_internal.currentEntryInfo.entry->centralDirectoryRecord;
+    NOZCentralDirectoryFileRecordT *record = &_internal.currentEntry->centralDirectoryRecord;
 
     /* File Record info */
     {
@@ -540,7 +538,7 @@ typedef struct _NOZCurrentEntryInfoT
                 }
             }
 
-            record->fileHeader->compressionMethod = Z_DEFLATED;
+            record->fileHeader->compressionMethod = entry.compressionMethod;
             noz_dos_date_from_NSDate(entry.timestamp ?: [NSDate date],
                                      &record->fileHeader->dosDate,
                                      &record->fileHeader->dosTime);
@@ -569,16 +567,16 @@ typedef struct _NOZCurrentEntryInfoT
     }
 
     if (nameSize > 0) {
-        _internal.currentEntryInfo.entry->name = (const Byte*)malloc(nameSize);
-        memcpy((void *)_internal.currentEntryInfo.entry->name, entry.name.UTF8String, nameSize);
-        _internal.currentEntryInfo.entry->ownsName = YES;
+        _internal.currentEntry->name = (const Byte*)malloc(nameSize);
+        memcpy((void *)_internal.currentEntry->name, entry.name.UTF8String, nameSize);
+        _internal.currentEntry->ownsName = YES;
     }
-    _internal.currentEntryInfo.entry->extraField = NULL;
-    _internal.currentEntryInfo.entry->ownsName = NO;
+    _internal.currentEntry->extraField = NULL;
+    _internal.currentEntry->ownsName = NO;
     if (commentSize > 0) {
-        _internal.currentEntryInfo.entry->comment = (const Byte*)malloc(commentSize);
-        memcpy((void *)_internal.currentEntryInfo.entry->comment, entry.comment.UTF8String, commentSize);
-        _internal.currentEntryInfo.entry->ownsName = YES;
+        _internal.currentEntry->comment = (const Byte*)malloc(commentSize);
+        memcpy((void *)_internal.currentEntry->comment, entry.comment.UTF8String, commentSize);
+        _internal.currentEntry->ownsName = YES;
     }
 
     return YES;
@@ -611,7 +609,7 @@ typedef struct _NOZCurrentEntryInfoT
 - (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError * __nullable * __nullable)error
 {
     BOOL success = YES;
-    NOZFileEntryT *entry = _internal.currentEntryInfo.entry;
+    NOZFileEntryT *entry = _internal.currentEntry;
 
     success = [self private_writeLocalFileHeaderForEntry:entry signature:YES];
 
@@ -636,79 +634,21 @@ typedef struct _NOZCurrentEntryInfoT
     return success;
 }
 
-- (BOOL)private_prepareCurrentEntryZStream:(NOZCompressionLevel)compressionLevel
+- (BOOL)private_finishEncoding
 {
-    _internal.currentEntryInfo.zStream.avail_in = 0;
-    _internal.currentEntryInfo.zStream.avail_out = NOZPageSize;
-    _internal.currentEntryInfo.zStream.next_out = _internal.currentEntryInfo.compressedDataBuffer;
-    _internal.currentEntryInfo.zStream.total_in = 0;
-    _internal.currentEntryInfo.zStream.total_out = 0;
-    _internal.currentEntryInfo.zStream.data_type = Z_BINARY;
-    _internal.currentEntryInfo.zStream.zalloc = NULL;
-    _internal.currentEntryInfo.zStream.zfree = NULL;
-    _internal.currentEntryInfo.zStream.opaque = NULL;
-
-    if (Z_OK != deflateInit2(&(_internal.currentEntryInfo.zStream),
-                             compressionLevel,
-                             Z_DEFLATED,
-                             -MAX_WBITS,
-                             8 /* default memory level */,
-                             Z_DEFAULT_STRATEGY)) {
+    if (!_currentEncoder) {
         return NO;
     }
 
-    _internal.currentEntryInfo.isZStreamOpen = 1;
-    return YES;
-}
+    noz_defer(^{
+        _currentEncoder = nil;
+        _currentEncoderContext = nil;
+    });
 
-- (BOOL)private_finishDeflate
-{
-    if (!_internal.currentEntryInfo.isZStreamOpen) {
-        return NO;
+    BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext error:NULL];
+    if (_currentEncoderContext.encodedDataWasText) {
+        _internal.currentEntry->centralDirectoryRecord.internalFileAttributes |= (1 << 0) /* text */;
     }
-
-    BOOL success = YES;
-    BOOL finishedDeflate = NO;
-    _internal.currentEntryInfo.zStream.avail_in = 0;
-    while (success && !finishedDeflate) {
-        uLong previousTotalOut;
-        if (_internal.currentEntryInfo.zStream.avail_out == 0) {
-            if (![self private_flushWriteBuffer]) {
-                success = NO;
-            }
-            _internal.currentEntryInfo.zStream.avail_out = NOZPageSize;
-            _internal.currentEntryInfo.zStream.next_out = _internal.currentEntryInfo.compressedDataBuffer;
-        }
-
-        previousTotalOut = _internal.currentEntryInfo.zStream.total_out;
-        if (success) {
-            int err = deflate(&_internal.currentEntryInfo.zStream, Z_FINISH);
-            if (err != Z_OK) {
-                if (err == Z_STREAM_END) {
-                    finishedDeflate = YES;
-                } else {
-                    success = NO;
-                }
-            }
-        }
-        _internal.currentEntryInfo.compressedDataBufferPosition += _internal.currentEntryInfo.zStream.total_out - previousTotalOut;
-    }
-
-    if (success && _internal.currentEntryInfo.compressedDataBufferPosition > 0) {
-        success = [self private_flushWriteBuffer];
-    }
-
-    do {
-        if (_internal.currentEntryInfo.zStream.data_type == Z_ASCII) {
-            _internal.currentEntryInfo.entry->centralDirectoryRecord.internalFileAttributes = Z_ASCII;
-        }
-        int err = deflateEnd(&_internal.currentEntryInfo.zStream);
-        if (success) {
-            success = (err == Z_OK);
-        }
-        _internal.currentEntryInfo.isZStreamOpen = NO;
-    } while (0);
-
     return success;
 }
 
@@ -735,7 +675,7 @@ typedef struct _NOZCurrentEntryInfoT
 
 - (BOOL)private_writeCurrentLocalFileDescriptor:(BOOL)writeSignature
 {
-    return [self private_writeLocalFileDescriptorForEntry:_internal.currentEntryInfo.entry signature:writeSignature];
+    return [self private_writeLocalFileDescriptorForEntry:_internal.currentEntry signature:writeSignature];
 }
 
 - (BOOL)private_writeCentralDirectoryRecords

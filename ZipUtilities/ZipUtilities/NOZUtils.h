@@ -27,24 +27,4 @@
 
 @import Foundation;
 
-/**
- The compression level to use.
- Lower levels execute faster, while higher levels will achieve a higher compression ratio.
- */
-typedef NS_ENUM(NSInteger, NOZCompressionLevel)
-{
-    NOZCompressionLevelNone = 0,
-    NOZCompressionLevelMin = 1,
-    NOZCompressionLevelVeryLow = 2,
-    NOZCompressionLevelLow = 3,
-    NOZCompressionLevelMediumLow = 4,
-    NOZCompressionLevelMedium = 5,
-    NOZCompressionLevelMediumHigh = 6,
-    NOZCompressionLevelHigh = 7,
-    NOZCompressionLevelVeryHigh = 8,
-    NOZCompressionLevelMax = 9,
-
-    NOZCompressionLevelDefault = -1,
-};
-
 typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort);

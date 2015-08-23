@@ -121,6 +121,42 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZAbstractZipEntry/setCompressionMethod:</TokenIdentifier>
+			<Abstract type="html">The NOZCompressionMethod to compress with.  Default is NOZCompressionMethodDeflate.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZAbstractZipEntry/compressionMethod</TokenIdentifier>
+			<Abstract type="html">The NOZCompressionMethod to compress with.  Default is NOZCompressionMethodDeflate.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZAbstractZipEntry/compressionMethod</TokenIdentifier>
+			<Abstract type="html">The NOZCompressionMethod to compress with.  Default is NOZCompressionMethodDeflate.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/NOZAbstractZipEntry/initWithName:</TokenIdentifier>
 			<Abstract type="html">Designated initializer</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>

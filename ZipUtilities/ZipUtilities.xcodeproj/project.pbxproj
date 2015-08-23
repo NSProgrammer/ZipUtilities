@@ -32,6 +32,10 @@
 		1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B31B7476BB00969629 /* NOZ_Project.m */; };
 		1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
+		1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
+		1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
+		1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79C1B899804004AD418 /* NOZRawCoders.m */; };
 		1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB31B757A38000B93C4 /* Aesop.txt */; };
 		1CD9BAB61B757E3F000B93C4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9BAB51B757E3F000B93C4 /* libz.dylib */; };
 		1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB81B75B419000B93C4 /* Directory.zip */; };
@@ -92,6 +96,10 @@
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
 		1C8A4A171B81BC7100C8FFB5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
 		1C8A4A181B81BC7100C8FFB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		1CCAC7961B890FAD004AD418 /* NOZCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZCompression.h; sourceTree = "<group>"; };
+		1CCAC7971B890FAD004AD418 /* NOZCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompression.m; sourceTree = "<group>"; };
+		1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDeflateCoders.m; sourceTree = "<group>"; };
+		1CCAC79C1B899804004AD418 /* NOZRawCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZRawCoders.m; sourceTree = "<group>"; };
 		1CD9BAB31B757A38000B93C4 /* Aesop.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aesop.txt; sourceTree = "<group>"; };
 		1CD9BAB51B757E3F000B93C4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1CD9BAB81B75B419000B93C4 /* Directory.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Directory.zip; sourceTree = "<group>"; };
@@ -146,10 +154,14 @@
 				1C6BF7B31B7476BB00969629 /* NOZ_Project.m */,
 				1C6BF78C1B74093B00969629 /* NOZCompress.h */,
 				1C6BF78D1B74093B00969629 /* NOZCompress.m */,
+				1CCAC7961B890FAD004AD418 /* NOZCompression.h */,
+				1CCAC7971B890FAD004AD418 /* NOZCompression.m */,
 				1C6BF78F1B74095500969629 /* NOZDecompress.h */,
 				1C6BF7901B74095500969629 /* NOZDecompress.m */,
+				1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */,
 				1C3223781B77BE9F00DC0A33 /* NOZError.h */,
 				1C3223791B77BE9F00DC0A33 /* NOZError.m */,
+				1CCAC79C1B899804004AD418 /* NOZRawCoders.m */,
 				1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */,
 				1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */,
 				1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */,
@@ -216,6 +228,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */,
 				1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
@@ -326,7 +339,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */,
 				1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */,
+				1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
 				1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */,
 				1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */,
@@ -335,6 +350,7 @@
 				1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */,
 				1C05422C1B7BDD97007CE7BA /* NOZZipper.m in Sources */,
 				1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */,
+				1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +489,9 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/ZipUtilities;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -485,7 +503,9 @@
 					"-ObjC",
 					"-all_load",
 				);
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = include/ZipUtilities;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

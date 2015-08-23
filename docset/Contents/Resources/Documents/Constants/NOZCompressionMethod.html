@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>NOZCompressionMethod Constants Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ZipUtilities </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Nolan O&apos;Brien</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">NOZCompressionMethod Constants Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>NOZCompression.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+
+                    
+                    <h3 class="subsubtitle method-title">NOZCompressionMethod</h3>
+                    
+					
+					<div class="section section-overview">
+                        <p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+<h3><code>NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id</code>NOZCompressionEncoder<code> __nullable encoder);</code></h3>
+
+<p>Updates the known compression method encoder to be <em>encoder</em>.
+Provide <code>nil</code> to make the <em>method</em> unsupported for compression.</p>
+
+<h3><code>NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id</code>NOZCompressionDecoder<code> __nullable decoder);</code></h3>
+
+<p>Updates the known compression method decoder to be <em>decoder</em>.
+Provide <code>nil</code> to make the <em>method</em> unsupported for decompression.</p>
+					</div>
+					
+					
+                    <div class="section">
+                        <!-- display enum values -->
+                        
+                        <h4 class="method-subtitle">Definition</h4>
+                        <code>typedef NS_ENUM(UInt16, NOZCompressionMethod ) {<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodNone</a> = 0,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodShrink</a> = 1,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReduce1</a> = 2,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReduce2</a> = 3,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReduce3</a> = 4,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReduce4</a> = 5,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodImplode</a> = 6,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved7</a> = 7,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodDeflate</a> = 8,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodDeflate64</a> = 9,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodIBMTERSEOld</a> = 10,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved11</a> = 11,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodBZip2</a> = 12,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved13</a> = 13,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodLZMA</a> = 14,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved15</a> = 15,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved16</a> = 16,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodReserved17</a> = 17,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodIBMTERSENew</a> = 18,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodLZ77</a> = 19,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodWAVPack</a> = 97,<br>
+                            
+                            &nbsp;&nbsp; <a href="">NOZCompressionMethodPPMv1rev1</a> = 98,<br>
+                            
+                            };</code>
+                    
+                    </div>
+                    
+                    <div class="section section-methods">
+                        <h4 class="method-subtitle">Constants</h4>
+                        <dl class="termdef">
+                            
+                            <dt><a name="" title="NOZCompressionMethodNone"></a><code>NOZCompressionMethodNone</code></dt>
+<dd>
+
+
+<p>No compression is supported by default.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodShrink"></a><code>NOZCompressionMethodShrink</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReduce1"></a><code>NOZCompressionMethodReduce1</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReduce2"></a><code>NOZCompressionMethodReduce2</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReduce3"></a><code>NOZCompressionMethodReduce3</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReduce4"></a><code>NOZCompressionMethodReduce4</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodImplode"></a><code>NOZCompressionMethodImplode</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved7"></a><code>NOZCompressionMethodReserved7</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodDeflate"></a><code>NOZCompressionMethodDeflate</code></dt>
+<dd>
+
+
+<p>Deflate is supported by default via zlib.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodDeflate64"></a><code>NOZCompressionMethodDeflate64</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodIBMTERSEOld"></a><code>NOZCompressionMethodIBMTERSEOld</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved11"></a><code>NOZCompressionMethodReserved11</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodBZip2"></a><code>NOZCompressionMethodBZip2</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved13"></a><code>NOZCompressionMethodReserved13</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodLZMA"></a><code>NOZCompressionMethodLZMA</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved15"></a><code>NOZCompressionMethodReserved15</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved16"></a><code>NOZCompressionMethodReserved16</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodReserved17"></a><code>NOZCompressionMethodReserved17</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodIBMTERSENew"></a><code>NOZCompressionMethodIBMTERSENew</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodLZ77"></a><code>NOZCompressionMethodLZ77</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodWAVPack"></a><code>NOZCompressionMethodWAVPack</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="NOZCompressionMethodPPMv1rev1"></a><code>NOZCompressionMethodPPMv1rev1</code></dt>
+<dd>
+
+
+<p>The compression method to use.
+Only 0 (don&rsquo;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">NOZCompression.h</code>.
+	</p>
+	
+</dd>
+                            
+                        </dl>
+                    </div>
+                    
+
+                    
+                    
+
+                    
+
+                    
+                    <div class="method-subsection declared-in-section">
+                        <h4 class="method-subtitle">Declared In</h4>
+                        <p><code class="declared-in-ref">NOZCompression.h</code></p>
+                    </div>
+                    
+                    
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-08-22</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -94,7 +94,9 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeZipFailedToWriteZip,
     NOZErrorCodeZipCannotOpenNewEntry,
     NOZErrorCodeZipDoesNotSupportZip64,
+    NOZErrorCodeZipDoesNotSupportCompressionMethod,
     NOZErrorCodeZipFailedToWriteEntry,
+    NOZErrorCodeZipFailedToCompressEntry,
 
     NOZErrorCodeUnzipUnknown = NOZErrorPageUnzip,
     NOZErrorCodeUnzipCannotOpenZip,
@@ -111,6 +113,7 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeUnzipIndexOutOfBounds,
     NOZErrorCodeUnzipCannotReadFileEntry,
     NOZErrorCodeUnzipCannotDecompressFileEntry,
+    NOZErrorCodeUnzipFailedToDecompressEntry,
 };
 
 NS_INLINE BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page)

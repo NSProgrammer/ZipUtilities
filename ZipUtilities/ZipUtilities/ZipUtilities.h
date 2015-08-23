@@ -45,6 +45,8 @@
 
 
 #warning TODO \
+Pluggable encoders \
+Pluggable decoders \
 Support single pass zipping (0x08 bitFlag) \
 Handle zero length entries as no-ops \
 Handle zero compression methods as copies
@@ -121,6 +123,14 @@ Handle zero compression methods as copies
  into destinations (NSData, streams and/or files).
 
  ## History
+
+ ### 1.3.0  (Aug 22, 2015) - Nolan O'Brien
+
+ - Modularize compression encoding and decoding with protocols in `NOZCompression.h`
+ - Add _Deflate_ encoder/decoder
+ - Add _Raw_ encoder/decoder (for no compression support)
+ - TODO: currently, only encoders are supported and implemented.
+   Still need to implement and use decoders.
 
  ### 1.2.0  (Aug 21, 2015) - Nolan O'Brien
 
