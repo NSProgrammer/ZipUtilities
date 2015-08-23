@@ -41,6 +41,7 @@
 
 @property (nonatomic, readonly) z_stream *zStream;
 @property (nonatomic, readonly) Byte *compressedDataBuffer;
+@property (nonatomic, readonly) size_t compressedDataBufferSize;
 @property (nonatomic) size_t compressedDataPosition;
 @property (nonatomic) BOOL encodedDataWasText;
 @end
@@ -50,6 +51,7 @@
     struct {
         z_stream zStream;
         Byte* compressedDataBuffer;
+        size_t compressedDataBufferSize;
 
         SInt16 compressionLevel;
         BOOL zStreamOpen:1;
@@ -86,10 +88,16 @@
     _internal.compressionLevel = compressionLevel;
 }
 
+- (size_t)compressedDataBufferSize
+{
+    return _internal.compressedDataBufferSize;
+}
+
 - (nonnull instancetype)init
 {
     if (self = [super init]) {
         _internal.compressedDataBuffer = malloc(NSPageSize());
+        _internal.compressedDataBufferSize = NSPageSize();
 
         _internal.zStream.avail_in = 0;
         _internal.zStream.avail_out = (UInt32)NSPageSize();
@@ -109,11 +117,29 @@
 - (void)dealloc
 {
     free(_internal.compressedDataBuffer);
+    if (_internal.zStreamOpen) {
+        deflateEnd(&_internal.zStream);
+    }
 }
 
 @end
 
 @implementation NOZDeflateEncoder
+
+- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry
+{
+    switch (entry.compressionLevel) {
+        case 9:
+        case 8:
+            return NOZFlagBitsMaxDeflate;
+        case 2:
+            return NOZFlagBitsFastDeflate;
+        case 1:
+            return NOZFlagBitsSuperFastDeflate;
+        default:
+            return NOZFlagBitsNormalDeflate;
+    }
+}
 
 - (nonnull NOZDeflateEncoderContext *)createContextForEncodingEntry:(nonnull id<NOZZipEntry>)entry flushCallback:(nonnull NOZFlushCallback)callback;
 {
@@ -170,7 +196,7 @@
             }
             zStream->total_in = 0;
             context.compressedDataPosition = 0;
-            zStream->avail_out = (UInt32)NSPageSize();
+            zStream->avail_out = (UInt32)context.compressedDataBufferSize;
             zStream->next_out = context.compressedDataBuffer;
         }
 
@@ -216,7 +242,7 @@
             }
             zStream->total_in = 0;
             context.compressedDataPosition = 0;
-            zStream->avail_out = (UInt32)NSPageSize();
+            zStream->avail_out = (UInt32)context.compressedDataBufferSize;
             zStream->next_out = context.compressedDataBuffer;
         }
 
@@ -259,11 +285,48 @@
 #pragma mark - Deflate Decoder
 
 @interface NOZDeflateDecoderContext : NSObject <NOZCompressionDecoderContext>
+@property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
+@property (nonatomic) BOOL zStreamOpen;
+@property (nonatomic) BOOL hasFinished;
+
+@property (nonatomic, readonly) z_stream *zStream;
+@property (nonatomic, readonly) Byte *decompressedDataBuffer;
+@property (nonatomic, readonly) size_t decompressedDataBufferSize;
+//@property (nonatomic) size_t decompressedDataPosition;
 @end
 
 @implementation NOZDeflateDecoderContext
+{
+    z_stream _zStream;
+}
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _zStream.zalloc = NULL;
+        _zStream.zfree = NULL;
+        _zStream.opaque = NULL;
+        _zStream.next_in = 0;
+        _zStream.avail_in = 0;
 
+        _decompressedDataBufferSize = NSPageSize();
+        _decompressedDataBuffer = malloc(_decompressedDataBufferSize);
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    free(_decompressedDataBuffer);
+    if (_zStreamOpen) {
+        inflateEnd(&_zStream);
+    }
+}
+
+- (z_stream *)zStream
+{
+    return &_zStream;
+}
 
 @end
 
@@ -271,15 +334,22 @@
 
 - (nonnull NOZDeflateDecoderContext *)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback
 {
-    [self doesNotRecognizeSelector:_cmd];
-    abort();
+    NOZDeflateDecoderContext *context = [[NOZDeflateDecoderContext alloc] init];
+    context.flushCallback = callback;
+    return context;
 }
 
 - (BOOL)initializeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
                            error:(out NSError * __nullable * __nullable)error
 {
-    [self doesNotRecognizeSelector:_cmd];
-    abort();
+    if (Z_OK != inflateInit2(context.zStream, -MAX_WBITS)) {
+        if (error) {
+            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+        }
+        return NO;
+    }
+    context.zStreamOpen = YES;
+    return YES;
 }
 
 - (BOOL)decodeBytes:(nonnull const Byte*)bytes
@@ -287,15 +357,64 @@
             context:(nonnull NOZDeflateDecoderContext *)context
               error:(out NSError * __nullable * __nullable)error
 {
-    [self doesNotRecognizeSelector:_cmd];
-    abort();
+    if (context.hasFinished) {
+        return YES;
+    }
+
+    if (!context.zStreamOpen) {
+        if (error) {
+            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+        }
+        return NO;
+    }
+
+    z_stream *zStream = context.zStream;
+    int zErr = Z_OK;
+    zStream->avail_in = (UInt32)length;
+    zStream->next_in = (Byte*)bytes;
+
+    do {
+
+        zStream->avail_out = (UInt32)context.decompressedDataBufferSize;
+        zStream->next_out = context.decompressedDataBuffer;
+
+        zErr = inflate(zStream, Z_NO_FLUSH);
+
+        if (zErr == Z_OK || zErr == Z_STREAM_END) {
+
+            size_t consumed = context.decompressedDataBufferSize - zStream->avail_out;
+            if (!context.flushCallback(self, context, context.decompressedDataBuffer, consumed)) {
+                zErr = Z_UNKNOWN;
+            }
+
+        }
+
+    } while (zStream->avail_out == 0 && zErr == Z_OK);
+
+    if (zErr == Z_STREAM_END) {
+        context.hasFinished = YES;
+    } else if (zErr != Z_OK) {
+        if (error) {
+            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+        }
+        return NO;
+    }
+
+    if (!length) {
+        context.hasFinished = YES;
+    }
+
+    return YES;
 }
 
 - (BOOL)finalizeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
                          error:(out NSError * __nullable * __nullable)error
 {
-    [self doesNotRecognizeSelector:_cmd];
-    abort();
+    if (context.zStreamOpen) {
+        inflateEnd(context.zStream);
+        context.zStreamOpen = NO;
+    }
+    return YES;
 }
 
 @end

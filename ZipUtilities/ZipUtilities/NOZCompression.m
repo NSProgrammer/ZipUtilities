@@ -43,6 +43,9 @@ static void NOZCompressionConstructor(void)
 
     sCompressionEncoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateEncoder alloc] init];
     sCompressionEncoders[@(NOZCompressionMethodNone)] = [[NOZRawEncoder alloc] init];
+
+    sCompressionDecoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateDecoder alloc] init];
+    sCompressionDecoders[@(NOZCompressionMethodNone)] = [[NOZRawDecoder alloc] init];
 }
 
 id<NOZCompressionEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method)

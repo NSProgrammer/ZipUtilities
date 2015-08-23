@@ -61,12 +61,16 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 - (SInt64)private_locateSignature:(UInt32)signature;
 - (BOOL)private_locateCompressedDataOfRecord:(NOZCentralDirectoryRecord *)record;
 - (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock
-                              usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
+                              usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block
+                                   error:(out NSError *__autoreleasing  __nullable * __nullable)error;
+- (BOOL)private_flushDecompressedBytes:(const Byte*)buffer length:(size_t)length block:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
 @end
 
 @implementation NOZUnzipper
 {
     NSString *_standardizedFilePath;
+    id<NOZCompressionDecoder> _currentDecoder;
+    id<NOZCompressionDecoderContext> _currentDecoderContext;
 
     struct {
         FILE* file;
@@ -76,9 +80,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     } _internal;
 
     struct {
-        z_stream zStream;
         off_t offsetToFirstByte;
         UInt32 crc32;
+        size_t bytesDecompressed;
 
         NOZFileEntryT *entry;
 
@@ -218,22 +222,40 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     }
 
     _currentUnzipping.crc32 = 0;
-    _currentUnzipping.zStream.zalloc = NULL;
-    _currentUnzipping.zStream.zfree = NULL;
-    _currentUnzipping.zStream.opaque = NULL;
-    _currentUnzipping.zStream.next_in = 0;
-    _currentUnzipping.zStream.avail_in = 0;
 
-    if (Z_OK != inflateInit2(&_currentUnzipping.zStream, -MAX_WBITS)) {
-        return NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+    __unsafe_unretained typeof(self) rawSelf = self;
+    _currentDecoder = NOZDecoderForCompressionMethod(record.internalEntry->fileHeader.compressionMethod);
+    _currentDecoderContext = [_currentDecoder createContextForDecodingWithFlushCallback:^BOOL(id coder, id context, const Byte* bufferToFlush, size_t length) {
+        if (rawSelf->_currentDecoder != coder) {
+            return NO;
+        }
+
+        return [rawSelf private_flushDecompressedBytes:bufferToFlush length:length block:block];
+    }];
+
+    noz_defer(^{
+        _currentDecoder = nil;
+        _currentDecoderContext = nil;
+    });
+
+    if (!_currentDecoder || !_currentDecoderContext) {
+        return NOZError(NOZErrorCodeUnzipDecompressionMethodNotSupported, nil);
     }
-    noz_defer(^{ inflateEnd(&_currentUnzipping.zStream); });
+
+    NSError *error;
+    if (![_currentDecoder initializeDecoderContext:_currentDecoderContext error:&error]) {
+        return error;
+    }
 
     _currentUnzipping.entry = record.internalEntry;
     noz_defer(^{ _currentUnzipping.entry = NULL; });
 
-    if (![self private_deflateWithProgressBlock:progressBlock usingBlock:block]) {
-        return NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+    if (![self private_deflateWithProgressBlock:progressBlock usingBlock:block error:&error]) {
+        return error;
+    }
+
+    if (![_currentDecoder finalizeDecoderContext:_currentDecoderContext error:&error]) {
+        return error;
     }
 
     return nil;
@@ -326,6 +348,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 @end
 
 @implementation NOZUnzipper (Private)
+
+- (BOOL)private_flushDecompressedBytes:(const Byte *)buffer length:(size_t)length block:(nonnull NOZUnzipByteRangeEnumerationBlock)block
+{
+    _currentUnzipping.crc32 = (UInt32)crc32(_currentUnzipping.crc32, buffer, (UInt32)length);
+    _currentUnzipping.bytesDecompressed += length;
+
+    BOOL abort = NO;
+    block(buffer, NSMakeRange((NSUInteger)(_currentUnzipping.bytesDecompressed - length), (NSUInteger)length), &abort);
+
+    return !abort;
+}
 
 - (off_t)private_locateSignature:(UInt32)signature
 {
@@ -442,78 +475,51 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block
+- (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block error:(out NSError * __nullable __autoreleasing * __nullable)error
 {
+    __block BOOL success = YES;
+    noz_defer(^{
+        if (!success && error && !*error) {
+            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+        }
+    });
+
     const size_t pageSize = NSPageSize();
-    Byte uncompressedBuffer[pageSize];
-    size_t uncompressedBufferSize = sizeof(uncompressedBuffer);
     Byte compressedBuffer[pageSize];
     size_t compressedBufferSize = sizeof(compressedBuffer);
 
-    SInt64 uncompressedBytesConsumed = 0;
-    const SInt64 totalUncompressedBytes = _currentUnzipping.entry->fileDescriptor.uncompressedSize;
-    SInt64 uncompressedBytesConsumedThisPass = 1;
     BOOL stop = NO;
-    SInt64 compressedBytesLeft = _currentUnzipping.entry->fileDescriptor.compressedSize;
+    const SInt64 compressedBytesTotal = _currentUnzipping.entry->fileDescriptor.compressedSize;
+    SInt64 compressedBytesLeft = compressedBytesTotal;
 
-    int zErr = Z_OK;
-    while (!stop) {
+    while (!stop && !_currentDecoderContext.hasFinished) {
 
         if ((size_t)compressedBytesLeft < compressedBufferSize) {
             compressedBufferSize = (size_t)compressedBytesLeft;
         }
 
         if (compressedBufferSize != fread(compressedBuffer, 1, compressedBufferSize, _internal.file)) {
+            success = NO;
             return NO;
         }
         compressedBytesLeft -= compressedBufferSize;
 
-        _currentUnzipping.zStream.avail_in = (uInt)compressedBufferSize;
-        _currentUnzipping.zStream.next_in = compressedBuffer;
+        if (![_currentDecoder decodeBytes:compressedBuffer length:compressedBufferSize context:_currentDecoderContext error:error]) {
+            return NO;
+        }
 
-        do {
-
-            _currentUnzipping.zStream.avail_out = (uInt)uncompressedBufferSize;
-            _currentUnzipping.zStream.next_out = uncompressedBuffer;
-
-            zErr = inflate(&_currentUnzipping.zStream, Z_NO_FLUSH);
-
-//            if (zErr == Z_STREAM_END) {
-//                int inErr = inflate(&_currentUnzipping.zStream, Z_FULL_FLUSH);
-//                (void)inErr;
-//            }
-
-            if (zErr == Z_OK || zErr == Z_STREAM_END) {
-                uncompressedBytesConsumedThisPass = (SInt64)(uncompressedBufferSize - _currentUnzipping.zStream.avail_out);
-                _currentUnzipping.crc32 = (UInt32)crc32(_currentUnzipping.crc32, uncompressedBuffer, (uInt)uncompressedBytesConsumedThisPass);
-
-                uncompressedBytesConsumed += uncompressedBytesConsumedThisPass;
-                block(uncompressedBuffer,
-                      NSMakeRange((NSUInteger)(uncompressedBytesConsumed - uncompressedBytesConsumedThisPass), (NSUInteger)uncompressedBytesConsumedThisPass),
-                      &stop);
-
-                if (progressBlock) {
-                    BOOL progressStop = NO;
-                    progressBlock(totalUncompressedBytes, uncompressedBytesConsumed, uncompressedBytesConsumedThisPass, &progressStop);
-                    if (progressStop) {
-                        stop = YES;
-                    }
-                }
-
-            }
-
-            if (zErr != Z_OK) {
+        if (progressBlock) {
+            BOOL progressStop = NO;
+            progressBlock(compressedBytesTotal, compressedBytesTotal - compressedBytesLeft, (SInt64)compressedBufferSize, &progressStop);
+            if (progressStop) {
                 stop = YES;
             }
+        }
 
-        } while (_currentUnzipping.zStream.avail_out == 0 && !stop);
-    };
+    } // while (...)
 
-    if (zErr != Z_STREAM_END) {
-        return NO;
-    }
-
-    if (_currentUnzipping.crc32 != _currentUnzipping.entry->fileDescriptor.crc32) {
+    if (stop || (_currentUnzipping.crc32 != _currentUnzipping.entry->fileDescriptor.crc32)) {
+        success = NO;
         return NO;
     }
 
@@ -882,9 +888,6 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     }
     if ((_entry.centralDirectoryRecord.fileHeader->bitFlag & 0b01)) {
         return NOZErrorCodeUnzipDecompressionEncryptionNotSupported;
-    }
-    if (_entry.centralDirectoryRecord.fileHeader->compressionMethod != Z_DEFLATED) {
-        return NOZErrorCodeUnzipDecompressionMethodNotSupported;
     }
 
     return 0;

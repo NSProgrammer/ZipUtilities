@@ -45,11 +45,7 @@
 
 
 #warning TODO \
-Pluggable encoders \
-Pluggable decoders \
-Support single pass zipping (0x08 bitFlag) \
-Handle zero length entries as no-ops \
-Handle zero compression methods as copies
+Support single pass zipping (0x08 bitFlag)
 
 
 /**
@@ -124,6 +120,10 @@ Handle zero compression methods as copies
 
  ## History
 
+ ### 1.3.1  (Aug 23, 2015) - Nolan O'Brien
+
+ - Finish modularization of compression with decoders being implemented
+
  ### 1.3.0  (Aug 22, 2015) - Nolan O'Brien
 
  - Modularize compression encoding and decoding with protocols in `NOZCompression.h`
@@ -173,10 +173,12 @@ Handle zero compression methods as copies
  - add generic utilies like compressing/decompressing from NSData to NSData
  
  ### Eventually
- 
+
+ - figure out a way to avoid having README.md and ZipUtilities.h both providing the same info
+   - we want the info in the documentation and in the README.md
  - add password support
  - add support for per entry "extra info" in an archive
- - expand on progress info
+ - expand on progress info for operations
    - state transitions
    - what files are being zipped/unzipped
    - per file progress

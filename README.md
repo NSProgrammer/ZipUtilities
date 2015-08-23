@@ -48,6 +48,10 @@ into destinations (NSData, streams and/or files).
 
 ## History
 
+### 1.3.1  (Aug 23, 2015) - Nolan O'Brien
+
+- Finish modularization of compression with decoders being implemented
+
 ### 1.3.0  (Aug 22, 2015) - Nolan O'Brien
 
 - Modularize compression encoding and decoding with protocols in `NOZCompression.h`
@@ -97,6 +101,8 @@ into destinations (NSData, streams and/or files).
 
 ### Eventually
 
+- figure out a way to avoid having README.md and ZipUtilities.h both providing the same info
+  - we want the info in the documentation and in the README.md
 - add password support
 - add support for per entry "extra info" in an archive
 - expand on progress info

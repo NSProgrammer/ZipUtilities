@@ -100,6 +100,8 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
 
 /**
  Protocol for encapsulating the context and state of an encoding process.
+ A context object must always be able to clean itself up on dealloc and should
+ not rely on `finalize` to clean it up.
  */
 @protocol NOZCompressionEncoderContext <NSObject>
 /** return `YES` if the encoded data was known to be text.  `NO` otherwise. */
@@ -108,14 +110,30 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
 
 /**
  Protocol for encapsulating the context and state of a decoding process.
+ A context object must always be able to clean itself up on dealloc and should
+ not rely on `finalize` to clean it up.
  */
 @protocol NOZCompressionDecoderContext <NSObject>
+/** 
+ return `YES` once if the decoding is known to have completed and
+ any future call to decodeBytes will be a considered no-op (returning `YES`).
+ If the decoder is provided a zero length buffer to decode, there is no more
+ data to decode, but the decoder may continue decoding.
+ The decoder will have it's decode method called until an error is encountered
+ or hasFinished returns `YES`.
+ */
+- (BOOL)hasFinished;
 @end
 
 /**
  Protocol to implement for constructing a compression encoder.
  */
 @protocol NOZCompressionEncoder <NSObject>
+
+/**
+ Return any bit flags related to the given entry for hinting at the compression that will be used.
+ */
+- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry;
 
 /**
  Create a new context object to track the encoding process.
@@ -176,7 +194,7 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
  */
 - (BOOL)decodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
-            context:(nonnull id<NOZCompressionEncoderContext>)context
+            context:(nonnull id<NOZCompressionDecoderContext>)context
               error:(out NSError * __nullable * __nullable)error;
 
 /**

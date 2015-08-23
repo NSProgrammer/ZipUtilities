@@ -522,20 +522,9 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
             /* Bit Flag */
             {
                 record->fileHeader->bitFlag = 0;
-                switch (entry.compressionLevel) {
-                    case 9:
-                    case 8:
-                        record->fileHeader->bitFlag |= NOZFlagBitsMaxDeflate;
-                        break;
-                    case 2:
-                        record->fileHeader->bitFlag |= NOZFlagBitsFastDeflate;
-                        break;
-                    case 1:
-                        record->fileHeader->bitFlag |= NOZFlagBitsSuperFastDeflate;
-                        break;
-                    default:
-                        record->fileHeader->bitFlag |= NOZFlagBitsNormalDeflate;
-                        break;
+                id<NOZCompressionEncoder> encoder = NOZEncoderForCompressionMethod(entry.compressionMethod);
+                if (encoder) {
+                    record->fileHeader->bitFlag |= [encoder bitFlagsForEntry:entry];
                 }
             }
 

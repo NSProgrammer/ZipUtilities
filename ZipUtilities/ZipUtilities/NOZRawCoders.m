@@ -42,6 +42,11 @@
 
 @implementation NOZRawEncoder
 
+- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry
+{
+    return 0;
+}
+
 - (nonnull NOZRawEncoderContext *)createContextForEncodingEntry:(nonnull id<NOZZipEntry>)entry flushCallback:(nonnull NOZFlushCallback)callback
 {
     NOZRawEncoderContext *context = [[NOZRawEncoderContext alloc] init];
@@ -84,6 +89,7 @@
 
 @interface NOZRawDecoderContext : NSObject <NOZCompressionDecoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
+@property (nonatomic) BOOL hasFinished;
 @end
 
 @implementation NOZRawDecoderContext
@@ -109,12 +115,20 @@
             context:(nonnull NOZRawDecoderContext *)context
               error:(out NSError * __nullable * __nullable)error
 {
+    if (context.hasFinished) {
+        return YES;
+    }
+
     // direct passthrough
     if (!context.flushCallback(self, context, bytes, length)) {
         if (error) {
             *error = NOZError(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
         }
         return NO;
+    }
+
+    if (!length) {
+        context.hasFinished = YES;
     }
 
     return YES;
