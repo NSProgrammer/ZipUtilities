@@ -31,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  `NOZSyncStepOperation` is an `NSOperation` subclass for dealing with a lot of boiler plate code
- associated with creating a synchronous operation that performs multiple steps in sequential order.
+ associated with creating a synchronous operation that performs multiple synchronous steps
+ in sequential order.
  
  Both `NOZCompressOperation` and `NOZDecompressOperation` subclass `NOZSyncStepOperation`
  */
