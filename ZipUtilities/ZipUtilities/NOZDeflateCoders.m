@@ -48,77 +48,40 @@
 
 @implementation NOZDeflateEncoderContext
 {
-    struct {
-        z_stream zStream;
-        Byte* compressedDataBuffer;
-        size_t compressedDataBufferSize;
-
-        SInt16 compressionLevel;
-        BOOL zStreamOpen:1;
-    } _internal;
-}
-
-- (BOOL)zStreamOpen
-{
-    return _internal.zStreamOpen;
-}
-
-- (void)setZStreamOpen:(BOOL)zStreamOpen
-{
-    _internal.zStreamOpen = !!zStreamOpen;
+    z_stream _zStream;
 }
 
 - (z_stream *)zStream
 {
-    return &_internal.zStream;
-}
-
-- (Byte*)compressedDataBuffer
-{
-    return _internal.compressedDataBuffer;
-}
-
-- (NOZCompressionLevel)compressionLevel
-{
-    return _internal.compressionLevel;
-}
-
-- (void)setCompressionLevel:(NOZCompressionLevel)compressionLevel
-{
-    _internal.compressionLevel = compressionLevel;
-}
-
-- (size_t)compressedDataBufferSize
-{
-    return _internal.compressedDataBufferSize;
+    return &_zStream;
 }
 
 - (nonnull instancetype)init
 {
     if (self = [super init]) {
-        _internal.compressedDataBuffer = malloc(NSPageSize());
-        _internal.compressedDataBufferSize = NSPageSize();
+        _compressedDataBuffer = malloc(NSPageSize());
+        _compressedDataBufferSize = NSPageSize();
 
-        _internal.zStream.avail_in = 0;
-        _internal.zStream.avail_out = (UInt32)NSPageSize();
-        _internal.zStream.next_out = _internal.compressedDataBuffer;
-        _internal.zStream.total_in = 0;
-        _internal.zStream.total_out = 0;
-        _internal.zStream.data_type = Z_BINARY;
-        _internal.zStream.zalloc = NULL;
-        _internal.zStream.zfree = NULL;
-        _internal.zStream.opaque = NULL;
+        _zStream.avail_in = 0;
+        _zStream.avail_out = (UInt32)NSPageSize();
+        _zStream.next_out = _compressedDataBuffer;
+        _zStream.total_in = 0;
+        _zStream.total_out = 0;
+        _zStream.data_type = Z_BINARY;
+        _zStream.zalloc = NULL;
+        _zStream.zfree = NULL;
+        _zStream.opaque = NULL;
 
-        _internal.compressionLevel = NOZCompressionLevelDefault;
+        _compressionLevel = NOZCompressionLevelDefault;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    free(_internal.compressedDataBuffer);
-    if (_internal.zStreamOpen) {
-        deflateEnd(&_internal.zStream);
+    free(_compressedDataBuffer);
+    if (_zStreamOpen) {
+        deflateEnd(&_zStream);
     }
 }
 
