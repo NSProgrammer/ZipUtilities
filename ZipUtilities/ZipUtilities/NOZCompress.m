@@ -452,7 +452,11 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 {
     for (NOZFileZipEntry *entry in NOZEntriesFromDirectory(directoryPath)) {
         if (block) {
-            entry.compressionLevel = block(entry.filePath);
+            NOZCompressionMethod method = NOZCompressionMethodDeflate;
+            NOZCompressionLevel level = NOZCompressionLevelDefault;
+            block(entry.filePath, &method, &level);
+            entry.compressionLevel = level;
+            entry.compressionMethod = method;
         }
         [self addEntry:entry];
     }
