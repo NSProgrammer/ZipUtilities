@@ -39,6 +39,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 - (NOZFileEntryT *)internalEntry;
 - (NOZErrorCode)validate;
 - (BOOL)isOwnedByCentralDirectory:(NOZCentralDirectory *)cd;
+- (NSString *)nameNoCopy;
 @end
 
 @interface NOZCentralDirectory ()
@@ -296,7 +297,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
     });
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.name] stringByStandardizingPath];
+    NSString *destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy] stringByStandardizingPath];
 
     if (![fm createDirectoryAtPath:[destinationFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:error]) {
         return NO;
@@ -690,7 +691,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 {
     __block NSUInteger index = NSNotFound;
     [_records enumerateObjectsUsingBlock:^(NOZCentralDirectoryRecord *record, NSUInteger idx, BOOL *stop) {
-        if ([name isEqualToString:record.name]) {
+        if ([name isEqualToString:record.nameNoCopy]) {
             index = idx;
             *stop = YES;
         }
@@ -770,6 +771,11 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 {
     [self doesNotRecognizeSelector:_cmd];
     abort();
+}
+
+- (NSString *)nameNoCopy
+{
+    return [[NSString alloc] initWithBytesNoCopy:(void *)_entry.name length:_entry.fileHeader.nameSize encoding:NSUTF8StringEncoding freeWhenDone:NO];
 }
 
 - (NSString *)name
@@ -860,7 +866,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)isMacOSXAttribute
 {
-    NSArray *components = [self.name pathComponents];
+    NSArray *components = [self.nameNoCopy pathComponents];
     if ([components containsObject:@"__MACOSX"]) {
         return YES;
     }
@@ -869,7 +875,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)isMacOSXDSStore
 {
-    if ([self.name.lastPathComponent isEqualToString:@".DS_Store"]) {
+    if ([self.nameNoCopy.lastPathComponent isEqualToString:@".DS_Store"]) {
         return YES;
     }
     return NO;
