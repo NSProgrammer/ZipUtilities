@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class NOZCompressResult;
 @protocol NOZCompressDelegate;
 
-typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation * op, NOZCompressResult * result);
-typedef void(^NOZCompressionSelectionBlock)(NSString *filePath, NOZCompressionMethod *compressionMethodOut, NOZCompressionLevel * __nonnull compressionLevelOut);
+typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation* op, NOZCompressResult* result);
+typedef void(^NOZCompressionSelectionBlock)(NSString* filePath, NOZCompressionMethod* compressionMethodOut, NOZCompressionLevel* compressionLevelOut);
 
 /**
  `NOZCompressOperation` is an `NSOperation` for compressing one or more sources (`NSData` objects
