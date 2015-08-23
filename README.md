@@ -8,11 +8,13 @@
 
 The need can occasionally arise where easy compressing and decompressing of data is desired from a simple API.  There are many zipping/unzipping utilities out there but all of them can be found wanting in some way or another.
 
-- too low/level
+- too low level
 - too complex
 - poor code quality
 - old coding practices/style (basically really old)
 - lack a service oriented approach (request, operation and response pattern)
+
+The goal is to provide an easy to use modern interface for archiving and unarchiving zip files. As a particular focus, providing a service oriented approach can provide powerful support for NSOperation composition.
 
 ## Overview
 
