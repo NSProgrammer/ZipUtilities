@@ -412,7 +412,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
             }
 
             if (bytesRead != 0) {
-                _internal.currentEntry->fileDescriptor.uncompressedSize += bytesRead;
+                _internal.currentEntry->fileDescriptor.uncompressedSize += (SInt64)bytesRead;
                 if (progressBlock) {
                     progressBlock(totalBytes, _internal.currentEntry->fileDescriptor.uncompressedSize, bytesRead, abort);
                 }
