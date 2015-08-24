@@ -85,4 +85,8 @@ FOUNDATION_EXTERN NSDate * __nullable noz_NSDate_from_dos_date(UInt16 dosDate, U
 
 #pragma mark CRC32 exposed
 
-FOUNDATION_EXTERN unsigned long crc32(unsigned long crc, const Byte* __nonnull buf, UInt32 len);
+NS_ASSUME_NONNULL_BEGIN
+
+extern unsigned long crc32(unsigned long crc, const unsigned char *buf, unsigned int len);
+
+NS_ASSUME_NONNULL_END
