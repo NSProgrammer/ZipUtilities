@@ -18,11 +18,11 @@ The goal is to provide an easy to use modern interface for archiving and unarchi
 
 ## Overview
 
-**Primary**
+### Service Oriented Interfaces (NSOperations)
 
-The primary value of *ZipUtilities* is that it provides an easy to use interface for archiving data or files into a single zip archive and unarchiving a zip archive to the contained files.  The primary approach for *ZipUtilities* is to provide a service oriented pattern for compressing and decompressing.
+The primary value of _ZipUtilities_ is that it provides an easy to use interface for archiving data or files into a single zip archive and unarchiving a zip archive to the contained files.  The primary approach for _ZipUtilities_ is to provide a service oriented pattern for compressing and decompressing.
 
-### `NOZCompress.h`
+**`NOZCompress.h`**
 
 `NOZCompress.h` contains the service oriented interfaces related to compressing into a zip archive.
 
@@ -31,7 +31,7 @@ The primary value of *ZipUtilities* is that it provides an easy to use interface
 - `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`.  It provides callbacks for progress and completion.
 - `NOZCompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
 
-### `NOZDecompress.h`
+**`NOZDecompress.h`**
 
 `NOZDecompress.h` contains the service oriented interfaces related to decompressing from a zip archive.
 
@@ -40,19 +40,27 @@ The primary value of *ZipUtilities* is that it provides an easy to use interface
 - `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`.  It provides callbacks for progress, overwriting output files and completion.
 - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
 
-**Secondary**
+### Manual Zipping and Unzipping
 
 Additional, the underlying objects for zipping and unzipping are exposed for direct use if NSOperation support is not needed.
 
-### `NOZZipper.h`
+**`NOZZipper.h`**
 
 `NOZZipper` is an object that encapsulates the work for zipping sources (NSData, streams and/or
 files) into an on disk zip archive file.
 
-### `NOZUnzipper.h`
+**`NOZUnzipper.h`**
 
 `NOZUnzipper` is an object that encapsulates the work for unzipping from a zip archive file on disk
 into destinations (NSData, streams and/or files).
+
+### Extensibility - Modular Compression Encoders/Decoders
+
+**`NOZCompression.h`**
+
+_ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
+
+Since _ZipUtilities_ takes a modular approach for compression methods, adding support for addition compression encoders and decoders is very straightforward.  You simply implement the `NOZCompressionEncoder` and `NOZCompressionDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZCompressionEncoder>` and `MyBZIP2Decoder<NOZCompressionDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZCompressionMethodBZip2`.
 
 ## History
 
