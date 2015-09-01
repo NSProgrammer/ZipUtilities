@@ -122,9 +122,8 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 ### Eventually
 
-- figure out a way to avoid having README.md and ZipUtilities.h both providing the same info
-  - we want the info in the documentation and in the README.md
 - add password support
+  - This is low priority as encrypting zip file content is not the appropriate way to secure data
 - add support for per entry "extra info" in an archive
 - expand on progress info
   - state transitions
