@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
 
 NS_INLINE BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page)
 {
-    return page == (code - (code % NOZErrorPageSize));
+    return page == ((code - (code % NOZErrorPageSize)) / NOZErrorPageSize);
 }
 
 #define NOZErrorCodeIsCompressError(code)   NOZErrorCodeIsInErrorPage(code, NOZErrorPageCompress)
