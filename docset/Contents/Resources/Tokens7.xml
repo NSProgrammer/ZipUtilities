@@ -17,7 +17,7 @@
 			<Abstract type="html">The data to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSData *data</Declaration>
 			
 			
 			<Anchor>//api/name/data</Anchor>
@@ -29,7 +29,7 @@
 			<Abstract type="html">The data to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSData *data</Declaration>
 			
 			
 			<Anchor>//api/name/data</Anchor>
@@ -41,7 +41,7 @@
 			<Abstract type="html">The data to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nonnull) NSData *data</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSData *data</Declaration>
 			
 			
 			<Anchor>//api/name/data</Anchor>

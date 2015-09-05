@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressionDecoder.html">
+	<File path="Protocols/NOZCompressionDecoderContext.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionDecoder</TokenIdentifier>
-			<Abstract type="html">Protocol to implement for constructing a compression decoder.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionDecoderContext</TokenIdentifier>
+			<Abstract type="html">Protocol for encapsulating the context and state of a decoding process.
+A context object must always be able to clean itself up on dealloc and should
+not rely on finalize to clean it up.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
@@ -13,59 +15,19 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/createContextForDecodingWithFlushCallback:</TokenIdentifier>
-			<Abstract type="html">Create a new context object to track the decoding process.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoderContext/hasFinished</TokenIdentifier>
+			<Abstract type="html">return YES once if the decoding is known to have completed and
+any future call to decodeBytes will be a considered no-op (returning YES).
+If the decoder is provided a zero length buffer to decode, there is no more
+data to decode, but the decoder may continue decoding.
+The decoder will have it&apos;s decode method called until an error is encountered
+or hasFinished returns YES.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
 			
-			<Declaration>- (nonnull id&lt;NOZCompressionDecoderContext&gt;)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>callback</Name>
-					<Abstract type="html">The NOZFlushCallback that will be used to output the decompressed data</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">the new context object</Abstract></ReturnValue>
-			<Anchor>//api/name/createContextForDecodingWithFlushCallback:</Anchor>
-            <NodeRef refid="20"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/initializeDecoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Initialize the decoding process.
-Call this first for each decoding process.
-If it succeeds, be sure to pair it with a call to finalizeDecoderContext:error:.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)initializeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
+			<Declaration>- (BOOL)hasFinished</Declaration>
 			
 			
-			<Anchor>//api/name/initializeDecoderContext:error:</Anchor>
-            <NodeRef refid="20"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/decodeBytes:length:context:error:</TokenIdentifier>
-			<Abstract type="html">Decode the provided byte buffer.
-Call this as many times as necessary to get all bytes of a source decoded
-(or until a failure occurs).</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)decodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/decodeBytes:length:context:error:</Anchor>
-            <NodeRef refid="20"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/finalizeDecoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Finalize the decoding process.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)finalizeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/finalizeDecoderContext:error:</Anchor>
+			<Anchor>//api/name/hasFinished</Anchor>
             <NodeRef refid="20"/>
 		</Token>
 		

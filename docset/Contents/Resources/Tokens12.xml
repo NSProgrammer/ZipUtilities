@@ -5,7 +5,8 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/NOZSyncStepOperation</TokenIdentifier>
 			<Abstract type="html">NOZSyncStepOperation is an NSOperation subclass for dealing with a lot of boiler plate code
-associated with creating a synchronous operation that performs multiple steps in sequential order.</Abstract>
+associated with creating a synchronous operation that performs multiple synchronous steps
+in sequential order.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
             
 			

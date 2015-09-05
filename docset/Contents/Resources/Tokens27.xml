@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZCompressionLevel.html">
+	<File path="Constants/NOZCompressionMethod.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionLevel</TokenIdentifier>
-			<Abstract type="html">The compression level to use.
-Lower levels execute faster, while higher levels will achieve a higher compression ratio.</Abstract>
+			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionMethod</TokenIdentifier>
+			<Abstract type="html">The compression method to use.
+Only 0 (don&apos;t compress) and 8 (deflate) are supported by default.
+Additional methods can be supported by updating the compression encoders and decoders.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
@@ -15,9 +16,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelNone</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelNone</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodNone</TokenIdentifier>
+            <Abstract type="html">No compression is supported by default.</Abstract>
+            <Declaration>NOZCompressionMethodNone</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -25,9 +26,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMin</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodShrink</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMin</Declaration>
+            <Declaration>NOZCompressionMethodShrink</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -35,9 +36,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryLow</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce1</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryLow</Declaration>
+            <Declaration>NOZCompressionMethodReduce1</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -45,9 +46,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelLow</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce2</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelLow</Declaration>
+            <Declaration>NOZCompressionMethodReduce2</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -55,9 +56,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumLow</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce3</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumLow</Declaration>
+            <Declaration>NOZCompressionMethodReduce3</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -65,9 +66,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMedium</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce4</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMedium</Declaration>
+            <Declaration>NOZCompressionMethodReduce4</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -75,9 +76,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumHigh</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodImplode</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumHigh</Declaration>
+            <Declaration>NOZCompressionMethodImplode</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -85,9 +86,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelHigh</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved7</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelHigh</Declaration>
+            <Declaration>NOZCompressionMethodReserved7</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -95,9 +96,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryHigh</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodDeflate</TokenIdentifier>
+            <Abstract type="html">Deflate is supported by default via zlib.</Abstract>
+            <Declaration>NOZCompressionMethodDeflate</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -105,9 +106,9 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMax</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodDeflate64</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMax</Declaration>
+            <Declaration>NOZCompressionMethodDeflate64</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             
@@ -115,9 +116,119 @@ Lower levels execute faster, while higher levels will achieve a higher compressi
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelDefault</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodIBMTERSEOld</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelDefault</Declaration>
+            <Declaration>NOZCompressionMethodIBMTERSEOld</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved11</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodReserved11</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodBZip2</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodBZip2</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved13</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodReserved13</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodLZMA</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodLZMA</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved15</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodReserved15</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved16</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodReserved16</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved17</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodReserved17</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodIBMTERSENew</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodIBMTERSENew</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodLZ77</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodLZ77</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodWAVPack</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodWAVPack</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodPPMv1rev1</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionMethodPPMv1rev1</Declaration>
             
             <DeclaredIn>NOZCompression.h</DeclaredIn>
             

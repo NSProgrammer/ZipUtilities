@@ -1,65 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZZippableEntry.html">
+	<File path="Constants/NOZCompressionLevel.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZZippableEntry</TokenIdentifier>
-			<Abstract type="html">Protocol for a Zip Entry that can be Zipped</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionLevel</TokenIdentifier>
+			<Abstract type="html">The compression level to use.
+Lower levels execute faster, while higher levels will achieve a higher compression ratio.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
 			<NodeRef refid="26"/>
 		</Token>
 		
 		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/timestamp</TokenIdentifier>
-			<Abstract type="html">Timestamp for the entry.</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
-			
-			<Declaration>- (nullable NSDate *)timestamp</Declaration>
-			
-			
-			<Anchor>//api/name/timestamp</Anchor>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelNone</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelNone</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
             <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/sizeInBytes</TokenIdentifier>
-			<Abstract type="html">The size in bytes of the entry.</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
-			
-			<Declaration>- (SInt64)sizeInBytes</Declaration>
-			
-			
-			<Anchor>//api/name/sizeInBytes</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMin</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMin</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
             <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/canBeZipped</TokenIdentifier>
-			<Abstract type="html">Is the entry valid for zipping.</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)canBeZipped</Declaration>
-			
-			
-			<Anchor>//api/name/canBeZipped</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelVeryLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
             <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/inputStream</TokenIdentifier>
-			<Abstract type="html">Input Stream for reading the entry into the zip file.</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
-			
-			<Declaration>- (nullable NSInputStream *)inputStream</Declaration>
-			
-			
-			<Anchor>//api/name/inputStream</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
             <NodeRef refid="26"/>
-		</Token>
-		
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMediumLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMedium</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMedium</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMediumHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelVeryHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMax</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMax</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelDefault</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelDefault</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="26"/>
+        </Token>
         
         
 	</File>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZZipEntry.html">
+	<File path="Protocols/NOZZippableEntry.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZZipEntry</TokenIdentifier>
-			<Abstract type="html">Protocol for a Zip Entry</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZZippableEntry</TokenIdentifier>
+			<Abstract type="html">Protocol for a Zip Entry that can be Zipped</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
             
 			
@@ -13,62 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/name</TokenIdentifier>
-			<Abstract type="html">Name of entry</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/timestamp</TokenIdentifier>
+			<Abstract type="html">Timestamp for the entry.</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (nonnull NSString *)name</Declaration>
+			<Declaration>- (nullable NSDate *)timestamp</Declaration>
 			
 			
-			<Anchor>//api/name/name</Anchor>
+			<Anchor>//api/name/timestamp</Anchor>
             <NodeRef refid="25"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/comment</TokenIdentifier>
-			<Abstract type="html">Optional comment for entry</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/sizeInBytes</TokenIdentifier>
+			<Abstract type="html">The size in bytes of the entry.</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (nullable NSString *)comment</Declaration>
+			<Declaration>- (SInt64)sizeInBytes</Declaration>
 			
 			
-			<Anchor>//api/name/comment</Anchor>
+			<Anchor>//api/name/sizeInBytes</Anchor>
             <NodeRef refid="25"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/compressionLevel</TokenIdentifier>
-			<Abstract type="html">Compression level for entry</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/canBeZipped</TokenIdentifier>
+			<Abstract type="html">Is the entry valid for zipping.</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (NOZCompressionLevel)compressionLevel</Declaration>
+			<Declaration>- (BOOL)canBeZipped</Declaration>
 			
 			
-			<Anchor>//api/name/compressionLevel</Anchor>
+			<Anchor>//api/name/canBeZipped</Anchor>
             <NodeRef refid="25"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/compressionMethod</TokenIdentifier>
-			<Abstract type="html">Compression Method for entry</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/inputStream</TokenIdentifier>
+			<Abstract type="html">Input Stream for reading the entry into the zip file.</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>- (NOZCompressionMethod)compressionMethod</Declaration>
+			<Declaration>- (NSInputStream *)inputStream</Declaration>
 			
 			
-			<Anchor>//api/name/compressionMethod</Anchor>
-            <NodeRef refid="25"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/copy</TokenIdentifier>
-			<Abstract type="html">Copiable</Abstract>
-			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
-			
-			<Declaration>- (id)copy</Declaration>
-			
-			
-			<Anchor>//api/name/copy</Anchor>
+			<Anchor>//api/name/inputStream</Anchor>
             <NodeRef refid="25"/>
 		</Token>
 		
