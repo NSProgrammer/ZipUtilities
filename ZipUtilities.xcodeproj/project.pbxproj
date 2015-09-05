@@ -331,6 +331,14 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		4613835B1B9AAA130076C8B5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1CD9BAB51B757E3F000B93C4 /* libz.dylib */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		4623A8A71B9A887400A56535 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,7 +365,7 @@
 		4623A8A91B9A8AD300A56535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1CD9BAB51B757E3F000B93C4 /* libz.dylib */,
+				4613835B1B9AAA130076C8B5 /* iOS */,
 				4623A8AA1B9A8AE300A56535 /* OSX */,
 			);
 			name = Frameworks;
