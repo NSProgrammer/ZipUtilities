@@ -64,10 +64,10 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 ## History
 
-### master
+### 1.4.0  (Sep 5, 2015) - Ashton Williams
 
-- Mac OS X target and support - Ashton Williams
-- iOS dynamic framework target - Ashton Williams
+Mac OS X target and support
+iOS dynamic framework target
 
 ### 1.3.2  (Aug 23, 2015) - Nolan O'Brien
 
