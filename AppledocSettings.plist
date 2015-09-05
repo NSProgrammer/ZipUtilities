@@ -8,13 +8,13 @@
 	<string>Nolan O&apos;Brien</string>
 	<key>--input</key>
 	<array>
-		<string>ZipUtilities/ZipUtilities</string>
+		<string>ZipUtilities</string>
 	</array>
 	<key>--ignore</key>
 	<array>
 		<string>*_Project.h</string>
 		<string>*.m</string>
-		<string>ZipUtilities/ZipUtilities/crypt/*</string>
+		<string>ZipUtilities/crypt/*</string>
 	</array>
 	<key>--keep-undocumented-objects</key>
 	<true/>
