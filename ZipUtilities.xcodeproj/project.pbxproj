@@ -109,7 +109,6 @@
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8AC1B9A8CA400A56535 /* OSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */; };
-		4623A8AF1B9A8D3500A56535 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4623A8AE1B9A8D3500A56535 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -667,7 +666,6 @@
 				1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */,
 				1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
-				4623A8AF1B9A8D3500A56535 /* README.md in Sources */,
 				1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */,
 				1C6BF79B1B740ACF00969629 /* NOZUtils.m in Sources */,
 				1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */,
