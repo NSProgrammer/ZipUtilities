@@ -2,7 +2,7 @@
 
 ## Introduction
 
-*ZipUtilities*, prefixed with `NOZ` for _Nolan O'Brien ZipUtilities_, is a library of zipping and unzipping utilities for iOS (and Mac OS X soon).
+*ZipUtilities*, prefixed with `NOZ` for _Nolan O'Brien ZipUtilities_, is a library of zipping and unzipping utilities for iOS and Mac OS X.
 
 ## Background
 
@@ -64,6 +64,11 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 ## History
 
+### master
+
+- Mac OS X target and support - Ashton Williams
+- iOS dynamic framework target - Ashton Williams
+
 ### 1.3.2  (Aug 23, 2015) - Nolan O'Brien
 
 - Optimize zipping to be done in a single write pass
@@ -116,8 +121,6 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 ### Near term
 
-- add Mac OS X target and support
-- add iOS dynamic framework target
 - add generic utilies like compressing/decompressing from NSData to NSData
 
 ### Eventually
