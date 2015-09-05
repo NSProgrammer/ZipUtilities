@@ -25,20 +25,21 @@
 //  SOFTWARE.
 //
 
-#pragma mark Compress/Decompress Operations
+#import <Foundation/Foundation.h>
 
-#import "NOZCompress.h"
-#import "NOZDecompress.h"
+//! Project version number for ZipUtilities.
+FOUNDATION_EXPORT double ZipUtilitiesVersionNumber;
 
-#pragma mark Zip/Unzip Objects
+//! Project version string for ZipUtilities.
+FOUNDATION_EXPORT const unsigned char ZipUtilitiesVersionString[];
 
-#import "NOZUnzipper.h"
-#import "NOZZipper.h"
+// In this header, you should import all the public headers of your framework using statements like #import <ZipUtilities/PublicHeader.h>
 
-#pragma mark Errors
-
-#import "NOZError.h"
-
-#pragma mark Utilities
-
-#import "NOZUtils.h"
+#import <ZipUtilities/NOZCompress.h>
+#import <ZipUtilities/NOZCompression.h>
+#import <ZipUtilities/NOZDecompress.h>
+#import <ZipUtilities/NOZError.h>
+#import <ZipUtilities/NOZSyncStepOperation.h>
+#import <ZipUtilities/NOZUnzipper.h>
+#import <ZipUtilities/NOZUtils.h>
+#import <ZipUtilities/NOZZipEntry.h>
