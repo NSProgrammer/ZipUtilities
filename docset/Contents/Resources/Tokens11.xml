@@ -17,7 +17,7 @@
 			<Abstract type="html">Path to file to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *filePath</Declaration>
 			
 			
 			<Anchor>//api/name/filePath</Anchor>
@@ -29,7 +29,7 @@
 			<Abstract type="html">Path to file to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *filePath</Declaration>
 			
 			
 			<Anchor>//api/name/filePath</Anchor>
@@ -41,7 +41,7 @@
 			<Abstract type="html">Path to file to zip</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly, nonnull) NSString *filePath</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *filePath</Declaration>
 			
 			
 			<Anchor>//api/name/filePath</Anchor>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressionEncoder.html">
+	<File path="Protocols/NOZCompressionEncoderContext.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionEncoder</TokenIdentifier>
-			<Abstract type="html">Protocol to implement for constructing a compression encoder.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionEncoderContext</TokenIdentifier>
+			<Abstract type="html">Protocol for encapsulating the context and state of an encoding process.
+A context object must always be able to clean itself up on dealloc and should
+not rely on finalize to clean it up.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
@@ -13,74 +15,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/bitFlagsForEntry:</TokenIdentifier>
-			<Abstract type="html">Return any bit flags related to the given entry for hinting at the compression that will be used.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoderContext/encodedDataWasText</TokenIdentifier>
+			<Abstract type="html">return YES if the encoded data was known to be text.  NO otherwise.</Abstract>
 			<DeclaredIn>NOZCompression.h</DeclaredIn>
 			
-			<Declaration>- (UInt16)bitFlagsForEntry:(nonnull id&lt;NOZZipEntry&gt;)entry</Declaration>
+			<Declaration>- (BOOL)encodedDataWasText</Declaration>
 			
 			
-			<Anchor>//api/name/bitFlagsForEntry:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/createContextForEncodingEntry:flushCallback:</TokenIdentifier>
-			<Abstract type="html">Create a new context object to track the encoding process.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (nonnull id&lt;NOZCompressionEncoderContext&gt;)createContextForEncodingEntry:(nonnull id&lt;NOZZipEntry&gt;)entry flushCallback:(nonnull NOZFlushCallback)callback</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>entry</Name>
-					<Abstract type="html">The NOZZipEntry that will be encoded</Abstract>
-				</Parameter><Parameter>
-					<Name>callback</Name>
-					<Abstract type="html">The NOZFlushCallback that will be used to output the compressed data</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">the new context object</Abstract></ReturnValue>
-			<Anchor>//api/name/createContextForEncodingEntry:flushCallback:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/initializeEncoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Initialize the encoding process.
-Call this first for each encoding process.
-If it succeeds, be sure to pair it with a call to finalizeEncoderContext:error:.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)initializeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/initializeEncoderContext:error:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/encodeBytes:length:context:error:</TokenIdentifier>
-			<Abstract type="html">Encode the provided byte buffer.
-Call this as many times as necessary to get all bytes of a source encoded
-(or until a failure occurs).</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)encodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZCompressionEncoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/encodeBytes:length:context:error:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoder/finalizeEncoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Finalize the encoding process.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)finalizeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/finalizeEncoderContext:error:</Anchor>
+			<Anchor>//api/name/encodedDataWasText</Anchor>
             <NodeRef refid="22"/>
 		</Token>
 		

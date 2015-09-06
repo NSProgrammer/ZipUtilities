@@ -85,6 +85,42 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setCompressionMethod:</TokenIdentifier>
+			<Abstract type="html">Compression Method for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/compressionMethod</TokenIdentifier>
+			<Abstract type="html">Compression Method for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/NOZCentralDirectoryRecord/compressionMethod</TokenIdentifier>
+			<Abstract type="html">Compression Method for entry</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NOZCompressionMethod compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/setCompressionLevel:</TokenIdentifier>
 			<Abstract type="html">Compression level for entry</Abstract>
 			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
