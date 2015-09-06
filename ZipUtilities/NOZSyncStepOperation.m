@@ -30,6 +30,7 @@
 
 @interface NOZSyncStepOperation ()
 @property (nonatomic) float progress;
+@property (atomic, getter=isCancelled) BOOL cancelled;
 @end
 
 @implementation NOZSyncStepOperation
@@ -38,8 +39,9 @@
     SInt64 *_stepWeights;
     float *_currentStepProgress;
     SInt64 _totalWeight;
-    volatile BOOL _internalIsCancelled;
 }
+
+@synthesize cancelled = _internalIsCancelled;
 
 - (void)dealloc
 {
@@ -79,10 +81,6 @@
 
 - (void)start
 {
-    if (_internalIsCancelled) {
-        [super cancel];
-    }
-
     if (self.isCancelled) {
         _operationError = [[self class] operationCancelledError];
         [self handleFinishing];
@@ -107,12 +105,7 @@
         return;
     }
 
-    _internalIsCancelled = YES;
-
-    if (self.isExecuting) {
-        [super cancel];
-        return;
-    }
+    self.cancelled = YES;
 }
 
 @end
