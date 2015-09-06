@@ -52,6 +52,10 @@
 
 - (void)main
 {
+    if (self.isCancelled) {
+        return;
+    }
+
     _stepCount = [self numberOfSteps];
 
     if (_stepCount > 0) {
@@ -68,7 +72,7 @@
 
     for (NSUInteger step = 0; step < _stepCount; step++) {
         if (self.isCancelled) {
-            self.operationError = [[self class] operationCancelledError];
+            return;
         } else {
             self.operationError = [self runStep:step];
         }
@@ -82,10 +86,6 @@
 
 - (void)start
 {
-    if (self.isCancelled) {
-        [self handleFinishing];
-    }
-
     [super start];
 }
 
@@ -106,6 +106,7 @@
     }
 
     self.operationError = [[self class] operationCancelledError];
+    [self handleFinishing];
     self.cancelled = YES;
 }
 

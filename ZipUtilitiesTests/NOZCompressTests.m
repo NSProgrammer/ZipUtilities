@@ -180,7 +180,23 @@ static NSOperationQueue *sQueue = nil;
 - (void)runCompressRequest:(NOZCompressRequest *)request cancelling:(BOOL)yesBeforeEnqueueNoAfterEnqueue
 {
     [[self class] forceCompressionLevel:NOZCompressionLevelMax forAllEntriesOnRequest:request];
+    NSString * const cancellingStr = yesBeforeEnqueueNoAfterEnqueue ? @"Cancel before enqueue" : @"Cancel after enqueue";
+
+    // Enqueue a blocking op
+    __block NSBlockOperation *blockingOp = nil;
+    blockingOp = [NSBlockOperation blockOperationWithBlock:^{
+        while (!blockingOp.isCancelled) {
+            usleep(10000);
+        }
+        blockingOp = nil;
+    }];
+    [sQueue addOperation:blockingOp];
+
+    // Create zip op
     NOZCompressOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    [op addDependency:blockingOp];
+
+    // Cancel and Enqueue
     if (yesBeforeEnqueueNoAfterEnqueue) {
         [op cancel];
     }
@@ -188,9 +204,14 @@ static NSOperationQueue *sQueue = nil;
     if (!yesBeforeEnqueueNoAfterEnqueue) {
         [op cancel];
     }
-    [op waitUntilFinished];
 
-    NSString * const cancellingStr = yesBeforeEnqueueNoAfterEnqueue ? @"Cancel before enqueue" : @"Cancel after enqueue";
+    // Async cancel blocking op
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [blockingOp cancel];
+    });
+
+    // Wait for zip op
+    [op waitUntilFinished];
 
     XCTAssertTrue(op.isCancelled, @"%@", cancellingStr);
     XCTAssertTrue(op.isFinished, @"%@", cancellingStr);
