@@ -160,21 +160,30 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
     return 0;
 }
 
-- (nullable NSError *)runStep:(NSUInteger)stepIndex
+- (BOOL)runStep:(NSUInteger)stepIndex error:(out NSError **)error
 {
+    NSError *stepError = nil;
     NOZCompressStep step = stepIndex;
     switch (step) {
         case NOZCompressStepPrep:
-            return [self private_prepareProgress];
+            stepError = [self private_prepareProgress];
+            break;
         case NOZCompressStepOpen:
-            return [self private_openFile];
+            stepError = [self private_openFile];
+            break;
         case NOZCompressStepZip:
-            return [self private_addEntries];
+            stepError = [self private_addEntries];
+            break;
         case NOZCompressStepClose:
-            return [self private_closeFile];
+            stepError = [self private_closeFile];
+            break;
     }
 
-    return nil;
+    if (stepError && error) {
+        *error = stepError;
+    }
+
+    return !stepError;
 }
 
 - (void)handleProgressUpdated:(float)progress

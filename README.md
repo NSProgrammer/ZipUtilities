@@ -30,7 +30,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.4.0'
+pod 'ZipUtilities', '~> 1.4.1'
 ```
 
 #### Carthage
@@ -89,6 +89,11 @@ _ZipUtilities_ provides a modular approach to compressing and decompressing indi
 Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZCompressionEncoder` and `NOZCompressionDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZCompressionEncoder>` and `MyBZIP2Decoder<NOZCompressionDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
 
 ## History
+
+### 1.4.1  (Sep 6, 2015) - Nolan O'Brien
+
+- Fix race condition with cancelling
+- Change runStep: method to runStep:error: for better consistency and Swift compatibility
 
 ### 1.4.0  (Sep 5, 2015) - Ashton Williams
 

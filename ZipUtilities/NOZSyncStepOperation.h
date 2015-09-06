@@ -78,11 +78,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Run the specified _step_.
  MUST override in subclass.
- Return an `NSError` if an error was encountered, otherwise return `nil`.
+ Return `NO` and set the output _error_ if an error was encountered, otherwise return `nil`.
  Implementers should check `[self isCancelled]` for any indication that the operation was cancelled
  and return `[[self class] operationCancelledError]`.
  */
-- (nullable NSError *)runStep:(NSUInteger)step;
+- (BOOL)runStep:(NSUInteger)step error:(out NSError * __nullable * __nullable)error;
+
 /**
  Return the `NSError` that represents when this operation was cancelled.
  MUST override in subclass.

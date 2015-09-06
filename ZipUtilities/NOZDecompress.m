@@ -163,20 +163,30 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return 0;
 }
 
-- (NSError *)runStep:(NSUInteger)stepIndex
+- (BOOL)runStep:(NSUInteger)stepIndex error:(out NSError **)error
 {
+    NSError *stepError = nil;
     NOZDecompressStep step = stepIndex;
     switch (step) {
         case NOZDecompressStepOpen:
-            return [self private_openFile];
+            stepError = [self private_openFile];
+            break;
         case NOZDecompressStepReadEntrySizes:
-            return [self private_readExpectedSizes];
+            stepError = [self private_readExpectedSizes];
+            break;
         case NOZDecompressStepUnzip:
-            return [self private_unzipAllEntries];
+            stepError = [self private_unzipAllEntries];
+            break;
         case NOZDecompressStepClose:
-            return [self private_closeFile];
+            stepError = [self private_closeFile];
+            break;
     }
-    return nil;
+
+    if (stepError && error) {
+        *error = stepError;
+    }
+
+    return !stepError;
 }
 
 - (void)handleProgressUpdated:(float)progress

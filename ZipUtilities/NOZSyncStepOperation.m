@@ -25,6 +25,7 @@
 //  SOFTWARE.
 //
 
+#include <libkern/OSAtomic.h>
 #import "NOZ_Project.h"
 #import "NOZSyncStepOperation.h"
 
@@ -40,6 +41,7 @@
     SInt64 *_stepWeights;
     float *_currentStepProgress;
     SInt64 _totalWeight;
+    volatile uint64_t _testMask;
 }
 
 @synthesize cancelled = _internalIsCancelled;
@@ -74,14 +76,15 @@
         if (self.isCancelled) {
             return;
         } else {
-            self.operationError = [self runStep:step];
-        }
-        if (self.operationError) {
-            break;
+            NSError *stepError;
+            if (![self runStep:step error:&stepError]) {
+                self.operationError = stepError;
+                break;
+            }
         }
     };
 
-    [self handleFinishing];
+    [self finish];
 }
 
 - (void)start
@@ -106,8 +109,15 @@
     }
 
     self.operationError = [[self class] operationCancelledError];
-    [self handleFinishing];
+    [self finish];
     self.cancelled = YES;
+}
+
+- (void)finish
+{
+    if (0 == OSAtomicTestAndSet(7 /* 0th bit is the 7th index for OSAtomicTest */, &_testMask)) {
+        [self handleFinishing];
+    }
 }
 
 @end
@@ -130,10 +140,10 @@
     return 1000ll / _stepCount;
 }
 
-- (nullable NSError *)runStep:(NSUInteger)stepIndex
+- (BOOL)runStep:(NSUInteger)step error:(out NSError **)error
 {
     [self doesNotRecognizeSelector:_cmd];
-    return nil;
+    return YES;
 }
 
 + (nonnull NSError *)operationCancelledError

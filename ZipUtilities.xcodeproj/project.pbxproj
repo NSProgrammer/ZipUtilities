@@ -161,6 +161,8 @@
 		1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZSyncStepOperation.h; sourceTree = "<group>"; };
 		1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZSyncStepOperation.m; sourceTree = "<group>"; };
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
+		1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
+		1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZipUtilities.podspec; sourceTree = "<group>"; };
 		1C6BF7701B74086000969629 /* libZipUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZipUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6BF77B1B74086000969629 /* ZipUtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZipUtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6BF7811B74086000969629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +258,8 @@
 				1C6BF7711B74086000969629 /* Products */,
 				4623A8AE1B9A8D3500A56535 /* README.md */,
 				4623A8AD1B9A8D3500A56535 /* LICENSE */,
+				1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */,
+				1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */,
 			);
 			sourceTree = "<group>";
 		};
