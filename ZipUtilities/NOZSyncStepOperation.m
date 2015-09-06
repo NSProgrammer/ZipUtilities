@@ -31,6 +31,7 @@
 @interface NOZSyncStepOperation ()
 @property (nonatomic) float progress;
 @property (atomic, getter=isCancelled) BOOL cancelled;
+@property (atomic, nullable) NSError *operationError;
 @end
 
 @implementation NOZSyncStepOperation
@@ -67,11 +68,11 @@
 
     for (NSUInteger step = 0; step < _stepCount; step++) {
         if (self.isCancelled) {
-            _operationError = [[self class] operationCancelledError];
+            self.operationError = [[self class] operationCancelledError];
         } else {
-            _operationError = [self runStep:step];
+            self.operationError = [self runStep:step];
         }
-        if (_operationError) {
+        if (self.operationError) {
             break;
         }
     };
@@ -82,7 +83,6 @@
 - (void)start
 {
     if (self.isCancelled) {
-        _operationError = [[self class] operationCancelledError];
         [self handleFinishing];
     }
 
@@ -105,6 +105,7 @@
         return;
     }
 
+    self.operationError = [[self class] operationCancelledError];
     self.cancelled = YES;
 }
 

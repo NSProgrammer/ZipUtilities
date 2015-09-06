@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  Stores any `NSError` encountered while running.
  Useful for subclasses to examine during `handleFinishing`.
  */
-@property (nonatomic, readonly, nullable) NSError *operationError;
+@property (atomic, readonly, nullable) NSError *operationError;
 
 @end
 
