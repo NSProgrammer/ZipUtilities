@@ -38,6 +38,7 @@
     SInt64 *_stepWeights;
     float *_currentStepProgress;
     SInt64 _totalWeight;
+    volatile BOOL _internalIsCancelled;
 }
 
 - (void)dealloc
@@ -78,10 +79,15 @@
 
 - (void)start
 {
+    if (_internalIsCancelled) {
+        [super cancel];
+    }
+
     if (self.isCancelled) {
         _operationError = [[self class] operationCancelledError];
         [self handleFinishing];
     }
+
     [super start];
 }
 
@@ -93,6 +99,20 @@
 - (BOOL)isAsynchronous
 {
     return NO;
+}
+
+- (void)cancel
+{
+    if (self.isFinished) {
+        return;
+    }
+
+    _internalIsCancelled = YES;
+
+    if (self.isExecuting) {
+        [super cancel];
+        return;
+    }
 }
 
 @end
