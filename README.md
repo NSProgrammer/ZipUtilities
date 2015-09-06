@@ -1,4 +1,5 @@
 # ZipUtilities
+![MIT License](https://img.shields.io/github/license/NSProgrammer/ZipUtilities.svg?style=flat) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/ZipUtilities.svg?style=flat)](https://CocoaPods.org) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## Introduction
 
@@ -15,6 +16,29 @@ The need can occasionally arise where easy compressing and decompressing of data
 - lack a service oriented approach (request, operation and response pattern)
 
 The goal is to provide an easy to use modern interface for archiving and unarchiving zip files. As a particular focus, providing a service oriented approach can provide powerful support for NSOperation composition.
+
+## Install
+
+The _ZipUtilities_ Xcode project has targets to build iOS and OSX dynamic frameworks. You can build these and add them to your project manually, or add a subproject in Xcode.
+
+Alternatively you may use one of the following dependency managers:
+
+#### CocoaPods
+
+Add _ZipUtilities_ to your `Podfile`
+
+```ruby
+pod 'ZipUtilities', '~> 1.4.0'
+```
+
+#### Carthage
+
+Add _ZipUtilities_ to your `Cartfile`
+
+```ruby
+github "NSProgrammer/ZipUtilities"
+```
+
 
 ## Overview
 
