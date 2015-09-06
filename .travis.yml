@@ -1,7 +1,10 @@
 osx_image: xcode6.4
 language: objective-c
 xcode_project: ZipUtilities.xcodeproj
-xcode_scheme:
-  - ZipUtilities
-  - ZipUtilities Framework
-  - ZipUtilities OSX Framework
+matrix:
+  include:
+    - xcode_scheme: ZipUtilities
+      xcode_sdk: iphonesimulator
+    - xcode_scheme: ZipUtilities Framework
+      xcode_sdk: iphonesimulator
+    - xcode_scheme: ZipUtilities OSX Framework
