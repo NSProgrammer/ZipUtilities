@@ -1,6 +1,8 @@
 # ZipUtilities
 ![MIT License](https://img.shields.io/github/license/NSProgrammer/ZipUtilities.svg?style=flat) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/ZipUtilities.svg?style=flat)](https://CocoaPods.org) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
+![Targets](https://img.shields.io/badge/Targets-OSX.Framework_iOS.Framework_iOS.lib-lightgrey.svg)
+
 ## Introduction
 
 *ZipUtilities*, prefixed with `NOZ` for _Nolan O'Brien ZipUtilities_, is a library of zipping and unzipping utilities for iOS and Mac OS X.
