@@ -1,6 +1,6 @@
 language: objective-c
 xcode_project: ZipUtilities.xcodeproj
 xcode_scheme:
-	- ZipUtilities
-	- ZipUtilities Framework
-	- ZipUtilities OSX Framework
+  - ZipUtilities
+  - ZipUtilities Framework
+  - ZipUtilities OSX Framework
