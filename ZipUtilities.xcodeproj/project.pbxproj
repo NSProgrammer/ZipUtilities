@@ -163,6 +163,7 @@
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
 		1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZipUtilities.podspec; sourceTree = "<group>"; };
+		1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		1C6BF7701B74086000969629 /* libZipUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZipUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6BF77B1B74086000969629 /* ZipUtilitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZipUtilitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C6BF7811B74086000969629 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 				4623A8A91B9A8AD300A56535 /* Frameworks */,
 				1C6BF7711B74086000969629 /* Products */,
 				4623A8AE1B9A8D3500A56535 /* README.md */,
+				1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */,
 				4623A8AD1B9A8D3500A56535 /* LICENSE */,
 				1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */,
 				1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */,
