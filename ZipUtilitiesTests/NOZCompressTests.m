@@ -190,12 +190,15 @@ static NSOperationQueue *sQueue = nil;
     }
     [op waitUntilFinished];
 
-    XCTAssertTrue(op.isCancelled);
-    XCTAssertNotNil(op.result);
-    XCTAssertNotNil(op.result.operationError);
-    XCTAssertFalse(op.result.didSucceed);
-    XCTAssertEqualObjects(op.result.operationError.domain, NOZErrorDomain);
-    XCTAssertEqual(op.result.operationError.code, NOZErrorCodeCompressCancelled);
+    NSString * const cancellingStr = yesBeforeEnqueueNoAfterEnqueue ? @"Cancel before enqueue" : @"Cancel after enqueue";
+
+    XCTAssertTrue(op.isCancelled, @"%@", cancellingStr);
+    XCTAssertTrue(op.isFinished, @"%@", cancellingStr);
+    XCTAssertNotNil(op.result, @"%@", cancellingStr);
+    XCTAssertNotNil(op.result.operationError, @"%@", cancellingStr);
+    XCTAssertFalse(op.result.didSucceed, @"%@", cancellingStr);
+    XCTAssertEqualObjects(op.result.operationError.domain, NOZErrorDomain, @"%@", cancellingStr);
+    XCTAssertEqual(op.result.operationError.code, NOZErrorCodeCompressCancelled, @"%@", cancellingStr);
 }
 
 - (NSError *)runInvalidRequest:(NOZCompressRequest *)request
