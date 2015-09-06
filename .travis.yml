@@ -1,6 +1,6 @@
 osx_image: xcode6.4
 before_install:
-  - brew update
+  - brew update; brew update # Workaround for https://github.com/Homebrew/homebrew/issues/42553
   - brew outdated xctool || brew upgrade xctool
 language: objective-c
 xcode_project: ZipUtilities.xcodeproj
