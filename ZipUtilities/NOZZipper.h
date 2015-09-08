@@ -43,11 +43,59 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 /**
  `NOZZipper` encapsulates zipping sources into a zip archive.
  
- Uses **zlib** to compress with **deflate** encoding.
+ Uses the globally registered compression encoders.  See `NOZEncoderForCompressionMethod` and `NOZUpdateCompressionMethodEncoder` in `NOZCompression.h`.
  
  By default, `NOZZipper` is optimized to compress in a single pass.
  If you need `NOZZipper` to output without this optimization, define `NOZ_SINGLE_PASS_ZIP` as `0`
  in your build settings.
+ 
+ ### Example
+
+    - (BOOL)zipThingsUpAndReturnError:(out NSError **)error
+    {
+        NSAssert(![NSThread isMainThread]); // do this work on a background thread
+
+        NOZZipper *zipper = [[NOZZipper alloc] initWithZipFile:pathToCreateZipFile];
+        if (![zipper openWithMode:NOZZipperModeCreate error:error]) {
+            return NO;
+        }
+
+        __block int64_t totalBytesCompressed = 0;
+
+        NOZFileZipEntry *textFileZipEntry = [[NOZFileZipEntry alloc] initWithFilePath:textFilePath];
+        textFileZipEntry.comment = @"This is a heavily compressed text file.";
+        textFileZipEntry.compressionLevel = NOZCompressionLevelMax;
+
+        NSData *jpegData = UIImageJPEGRepresentation(someImage, 0.8f);
+        NOZDataZipEntry *jpegEntry = [[NOZDataZipEntry alloc] initWithData:jpegData name:@"image.jpg"];
+        jpegEntry.comment = @"This is a JPEG so it doesn't need more compression.";
+        jpegEntry.compressionMode = NOZCompressionModeNone;
+
+        if (![zipper addEntry:textFileZipEntry
+                progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+                 totalBytesCompressed = bytesCompletedThisPass;
+             }
+                        error:error]) {
+            return NO;
+        }
+
+        if (![zipper addEntry:jpegEntry
+                progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+                 totalBytesCompressed = bytesCompletedThisPass;
+             }
+                        error:error]) {
+            return NO;
+        }
+
+        zipper.globalComment = @"This is a global comment for the entire archive.";
+        if (![zipper closeAndReturnError:error]) {
+            return NO;
+        }
+
+        int64_t archiveSize = (int64_t)[[[NSFileManager defaultFileManager] attributesOfItemAtPath:zipper.zipFilePath] fileSize];
+        NSLog(@"Compressed to %@ with compression ratio of %.4f:1", zipper.zipFilePath, (double)totalBytesCompressed / (double)archiveSize);
+        return YES;
+    }
  */
 @interface NOZZipper : NSObject
 

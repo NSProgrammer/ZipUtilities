@@ -132,7 +132,125 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p><code>NOZUnzipper</code> unzips an archive.</p>
 
-<p>  Uses <strong>zlib</strong> to decompress and therefore only supports <strong>deflate</strong> compressed entries/record.</p>
+<p>Uses the globally registered compression encoders.  See <code>NOZDecoderForCompressionMethod</code> and <code>NOZUpdateCompressionMethodDecoder</code> in <code>NOZCompression.h</code>.</p>
+
+<h3>Example</h3>
+
+<p>Here&rsquo;s a completely contrived example for unzipping with the <code>NOZUnzipper</code>.
+Feel free to reference it for how to use <code>NOZUnzipper</code>, but don&rsquo;t treat it as an example of how to handle extracted data/files.</p>
+
+<pre><code>- (BOOL)unzipThingsAndReturnError:(out NSError **)error
+{
+    NSAssert(![NSThread isMainThread]); // do this work on a background thread
+
+    NOZUnzipper *unzipper = [[NOZUnzipper alloc] initWithZipFile:zipFilePath];
+    if (![unzipper openAndReturnError:error]) {
+        return NO;
+    }
+
+    if (nil == [unzipper readCentralDirectoryAndReturnError:error]) {
+        return NO;
+    }
+
+    __block NSError *enumError = nil;
+    [unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord * record, NSUInteger index, BOOL * stop) {
+        NSString *extension = record.name.pathExtension;
+        if ([extension isEqualToString:@"jpg"]) {
+            *stop = ![self readImageFromUnzipper:unzipper withRecord:record error:&amp;enumError];
+        } else if ([extension isEqualToString:@"json"]) {
+            *stop = ![self readJSONFromUnzipper:unzipper withRecord:record error:&amp;enumError];
+        } else {
+            *stop = ![self extractFileFromUnzipper:unzipper withRecord:record error:&amp;enumError];
+        }
+     }];
+
+    if (enumError) {
+        *error = enumError;
+        return NO;
+    }
+
+    if (![unzipper closeAndReturnError:error]) {
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)readImageFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    CGImageSourceRef imageSource = CGImageSourceCreateIncremental(NULL);
+    custom_defer(^{ // This is Obj-C equivalent to 'defer' in Swift.  See http://www.openradar.me/21684961 for more info.
+        if (imageSource) {
+            CFRelease(imageSource);
+        }
+    });
+
+    NSMutableData *imageData = [NSMutableData dataWithCapacity:record.uncompressedSize];
+    NSError *readImageError = nil;
+    readImageError = [unzipper enumerateByteRangesOfRecord:record
+                                             progressBlock:NULL
+                                                usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
+                            [imageData appendBytes:bytes length:byteRange.length];
+                            CGImageSourceUpdate(imageSource, imageData, NO);
+                      }];
+
+    if (readImageError) {
+        if (error) {
+            *error = readImageError;
+        }
+        return NO;
+    }
+
+    CGImageSourceUpdate(imageSource, (__bridge CFDataRef)imageData, YES);
+    CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+    if (!imageRef) {
+        *error = ... some error ...;
+        return NO;
+    }
+
+    custom_defer(^{
+        CFRelease(imageRef);
+    });
+
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    if (!image) {
+        *error = ... some error ...;
+        return NO;
+    }
+
+    self.image = image;
+    return YES;
+}
+
+- (BOOL)readJSONFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    NSData *jsonData = [unzipper readDataFromRecord:record
+                                      progressBlock:NULL
+                                              error:error];
+    if (!jsonData) {
+        return NO;
+    }
+
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:0
+                                                      error:error];
+    if (!jsonObject) {
+        return NO;
+    }
+
+    self.json = jsonObject;
+    return YES;
+}
+
+- (BOOL)extractFileFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    if (record.isZeroLength || record.isMacOSXAttribute || record.isMacOSXDSStore) {
+        return YES;
+    }
+
+    return [self saveRecord:record toDirectory:someDestinationRootDirectory shouldOverwrite:NO progressBlock:NULL error:error];
+}
+</code></pre>
 					</div>
 					
 					
@@ -671,6 +789,11 @@ If successful, <a href="#//api/name/centralDirectory"><code>[NOZUnzipper central
 			
 
 			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>TODO: change method to be - (BOOL)enumerateByteRangesOfRecord:progressBlock:usingBlock:error:</p>
+			</div>
+			
 
 			
 
@@ -741,7 +864,7 @@ If successful, <a href="#//api/name/centralDirectory"><code>[NOZUnzipper central
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-05</p>
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-07</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

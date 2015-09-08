@@ -61,6 +61,12 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 - `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`.  It provides callbacks for progress and completion.
 - `NOZCompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
 
+*Example:*
+
+```
+TODO - add example code (beyond what's in unit tests)
+```
+
 **`NOZDecompress.h`**
 
 `NOZDecompress.h` contains the service oriented interfaces related to decompressing from a zip archive.
@@ -69,6 +75,12 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 - `NOZDecompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
 - `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`.  It provides callbacks for progress, overwriting output files and completion.
 - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
+
+*Example:*
+
+```
+TODO - add example code (beyond what's in unit tests)
+```
 
 ### Manual Zipping and Unzipping
 
@@ -79,10 +91,174 @@ Additional, the underlying objects for zipping and unzipping are exposed for dir
 `NOZZipper` is an object that encapsulates the work for zipping sources (NSData, streams and/or
 files) into an on disk zip archive file.
 
+*Example:*
+
+```obj-c
+- (BOOL)zipThingsUpAndReturnError:(out NSError **)error
+{
+    NOZZipper *zipper = [[NOZZipper alloc] initWithZipFile:pathToCreateZipFile];
+    if (![zipper openWithMode:NOZZipperModeCreate error:error]) {
+        return NO;
+    }
+
+    __block int64_t totalBytesCompressed = 0;
+
+    NOZFileZipEntry *textFileZipEntry = [[NOZFileZipEntry alloc] initWithFilePath:textFilePath];
+    textFileZipEntry.comment = @"This is a heavily compressed text file.";
+    textFileZipEntry.compressionLevel = NOZCompressionLevelMax;
+
+    NSData *jpegData = UIImageJPEGRepresentation(someImage, 0.8f);
+    NOZDataZipEntry *jpegEntry = [[NOZDataZipEntry alloc] initWithData:jpegData name:@"image.jpg"];
+    jpegEntry.comment = @"This is a JPEG so it doesn't need more compression.";
+    jpegEntry.compressionMode = NOZCompressionModeNone;
+
+    if (![zipper addEntry:textFileZipEntry
+            progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+            totalBytesCompressed = bytesCompletedThisPass;
+          }
+                    error:error]) {
+        return NO;
+    }
+
+    if (![zipper addEntry:jpegEntry
+            progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+         }
+                    error:error]) {
+        return NO;
+    }
+
+    zipper.globalComment = @"This is a global comment for the entire archive.";
+    if (![zipper closeAndReturnError:error]) {
+        return NO;
+    }
+
+    int64_t archiveSize = (int64_t)[[[NSFileManager defaultFileManager] attributesOfItemAtPath:zipper.zipFilePath] fileSize];
+    NSLog(@"Compressed to %@ with compression ratio of %.4f:1", zipper.zipFilePath, (double)totalBytesCompressed / (double)archiveSize);
+    return YES;
+}
+
+```
+
 **`NOZUnzipper.h`**
 
 `NOZUnzipper` is an object that encapsulates the work for unzipping from a zip archive file on disk
 into destinations (NSData, streams and/or files).
+
+*Example:*
+
+```obj-c
+- (BOOL)unzipThingsAndReturnError:(out NSError **)error
+{
+    NSAssert(![NSThread isMainThread]); // do this work on a background thread
+
+    NOZUnzipper *unzipper = [[NOZUnzipper alloc] initWithZipFile:zipFilePath];
+    if (![unzipper openAndReturnError:error]) {
+        return NO;
+    }
+
+    if (nil == [unzipper readCentralDirectoryAndReturnError:error]) {
+        return NO;
+    }
+
+    __block NSError *enumError = nil;
+    [unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord * record, NSUInteger index, BOOL * stop) {
+        NSString *extension = record.name.pathExtension;
+        if ([extension isEqualToString:@"jpg"]) {
+            *stop = ![self readImageFromUnzipper:unzipper withRecord:record error:&enumError];
+        } else if ([extension isEqualToString:@"json"]) {
+            *stop = ![self readJSONFromUnzipper:unzipper withRecord:record error:&enumError];
+        } else {
+            *stop = ![self extractFileFromUnzipper:unzipper withRecord:record error:&enumError];
+        }
+    }];
+
+    if (enumError) {
+        *error = enumError;
+        return NO;
+    }
+
+    if (![unzipper closeAndReturnError:error]) {
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)readImageFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    CGImageSourceRef imageSource = CGImageSourceCreateIncremental(NULL);
+    custom_defer(^{ // This is Obj-C equivalent to 'defer' in Swift.  See http://www.openradar.me/21684961 for more info.
+        if (imageSource) {
+            CFRelease(imageSource);
+        }
+    });
+
+    NSMutableData *imageData = [NSMutableData dataWithCapacity:record.uncompressedSize];
+    NSError *readImageError = nil;
+    readImageError = [unzipper enumerateByteRangesOfRecord:record
+                                             progressBlock:NULL
+                                                usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
+                            [imageData appendBytes:bytes length:byteRange.length];
+                            CGImageSourceUpdate(imageSource, imageData, NO);
+                      }];
+
+    if (readImageError) {
+        if (error) {
+            *error = readImageError;
+        }
+        return NO;
+    }
+
+    CGImageSourceUpdate(imageSource, (__bridge CFDataRef)imageData, YES);
+    CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+    if (!imageRef) {
+        *error = ... some error ...;
+        return NO;
+    }
+
+    custom_defer(^{
+        CFRelease(imageRef);
+    });
+
+    UIImage *image = [UIImage imageWithCGImage:imageRef];
+    if (!image) {
+        *error = ... some error ...;
+        return NO;
+    }
+
+    self.image = image;
+    return YES;
+}
+
+- (BOOL)readJSONFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    NSData *jsonData = [unzipper readDataFromRecord:record
+                                      progressBlock:NULL
+                                              error:error];
+    if (!jsonData) {
+        return NO;
+    }
+
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:0
+                                                      error:error];
+    if (!jsonObject) {
+        return NO;
+    }
+
+    self.json = jsonObject;
+    return YES;
+}
+
+- (BOOL)extractFileFromUnzipper:(NOZUnzipper *)unzipper withRecord:(NOZCentralDirectoryRecord *)record error:(out NSError **)error
+{
+    if (record.isZeroLength || record.isMacOSXAttribute || record.isMacOSXDSStore) {
+        return YES;
+    }
+
+    return [self saveRecord:record toDirectory:someDestinationRootDirectory shouldOverwrite:NO progressBlock:NULL error:error];
+}
+```
 
 ### Extensibility - Modular Compression Encoders/Decoders
 
@@ -91,6 +267,12 @@ into destinations (NSData, streams and/or files).
 _ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
 
 Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZCompressionEncoder` and `NOZCompressionDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZCompressionEncoder>` and `MyBZIP2Decoder<NOZCompressionDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
+
+*Example:*
+
+```
+TODO - add example code
+```
 
 ## TODO
 

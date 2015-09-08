@@ -44,18 +44,18 @@ Default distributes weight equally amoung all steps.</Abstract>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/runStep:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/runStep:error:</TokenIdentifier>
 			<Abstract type="html">Run the specified step.
 MUST override in subclass.
-Return an NSError if an error was encountered, otherwise return nil.
+Return NO and set the output error if an error was encountered, otherwise return nil.
 Implementers should check [self isCancelled] for any indication that the operation was cancelled
 and return [[self class] operationCancelledError].</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (nullable NSError *)runStep:(NSUInteger)step</Declaration>
+			<Declaration>- (BOOL)runStep:(NSUInteger)step error:(out NSError *__nullable *__nullable)error</Declaration>
 			
 			
-			<Anchor>//api/name/runStep:</Anchor>
+			<Anchor>//api/name/runStep:error:</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

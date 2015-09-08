@@ -59,7 +59,7 @@ Supports KVO.</Abstract>
 Useful for subclasses to examine during handleFinishing.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
+			<Declaration>@property (atomic, readonly, nullable) NSError *operationError</Declaration>
 			
 			
 			<Anchor>//api/name/operationError</Anchor>
@@ -72,7 +72,7 @@ Useful for subclasses to examine during handleFinishing.</Abstract>
 Useful for subclasses to examine during handleFinishing.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
+			<Declaration>@property (atomic, readonly, nullable) NSError *operationError</Declaration>
 			
 			
 			<Anchor>//api/name/operationError</Anchor>
@@ -85,7 +85,7 @@ Useful for subclasses to examine during handleFinishing.</Abstract>
 Useful for subclasses to examine during handleFinishing.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, nullable) NSError *operationError</Declaration>
+			<Declaration>@property (atomic, readonly, nullable) NSError *operationError</Declaration>
 			
 			
 			<Anchor>//api/name/operationError</Anchor>
