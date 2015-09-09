@@ -1,5 +1,5 @@
 # ZipUtilities
-![MIT License](https://img.shields.io/github/license/NSProgrammer/ZipUtilities.svg?style=flat)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NSProgrammer/ZipUtilities/master/LICENSE.md)
 
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/ZipUtilities.svg?style=flat)](https://CocoaPods.org) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
