@@ -5,11 +5,13 @@ before_install:
 language: objective-c
 xcode_project: ZipUtilities.xcodeproj
 matrix:
-  include:
-    - xcode_scheme: ZipUtilities
-      xcode_sdk: iphonesimulator9.0
-      xcode_destination: 'platform=iOS Simulator,name=iPhone 6'
-    - xcode_scheme: ZipUtilities Framework
-      xcode_sdk: iphonesimulator9.0
-      xcode_destination: 'platform=iOS Simulator,name=iPhone 6'
+  includes:
+    - script: xctool -project ZipUtilities.xcodeproj -scheme ZipUtilities -sdk iphonesimulator9.0 -destination 'platform=iOS Simulator,name=iPhone 6' build test
+    - script: xctool -project ZipUtilities.xcodeproj -scheme 'ZipUtilities Framework' -sdk iphonesimulator9.0 -destination 'platform=iOS Simulator,name=iPhone 6' build test
+#    - xcode_scheme: ZipUtilities
+#      xcode_sdk: iphonesimulator9.0
+#      xcode_destination: 'platform=iOS Simulator,name=iPhone 6'
+#    - xcode_scheme: ZipUtilities Framework
+#      xcode_sdk: iphonesimulator9.0
+#      xcode_destination: 'platform=iOS Simulator,name=iPhone 6'
     - xcode_scheme: ZipUtilities OSX Framework
