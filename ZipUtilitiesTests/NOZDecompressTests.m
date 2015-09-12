@@ -33,7 +33,7 @@
 //#define TESTLOG(...) NSLog(__VA_ARGS__)
 #define TESTLOG(...) ((void)0)
 
-static NSArray *sFileNames = nil;
+static NSArray<NSString *> *sFileNames = nil;
 static NSOperationQueue *sQueue = nil;
 
 @interface NOZDecompressTests : XCTestCase <NOZDecompressDelegate>

@@ -47,7 +47,9 @@
     return 0;
 }
 
-- (nonnull NOZRawEncoderContext *)createContextForEncodingEntry:(nonnull id<NOZZipEntry>)entry flushCallback:(nonnull NOZFlushCallback)callback
+- (nonnull NOZRawEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
+                                           compressionLevel:(NOZCompressionLevel)level
+                                              flushCallback:(nonnull NOZFlushCallback)callback;
 {
     NOZRawEncoderContext *context = [[NOZRawEncoderContext alloc] init];
     context.flushCallback = callback;
@@ -55,7 +57,6 @@
 }
 
 - (BOOL)initializeEncoderContext:(nonnull NOZRawEncoderContext *)context
-                           error:(out NSError * __nullable * __nullable)error
 {
     return YES;
 }
@@ -63,13 +64,9 @@
 - (BOOL)encodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
             context:(nonnull NOZRawEncoderContext *)context
-              error:(out NSError * __nullable * __nullable)error
 {
     // direct passthrough
     if (!context.flushCallback(self, context, bytes, length)) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeZipFailedToCompressEntry, nil);
-        }
         return NO;
     }
 
@@ -77,7 +74,6 @@
 }
 
 - (BOOL)finalizeEncoderContext:(nonnull NOZRawEncoderContext *)context
-                         error:(out NSError * __nullable * __nullable)error
 {
     context.flushCallback = NULL;
     return YES;
@@ -97,7 +93,8 @@
 
 @implementation NOZRawDecoder
 
-- (nonnull NOZRawDecoderContext *)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback
+- (nonnull NOZRawDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
+                                                         flushCallback:(nonnull NOZFlushCallback)callback
 {
     NOZRawDecoderContext *context = [[NOZRawDecoderContext alloc] init];
     context.flushCallback = callback;
@@ -105,7 +102,6 @@
 }
 
 - (BOOL)initializeDecoderContext:(nonnull NOZRawDecoderContext *)context
-                           error:(out NSError * __nullable * __nullable)error
 {
     return YES;
 }
@@ -113,7 +109,6 @@
 - (BOOL)decodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
             context:(nonnull NOZRawDecoderContext *)context
-              error:(out NSError * __nullable * __nullable)error
 {
     if (context.hasFinished) {
         return YES;
@@ -121,9 +116,6 @@
 
     // direct passthrough
     if (!context.flushCallback(self, context, bytes, length)) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
-        }
         return NO;
     }
 
@@ -135,7 +127,6 @@
 }
 
 - (BOOL)finalizeDecoderContext:(nonnull NOZRawDecoderContext *)context
-                         error:(out NSError * __nullable * __nullable)error
 {
     context.flushCallback = NULL;
     return YES;

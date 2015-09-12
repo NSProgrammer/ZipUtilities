@@ -14,6 +14,18 @@
 		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
+		1C19A25A1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25B1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25C1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25E1BA3925D004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1C19A25F1BA3926A004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1C19A2611BA39284004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A2601BA39284004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1C19A2641BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */; settings = {ASSET_TAGS = (); }; };
+		1C19A2651BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */; settings = {ASSET_TAGS = (); }; };
+		1C19A2661BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */; settings = {ASSET_TAGS = (); }; };
+		1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
 		1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223791B77BE9F00DC0A33 /* NOZError.m */; };
@@ -21,6 +33,9 @@
 		1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */; };
 		1C3223851B78501A00DC0A33 /* Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C3223841B78501A00DC0A33 /* Data.zip */; };
 		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
+		1C667BFC1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
+		1C667BFD1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
+		1C667BFE1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
 		1C6BF77C1B74086000969629 /* libZipUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6BF7701B74086000969629 /* libZipUtilities.a */; };
 		1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF78D1B74093B00969629 /* NOZCompress.m */; };
 		1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78C1B74093B00969629 /* NOZCompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -155,12 +170,19 @@
 		1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZZipEntry.h; sourceTree = "<group>"; };
 		1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZZipEntry.m; sourceTree = "<group>"; };
 		1C16F4F01B787EC100963AB3 /* maniac-mansion */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "maniac-mansion"; sourceTree = "<group>"; };
+		1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZXLMZACoderTests.m; sourceTree = "<group>"; };
+		1C19A25D1BA3925D004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = usr/lib/libcompression.tbd; sourceTree = SDKROOT; };
+		1C19A2601BA39284004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libcompression.tbd; sourceTree = DEVELOPER_DIR; };
+		1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXAppleCompressionCoder.h; path = Extra/NOZXAppleCompressionCoder.h; sourceTree = "<group>"; };
+		1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXAppleCompressionCoder.m; path = Extra/NOZXAppleCompressionCoder.m; sourceTree = "<group>"; };
 		1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDecompressTests.m; sourceTree = "<group>"; };
 		1C3223781B77BE9F00DC0A33 /* NOZError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZError.h; sourceTree = "<group>"; };
 		1C3223791B77BE9F00DC0A33 /* NOZError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZError.m; sourceTree = "<group>"; };
 		1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZSyncStepOperation.h; sourceTree = "<group>"; };
 		1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZSyncStepOperation.m; sourceTree = "<group>"; };
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
+		1C667BFA1BA12A200028E5E7 /* NOZXLZMACoders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXLZMACoders.h; path = Extra/NOZXLZMACoders.h; sourceTree = "<group>"; };
+		1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXLZMACoders.m; path = Extra/NOZXLZMACoders.m; sourceTree = "<group>"; };
 		1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZipUtilities.podspec; sourceTree = "<group>"; };
 		1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -210,6 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C19A25E1BA3925D004E8D6C /* libcompression.tbd in Frameworks */,
 				1CD9BAB61B757E3F000B93C4 /* libz.dylib in Frameworks */,
 				1C6BF77C1B74086000969629 /* libZipUtilities.a in Frameworks */,
 			);
@@ -227,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C19A25F1BA3926A004E8D6C /* libcompression.tbd in Frameworks */,
 				4623A8391B9A828A00A56535 /* ZipUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C19A2611BA39284004E8D6C /* libcompression.tbd in Frameworks */,
 				4623A8571B9A82AF00A56535 /* ZipUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,9 +275,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */ = {
+			isa = PBXGroup;
+			children = (
+				1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */,
+				1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */,
+				1C667BFA1BA12A200028E5E7 /* NOZXLZMACoders.h */,
+				1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */,
+			);
+			name = "Extra Encoders/Decoders";
+			sourceTree = "<group>";
+		};
 		1C6BF7671B74086000969629 = {
 			isa = PBXGroup;
 			children = (
+				1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */,
 				1C6BF7721B74086000969629 /* ZipUtilities */,
 				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
 				4623A8A91B9A8AD300A56535 /* Frameworks */,
@@ -314,6 +351,7 @@
 				1C6BF7801B74086000969629 /* Supporting Files */,
 				1C6BF7B61B7564A700969629 /* NOZCompressTests.m */,
 				1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */,
+				1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */,
 			);
 			path = ZipUtilitiesTests;
 			sourceTree = "<group>";
@@ -370,6 +408,8 @@
 		4623A8A91B9A8AD300A56535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C19A2601BA39284004E8D6C /* libcompression.tbd */,
+				1C19A25D1BA3925D004E8D6C /* libcompression.tbd */,
 				4613835B1B9AAA130076C8B5 /* iOS */,
 				4623A8AA1B9A8AE300A56535 /* OSX */,
 			);
@@ -396,6 +436,7 @@
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
+				1C19A2641BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
 				1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */,
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
@@ -419,6 +460,7 @@
 				4623A86F1B9A83C200A56535 /* NOZDecompress.h in Headers */,
 				4623A87B1B9A83D600A56535 /* NOZSyncStepOperation.h in Headers */,
 				4623A86B1B9A83BC00A56535 /* NOZCompression.h in Headers */,
+				1C19A2651BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */,
 				4623A8331B9A828A00A56535 /* ZipUtilities.h in Headers */,
 				4623A87F1B9A83DC00A56535 /* NOZUnzipper.h in Headers */,
 			);
@@ -438,6 +480,7 @@
 				4623A8701B9A83C300A56535 /* NOZDecompress.h in Headers */,
 				4623A87C1B9A83D700A56535 /* NOZSyncStepOperation.h in Headers */,
 				4623A86C1B9A83BC00A56535 /* NOZCompression.h in Headers */,
+				1C19A2661BA4881D004E8D6C /* NOZXAppleCompressionCoder.h in Headers */,
 				4623A8801B9A83DC00A56535 /* NOZUnzipper.h in Headers */,
 				4623A8931B9A849400A56535 /* ZipUtilities.h in Headers */,
 			);
@@ -561,7 +604,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NOZ;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = NSProgrammer;
 				TargetAttributes = {
 					1C6BF76F1B74086000969629 = {
@@ -687,8 +730,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C667BFC1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */,
+				1C19A25A1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
 				1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */,
+				1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,8 +761,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C667BFD1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */,
+				1C19A25B1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
 				4623A8A31B9A883600A56535 /* NOZCompressTests.m in Sources */,
+				1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,8 +792,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C667BFE1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */,
+				1C19A25C1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
 				4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */,
+				1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +849,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -911,16 +964,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -929,12 +979,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -956,6 +1003,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -977,6 +1025,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -989,10 +1038,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1000,6 +1045,7 @@
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1008,13 +1054,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1038,6 +1081,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ZipUtilities;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1060,6 +1104,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ZipUtilities;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1084,6 +1129,7 @@
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -1100,6 +1146,7 @@
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};

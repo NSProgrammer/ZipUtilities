@@ -115,7 +115,7 @@ typedef void(^NOZCompressionSelectionBlock)(NSString* filePath, NOZCompressionMe
 /** The on disk file to archive to */
 @property (nonatomic, copy) NSString *destinationPath;
 /** The array of objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
-@property (nonatomic, copy) NSArray *entries;
+@property (nonatomic, copy) NSArray<id<NOZZippableEntry>> *entries;
 /** A comment embedded in the resulting zip file */
 @property (nonatomic, copy, nullable) NSString *comment;
 

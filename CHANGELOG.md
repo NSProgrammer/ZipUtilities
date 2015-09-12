@@ -2,6 +2,16 @@
 
 ## History
 
+### 1.5.0  (Sep 11, 2015) - Nolan O'Brien
+
+- Simplify compression encoders/decoders to only return a BOOL and not an NSError
+- Convert project to Xcode 7
+- Use container generics throughout
+- Add LZMA encoder/decoder to "extras"
+  - Includes unit tests
+  - iOS 9+ and OS X 10.11+ only
+  - Not included in libs/frameworks, you can include these files to add LZMA support though
+
 ### 1.4.1  (Sep 6, 2015) - Nolan O'Brien
 
 - Fix race condition with cancelling

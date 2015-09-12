@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     NOZCompressStepClose
 };
 
-static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull directoryPath);
+static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString * __nonnull directoryPath);
 
 #define kCancelledError NOZError(NOZErrorCodeCompressCancelled, nil)
 
@@ -51,7 +51,7 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 @end
 
 @interface NOZCompressRequest ()
-@property (nonatomic, nonnull) NSMutableArray *mutableEntries;
+@property (nonatomic, nonnull) NSMutableArray<id<NOZZippableEntry>> *mutableEntries;
 @end
 
 @interface NOZCompressResult ()
@@ -435,16 +435,16 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
     return copy;
 }
 
-- (NSArray *)entries
+- (NSArray<id<NOZZippableEntry>> *)entries
 {
-    NSMutableArray *entries = [[NSMutableArray alloc] initWithCapacity:_mutableEntries.count];
+    NSMutableArray<id<NOZZippableEntry>> *entries = [[NSMutableArray alloc] initWithCapacity:_mutableEntries.count];
     for (id<NOZZippableEntry> entry in _mutableEntries) {
         [entries addObject:[entry copy]];
     }
     return [entries copy];
 }
 
-- (void)setEntries:(NSArray *)entries
+- (void)setEntries:(NSArray<id<NOZZippableEntry>> *)entries
 {
     [_mutableEntries removeAllObjects];
     for (id<NOZZippableEntry> entry in entries) {
@@ -501,9 +501,9 @@ static NSArray * __nonnull NOZEntriesFromDirectory(NSString * __nonnull director
 
 @end
 
-static NSArray * NOZEntriesFromDirectory(NSString * directoryPath)
+static NSArray<NOZFileZipEntry *> * NOZEntriesFromDirectory(NSString * directoryPath)
 {
-    NSMutableArray *entries = [[NSMutableArray alloc] init];
+    NSMutableArray<NOZFileZipEntry *> *entries = [[NSMutableArray alloc] init];
     NSFileManager *fm = [NSFileManager defaultManager];
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:directoryPath];
     NSString *filePath = nil;

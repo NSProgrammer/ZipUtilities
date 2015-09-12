@@ -155,7 +155,7 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
 /** The path that acts as the root for all files to be unarchived to */
 @property (nonatomic, readonly, copy) NSString *destinationDirectoryPath;
 /** The files that were unarchived.  Items are relative paths to the `destinationDirectoryPath`. */
-@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles;
+@property (nonatomic, readonly, copy, nullable) NSArray<NSString *> *destinationFiles;
 /** Any error that was encountered during the operation */
 @property (nonatomic, readonly, nullable) NSError *operationError;
 /** Whether or not the operation did succeed */
