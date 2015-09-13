@@ -47,7 +47,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 @end
 
 @interface NOZCentralDirectory (Protected)
-- (NSArray *)internalRecords;
+- (NSArray<NOZCentralDirectoryRecord *> *)internalRecords;
 - (BOOL)readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file;
 - (BOOL)readCentralDirectoryEntriesWithFile:(FILE*)file;
 - (NOZCentralDirectoryRecord *)readCentralDirectoryEntryAtCurrentPositionWithFile:(FILE*)file;
@@ -224,7 +224,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     __unsafe_unretained typeof(self) rawSelf = self;
     _currentDecoder = NOZDecoderForCompressionMethod(record.internalEntry->fileHeader.compressionMethod);
-    _currentDecoderContext = [_currentDecoder createContextForDecodingWithFlushCallback:^BOOL(id coder, id context, const Byte* bufferToFlush, size_t length) {
+    _currentDecoderContext = [_currentDecoder createContextForDecodingWithBitFlags:record.internalEntry->fileHeader.bitFlag
+                                                                     flushCallback:^BOOL(id coder, id context, const Byte* bufferToFlush, size_t length) {
         if (rawSelf->_currentDecoder != coder) {
             return NO;
         }
@@ -242,8 +243,10 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     }
 
     NSError *error;
-    if (![_currentDecoder initializeDecoderContext:_currentDecoderContext error:&error]) {
-        return error;
+    if (![_currentDecoder initializeDecoderContext:_currentDecoderContext]) {
+        return [NSError errorWithDomain:NOZErrorDomain
+                                   code:NOZErrorCodeUnzipFailedToDecompressEntry
+                               userInfo:nil];
     }
 
     _currentUnzipping.entry = record.internalEntry;
@@ -253,8 +256,10 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         return error;
     }
 
-    if (![_currentDecoder finalizeDecoderContext:_currentDecoderContext error:&error]) {
-        return error;
+    if (![_currentDecoder finalizeDecoderContext:_currentDecoderContext]) {
+        return [NSError errorWithDomain:NOZErrorDomain
+                                   code:NOZErrorCodeUnzipFailedToDecompressEntry
+                               userInfo:nil];
     }
 
     return nil;
@@ -503,7 +508,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
         compressedBytesLeft -= compressedBufferSize;
 
-        if (![_currentDecoder decodeBytes:compressedBuffer length:compressedBufferSize context:_currentDecoderContext error:error]) {
+        if (![_currentDecoder decodeBytes:compressedBuffer length:compressedBufferSize context:_currentDecoderContext]) {
+            success = NO;
             return NO;
         }
 
@@ -532,7 +538,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     off_t _endOfCentralDirectoryRecordPosition;
     NOZEndOfCentralDirectoryRecordT _endOfCentralDirectoryRecord;
 
-    NSArray *_records;
+    NSArray<NOZCentralDirectoryRecord *> *_records;
     off_t _lastCentralDirectoryRecordEndPosition; // exclusive
 }
 
@@ -611,7 +617,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         return NO;
     }
 
-    NSMutableArray *records = [NSMutableArray arrayWithCapacity:_endOfCentralDirectoryRecord.totalRecordCount];
+    NSMutableArray<NOZCentralDirectoryRecord *> *records = [NSMutableArray arrayWithCapacity:_endOfCentralDirectoryRecord.totalRecordCount];
     while (_endOfCentralDirectoryRecordPosition > ftello(file)) {
         NOZCentralDirectoryRecord *record = [self readCentralDirectoryEntryAtCurrentPositionWithFile:file];
         if (record) {
@@ -699,7 +705,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return index;
 }
 
-- (NSArray *)internalRecords
+- (NSArray<NOZCentralDirectoryRecord *> *)internalRecords
 {
     return _records;
 }
@@ -866,7 +872,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)isMacOSXAttribute
 {
-    NSArray *components = [self.nameNoCopy pathComponents];
+    NSArray<NSString *> *components = [self.nameNoCopy pathComponents];
     if ([components containsObject:@"__MACOSX"]) {
         return YES;
     }

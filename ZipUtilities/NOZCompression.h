@@ -137,19 +137,21 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
 
 /**
  Create a new context object to track the encoding process.
- @param entry The `NOZZipEntry` that will be encoded
+ @param flags The bit flags that were specefied for this encoder.
+ @param level The level of compression requested
  @param callback The `NOZFlushCallback` that will be used to output the compressed data
  @return the new context object
  */
-- (nonnull id<NOZCompressionEncoderContext>)createContextForEncodingEntry:(nonnull id<NOZZipEntry>)entry flushCallback:(nonnull NOZFlushCallback)callback;
+- (nonnull id<NOZCompressionEncoderContext>)createContextWithBitFlags:(UInt16)bitFlags
+                                                     compressionLevel:(NOZCompressionLevel)level
+                                                        flushCallback:(nonnull NOZFlushCallback)callback;
 
 /**
  Initialize the encoding process.
  Call this first for each encoding process.
- If it succeeds, be sure to pair it with a call to `finalizeEncoderContext:error:`.
+ If it succeeds, be sure to pair it with a call to `finalizeEncoderContext:`.
  */
-- (BOOL)initializeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context
-                           error:(out NSError * __nullable * __nullable)error;
+- (BOOL)initializeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context;
 
 /**
  Encode the provided byte buffer.
@@ -158,14 +160,12 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
  */
 - (BOOL)encodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
-            context:(nonnull id<NOZCompressionEncoderContext>)context
-              error:(out NSError * __nullable * __nullable)error;
+            context:(nonnull id<NOZCompressionEncoderContext>)context;
 
 /**
  Finalize the encoding process.
  */
-- (BOOL)finalizeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context
-                         error:(out NSError * __nullable * __nullable)error;
+- (BOOL)finalizeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context;
 @end
 
 /**
@@ -175,18 +175,19 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
 
 /**
  Create a new context object to track the decoding process.
+ @param flags The bit flags that were specefied for this encoder.
  @param callback The `NOZFlushCallback` that will be used to output the decompressed data
  @return the new context object
  */
-- (nonnull id<NOZCompressionDecoderContext>)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback;
+- (nonnull id<NOZCompressionDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
+                                                                   flushCallback:(nonnull NOZFlushCallback)callback;
 
 /**
  Initialize the decoding process.
  Call this first for each decoding process.
  If it succeeds, be sure to pair it with a call to `finalizeDecoderContext:error:`.
  */
-- (BOOL)initializeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context
-                           error:(out NSError * __nullable * __nullable)error;
+- (BOOL)initializeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context;
 /**
  Decode the provided byte buffer.
  Call this as many times as necessary to get all bytes of a source decoded
@@ -194,14 +195,13 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
  */
 - (BOOL)decodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
-            context:(nonnull id<NOZCompressionDecoderContext>)context
-              error:(out NSError * __nullable * __nullable)error;
+            context:(nonnull id<NOZCompressionDecoderContext>)context;
 
 /**
  Finalize the decoding process.
  */
-- (BOOL)finalizeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context
-                         error:(out NSError * __nullable * __nullable)error;
+- (BOOL)finalizeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context;
+
 @end
 
 

@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @interface NOZDecompressResult ()
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
-@property (nonatomic, copy, nullable) NSArray *destinationFiles;
+@property (nonatomic, copy, nullable) NSArray<NSString *> *destinationFiles;
 @property (nonatomic, nullable) NSError *operationError;
 @property (nonatomic) BOOL didSucceed;
 
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     NSUInteger _expectedEntryCount;
     SInt64 _expectedUncompressedSize;
     SInt64 _bytesUncompressed;
-    NSMutableArray *_entryPaths;
+    NSMutableArray<NSString *> *_entryPaths;
 
     struct {
         BOOL delegateUpdatesProgress:1;

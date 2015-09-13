@@ -104,16 +104,17 @@
     }
 }
 
-- (nonnull NOZDeflateEncoderContext *)createContextForEncodingEntry:(nonnull id<NOZZipEntry>)entry flushCallback:(nonnull NOZFlushCallback)callback;
+- (nonnull NOZDeflateEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
+                                               compressionLevel:(NOZCompressionLevel)level
+                                                  flushCallback:(nonnull NOZFlushCallback)callback;
 {
     NOZDeflateEncoderContext *context = [[NOZDeflateEncoderContext alloc] init];
     context.flushCallback = callback;
-    context.compressionLevel = entry.compressionLevel;
+    context.compressionLevel = level;
     return context;
 }
 
 - (BOOL)initializeEncoderContext:(nonnull NOZDeflateEncoderContext *)context
-                           error:(out NSError * __nullable * __nullable)error
 {
     if (Z_OK != deflateInit2(context.zStream,
                              context.compressionLevel,
@@ -121,9 +122,6 @@
                              -MAX_WBITS,
                              8 /* default memory level */,
                              Z_DEFAULT_STRATEGY)) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeZipFailedToCompressEntry, nil);
-        }
         return NO;
     }
 
@@ -134,19 +132,12 @@
 - (BOOL)encodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
             context:(nonnull NOZDeflateEncoderContext *)context
-              error:(out NSError * __nullable * __nullable)error
 {
-    __block BOOL success = YES;
-    noz_defer(^{
-        if (!success && error && !*error) {
-            *error = NOZError(NOZErrorCodeZipFailedToCompressEntry, nil);
-        }
-    });
-
     if (!context.zStreamOpen) {
-        success = NO;
         return NO;
     }
+
+    BOOL success = YES;
 
     z_stream *zStream = context.zStream;
     zStream->next_in = (Byte*)bytes;
@@ -180,20 +171,12 @@
 }
 
 - (BOOL)finalizeEncoderContext:(nonnull NOZDeflateEncoderContext *)context
-                         error:(out NSError * __nullable * __nullable)error
 {
-    __block BOOL success = YES;
-    noz_defer(^{
-        if (!success && error && !*error) {
-            *error = NOZError(NOZErrorCodeZipFailedToCompressEntry, nil);
-        }
-    });
-
     if (!context.zStreamOpen) {
-        success = NO;
         return NO;
     }
 
+    BOOL success = YES;
     BOOL finishedDeflate = NO;
     z_stream* zStream = context.zStream;
     zStream->avail_in = 0;
@@ -295,7 +278,8 @@
 
 @implementation NOZDeflateDecoder
 
-- (nonnull NOZDeflateDecoderContext *)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback
+- (nonnull NOZDeflateDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
+                                                             flushCallback:(nonnull NOZFlushCallback)callback
 {
     NOZDeflateDecoderContext *context = [[NOZDeflateDecoderContext alloc] init];
     context.flushCallback = callback;
@@ -303,12 +287,8 @@
 }
 
 - (BOOL)initializeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
-                           error:(out NSError * __nullable * __nullable)error
 {
     if (Z_OK != inflateInit2(context.zStream, -MAX_WBITS)) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
-        }
         return NO;
     }
     context.zStreamOpen = YES;
@@ -318,16 +298,12 @@
 - (BOOL)decodeBytes:(nonnull const Byte*)bytes
              length:(size_t)length
             context:(nonnull NOZDeflateDecoderContext *)context
-              error:(out NSError * __nullable * __nullable)error
 {
     if (context.hasFinished) {
         return YES;
     }
 
     if (!context.zStreamOpen) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
-        }
         return NO;
     }
 
@@ -357,9 +333,6 @@
     if (zErr == Z_STREAM_END) {
         context.hasFinished = YES;
     } else if (zErr != Z_OK) {
-        if (error) {
-            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
-        }
         return NO;
     }
 
@@ -371,7 +344,6 @@
 }
 
 - (BOOL)finalizeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
-                         error:(out NSError * __nullable * __nullable)error
 {
     if (context.zStreamOpen) {
         inflateEnd(context.zStream);

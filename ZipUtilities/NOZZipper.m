@@ -335,8 +335,9 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
     __unsafe_unretained typeof(self) rawSelf = self;
     _currentEncoder = NOZEncoderForCompressionMethod(_internal.currentEntry->fileHeader.compressionMethod);
-    _currentEncoderContext = [_currentEncoder createContextForEncodingEntry:entry
-                                                              flushCallback:^BOOL(id<NOZCompressionEncoder> encoder, id<NOZCompressionEncoderContext> context, const Byte* buffer, size_t length) {
+    _currentEncoderContext = [_currentEncoder createContextWithBitFlags:_internal.currentEntry->fileHeader.bitFlag
+                                                       compressionLevel:entry.compressionLevel
+                                                          flushCallback:^BOOL(id<NOZCompressionEncoder> encoder, id<NOZCompressionEncoderContext> context, const Byte* buffer, size_t length) {
         if (rawSelf->_currentEncoder != encoder) {
             return NO;
         }
@@ -352,10 +353,15 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         return NO;
     }
 
-    if (![_currentEncoder initializeEncoderContext:_currentEncoderContext error:error]) {
+    if (![_currentEncoder initializeEncoderContext:_currentEncoderContext]) {
         _currentEncoderContext = nil;
         _currentEncoder = nil;
         _internal.currentEntry = NULL;
+        if (error) {
+            *error = [NSError errorWithDomain:NOZErrorDomain
+                                         code:NOZErrorCodeZipFailedToCompressEntry
+                                     userInfo:nil];
+        }
         return NO;
     }
 
@@ -406,8 +412,13 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
             _internal.currentEntry->fileDescriptor.crc32 = (UInt32)crc32(_internal.currentEntry->fileDescriptor.crc32, buffer, (UInt32)bytesRead);
 
-            success = [_currentEncoder encodeBytes:buffer length:(size_t)bytesRead context:_currentEncoderContext error:error];
+            success = [_currentEncoder encodeBytes:buffer length:(size_t)bytesRead context:_currentEncoderContext];
             if (!success) {
+                if (error) {
+                    *error = [NSError errorWithDomain:NOZErrorDomain
+                                                 code:NOZErrorCodeZipFailedToCompressEntry
+                                             userInfo:nil];
+                }
                 break;
             }
 
@@ -640,7 +651,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         _currentEncoderContext = nil;
     });
 
-    BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext error:NULL];
+    BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext];
     if (_currentEncoderContext.encodedDataWasText) {
         _internal.currentEntry->centralDirectoryRecord.internalFileAttributes |= (1 << 0) /* text */;
     }

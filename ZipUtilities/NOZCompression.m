@@ -31,8 +31,8 @@
 #import "NOZZipEntry.h"
 
 static dispatch_queue_t sCompressionCoderQueue = NULL;
-static NSMutableDictionary *sCompressionEncoders = nil;
-static NSMutableDictionary *sCompressionDecoders = nil;
+static NSMutableDictionary<NSNumber *, id<NOZCompressionEncoder>> *sCompressionEncoders = nil;
+static NSMutableDictionary<NSNumber *, id<NOZCompressionDecoder>> *sCompressionDecoders = nil;
 
 __attribute__((constructor))
 static void NOZCompressionConstructor(void)

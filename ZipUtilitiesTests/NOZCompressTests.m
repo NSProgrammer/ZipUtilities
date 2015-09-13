@@ -36,7 +36,7 @@
 static NSOperationQueue *sQueue = nil;
 
 @interface NOZCompressRequest (TestExposure)
-- (nonnull NSMutableArray *)mutableEntries;
+- (nonnull NSMutableArray<id<NOZZippableEntry>> *)mutableEntries;
 @end
 
 @interface NOZCompressTests : XCTestCase <NOZCompressDelegate>

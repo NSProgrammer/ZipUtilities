@@ -33,7 +33,7 @@
 //#define TESTLOG(...) NSLog(__VA_ARGS__)
 #define TESTLOG(...) ((void)0)
 
-static NSArray *sFileNames = nil;
+static NSArray<NSString *> *sFileNames = nil;
 static NSOperationQueue *sQueue = nil;
 
 @interface NOZDecompressTests : XCTestCase <NOZDecompressDelegate>
@@ -135,7 +135,23 @@ static NSOperationQueue *sQueue = nil;
 
 - (void)runDecompressRequest:(NOZDecompressRequest *)request cancelling:(BOOL)yesBeforeEnqueueNoAfterEnqueue
 {
+    NSString * const cancellingStr = yesBeforeEnqueueNoAfterEnqueue ? @"Cancel before enqueue" : @"Cancel after enqueue";
+
+    // Enqueue a blocking op
+    __block NSBlockOperation *blockingOp = nil;
+    blockingOp = [NSBlockOperation blockOperationWithBlock:^{
+        while (!blockingOp.isCancelled) {
+            usleep(10000);
+        }
+        blockingOp = nil;
+    }];
+    [sQueue addOperation:blockingOp];
+
+    // Create zip op
     NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:self];
+    [op addDependency:blockingOp];
+
+    // Cancel and Enqueue
     if (yesBeforeEnqueueNoAfterEnqueue) {
         [op cancel];
     }
@@ -143,13 +159,22 @@ static NSOperationQueue *sQueue = nil;
     if (!yesBeforeEnqueueNoAfterEnqueue) {
         [op cancel];
     }
+
+    // Async cancel blocking op
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [blockingOp cancel];
+    });
+
+    // Wait for zip op
     [op waitUntilFinished];
-    NOZDecompressResult *result = op.result;
-    XCTAssertNotNil(result);
-    XCTAssertNotNil(result.operationError);
-    XCTAssertFalse(result.didSucceed);
-    XCTAssertEqualObjects(result.operationError.domain, NOZErrorDomain);
-    XCTAssertEqual(result.operationError.code, NOZErrorCodeDecompressCancelled);
+
+    XCTAssertTrue(op.isCancelled, @"%@", cancellingStr);
+    XCTAssertTrue(op.isFinished, @"%@", cancellingStr);
+    XCTAssertNotNil(op.result, @"%@", cancellingStr);
+    XCTAssertNotNil(op.result.operationError, @"%@", cancellingStr);
+    XCTAssertFalse(op.result.didSucceed, @"%@", cancellingStr);
+    XCTAssertEqualObjects(op.result.operationError.domain, NOZErrorDomain, @"%@", cancellingStr);
+    XCTAssertEqual(op.result.operationError.code, NOZErrorCodeDecompressCancelled, @"%@", cancellingStr);
 }
 
 - (void)runInvalidRequest:(NOZDecompressRequest *)request

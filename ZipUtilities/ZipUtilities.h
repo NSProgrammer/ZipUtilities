@@ -33,13 +33,14 @@ FOUNDATION_EXPORT double ZipUtilitiesVersionNumber;
 //! Project version string for ZipUtilities.
 FOUNDATION_EXPORT const unsigned char ZipUtilitiesVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <ZipUtilities/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import "PublicHeader.h"
 
-#import <ZipUtilities/NOZCompress.h>
-#import <ZipUtilities/NOZCompression.h>
-#import <ZipUtilities/NOZDecompress.h>
-#import <ZipUtilities/NOZError.h>
-#import <ZipUtilities/NOZSyncStepOperation.h>
-#import <ZipUtilities/NOZUnzipper.h>
-#import <ZipUtilities/NOZUtils.h>
-#import <ZipUtilities/NOZZipEntry.h>
+#import "NOZCompress.h"
+#import "NOZCompression.h"
+#import "NOZDecompress.h"
+#import "NOZError.h"
+#import "NOZSyncStepOperation.h"
+#import "NOZUnzipper.h"
+#import "NOZUtils.h"
+#import "NOZZipEntry.h"
+#import "NOZZipper.h"
