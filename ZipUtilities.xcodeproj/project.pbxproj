@@ -14,9 +14,9 @@
 		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
-		1C19A25A1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A25B1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A25C1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25A1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
 		1C19A25E1BA3925D004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C19A25F1BA3926A004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C19A2611BA39284004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A2601BA39284004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -33,9 +33,6 @@
 		1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */; };
 		1C3223851B78501A00DC0A33 /* Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C3223841B78501A00DC0A33 /* Data.zip */; };
 		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
-		1C667BFC1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
-		1C667BFD1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
-		1C667BFE1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */; };
 		1C6BF77C1B74086000969629 /* libZipUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6BF7701B74086000969629 /* libZipUtilities.a */; };
 		1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF78D1B74093B00969629 /* NOZCompress.m */; };
 		1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78C1B74093B00969629 /* NOZCompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -170,7 +167,7 @@
 		1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZZipEntry.h; sourceTree = "<group>"; };
 		1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZZipEntry.m; sourceTree = "<group>"; };
 		1C16F4F01B787EC100963AB3 /* maniac-mansion */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "maniac-mansion"; sourceTree = "<group>"; };
-		1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZXLMZACoderTests.m; sourceTree = "<group>"; };
+		1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZXAppleCompressionCoderTests.m; sourceTree = "<group>"; };
 		1C19A25D1BA3925D004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = usr/lib/libcompression.tbd; sourceTree = SDKROOT; };
 		1C19A2601BA39284004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libcompression.tbd; sourceTree = DEVELOPER_DIR; };
 		1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXAppleCompressionCoder.h; path = Extra/NOZXAppleCompressionCoder.h; sourceTree = "<group>"; };
@@ -181,8 +178,6 @@
 		1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZSyncStepOperation.h; sourceTree = "<group>"; };
 		1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZSyncStepOperation.m; sourceTree = "<group>"; };
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
-		1C667BFA1BA12A200028E5E7 /* NOZXLZMACoders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXLZMACoders.h; path = Extra/NOZXLZMACoders.h; sourceTree = "<group>"; };
-		1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXLZMACoders.m; path = Extra/NOZXLZMACoders.m; sourceTree = "<group>"; };
 		1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZipUtilities.podspec; sourceTree = "<group>"; };
 		1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -280,8 +275,6 @@
 			children = (
 				1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */,
 				1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */,
-				1C667BFA1BA12A200028E5E7 /* NOZXLZMACoders.h */,
-				1C667BFB1BA12A200028E5E7 /* NOZXLZMACoders.m */,
 			);
 			name = "Extra Encoders/Decoders";
 			sourceTree = "<group>";
@@ -351,7 +344,7 @@
 				1C6BF7801B74086000969629 /* Supporting Files */,
 				1C6BF7B61B7564A700969629 /* NOZCompressTests.m */,
 				1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */,
-				1C19A2591BA39001004E8D6C /* NOZXLMZACoderTests.m */,
+				1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */,
 			);
 			path = ZipUtilitiesTests;
 			sourceTree = "<group>";
@@ -730,9 +723,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C667BFC1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */,
-				1C19A25A1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
+				1C19A25A1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */,
 				1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);
@@ -761,9 +753,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C667BFD1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */,
-				1C19A25B1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
+				1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				4623A8A31B9A883600A56535 /* NOZCompressTests.m in Sources */,
 				1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);
@@ -792,9 +783,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C667BFE1BA12A200028E5E7 /* NOZXLZMACoders.m in Sources */,
 				4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */,
-				1C19A25C1BA39001004E8D6C /* NOZXLMZACoderTests.m in Sources */,
+				1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */,
 				1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 			);

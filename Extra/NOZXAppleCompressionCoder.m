@@ -10,7 +10,7 @@
 
 #if COMPRESSION_LIB_AVAILABLE
 
-@interface NOZXAppleCompressionCoderContext ()
+@interface NOZXAppleCompressionCoderContext : NSObject <NOZCompressionDecoderContext, NOZCompressionEncoderContext>
 @property (nonatomic) compression_stream_operation operation;
 @property (nonatomic) compression_algorithm algorithm;
 @property (nonatomic) UInt16 bitFlags;
@@ -22,7 +22,38 @@
 @property (nonatomic) BOOL hasFinished;
 @end
 
+@interface NOZXAppleCompressionCoder (Encoder) <NOZCompressionEncoder>
+@end
+
+@interface NOZXAppleCompressionCoder (Decoder) <NOZCompressionDecoder>
+@end
+
+@interface NOZXAppleCompressionCoder (Private)
+
+- (nonnull instancetype)initWithAlgorithm:(compression_algorithm)algorithm
+                                operation:(compression_stream_operation)operation;
+
+- (nonnull NOZXAppleCompressionCoderContext *)createContextForAlgorithm:(compression_algorithm)algorithm
+                                                              operation:(compression_stream_operation)operation
+                                                               bitFlags:(UInt16)bitFlags
+                                                          flushCallback:(nonnull NOZFlushCallback)callback;
+
+- (BOOL)initializeWithContext:(nonnull NOZXAppleCompressionCoderContext *)context;
+
+- (BOOL)codeBytes:(nullable const Byte*)bytes
+           length:(size_t)length
+            final:(BOOL)final
+          context:(nonnull NOZXAppleCompressionCoderContext *)context;
+
+- (BOOL)finalizeWithContext:(nonnull NOZXAppleCompressionCoderContext *)context;
+
+@end
+
 @implementation NOZXAppleCompressionCoder
+{
+    compression_algorithm _algorithm;
+    compression_stream_operation _operation;
+}
 
 + (BOOL)isSupported
 {
@@ -38,6 +69,95 @@
 #else
     return NO;
 #endif
+}
+
++ (nullable id<NOZCompressionEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
+{
+    return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_ENCODE] : nil;
+}
+
++ (nullable id<NOZCompressionDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
+{
+    return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_DECODE] : nil;
+}
+
+@end
+
+@implementation NOZXAppleCompressionCoder (Encoder)
+
+- (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
+{
+    return 0;
+}
+
+- (id<NOZCompressionEncoderContext>)createContextWithBitFlags:(UInt16)bitFlags
+                                             compressionLevel:(NOZCompressionLevel)level
+                                                flushCallback:(NOZFlushCallback)callback
+{
+    return [self createContextForAlgorithm:_algorithm
+                                 operation:COMPRESSION_STREAM_ENCODE
+                                  bitFlags:bitFlags
+                             flushCallback:callback];
+}
+
+- (BOOL)initializeEncoderContext:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self initializeWithContext:context];
+}
+
+- (BOOL)encodeBytes:(const Byte*)bytes
+             length:(size_t)length
+            context:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self codeBytes:bytes length:length final:NO context:context];
+}
+
+- (BOOL)finalizeEncoderContext:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self finalizeWithContext:context];
+}
+
+@end
+
+@implementation NOZXAppleCompressionCoder (Decoder)
+
+- (id<NOZCompressionDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
+                                                           flushCallback:(NOZFlushCallback)callback
+{
+    return [self createContextForAlgorithm:_algorithm
+                                 operation:COMPRESSION_STREAM_DECODE
+                                  bitFlags:flags
+                             flushCallback:callback];
+}
+
+- (BOOL)initializeDecoderContext:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self initializeWithContext:context];
+}
+
+- (BOOL)decodeBytes:(const Byte*)bytes
+             length:(size_t)length
+            context:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self codeBytes:bytes length:length final:NO context:context];
+}
+
+- (BOOL)finalizeDecoderContext:(NOZXAppleCompressionCoderContext *)context
+{
+    return [self finalizeWithContext:context];
+}
+
+@end
+
+@implementation NOZXAppleCompressionCoder (Private)
+
+- (instancetype)initWithAlgorithm:(compression_algorithm)algorithm operation:(compression_stream_operation)operation
+{
+    if (self = [super init]) {
+        _algorithm = algorithm;
+        _operation = operation;
+    }
+    return self;
 }
 
 - (NOZXAppleCompressionCoderContext *)createContextForAlgorithm:(compression_algorithm)algorithm

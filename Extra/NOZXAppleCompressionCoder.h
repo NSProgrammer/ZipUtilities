@@ -21,27 +21,14 @@
 #import <compression.h>
 
 @interface NOZXAppleCompressionCoder : NSObject
+
 + (BOOL)isSupported;
-@end
 
-@interface NOZXAppleCompressionCoderContext : NSObject <NOZCompressionDecoderContext, NOZCompressionEncoderContext>
-@end
++ (nullable id<NOZCompressionEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm;
++ (nullable id<NOZCompressionDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm;
 
-@interface NOZXAppleCompressionCoder (Protected)
-
-- (nonnull NOZXAppleCompressionCoderContext *)createContextForAlgorithm:(compression_algorithm)algorithm
-                                                              operation:(compression_stream_operation)operation
-                                                               bitFlags:(UInt16)bitFlags
-                                                          flushCallback:(nonnull NOZFlushCallback)callback;
-
-- (BOOL)initializeWithContext:(nonnull NOZXAppleCompressionCoderContext *)context;
-
-- (BOOL)codeBytes:(nullable const Byte*)bytes
-           length:(size_t)length
-            final:(BOOL)final
-          context:(nonnull NOZXAppleCompressionCoderContext *)context;
-
-- (BOOL)finalizeWithContext:(nonnull NOZXAppleCompressionCoderContext *)context;
+- (nullable instancetype)init NS_UNAVAILABLE;
++ (nullable instancetype)new NS_UNAVAILABLE;
 
 @end
 
