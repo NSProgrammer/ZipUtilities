@@ -251,10 +251,11 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 
     NSError *error = nil;
     NSString *path = [_request.destinationPath stringByStandardizingPath];
-    [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:NULL];
-    _zipper = [[NOZZipper alloc] initWithZipFile:path];
-    _zipper.globalComment = _request.comment;
-    [_zipper openWithMode:NOZZipperModeCreate error:&error];
+    if ([[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&error]) {
+        _zipper = [[NOZZipper alloc] initWithZipFile:path];
+        _zipper.globalComment = _request.comment;
+        [_zipper openWithMode:NOZZipperModeCreate error:&error];
+    }
 
     if (error) {
         _zipper = nil;
