@@ -32,8 +32,12 @@
 
 @class NOZEncrytion;
 
+/**
+ Enum of possible modes to open an `NOZZipper` with.  Currently only creating a new archive is supported.
+ */
 typedef NS_ENUM(NSInteger, NOZZipperMode)
 {
+    /** Creat a new zip archive */
     NOZZipperModeCreate,
 // TODO: add support for adding to an existing file
 //    NOZZipperModeOpenExisting,

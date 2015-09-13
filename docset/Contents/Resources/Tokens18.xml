@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressDelegate.html">
+	<File path="Categories/NOZSyncStepOperation+Protected.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressDelegate</TokenIdentifier>
-			<Abstract type="html">NOZCompressDelegate is the delegate to the NOZCompressOperation for callbacks.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(Protected)</TokenIdentifier>
+			<Abstract type="html">Methods for subclasses to override or call.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
             
 			
 			<NodeRef refid="18"/>
@@ -13,58 +13,101 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/requiresStrongReference</TokenIdentifier>
-			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/numberOfSteps</TokenIdentifier>
+			<Abstract type="html">Number of steps in the operation.
+MUST override in subclass.
+When other methods are called with an NSUInteger step, the step is 0-based (like an index).</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)requiresStrongReference</Declaration>
+			<Declaration>- (NSUInteger)numberOfSteps</Declaration>
 			
 			
-			<Anchor>//api/name/requiresStrongReference</Anchor>
+			<Anchor>//api/name/numberOfSteps</Anchor>
             <NodeRef refid="18"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/completionQueue</TokenIdentifier>
-			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/weightForStep:</TokenIdentifier>
+			<Abstract type="html">Return the weight of a given step.
+This can make it so that you can specify the amount of progress attributed to a particular step.
+For example: reading the header of a JPEG is light weight while decoding the image is heavy.
+   You could have header reading be 500LL and decoding be 9500LL so that 95% goes to decoding.
+SHOULD override in subclass.
+Default distributes weight equally amoung all steps.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			<Declaration>- (SInt64)weightForStep:(NSUInteger)step</Declaration>
 			
 			
-			<Anchor>//api/name/completionQueue</Anchor>
+			<Anchor>//api/name/weightForStep:</Anchor>
             <NodeRef refid="18"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didCompleteWithResult:</TokenIdentifier>
-			<Abstract type="html">Called when the operation is finished.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/runStep:error:</TokenIdentifier>
+			<Abstract type="html">Run the specified step.
+MUST override in subclass.
+Return NO and set the output error if an error was encountered, otherwise return nil.
+Implementers should check [self isCancelled] for any indication that the operation was cancelled
+and return [[self class] operationCancelledError].</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZCompressOperation that finished.</Abstract>
-				</Parameter><Parameter>
-					<Name>result</Name>
-					<Abstract type="html">The NOZCompressResult for the operation.</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>- (BOOL)runStep:(NSUInteger)step error:(out NSError *__nullable *__nullable)error</Declaration>
 			
-			<Anchor>//api/name/compressOperation:didCompleteWithResult:</Anchor>
+			
+			<Anchor>//api/name/runStep:error:</Anchor>
             <NodeRef refid="18"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didUpdateProgress:</TokenIdentifier>
-			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/operationCancelledError</TokenIdentifier>
+			<Abstract type="html">Return the NSError that represents when this operation was cancelled.
+MUST override in subclass.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress</Declaration>
+			<Declaration>+ (nonnull NSError *)operationCancelledError</Declaration>
 			
 			
-			<Anchor>//api/name/compressOperation:didUpdateProgress:</Anchor>
+			<Anchor>//api/name/operationCancelledError</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleProgressUpdated:</TokenIdentifier>
+			<Abstract type="html">Subclasses can override this method to handle when progress was updated.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (void)handleProgressUpdated:(float)progress</Declaration>
+			
+			
+			<Anchor>//api/name/handleProgressUpdated:</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleFinishing</TokenIdentifier>
+			<Abstract type="html">Subclasses can override this method to handle when the operation is finishing.
+Useful for aggregating results.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (void)handleFinishing</Declaration>
+			
+			
+			<Anchor>//api/name/handleFinishing</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/updateProgress:forStep:</TokenIdentifier>
+			<Abstract type="html">Subclasses SHOULD call this method with the progress of a given step.
+Simplest option is to just to call this method when a step completes with 1.f for the progress.
+DO NOT Override.</Abstract>
+			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			
+			<Declaration>- (void)updateProgress:(float)progress forStep:(NSUInteger)step</Declaration>
+			
+			
+			<Anchor>//api/name/updateProgress:forStep:</Anchor>
             <NodeRef refid="18"/>
 		</Token>
 		

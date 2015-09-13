@@ -70,32 +70,53 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
 {
     /** No compression is supported by default. */
     NOZCompressionMethodNone        = 0,
+    /** Shrink */
     NOZCompressionMethodShrink      = 1,
+    /** Reduce #1 */
     NOZCompressionMethodReduce1     = 2,
+    /** Reduce #2 */
     NOZCompressionMethodReduce2     = 3,
+    /** Reduce #3 */
     NOZCompressionMethodReduce3     = 4,
+    /** Reduce #4 */
     NOZCompressionMethodReduce4     = 5,
+    /** Implode */
     NOZCompressionMethodImplode     = 6,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved7   = 7,
-    /** Deflate is supported by default via zlib. */
+    /** Deflate.  Supported by default via zlib. */
     NOZCompressionMethodDeflate     = 8,
+    /** Deflate64 */
     NOZCompressionMethodDeflate64   = 9,
+    /** IBM TERSE (old) */
     NOZCompressionMethodIBMTERSEOld = 10,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved11  = 11,
+    /** BZip2 */
     NOZCompressionMethodBZip2       = 12,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved13  = 13,
+    /** LZMA */
     NOZCompressionMethodLZMA        = 14,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved15  = 15,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved16  = 16,
+    /** Reserved by PKWare */
     NOZCompressionMethodReserved17  = 17,
+    /** IBM TERSE (new) */
     NOZCompressionMethodIBMTERSENew = 18,
+    /** LZ77 */
     NOZCompressionMethodLZ77        = 19,
 
 
+    /** WAV Pack */
     NOZCompressionMethodWAVPack     = 97,
+    /** PPM version 1 revision 1 */
     NOZCompressionMethodPPMv1rev1   = 98,
 };
 
+//! Block for flushing a buffer of bytes
 typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const Byte* __nonnull bufferToFlush, size_t length);
 
 /**
@@ -204,9 +225,12 @@ typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const 
 
 @end
 
-
+//! Retrieve the compression encoder for a given method.  Will return `nil` if nothing is registered.
 FOUNDATION_EXTERN id<NOZCompressionEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method);
+//! Set the compression encoder for a given method.  Setting `nil` will clear the encoder.  Whatever encoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
 FOUNDATION_EXTERN void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZCompressionEncoder> __nullable encoder);
 
+//! Retrieve the compression decoder for a given method.  Will return `nil` if nothing is registered.
 FOUNDATION_EXTERN id<NOZCompressionDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method);
+//! Set the compression decoder for a given method.  Setting `nil` will clear the decoder.  Whatever decoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
 FOUNDATION_EXTERN void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZCompressionDecoder> __nullable decoder);

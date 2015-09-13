@@ -233,6 +233,18 @@ If successful, [NOZUnzipper centralDirectory] will be populated (and no longer n
             <NodeRef refid="13"/>
 		</Token>
 		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZUnzipper/enumerateByteRangesOfRecord:progressBlock:usingBlock:error:</TokenIdentifier>
+			<Abstract type="html">Stream a record&apos;s data to block.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)record progressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block error:(out NSError *__autoreleasing __nullable *__nullable)error</Declaration>
+			
+			
+			<Anchor>//api/name/enumerateByteRangesOfRecord:progressBlock:usingBlock:error:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
         
         
 	</File>

@@ -2,6 +2,11 @@
 
 ## History
 
+### 1.5.1  (Sep 13, 2015) - Nolan O'Brien
+
+- Update docs
+- Minor cleanup
+
 ### 1.5.0  (Sep 11, 2015) - Nolan O'Brien
 
 - Simplify compression encoders/decoders to only return a BOOL and not an NSError

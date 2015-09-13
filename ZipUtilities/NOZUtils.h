@@ -27,4 +27,5 @@
 
 @import Foundation;
 
+//! Block for providing progress to.  Used by `NOZCompressOperation` and `NOZDecompressOperation`.
 typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort);

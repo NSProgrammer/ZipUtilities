@@ -34,7 +34,9 @@
 @class NOZCentralDirectory;
 @class NOZCentralDirectoryRecord;
 
+//! Callback when enumerating Central Directory Record.  Set _stop_ to `YES` to end the enumeration early.
 typedef void(^NOZUnzipRecordEnumerationBlock)(NOZCentralDirectoryRecord * __nonnull record, NSUInteger index, BOOL * __nonnull stop);
+//! Callback when enumerating bytes being decompressed for an entry.  Set _stop_ to `YES` to end the enumeration early.
 typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop);
 
 /**
@@ -94,21 +96,16 @@ typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, N
         });
 
         NSMutableData *imageData = [NSMutableData dataWithCapacity:record.uncompressedSize];
-        NSError *readImageError = nil;
-        readImageError = [unzipper enumerateByteRangesOfRecord:record
-                                                 progressBlock:NULL
-                                                    usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
-                                [imageData appendBytes:bytes length:byteRange.length];
-                                CGImageSourceUpdate(imageSource, imageData, NO);
-                          }];
-
-        if (readImageError) {
-            if (error) {
-                *error = readImageError;
-            }
+        if (![unzipper enumerateByteRangesOfRecord:record
+                                     progressBlock:NULL
+                                        usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
+                                            [imageData appendBytes:bytes length:byteRange.length];
+                                            CGImageSourceUpdate(imageSource, imageData, NO);
+                                        }
+                                             error:error]) {
             return NO;
         }
- 
+
         CGImageSourceUpdate(imageSource, (__bridge CFDataRef)imageData, YES);
         CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
         if (!imageRef) {
@@ -221,12 +218,11 @@ typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, N
 
 /**
  Stream a record's data to _block_.
- 
- TODO: change method to be - (BOOL)enumerateByteRangesOfRecord:progressBlock:usingBlock:error:
  */
-- (nullable NSError *)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)record
-                                    progressBlock:(nullable NOZProgressBlock)progressBlock
-                                       usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
+- (BOOL)enumerateByteRangesOfRecord:(nonnull NOZCentralDirectoryRecord *)record
+                      progressBlock:(nullable NOZProgressBlock)progressBlock
+                         usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block
+                              error:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
 /**
  Save a record to disk.
@@ -274,9 +270,13 @@ typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, N
  The central directory houses all the records for entries in the zip as well as global info.
  */
 @interface NOZCentralDirectory : NSObject
+/** A global comment for the entire archive */
 @property (nonatomic, copy, readonly, nullable) NSString *globalComment;
+/** The number of records in the archive */
 @property (nonatomic, readonly) NSUInteger recordCount;
+/** The total compressed size of the archive in bytes */
 @property (nonatomic, readonly) SInt64 totalCompressedSize;
+/** The total uncompressed size of all entries in bytes */
 @property (nonatomic, readonly) SInt64 totalUncompressedSize;
 
 /** Unavailable */

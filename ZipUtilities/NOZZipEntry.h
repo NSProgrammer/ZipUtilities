@@ -84,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
+/** Unavailable */
 + (instancetype)new NS_UNAVAILABLE;
 
 @end

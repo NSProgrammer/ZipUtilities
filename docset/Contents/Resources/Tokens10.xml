@@ -53,7 +53,7 @@
 			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
 			<DeclaredIn>NOZDecompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
+			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray&lt;NSString*&gt; *destinationFiles</Declaration>
 			
 			
 			<Anchor>//api/name/destinationFiles</Anchor>
@@ -65,7 +65,7 @@
 			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
 			<DeclaredIn>NOZDecompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
+			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray&lt;NSString*&gt; *destinationFiles</Declaration>
 			
 			
 			<Anchor>//api/name/destinationFiles</Anchor>
@@ -77,7 +77,7 @@
 			<Abstract type="html">The files that were unarchived.  Items are relative paths to the destinationDirectoryPath.</Abstract>
 			<DeclaredIn>NOZDecompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray *destinationFiles</Declaration>
+			<Declaration>@property (nonatomic, readonly, copy, nullable) NSArray&lt;NSString*&gt; *destinationFiles</Declaration>
 			
 			
 			<Anchor>//api/name/destinationFiles</Anchor>

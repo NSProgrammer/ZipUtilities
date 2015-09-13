@@ -62,13 +62,13 @@
 		
 		<option value="//api/name/bitFlagsForEntry:">- bitFlagsForEntry:</option>
 		
-		<option value="//api/name/createContextForEncodingEntry:flushCallback:">- createContextForEncodingEntry:flushCallback:</option>
+		<option value="//api/name/createContextWithBitFlags:compressionLevel:flushCallback:">- createContextWithBitFlags:compressionLevel:flushCallback:</option>
 		
-		<option value="//api/name/initializeEncoderContext:error:">- initializeEncoderContext:error:</option>
+		<option value="//api/name/initializeEncoderContext:">- initializeEncoderContext:</option>
 		
-		<option value="//api/name/encodeBytes:length:context:error:">- encodeBytes:length:context:error:</option>
+		<option value="//api/name/encodeBytes:length:context:">- encodeBytes:length:context:</option>
 		
-		<option value="//api/name/finalizeEncoderContext:error:">- finalizeEncoderContext:error:</option>
+		<option value="//api/name/finalizeEncoderContext:">- finalizeEncoderContext:</option>
 		
 	</optgroup>
 	
@@ -161,8 +161,8 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/createContextForEncodingEntry:flushCallback:" title="createContextForEncodingEntry:flushCallback:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/createContextForEncodingEntry:flushCallback:">&ndash;&nbsp;createContextForEncodingEntry:flushCallback:</a></code>
+	<a name="//api/name/createContextWithBitFlags:compressionLevel:flushCallback:" title="createContextWithBitFlags:compressionLevel:flushCallback:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createContextWithBitFlags:compressionLevel:flushCallback:">&ndash;&nbsp;createContextWithBitFlags:compressionLevel:flushCallback:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -177,7 +177,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (nonnull id&lt;NOZCompressionEncoderContext&gt;)createContextForEncodingEntry:(nonnull id&lt;NOZZipEntry&gt;)<em>entry</em> flushCallback:(nonnull NOZFlushCallback)<em>callback</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (nonnull id&lt;NOZCompressionEncoderContext&gt;)createContextWithBitFlags:(UInt16)<em>bitFlags</em> compressionLevel:(NOZCompressionLevel)<em>level</em> flushCallback:(nonnull NOZFlushCallback)<em>callback</em></code></div>
 
 		    
 			
@@ -186,13 +186,18 @@
 				<table class="argument-def parameter-def">
 				
 					<tr>
-						<th scope="row" class="argument-name"><code>entry</code></th>
-						<td><p>The <a href="../Protocols/NOZZipEntry.html"><code>NOZZipEntry</code></a> that will be encoded</p></td>
+						<th scope="row" class="argument-name"><code>level</code></th>
+						<td><p>The level of compression requested</p></td>
 					</tr>
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>callback</code></th>
 						<td><p>The <a href="../Blocks/NOZFlushCallback.html"><code>NOZFlushCallback</code></a> that will be used to output the compressed data</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>flags</code></th>
+						<td><p>The bit flags that were specefied for this encoder.</p></td>
 					</tr>
 				
 				</table>
@@ -224,8 +229,8 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/initializeEncoderContext:error:" title="initializeEncoderContext:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/initializeEncoderContext:error:">&ndash;&nbsp;initializeEncoderContext:error:</a></code>
+	<a name="//api/name/initializeEncoderContext:" title="initializeEncoderContext:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initializeEncoderContext:">&ndash;&nbsp;initializeEncoderContext:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -237,12 +242,12 @@
 			<div class="method-subsection brief-description">
 				<p>Initialize the encoding process.
 Call this first for each encoding process.
-If it succeeds, be sure to pair it with a call to <a href="#//api/name/finalizeEncoderContext:error:"><code>finalizeEncoderContext:error:</code></a>.</p>
+If it succeeds, be sure to pair it with a call to <a href="#//api/name/finalizeEncoderContext:"><code>finalizeEncoderContext:</code></a>.</p>
 			</div>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)initializeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)initializeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -267,8 +272,8 @@ If it succeeds, be sure to pair it with a call to <a href="#//api/name/finalizeE
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/encodeBytes:length:context:error:" title="encodeBytes:length:context:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/encodeBytes:length:context:error:">&ndash;&nbsp;encodeBytes:length:context:error:</a></code>
+	<a name="//api/name/encodeBytes:length:context:" title="encodeBytes:length:context:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/encodeBytes:length:context:">&ndash;&nbsp;encodeBytes:length:context:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -285,7 +290,7 @@ Call this as many times as necessary to get all bytes of a source encoded
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)encodeBytes:(nonnull const Byte *)<em>bytes</em> length:(size_t)<em>length</em> context:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)encodeBytes:(nonnull const Byte *)<em>bytes</em> length:(size_t)<em>length</em> context:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -310,8 +315,8 @@ Call this as many times as necessary to get all bytes of a source encoded
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/finalizeEncoderContext:error:" title="finalizeEncoderContext:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/finalizeEncoderContext:error:">&ndash;&nbsp;finalizeEncoderContext:error:</a></code>
+	<a name="//api/name/finalizeEncoderContext:" title="finalizeEncoderContext:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/finalizeEncoderContext:">&ndash;&nbsp;finalizeEncoderContext:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -326,7 +331,7 @@ Call this as many times as necessary to get all bytes of a source encoded
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)finalizeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)finalizeEncoderContext:(nonnull id&lt;NOZCompressionEncoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -365,7 +370,7 @@ Call this as many times as necessary to get all bytes of a source encoded
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-07</p>
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-13</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

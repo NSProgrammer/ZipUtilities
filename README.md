@@ -34,7 +34,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.5.0'
+pod 'ZipUtilities', '~> 1.5.1'
 ```
 
 #### Carthage
@@ -194,18 +194,13 @@ into destinations (NSData, streams and/or files).
     });
 
     NSMutableData *imageData = [NSMutableData dataWithCapacity:record.uncompressedSize];
-    NSError *readImageError = nil;
-    readImageError = [unzipper enumerateByteRangesOfRecord:record
-                                             progressBlock:NULL
-                                                usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
-                            [imageData appendBytes:bytes length:byteRange.length];
-                            CGImageSourceUpdate(imageSource, imageData, NO);
-                      }];
-
-    if (readImageError) {
-        if (error) {
-            *error = readImageError;
-        }
+    if (![unzipper enumerateByteRangesOfRecord:record
+                                 progressBlock:NULL
+                                    usingBlock:^(const void * bytes, NSRange byteRange, BOOL * stop) {
+                                        [imageData appendBytes:bytes length:byteRange.length];
+                                        CGImageSourceUpdate(imageSource, imageData, NO);
+                                    }
+                                         error:error]) {
         return NO;
     }
 
@@ -292,3 +287,5 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 ### Test files for zipping/unzipping
 As a part of unit testing, Aesop's Fables and Maniac Mansion are both used for unit testing.  Neither has a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.
+
+![MANIAC.EXE](https://media.giphy.com/media/DPQ4G030oJdcc/giphy.gif)

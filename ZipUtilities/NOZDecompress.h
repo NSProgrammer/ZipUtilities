@@ -37,6 +37,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+//! Callback block when the `NOZDecompressOperation` completes
 typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDecompressResult * result);
 
 /**

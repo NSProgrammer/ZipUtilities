@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressionDecoder.html">
+	<File path="Protocols/NOZCompressDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionDecoder</TokenIdentifier>
-			<Abstract type="html">Protocol to implement for constructing a compression decoder.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressDelegate</TokenIdentifier>
+			<Abstract type="html">NOZCompressDelegate is the delegate to the NOZCompressOperation for callbacks.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
             
 			
 			<NodeRef refid="19"/>
@@ -13,59 +13,58 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/createContextForDecodingWithFlushCallback:</TokenIdentifier>
-			<Abstract type="html">Create a new context object to track the decoding process.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/requiresStrongReference</TokenIdentifier>
+			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
 			
-			<Declaration>- (nonnull id&lt;NOZCompressionDecoderContext&gt;)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)callback</Declaration>
+			<Declaration>- (BOOL)requiresStrongReference</Declaration>
+			
+			
+			<Anchor>//api/name/requiresStrongReference</Anchor>
+            <NodeRef refid="19"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/completionQueue</TokenIdentifier>
+			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			
+			
+			<Anchor>//api/name/completionQueue</Anchor>
+            <NodeRef refid="19"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didCompleteWithResult:</TokenIdentifier>
+			<Abstract type="html">Called when the operation is finished.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			
+			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>callback</Name>
-					<Abstract type="html">The NOZFlushCallback that will be used to output the decompressed data</Abstract>
+					<Name>op</Name>
+					<Abstract type="html">The NOZCompressOperation that finished.</Abstract>
+				</Parameter><Parameter>
+					<Name>result</Name>
+					<Abstract type="html">The NOZCompressResult for the operation.</Abstract>
 				</Parameter>
 			</Parameters>
-			<ReturnValue><Abstract type="html">the new context object</Abstract></ReturnValue>
-			<Anchor>//api/name/createContextForDecodingWithFlushCallback:</Anchor>
+			
+			<Anchor>//api/name/compressOperation:didCompleteWithResult:</Anchor>
             <NodeRef refid="19"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/initializeDecoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Initialize the decoding process.
-Call this first for each decoding process.
-If it succeeds, be sure to pair it with a call to finalizeDecoderContext:error:.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didUpdateProgress:</TokenIdentifier>
+			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
+			<DeclaredIn>NOZCompress.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)initializeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
+			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress</Declaration>
 			
 			
-			<Anchor>//api/name/initializeDecoderContext:error:</Anchor>
-            <NodeRef refid="19"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/decodeBytes:length:context:error:</TokenIdentifier>
-			<Abstract type="html">Decode the provided byte buffer.
-Call this as many times as necessary to get all bytes of a source decoded
-(or until a failure occurs).</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)decodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/decodeBytes:length:context:error:</Anchor>
-            <NodeRef refid="19"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionDecoder/finalizeDecoderContext:error:</TokenIdentifier>
-			<Abstract type="html">Finalize the decoding process.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)finalizeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)context error:(out NSError *__nullable *__nullable)error</Declaration>
-			
-			
-			<Anchor>//api/name/finalizeDecoderContext:error:</Anchor>
+			<Anchor>//api/name/compressOperation:didUpdateProgress:</Anchor>
             <NodeRef refid="19"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZZipperMode.html">
+	<File path="Constants/NOZErrorPage.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZZipperMode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/NOZErrorPage</TokenIdentifier>
+			<Abstract type="html">NOZErrorCode values are broken into pages (NOZErrorPage) for each are of ZipUtilities that can produce an error.</Abstract>
+			<DeclaredIn>NOZError.h</DeclaredIn>
             
 			
 			<NodeRef refid="30"/>
@@ -14,11 +14,51 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZZipperModeCreate</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZZipperModeCreate</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageNone</TokenIdentifier>
+            <Abstract type="html">None</Abstract>
+            <Declaration>NOZErrorPageNone</Declaration>
             
-            <DeclaredIn>NOZZipper.h</DeclaredIn>
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageCompress</TokenIdentifier>
+            <Abstract type="html">For NOZCompressOperation errors</Abstract>
+            <Declaration>NOZErrorPageCompress</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageDecompress</TokenIdentifier>
+            <Abstract type="html">For NOZDecompressOperation errors</Abstract>
+            <Declaration>NOZErrorPageDecompress</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageZip</TokenIdentifier>
+            <Abstract type="html">For NOZZipper errors</Abstract>
+            <Declaration>NOZErrorPageZip</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageUnzip</TokenIdentifier>
+            <Abstract type="html">For NOZUnzipper errors</Abstract>
+            <Declaration>NOZErrorPageUnzip</Declaration>
+            
+            <DeclaredIn>NOZError.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>

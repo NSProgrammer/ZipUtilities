@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NOZSyncStepOperation+DoNotOverride.html">
+	<File path="Categories/NOZCentralDirectoryRecord+Attributes.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(DoNotOverride)</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cat/NOZCentralDirectoryRecord(Attributes)</TokenIdentifier>
+			<Abstract type="html">NOZCentralDirectoryRecord(Attributes) has methods to identify if a record has any specific attributes.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -13,86 +13,38 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/main</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/isZeroLength</TokenIdentifier>
+			<Abstract type="html">Record is empty</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)main</Declaration>
+			<Declaration>- (BOOL)isZeroLength</Declaration>
 			
 			
-			<Anchor>//api/name/main</Anchor>
+			<Anchor>//api/name/isZeroLength</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/start</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/isMacOSXAttribute</TokenIdentifier>
+			<Abstract type="html">Record is a Mac OS X attribute entry.  &quot;__MACOSX/&quot; entries are not automatically supported by ZipUtilities.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (void)start</Declaration>
+			<Declaration>- (BOOL)isMacOSXAttribute</Declaration>
 			
 			
-			<Anchor>//api/name/start</Anchor>
+			<Anchor>//api/name/isMacOSXAttribute</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isConcurrent</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZCentralDirectoryRecord/isMacOSXDSStore</TokenIdentifier>
+			<Abstract type="html">Record is a &quot;.DS_Store&quot; file for Mac OS X.</Abstract>
+			<DeclaredIn>NOZUnzipper.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)isConcurrent</Declaration>
-			
-			
-			<Anchor>//api/name/isConcurrent</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isAsynchronous</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isAsynchronous</Declaration>
+			<Declaration>- (BOOL)isMacOSXDSStore</Declaration>
 			
 			
-			<Anchor>//api/name/isAsynchronous</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isCancelled</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isCancelled</Declaration>
-			
-			
-			<Anchor>//api/name/isCancelled</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isFinished</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isFinished</Declaration>
-			
-			
-			<Anchor>//api/name/isFinished</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isExecuting</TokenIdentifier>
-			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
-			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isExecuting</Declaration>
-			
-			
-			<Anchor>//api/name/isExecuting</Anchor>
+			<Anchor>//api/name/isMacOSXDSStore</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		

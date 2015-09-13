@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NOZSyncStepOperation+Protected.html">
+	<File path="Categories/NOZSyncStepOperation+DoNotOverride.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(Protected)</TokenIdentifier>
-			<Abstract type="html">Methods for subclasses to override or call.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/cat/NOZSyncStepOperation(DoNotOverride)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
             
 			
@@ -13,101 +13,86 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/numberOfSteps</TokenIdentifier>
-			<Abstract type="html">Number of steps in the operation.
-MUST override in subclass.
-When other methods are called with an NSUInteger step, the step is 0-based (like an index).</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/main</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (NSUInteger)numberOfSteps</Declaration>
+			<Declaration>- (void)main</Declaration>
 			
 			
-			<Anchor>//api/name/numberOfSteps</Anchor>
+			<Anchor>//api/name/main</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/weightForStep:</TokenIdentifier>
-			<Abstract type="html">Return the weight of a given step.
-This can make it so that you can specify the amount of progress attributed to a particular step.
-For example: reading the header of a JPEG is light weight while decoding the image is heavy.
-   You could have header reading be 500LL and decoding be 9500LL so that 95% goes to decoding.
-SHOULD override in subclass.
-Default distributes weight equally amoung all steps.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/start</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (SInt64)weightForStep:(NSUInteger)step</Declaration>
+			<Declaration>- (void)start</Declaration>
 			
 			
-			<Anchor>//api/name/weightForStep:</Anchor>
+			<Anchor>//api/name/start</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/runStep:error:</TokenIdentifier>
-			<Abstract type="html">Run the specified step.
-MUST override in subclass.
-Return NO and set the output error if an error was encountered, otherwise return nil.
-Implementers should check [self isCancelled] for any indication that the operation was cancelled
-and return [[self class] operationCancelledError].</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isConcurrent</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)runStep:(NSUInteger)step error:(out NSError *__nullable *__nullable)error</Declaration>
+			<Declaration>- (BOOL)isConcurrent</Declaration>
 			
 			
-			<Anchor>//api/name/runStep:error:</Anchor>
+			<Anchor>//api/name/isConcurrent</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/operationCancelledError</TokenIdentifier>
-			<Abstract type="html">Return the NSError that represents when this operation was cancelled.
-MUST override in subclass.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isAsynchronous</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>+ (nonnull NSError *)operationCancelledError</Declaration>
+			<Declaration>- (BOOL)isAsynchronous</Declaration>
 			
 			
-			<Anchor>//api/name/operationCancelledError</Anchor>
+			<Anchor>//api/name/isAsynchronous</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleProgressUpdated:</TokenIdentifier>
-			<Abstract type="html">Subclasses can override this method to handle when progress was updated.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isCancelled</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)handleProgressUpdated:(float)progress</Declaration>
+			<Declaration>- (BOOL)isCancelled</Declaration>
 			
 			
-			<Anchor>//api/name/handleProgressUpdated:</Anchor>
+			<Anchor>//api/name/isCancelled</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/handleFinishing</TokenIdentifier>
-			<Abstract type="html">Subclasses can override this method to handle when the operation is finishing.
-Useful for aggregating results.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isFinished</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)handleFinishing</Declaration>
+			<Declaration>- (BOOL)isFinished</Declaration>
 			
 			
-			<Anchor>//api/name/handleFinishing</Anchor>
+			<Anchor>//api/name/isFinished</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/updateProgress:forStep:</TokenIdentifier>
-			<Abstract type="html">Subclasses SHOULD call this method with the progress of a given step.
-Simplest option is to just to call this method when a step completes with 1.f for the progress.
-DO NOT Override.</Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NOZSyncStepOperation/isExecuting</TokenIdentifier>
+			<Abstract type="html">DO NOT OVERRIDE.  If you need to add passive code, be sure to call super.  Never override with new behavior.</Abstract>
 			<DeclaredIn>NOZSyncStepOperation.h</DeclaredIn>
 			
-			<Declaration>- (void)updateProgress:(float)progress forStep:(NSUInteger)step</Declaration>
+			<Declaration>- (BOOL)isExecuting</Declaration>
 			
 			
-			<Anchor>//api/name/updateProgress:forStep:</Anchor>
+			<Anchor>//api/name/isExecuting</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

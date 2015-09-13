@@ -60,13 +60,13 @@
 	
 	<optgroup label="Instance Methods">
 		
-		<option value="//api/name/createContextForDecodingWithFlushCallback:">- createContextForDecodingWithFlushCallback:</option>
+		<option value="//api/name/createContextForDecodingWithBitFlags:flushCallback:">- createContextForDecodingWithBitFlags:flushCallback:</option>
 		
-		<option value="//api/name/initializeDecoderContext:error:">- initializeDecoderContext:error:</option>
+		<option value="//api/name/initializeDecoderContext:">- initializeDecoderContext:</option>
 		
-		<option value="//api/name/decodeBytes:length:context:error:">- decodeBytes:length:context:error:</option>
+		<option value="//api/name/decodeBytes:length:context:">- decodeBytes:length:context:</option>
 		
-		<option value="//api/name/finalizeDecoderContext:error:">- finalizeDecoderContext:error:</option>
+		<option value="//api/name/finalizeDecoderContext:">- finalizeDecoderContext:</option>
 		
 	</optgroup>
 	
@@ -118,8 +118,8 @@
 
 						<div class="task-list">
 							<div class="section-method">
-	<a name="//api/name/createContextForDecodingWithFlushCallback:" title="createContextForDecodingWithFlushCallback:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/createContextForDecodingWithFlushCallback:">&ndash;&nbsp;createContextForDecodingWithFlushCallback:</a></code>
+	<a name="//api/name/createContextForDecodingWithBitFlags:flushCallback:" title="createContextForDecodingWithBitFlags:flushCallback:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/createContextForDecodingWithBitFlags:flushCallback:">&ndash;&nbsp;createContextForDecodingWithBitFlags:flushCallback:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -134,13 +134,18 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (nonnull id&lt;NOZCompressionDecoderContext&gt;)createContextForDecodingWithFlushCallback:(nonnull NOZFlushCallback)<em>callback</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (nonnull id&lt;NOZCompressionDecoderContext&gt;)createContextForDecodingWithBitFlags:(UInt16)<em>flags</em> flushCallback:(nonnull NOZFlushCallback)<em>callback</em></code></div>
 
 		    
 			
 			<div class="method-subsection arguments-section parameters">
 				<h4 class="method-subtitle parameter-title">Parameters</h4>
 				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>flags</code></th>
+						<td><p>The bit flags that were specefied for this encoder.</p></td>
+					</tr>
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>callback</code></th>
@@ -176,8 +181,8 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/initializeDecoderContext:error:" title="initializeDecoderContext:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/initializeDecoderContext:error:">&ndash;&nbsp;initializeDecoderContext:error:</a></code>
+	<a name="//api/name/initializeDecoderContext:" title="initializeDecoderContext:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initializeDecoderContext:">&ndash;&nbsp;initializeDecoderContext:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -189,12 +194,12 @@
 			<div class="method-subsection brief-description">
 				<p>Initialize the decoding process.
 Call this first for each decoding process.
-If it succeeds, be sure to pair it with a call to <a href="#//api/name/finalizeDecoderContext:error:"><code>finalizeDecoderContext:error:</code></a>.</p>
+If it succeeds, be sure to pair it with a call to <code>finalizeDecoderContext:error:</code>.</p>
 			</div>
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)initializeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)initializeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -219,8 +224,8 @@ If it succeeds, be sure to pair it with a call to <a href="#//api/name/finalizeD
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/decodeBytes:length:context:error:" title="decodeBytes:length:context:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/decodeBytes:length:context:error:">&ndash;&nbsp;decodeBytes:length:context:error:</a></code>
+	<a name="//api/name/decodeBytes:length:context:" title="decodeBytes:length:context:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/decodeBytes:length:context:">&ndash;&nbsp;decodeBytes:length:context:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -237,7 +242,7 @@ Call this as many times as necessary to get all bytes of a source decoded
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)decodeBytes:(nonnull const Byte *)<em>bytes</em> length:(size_t)<em>length</em> context:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)decodeBytes:(nonnull const Byte *)<em>bytes</em> length:(size_t)<em>length</em> context:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -262,8 +267,8 @@ Call this as many times as necessary to get all bytes of a source decoded
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/finalizeDecoderContext:error:" title="finalizeDecoderContext:error:"></a>
-	<h3 class="method-title"><code><a href="#//api/name/finalizeDecoderContext:error:">&ndash;&nbsp;finalizeDecoderContext:error:</a></code>
+	<a name="//api/name/finalizeDecoderContext:" title="finalizeDecoderContext:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/finalizeDecoderContext:">&ndash;&nbsp;finalizeDecoderContext:</a></code>
 <span class="task-item-suffix">required method</span></h3>
 
 	<div class="method-info">
@@ -278,7 +283,7 @@ Call this as many times as necessary to get all bytes of a source decoded
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>- (BOOL)finalizeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em> error:(out NSError *__nullable *__nullable)<em>error</em></code></div>
+			<div class="method-subsection method-declaration"><code>- (BOOL)finalizeDecoderContext:(nonnull id&lt;NOZCompressionDecoderContext&gt;)<em>context</em></code></div>
 
 		    
 			
@@ -317,7 +322,7 @@ Call this as many times as necessary to get all bytes of a source decoded
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-07</p>
+						<p class="copyright">Copyright &copy; 2015 Nolan O&apos;Brien. All rights reserved. Updated: 2015-09-13</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

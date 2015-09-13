@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZDecompressDelegate.html">
+	<File path="Protocols/NOZCompressionEncoderContext.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZDecompressDelegate</TokenIdentifier>
-			<Abstract type="html">NOZDecompressDelegate is the delegate to the NOZDecompressOperation for callbacks.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressionEncoderContext</TokenIdentifier>
+			<Abstract type="html">Protocol for encapsulating the context and state of an encoding process.
+A context object must always be able to clean itself up on dealloc and should
+not rely on finalize to clean it up.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
             
 			
 			<NodeRef refid="23"/>
@@ -13,79 +15,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/requiresStrongReference</TokenIdentifier>
-			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressionEncoderContext/encodedDataWasText</TokenIdentifier>
+			<Abstract type="html">return YES if the encoded data was known to be text.  NO otherwise.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)requiresStrongReference</Declaration>
-			
-			
-			<Anchor>//api/name/requiresStrongReference</Anchor>
-            <NodeRef refid="23"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/completionQueue</TokenIdentifier>
-			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			<Declaration>- (BOOL)encodedDataWasText</Declaration>
 			
 			
-			<Anchor>//api/name/completionQueue</Anchor>
-            <NodeRef refid="23"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didCompleteWithResult:</TokenIdentifier>
-			<Abstract type="html">Called when the operation is finished.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZDecompressOperation that finished.</Abstract>
-				</Parameter><Parameter>
-					<Name>result</Name>
-					<Abstract type="html">The NOZDecompressResult for the operation.</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/decompressOperation:didCompleteWithResult:</Anchor>
-            <NodeRef refid="23"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didUpdateProgress:</TokenIdentifier>
-			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress</Declaration>
-			
-			
-			<Anchor>//api/name/decompressOperation:didUpdateProgress:</Anchor>
-            <NodeRef refid="23"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/shouldDecompressOperation:overwriteFileAtPath:</TokenIdentifier>
-			<Abstract type="html">Called when unarchive a file would overwrite an existing file on disk.
-By default, returns NO and the operation fails with an error.</Abstract>
-			<DeclaredIn>NOZDecompress.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZDecompressOperation that is running.</Abstract>
-				</Parameter><Parameter>
-					<Name>path</Name>
-					<Abstract type="html">The path to the file on disk that would be overwritten.</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">YES to overwrite.</Abstract></ReturnValue>
-			<Anchor>//api/name/shouldDecompressOperation:overwriteFileAtPath:</Anchor>
+			<Anchor>//api/name/encodedDataWasText</Anchor>
             <NodeRef refid="23"/>
 		</Token>
 		

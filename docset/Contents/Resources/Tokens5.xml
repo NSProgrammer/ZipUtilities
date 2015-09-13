@@ -53,7 +53,7 @@
 			<Abstract type="html">The array of objects conforming to NOZZippableEntry to compress.  Read and write of perform a deep copy.</Abstract>
 			<DeclaredIn>NOZCompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray&lt;id&lt;NOZZippableEntry&gt; &gt; *entries</Declaration>
 			
 			
 			<Anchor>//api/name/entries</Anchor>
@@ -65,7 +65,7 @@
 			<Abstract type="html">The array of objects conforming to NOZZippableEntry to compress.  Read and write of perform a deep copy.</Abstract>
 			<DeclaredIn>NOZCompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray&lt;id&lt;NOZZippableEntry&gt; &gt; *entries</Declaration>
 			
 			
 			<Anchor>//api/name/entries</Anchor>
@@ -77,7 +77,7 @@
 			<Abstract type="html">The array of objects conforming to NOZZippableEntry to compress.  Read and write of perform a deep copy.</Abstract>
 			<DeclaredIn>NOZCompress.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSArray *entries</Declaration>
+			<Declaration>@property (nonatomic, copy) NSArray&lt;id&lt;NOZZippableEntry&gt; &gt; *entries</Declaration>
 			
 			
 			<Anchor>//api/name/entries</Anchor>

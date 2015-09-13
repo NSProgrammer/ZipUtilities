@@ -182,7 +182,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/NOZAbstractZipEntry/new</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Unavailable</Abstract>
 			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
 			
 			<Declaration>+ (instancetype)new</Declaration>

@@ -38,7 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class NOZCompressResult;
 @protocol NOZCompressDelegate;
 
+//! Block for when `NOZCompressOperation` completes
 typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation* op, NOZCompressResult* result);
+//! Block for dynamically selecting an `NOZCompressionMethod` and `NOZCompressionLevel` for a `NOZCompressOperation` when using `[NOZCompressionRequest addEntriesInDirectory:compressionSelectionBlock:]`
 typedef void(^NOZCompressionSelectionBlock)(NSString* filePath, NOZCompressionMethod* compressionMethodOut, NOZCompressionLevel* compressionLevelOut);
 
 /**
