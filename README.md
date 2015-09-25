@@ -122,6 +122,7 @@ files) into an on disk zip archive file.
 
     if (![zipper addEntry:jpegEntry
             progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+            totalBytesCompressed = bytesCompletedThisPass;
          }
                     error:error]) {
         return NO;
