@@ -10,7 +10,7 @@
 
 #if COMPRESSION_LIB_AVAILABLE
 
-@interface NOZXAppleCompressionCoderContext : NSObject <NOZCompressionDecoderContext, NOZCompressionEncoderContext>
+@interface NOZXAppleCompressionCoderContext : NSObject <NOZDecoderContext, NOZEncoderContext>
 @property (nonatomic) compression_stream_operation operation;
 @property (nonatomic) compression_algorithm algorithm;
 @property (nonatomic) UInt16 bitFlags;
@@ -22,10 +22,10 @@
 @property (nonatomic) BOOL hasFinished;
 @end
 
-@interface NOZXAppleCompressionCoder (Encoder) <NOZCompressionEncoder>
+@interface NOZXAppleCompressionCoder (Encoder) <NOZEncoder>
 @end
 
-@interface NOZXAppleCompressionCoder (Decoder) <NOZCompressionDecoder>
+@interface NOZXAppleCompressionCoder (Decoder) <NOZDecoder>
 @end
 
 @interface NOZXAppleCompressionCoder (Private)
@@ -71,12 +71,12 @@
 #endif
 }
 
-+ (nullable id<NOZCompressionEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
++ (nullable id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
 {
     return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_ENCODE] : nil;
 }
 
-+ (nullable id<NOZCompressionDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
++ (nullable id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
 {
     return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_DECODE] : nil;
 }
@@ -90,9 +90,9 @@
     return 0;
 }
 
-- (id<NOZCompressionEncoderContext>)createContextWithBitFlags:(UInt16)bitFlags
-                                             compressionLevel:(NOZCompressionLevel)level
-                                                flushCallback:(NOZFlushCallback)callback
+- (id<NOZEncoderContext>)createContextWithBitFlags:(UInt16)bitFlags
+                                  compressionLevel:(NOZCompressionLevel)level
+                                     flushCallback:(NOZFlushCallback)callback
 {
     return [self createContextForAlgorithm:_algorithm
                                  operation:COMPRESSION_STREAM_ENCODE
@@ -121,8 +121,8 @@
 
 @implementation NOZXAppleCompressionCoder (Decoder)
 
-- (id<NOZCompressionDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
-                                                           flushCallback:(NOZFlushCallback)callback
+- (id<NOZDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
+                                                flushCallback:(NOZFlushCallback)callback
 {
     return [self createContextForAlgorithm:_algorithm
                                  operation:COMPRESSION_STREAM_DECODE

@@ -1,8 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="">
+	<File path="Constants/NOZCompressionLevel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionLevel</TokenIdentifier>
+			<Abstract type="html">The compression level to use.
+Lower levels execute faster, while higher levels will achieve a higher compression ratio.</Abstract>
+			<DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+			
+			<NodeRef refid="32"/>
+		</Token>
 		
 		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelNone</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelNone</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMin</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMin</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelVeryLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumLow</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMediumLow</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMedium</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMedium</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMediumHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryHigh</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelVeryHigh</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMax</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelMax</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelDefault</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>NOZCompressionLevelDefault</Declaration>
+            
+            <DeclaredIn>NOZCompression.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
         
         
 	</File>

@@ -55,12 +55,12 @@ typedef NS_ENUM(SInt16, NOZCompressionLevel)
  Only 0 (don't compress) and 8 (deflate) are supported by default.
  Additional methods can be supported by updating the compression encoders and decoders.
 
- ### `NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZCompressionEncoder> __nullable encoder);`
+ ### `NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);`
 
  Updates the known compression method encoder to be _encoder_.
  Provide `nil` to make the _method_ unsupported for compression.
 
- ### `NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZCompressionDecoder> __nullable decoder);`
+ ### `NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);`
  
  Updates the known compression method decoder to be _decoder_.
  Provide `nil` to make the _method_ unsupported for decompression.
@@ -119,118 +119,15 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
 //! Block for flushing a buffer of bytes
 typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const Byte* __nonnull bufferToFlush, size_t length);
 
-/**
- Protocol for encapsulating the context and state of an encoding process.
- A context object must always be able to clean itself up on dealloc and should
- not rely on `finalize` to clean it up.
- */
-@protocol NOZCompressionEncoderContext <NSObject>
-/** return `YES` if the encoded data was known to be text.  `NO` otherwise. */
-- (BOOL)encodedDataWasText;
-@end
-
-/**
- Protocol for encapsulating the context and state of a decoding process.
- A context object must always be able to clean itself up on dealloc and should
- not rely on `finalize` to clean it up.
- */
-@protocol NOZCompressionDecoderContext <NSObject>
-/** 
- return `YES` once if the decoding is known to have completed and
- any future call to decodeBytes will be a considered no-op (returning `YES`).
- If the decoder is provided a zero length buffer to decode, there is no more
- data to decode, but the decoder may continue decoding.
- The decoder will have it's decode method called until an error is encountered
- or hasFinished returns `YES`.
- */
-- (BOOL)hasFinished;
-@end
-
-/**
- Protocol to implement for constructing a compression encoder.
- */
-@protocol NOZCompressionEncoder <NSObject>
-
-/**
- Return any bit flags related to the given entry for hinting at the compression that will be used.
- */
-- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry;
-
-/**
- Create a new context object to track the encoding process.
- @param flags The bit flags that were specefied for this encoder.
- @param level The level of compression requested
- @param callback The `NOZFlushCallback` that will be used to output the compressed data
- @return the new context object
- */
-- (nonnull id<NOZCompressionEncoderContext>)createContextWithBitFlags:(UInt16)bitFlags
-                                                     compressionLevel:(NOZCompressionLevel)level
-                                                        flushCallback:(nonnull NOZFlushCallback)callback;
-
-/**
- Initialize the encoding process.
- Call this first for each encoding process.
- If it succeeds, be sure to pair it with a call to `finalizeEncoderContext:`.
- */
-- (BOOL)initializeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context;
-
-/**
- Encode the provided byte buffer.
- Call this as many times as necessary to get all bytes of a source encoded
- (or until a failure occurs).
- */
-- (BOOL)encodeBytes:(nonnull const Byte*)bytes
-             length:(size_t)length
-            context:(nonnull id<NOZCompressionEncoderContext>)context;
-
-/**
- Finalize the encoding process.
- */
-- (BOOL)finalizeEncoderContext:(nonnull id<NOZCompressionEncoderContext>)context;
-@end
-
-/**
- Protocol to implement for constructing a compression decoder.
- */
-@protocol NOZCompressionDecoder <NSObject>
-
-/**
- Create a new context object to track the decoding process.
- @param flags The bit flags that were specefied for this encoder.
- @param callback The `NOZFlushCallback` that will be used to output the decompressed data
- @return the new context object
- */
-- (nonnull id<NOZCompressionDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
-                                                                   flushCallback:(nonnull NOZFlushCallback)callback;
-
-/**
- Initialize the decoding process.
- Call this first for each decoding process.
- If it succeeds, be sure to pair it with a call to `finalizeDecoderContext:error:`.
- */
-- (BOOL)initializeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context;
-/**
- Decode the provided byte buffer.
- Call this as many times as necessary to get all bytes of a source decoded
- (or until a failure occurs).
- */
-- (BOOL)decodeBytes:(nonnull const Byte*)bytes
-             length:(size_t)length
-            context:(nonnull id<NOZCompressionDecoderContext>)context;
-
-/**
- Finalize the decoding process.
- */
-- (BOOL)finalizeDecoderContext:(nonnull id<NOZCompressionDecoderContext>)context;
-
-@end
+@protocol NOZDecoder;
+@protocol NOZEncoder;
 
 //! Retrieve the compression encoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZCompressionEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method);
+FOUNDATION_EXTERN id<NOZEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method);
 //! Set the compression encoder for a given method.  Setting `nil` will clear the encoder.  Whatever encoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZCompressionEncoder> __nullable encoder);
+FOUNDATION_EXTERN void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);
 
 //! Retrieve the compression decoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZCompressionDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method);
+FOUNDATION_EXTERN id<NOZDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method);
 //! Set the compression decoder for a given method.  Setting `nil` will clear the decoder.  Whatever decoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZCompressionDecoder> __nullable decoder);
+FOUNDATION_EXTERN void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);

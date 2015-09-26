@@ -34,7 +34,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.5.1'
+pod 'ZipUtilities', '~> 1.6.0'
 ```
 
 #### Carthage
@@ -63,8 +63,36 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 
 *Example:*
 
-```
-TODO - add example code (beyond what's in unit tests)
+```obj-c
+- (NSOperation *)startCompression
+{
+	NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:self.zipFilePath];
+    [request addEntriesInDirectory:self.sourceDirectoryPath compressionSelectionBlock:NULL];
+    [request addDataEntry:self.data name:@"Aesop.txt"];
+    for (id<NOZZippableEntry> entry in self.additionalEntries) {
+        [request addEntry:entry];
+    }
+
+    NOZCompressionOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    [self.operationQueue addOperation:op];
+
+    // return operation so that a handle can be maintained and cancelled if necessary
+    return op;
+}
+
+- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+	    self.completionBlock(result.didSuccess, result.operationError);
+    });
+} 
+
+- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+	    self.progressBlock(progress);
+	});
+}
 ```
 
 **`NOZDecompress.h`**
@@ -78,8 +106,31 @@ TODO - add example code (beyond what's in unit tests)
 
 *Example:*
 
-```
-TODO - add example code (beyond what's in unit tests)
+```obj-c
+- (NSOperation *)startDecompression
+{
+	NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:self.zipFilePath];
+
+    NOZDecompressionOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    [self.operationQueue addOperation:op];
+
+    // return operation so that a handle can be maintained and cancelled if necessary
+    return op;
+}
+
+- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+	    self.completionBlock(result.didSuccess, result.destinationFiles, result.operationError);
+    });
+} 
+
+- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress
+{
+	dispatch_async(dispatch_get_main_queue(), ^{
+	    self.progressBlock(progress);
+	});
+}
 ```
 
 ### Manual Zipping and Unzipping
@@ -258,21 +309,17 @@ into destinations (NSData, streams and/or files).
 
 ### Extensibility - Modular Compression Encoders/Decoders
 
-**`NOZCompression.h`**
+**`NOZEncoder` and `NOZDecoder`**
 
 _ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
 
-Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZCompressionEncoder` and `NOZCompressionDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZCompressionEncoder>` and `MyBZIP2Decoder<NOZCompressionDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
+Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
 
 *Apple compression library as an extra*
 
 `NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified in as a known compression method in the ZIP archive format.
 
 ## TODO
-
-### Near term
-
-- add generic utilies like compressing/decompressing from NSData to NSData
 
 ### Eventually
 

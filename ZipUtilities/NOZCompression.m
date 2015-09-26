@@ -27,63 +27,65 @@
 
 #import "NOZ_Project.h"
 #import "NOZCompression.h"
+#import "NOZEncoder.h"
+#import "NOZDecoder.h"
 #import "NOZUtils_Project.h"
 #import "NOZZipEntry.h"
 
-static dispatch_queue_t sCompressionCoderQueue = NULL;
-static NSMutableDictionary<NSNumber *, id<NOZCompressionEncoder>> *sCompressionEncoders = nil;
-static NSMutableDictionary<NSNumber *, id<NOZCompressionDecoder>> *sCompressionDecoders = nil;
+static dispatch_queue_t sCoderQueue = NULL;
+static NSMutableDictionary<NSNumber *, id<NOZEncoder>> *sEncoders = nil;
+static NSMutableDictionary<NSNumber *, id<NOZDecoder>> *sDecoders = nil;
 
 __attribute__((constructor))
 static void NOZCompressionConstructor(void)
 {
-    sCompressionCoderQueue = dispatch_queue_create("com.ziputilities.coders", DISPATCH_QUEUE_CONCURRENT);
-    sCompressionEncoders = [NSMutableDictionary dictionary];
-    sCompressionDecoders = [NSMutableDictionary dictionary];
+    sCoderQueue = dispatch_queue_create("com.ziputilities.coders", DISPATCH_QUEUE_CONCURRENT);
+    sEncoders = [NSMutableDictionary dictionary];
+    sDecoders = [NSMutableDictionary dictionary];
 
-    sCompressionEncoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateEncoder alloc] init];
-    sCompressionEncoders[@(NOZCompressionMethodNone)] = [[NOZRawEncoder alloc] init];
+    sEncoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateEncoder alloc] init];
+    sEncoders[@(NOZCompressionMethodNone)] = [[NOZRawEncoder alloc] init];
 
-    sCompressionDecoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateDecoder alloc] init];
-    sCompressionDecoders[@(NOZCompressionMethodNone)] = [[NOZRawDecoder alloc] init];
+    sDecoders[@(NOZCompressionMethodDeflate)] = [[NOZDeflateDecoder alloc] init];
+    sDecoders[@(NOZCompressionMethodNone)] = [[NOZRawDecoder alloc] init];
 }
 
-id<NOZCompressionEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method)
+id<NOZEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method)
 {
-    __block id<NOZCompressionEncoder> encoder;
-    dispatch_sync(sCompressionCoderQueue, ^{
-        encoder = sCompressionEncoders[@(method)];
+    __block id<NOZEncoder> encoder;
+    dispatch_sync(sCoderQueue, ^{
+        encoder = sEncoders[@(method)];
     });
     return encoder;
 }
 
-void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZCompressionEncoder> __nullable encoder)
+void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder)
 {
-    dispatch_barrier_async(sCompressionCoderQueue, ^{
+    dispatch_barrier_async(sCoderQueue, ^{
         if (encoder) {
-            sCompressionEncoders[@(method)] = encoder;
+            sEncoders[@(method)] = encoder;
         } else {
-            [sCompressionEncoders removeObjectForKey:@(method)];
+            [sEncoders removeObjectForKey:@(method)];
         }
     });
 }
 
-id<NOZCompressionDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method)
+id<NOZDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method)
 {
-    __block id<NOZCompressionDecoder> decoder;
-    dispatch_sync(sCompressionCoderQueue, ^{
-        decoder = sCompressionDecoders[@(method)];
+    __block id<NOZDecoder> decoder;
+    dispatch_sync(sCoderQueue, ^{
+        decoder = sDecoders[@(method)];
     });
     return decoder;
 }
 
-void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZCompressionDecoder> __nullable decoder)
+void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder)
 {
-    dispatch_barrier_async(sCompressionCoderQueue, ^{
+    dispatch_barrier_async(sCoderQueue, ^{
         if (decoder) {
-            sCompressionDecoders[@(method)] = decoder;
+            sDecoders[@(method)] = decoder;
         } else {
-            [sCompressionDecoders removeObjectForKey:@(method)];
+            [sDecoders removeObjectForKey:@(method)];
         }
     });
 }

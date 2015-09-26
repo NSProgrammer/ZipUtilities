@@ -74,8 +74,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 @implementation NOZZipper
 {
     NSString *_standardizedZipFilePath;
-    id<NOZCompressionEncoder> _currentEncoder;
-    id<NOZCompressionEncoderContext> _currentEncoderContext;
+    id<NOZEncoder> _currentEncoder;
+    id<NOZEncoderContext> _currentEncoderContext;
 
     struct {
         FILE *file;
@@ -337,7 +337,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     _currentEncoder = NOZEncoderForCompressionMethod(_internal.currentEntry->fileHeader.compressionMethod);
     _currentEncoderContext = [_currentEncoder createContextWithBitFlags:_internal.currentEntry->fileHeader.bitFlag
                                                        compressionLevel:entry.compressionLevel
-                                                          flushCallback:^BOOL(id<NOZCompressionEncoder> encoder, id<NOZCompressionEncoderContext> context, const Byte* buffer, size_t length) {
+                                                          flushCallback:^BOOL(id<NOZEncoder> encoder, id<NOZEncoderContext> context, const Byte* buffer, size_t length) {
         if (rawSelf->_currentEncoder != encoder) {
             return NO;
         }
@@ -535,7 +535,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
             /* Bit Flag */
             {
                 record->fileHeader->bitFlag = 0;
-                id<NOZCompressionEncoder> encoder = NOZEncoderForCompressionMethod(entry.compressionMethod);
+                id<NOZEncoder> encoder = NOZEncoderForCompressionMethod(entry.compressionMethod);
                 if (encoder) {
                     record->fileHeader->bitFlag |= [encoder bitFlagsForEntry:entry];
                 }

@@ -24,8 +24,8 @@
 
 + (BOOL)isSupported;
 
-+ (nullable id<NOZCompressionEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm;
-+ (nullable id<NOZCompressionDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm;
++ (nullable id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm;
++ (nullable id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm;
 
 - (nullable instancetype)init NS_UNAVAILABLE;
 + (nullable instancetype)new NS_UNAVAILABLE;

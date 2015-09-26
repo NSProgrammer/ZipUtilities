@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZErrorPage.html">
+	<File path="Protocols/NOZZipEntry.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZErrorPage</TokenIdentifier>
-			<Abstract type="html">NOZErrorCode values are broken into pages (NOZErrorPage) for each are of ZipUtilities that can produce an error.</Abstract>
-			<DeclaredIn>NOZError.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZZipEntry</TokenIdentifier>
+			<Abstract type="html">Protocol for a Zip Entry</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
             
 			
 			<NodeRef refid="30"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageNone</TokenIdentifier>
-            <Abstract type="html">None</Abstract>
-            <Declaration>NOZErrorPageNone</Declaration>
-            
-            <DeclaredIn>NOZError.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/name</TokenIdentifier>
+			<Abstract type="html">Name of entry</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="30"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageCompress</TokenIdentifier>
-            <Abstract type="html">For NOZCompressOperation errors</Abstract>
-            <Declaration>NOZErrorPageCompress</Declaration>
-            
-            <DeclaredIn>NOZError.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/comment</TokenIdentifier>
+			<Abstract type="html">Optional comment for entry</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (nullable NSString *)comment</Declaration>
+			
+			
+			<Anchor>//api/name/comment</Anchor>
             <NodeRef refid="30"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageDecompress</TokenIdentifier>
-            <Abstract type="html">For NOZDecompressOperation errors</Abstract>
-            <Declaration>NOZErrorPageDecompress</Declaration>
-            
-            <DeclaredIn>NOZError.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/compressionLevel</TokenIdentifier>
+			<Abstract type="html">Compression level for entry</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (NOZCompressionLevel)compressionLevel</Declaration>
+			
+			
+			<Anchor>//api/name/compressionLevel</Anchor>
             <NodeRef refid="30"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageZip</TokenIdentifier>
-            <Abstract type="html">For NOZZipper errors</Abstract>
-            <Declaration>NOZErrorPageZip</Declaration>
-            
-            <DeclaredIn>NOZError.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/compressionMethod</TokenIdentifier>
+			<Abstract type="html">Compression Method for entry</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (NOZCompressionMethod)compressionMethod</Declaration>
+			
+			
+			<Anchor>//api/name/compressionMethod</Anchor>
             <NodeRef refid="30"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZErrorPageUnzip</TokenIdentifier>
-            <Abstract type="html">For NOZUnzipper errors</Abstract>
-            <Declaration>NOZErrorPageUnzip</Declaration>
-            
-            <DeclaredIn>NOZError.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZipEntry/copy</TokenIdentifier>
+			<Abstract type="html">Copiable</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (id)copy</Declaration>
+			
+			
+			<Anchor>//api/name/copy</Anchor>
             <NodeRef refid="30"/>
-        </Token>
+		</Token>
+		
         
         
 	</File>

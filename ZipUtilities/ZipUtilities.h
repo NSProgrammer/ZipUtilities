@@ -37,10 +37,14 @@ FOUNDATION_EXPORT const unsigned char ZipUtilitiesVersionString[];
 
 #import "NOZCompress.h"
 #import "NOZCompression.h"
+#import "NOZDecoder.h"
 #import "NOZDecompress.h"
+#import "NOZEncoder.h"
 #import "NOZError.h"
 #import "NOZSyncStepOperation.h"
 #import "NOZUnzipper.h"
 #import "NOZUtils.h"
 #import "NOZZipEntry.h"
 #import "NOZZipper.h"
+
+#import "NSData+NOZAdditions.h"

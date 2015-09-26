@@ -26,7 +26,8 @@
 //
 
 #import "NOZ_Project.h"
-#import "NOZCompression.h"
+#import "NOZDecoder.h"
+#import "NOZEncoder.h"
 #import "NOZUtils_Project.h"
 #import "NOZZipEntry.h"
 
@@ -34,7 +35,7 @@
 
 #pragma mark - Deflate Encoder
 
-@interface NOZDeflateEncoderContext : NSObject <NOZCompressionEncoderContext>
+@interface NOZDeflateEncoderContext : NSObject <NOZEncoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) NOZCompressionLevel compressionLevel;
 @property (nonatomic) BOOL zStreamOpen;
@@ -230,7 +231,7 @@
 
 #pragma mark - Deflate Decoder
 
-@interface NOZDeflateDecoderContext : NSObject <NOZCompressionDecoderContext>
+@interface NOZDeflateDecoderContext : NSObject <NOZDecoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL zStreamOpen;
 @property (nonatomic) BOOL hasFinished;

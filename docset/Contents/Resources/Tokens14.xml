@@ -29,7 +29,7 @@
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>NOZXAppleCompressionCoder.h</DeclaredIn>
 			
-			<Declaration>+ (nullable id&lt;NOZCompressionEncoder&gt;)encoderWithAlgorithm:(compression_algorithm)algorithm</Declaration>
+			<Declaration>+ (nullable id&lt;NOZEncoder&gt;)encoderWithAlgorithm:(compression_algorithm)algorithm</Declaration>
 			
 			
 			<Anchor>//api/name/encoderWithAlgorithm:</Anchor>
@@ -41,7 +41,7 @@
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>NOZXAppleCompressionCoder.h</DeclaredIn>
 			
-			<Declaration>+ (nullable id&lt;NOZCompressionDecoder&gt;)decoderWithAlgorithm:(compression_algorithm)algorithm</Declaration>
+			<Declaration>+ (nullable id&lt;NOZDecoder&gt;)decoderWithAlgorithm:(compression_algorithm)algorithm</Declaration>
 			
 			
 			<Anchor>//api/name/decoderWithAlgorithm:</Anchor>

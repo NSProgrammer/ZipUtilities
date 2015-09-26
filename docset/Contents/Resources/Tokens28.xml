@@ -1,239 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZCompressionMethod.html">
+	<File path="Protocols/NOZEncoder.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionMethod</TokenIdentifier>
-			<Abstract type="html">The compression method to use.
-Only 0 (don&apos;t compress) and 8 (deflate) are supported by default.
-Additional methods can be supported by updating the compression encoders and decoders.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZEncoder</TokenIdentifier>
+			<Abstract type="html">Protocol to implement for constructing a compression encoder.</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
             
 			
 			<NodeRef refid="28"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodNone</TokenIdentifier>
-            <Abstract type="html">No compression is supported by default.</Abstract>
-            <Declaration>NOZCompressionMethodNone</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZEncoder/bitFlagsForEntry:</TokenIdentifier>
+			<Abstract type="html">Return any bit flags related to the given entry for hinting at the compression that will be used.</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
+			
+			<Declaration>- (UInt16)bitFlagsForEntry:(nonnull id&lt;NOZZipEntry&gt;)entry</Declaration>
+			
+			
+			<Anchor>//api/name/bitFlagsForEntry:</Anchor>
             <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodShrink</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodShrink</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZEncoder/createContextWithBitFlags:compressionLevel:flushCallback:</TokenIdentifier>
+			<Abstract type="html">Create a new context object to track the encoding process.</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
+			
+			<Declaration>- (nonnull id&lt;NOZEncoderContext&gt;)createContextWithBitFlags:(UInt16)bitFlags compressionLevel:(NOZCompressionLevel)level flushCallback:(nonnull NOZFlushCallback)callback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>level</Name>
+					<Abstract type="html">The level of compression requested</Abstract>
+				</Parameter><Parameter>
+					<Name>callback</Name>
+					<Abstract type="html">The NOZFlushCallback that will be used to output the compressed data</Abstract>
+				</Parameter><Parameter>
+					<Name>flags</Name>
+					<Abstract type="html">The bit flags that were specefied for this encoder.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">the new context object</Abstract></ReturnValue>
+			<Anchor>//api/name/createContextWithBitFlags:compressionLevel:flushCallback:</Anchor>
             <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce1</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReduce1</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZEncoder/initializeEncoderContext:</TokenIdentifier>
+			<Abstract type="html">Initialize the encoding process.
+Call this first for each encoding process.
+If it succeeds, be sure to pair it with a call to finalizeEncoderContext:.</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)initializeEncoderContext:(nonnull id&lt;NOZEncoderContext&gt;)context</Declaration>
+			
+			
+			<Anchor>//api/name/initializeEncoderContext:</Anchor>
             <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce2</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReduce2</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZEncoder/encodeBytes:length:context:</TokenIdentifier>
+			<Abstract type="html">Encode the provided byte buffer.
+Call this as many times as necessary to get all bytes of a source encoded
+(or until a failure occurs).</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)encodeBytes:(nonnull const Byte *)bytes length:(size_t)length context:(nonnull id&lt;NOZEncoderContext&gt;)context</Declaration>
+			
+			
+			<Anchor>//api/name/encodeBytes:length:context:</Anchor>
             <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce3</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReduce3</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZEncoder/finalizeEncoderContext:</TokenIdentifier>
+			<Abstract type="html">Finalize the encoding process.</Abstract>
+			<DeclaredIn>NOZEncoder.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)finalizeEncoderContext:(nonnull id&lt;NOZEncoderContext&gt;)context</Declaration>
+			
+			
+			<Anchor>//api/name/finalizeEncoderContext:</Anchor>
             <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReduce4</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReduce4</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodImplode</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodImplode</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved7</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved7</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodDeflate</TokenIdentifier>
-            <Abstract type="html">Deflate is supported by default via zlib.</Abstract>
-            <Declaration>NOZCompressionMethodDeflate</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodDeflate64</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodDeflate64</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodIBMTERSEOld</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodIBMTERSEOld</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved11</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved11</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodBZip2</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodBZip2</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved13</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved13</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodLZMA</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodLZMA</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved15</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved15</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved16</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved16</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodReserved17</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodReserved17</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodIBMTERSENew</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodIBMTERSENew</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodLZ77</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodLZ77</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodWAVPack</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodWAVPack</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionMethodPPMv1rev1</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionMethodPPMv1rev1</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="28"/>
-        </Token>
+		</Token>
+		
         
         
 	</File>

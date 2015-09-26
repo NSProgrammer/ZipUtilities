@@ -68,8 +68,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 @implementation NOZUnzipper
 {
     NSString *_standardizedFilePath;
-    id<NOZCompressionDecoder> _currentDecoder;
-    id<NOZCompressionDecoderContext> _currentDecoderContext;
+    id<NOZDecoder> _currentDecoder;
+    id<NOZDecoderContext> _currentDecoderContext;
 
     struct {
         FILE* file;

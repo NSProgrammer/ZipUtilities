@@ -2,6 +2,11 @@
 
 ## History
 
+### 1.6.0  (Sep 26, 2015) - Nolan O'Brien
+
+- Rename NOZCompressionEncoder/Decoder to NOZEncoder/Decoder
+- Add category to NSData for easy compression/decompression of data
+
 ### 1.5.1  (Sep 13, 2015) - Nolan O'Brien
 
 - Update docs

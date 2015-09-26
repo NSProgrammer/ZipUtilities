@@ -1,128 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZCompressionLevel.html">
+	<File path="Protocols/NOZDecompressDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZCompressionLevel</TokenIdentifier>
-			<Abstract type="html">The compression level to use.
-Lower levels execute faster, while higher levels will achieve a higher compression ratio.</Abstract>
-			<DeclaredIn>NOZCompression.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZDecompressDelegate</TokenIdentifier>
+			<Abstract type="html">NOZDecompressDelegate is the delegate to the NOZDecompressOperation for callbacks.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
             
 			
 			<NodeRef refid="27"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelNone</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelNone</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/requiresStrongReference</TokenIdentifier>
+			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)requiresStrongReference</Declaration>
+			
+			
+			<Anchor>//api/name/requiresStrongReference</Anchor>
             <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMin</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMin</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/completionQueue</TokenIdentifier>
+			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
+			
+			
+			<Anchor>//api/name/completionQueue</Anchor>
             <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryLow</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didCompleteWithResult:</TokenIdentifier>
+			<Abstract type="html">Called when the operation is finished.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>op</Name>
+					<Abstract type="html">The NOZDecompressOperation that finished.</Abstract>
+				</Parameter><Parameter>
+					<Name>result</Name>
+					<Abstract type="html">The NOZDecompressResult for the operation.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/decompressOperation:didCompleteWithResult:</Anchor>
             <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelLow</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/decompressOperation:didUpdateProgress:</TokenIdentifier>
+			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress</Declaration>
+			
+			
+			<Anchor>//api/name/decompressOperation:didUpdateProgress:</Anchor>
             <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumLow</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumLow</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZDecompressDelegate/shouldDecompressOperation:overwriteFileAtPath:</TokenIdentifier>
+			<Abstract type="html">Called when unarchive a file would overwrite an existing file on disk.
+By default, returns NO and the operation fails with an error.</Abstract>
+			<DeclaredIn>NOZDecompress.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>op</Name>
+					<Abstract type="html">The NOZDecompressOperation that is running.</Abstract>
+				</Parameter><Parameter>
+					<Name>path</Name>
+					<Abstract type="html">The path to the file on disk that would be overwritten.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">YES to overwrite.</Abstract></ReturnValue>
+			<Anchor>//api/name/shouldDecompressOperation:overwriteFileAtPath:</Anchor>
             <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMedium</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMedium</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMediumHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMediumHigh</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelHigh</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelVeryHigh</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelVeryHigh</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelMax</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelMax</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZCompressionLevelDefault</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZCompressionLevelDefault</Declaration>
-            
-            <DeclaredIn>NOZCompression.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
+		</Token>
+		
         
         
 	</File>

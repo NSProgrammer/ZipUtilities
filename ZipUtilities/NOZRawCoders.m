@@ -26,13 +26,14 @@
 //
 
 #import "NOZ_Project.h"
-#import "NOZCompression.h"
+#import "NOZDecoder.h"
+#import "NOZEncoder.h"
 #import "NOZUtils_Project.h"
 #import "NOZZipEntry.h"
 
 #pragma mark - Raw Encoder
 
-@interface NOZRawEncoderContext : NSObject <NOZCompressionEncoderContext>
+@interface NOZRawEncoderContext : NSObject <NOZEncoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL encodedDataWasText;
 @end
@@ -83,7 +84,7 @@
 
 #pragma mark - Raw Decoder
 
-@interface NOZRawDecoderContext : NSObject <NOZCompressionDecoderContext>
+@interface NOZRawDecoderContext : NSObject <NOZDecoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL hasFinished;
 @end

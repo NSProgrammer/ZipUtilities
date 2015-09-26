@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/NOZCompressDelegate.html">
+	<File path="Categories/NSData+NOZAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/NOZCompressDelegate</TokenIdentifier>
-			<Abstract type="html">NOZCompressDelegate is the delegate to the NOZCompressOperation for callbacks.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cat/NSData(NOZAdditions)</TokenIdentifier>
+			<Abstract type="html">Convenience category on NSData to permit easy compressing/decompressing of NSData to NSData</Abstract>
+			<DeclaredIn>NSData+NOZAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="19"/>
@@ -13,58 +13,39 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/requiresStrongReference</TokenIdentifier>
-			<Abstract type="html">To force a strong reference by the NOZCompressOperation, return YES.  Default == NO.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSData/noz_dataByCompressing:compressionLevel:</TokenIdentifier>
+			<Abstract type="html">Compress the receiver</Abstract>
+			<DeclaredIn>NSData+NOZAdditions.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)requiresStrongReference</Declaration>
-			
-			
-			<Anchor>//api/name/requiresStrongReference</Anchor>
-            <NodeRef refid="19"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/completionQueue</TokenIdentifier>
-			<Abstract type="html">Override to provide a different GCD queue for the completion callback (default is the main queue)</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
-			
-			<Declaration>- (dispatch_queue_t)completionQueue</Declaration>
-			
-			
-			<Anchor>//api/name/completionQueue</Anchor>
-            <NodeRef refid="19"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didCompleteWithResult:</TokenIdentifier>
-			<Abstract type="html">Called when the operation is finished.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
-			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result</Declaration>
+			<Declaration>- (nullable NSData *)noz_dataByCompressing:(nonnull id&lt;NOZEncoder&gt;)encoder compressionLevel:(NOZCompressionLevel)compressionLevel</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>op</Name>
-					<Abstract type="html">The NOZCompressOperation that finished.</Abstract>
+					<Name>encoder</Name>
+					<Abstract type="html">the NOZEncoder to compress with</Abstract>
 				</Parameter><Parameter>
-					<Name>result</Name>
-					<Abstract type="html">The NOZCompressResult for the operation.</Abstract>
+					<Name>compressionLevel</Name>
+					<Abstract type="html">the level to compress at (if supported by the encoder)</Abstract>
 				</Parameter>
 			</Parameters>
-			
-			<Anchor>//api/name/compressOperation:didCompleteWithResult:</Anchor>
+			<ReturnValue><Abstract type="html">The compressed data or nil if an error was encountered</Abstract></ReturnValue>
+			<Anchor>//api/name/noz_dataByCompressing:compressionLevel:</Anchor>
             <NodeRef refid="19"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/NOZCompressDelegate/compressOperation:didUpdateProgress:</TokenIdentifier>
-			<Abstract type="html">Called when the operation updates it&apos;s overall progress.</Abstract>
-			<DeclaredIn>NOZCompress.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSData/noz_dataByDecompressing:</TokenIdentifier>
+			<Abstract type="html">Decompress the receiver</Abstract>
+			<DeclaredIn>NSData+NOZAdditions.h</DeclaredIn>
 			
-			<Declaration>- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress</Declaration>
-			
-			
-			<Anchor>//api/name/compressOperation:didUpdateProgress:</Anchor>
+			<Declaration>- (nullable NSData *)noz_dataByDecompressing:(nonnull id&lt;NOZDecoder&gt;)decoder</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>encoder</Name>
+					<Abstract type="html">the NOZDecoder to decompress with</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The decompressed data or nil if an error was encountered</Abstract></ReturnValue>
+			<Anchor>//api/name/noz_dataByDecompressing:</Anchor>
             <NodeRef refid="19"/>
 		</Token>
 		

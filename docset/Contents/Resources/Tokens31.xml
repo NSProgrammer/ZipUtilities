@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/NOZZipperMode.html">
+	<File path="Protocols/NOZZippableEntry.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/NOZZipperMode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>NOZZipper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/NOZZippableEntry</TokenIdentifier>
+			<Abstract type="html">Protocol for a Zip Entry that can be Zipped</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
             
 			
 			<NodeRef refid="31"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/NOZZipperModeCreate</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>NOZZipperModeCreate</Declaration>
-            
-            <DeclaredIn>NOZZipper.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/timestamp</TokenIdentifier>
+			<Abstract type="html">Timestamp for the entry.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (nullable NSDate *)timestamp</Declaration>
+			
+			
+			<Anchor>//api/name/timestamp</Anchor>
             <NodeRef refid="31"/>
-        </Token>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/sizeInBytes</TokenIdentifier>
+			<Abstract type="html">The size in bytes of the entry.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (SInt64)sizeInBytes</Declaration>
+			
+			
+			<Anchor>//api/name/sizeInBytes</Anchor>
+            <NodeRef refid="31"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/canBeZipped</TokenIdentifier>
+			<Abstract type="html">Is the entry valid for zipping.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)canBeZipped</Declaration>
+			
+			
+			<Anchor>//api/name/canBeZipped</Anchor>
+            <NodeRef refid="31"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NOZZippableEntry/inputStream</TokenIdentifier>
+			<Abstract type="html">Input Stream for reading the entry into the zip file.</Abstract>
+			<DeclaredIn>NOZZipEntry.h</DeclaredIn>
+			
+			<Declaration>- (NSInputStream *)inputStream</Declaration>
+			
+			
+			<Anchor>//api/name/inputStream</Anchor>
+            <NodeRef refid="31"/>
+		</Token>
+		
         
         
 	</File>
