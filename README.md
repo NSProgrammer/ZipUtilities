@@ -315,9 +315,68 @@ _ZipUtilities_ provides a modular approach to compressing and decompressing indi
 
 Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
 
+*Example:*
+
+```objc
+NOZUpdateCompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Encoder alloc] init]);
+NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder alloc] init]);
+```
+
 *Apple compression library as an extra*
 
 `NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified in as a known compression method in the ZIP archive format.
+
+*Example of registering the Apple compression library coders:*
+
+```objc
+- (BOOL)updateRegisteredCodersWithAppleCompressionCoders
+{
+    if (![NOZXAppleCompressionCoder isSupported]) {
+        // Apple's Compression Lib is only supported on iOS 9+ and Mac OS X 10.11+
+        return NO;
+    }
+
+    // DEFLATE
+    // Replace existing default DEFLATE coders with Apple Compression variant
+
+    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate,
+                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
+    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate,
+                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
+    
+    // LZMA
+
+    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodLZMA,
+                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]);
+    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodLZMA,
+                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]);
+
+    // The following coders are not defined as known ZIP compression methods, 
+    // however that doesn't mean we can't extend the enumeration of ZIP methods
+    // to have custom compression methods.
+    //
+    // Since compression_algorithm enum values are all beyond the defined ZIP methods values
+    // and are all within 16 bits, we can just use the values directly.
+    // Puts the burden on the decoder to know that these non-ZIP compression methods
+    // are for their respective algorithm.
+
+    // LZ4
+
+    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZ4,
+                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]);
+    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZ4,
+                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]);
+
+    // Apple LZFSE - the new hotness for compression from Apple
+
+    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZFSE,
+                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]);
+    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZFSE,
+                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]);
+
+    return YES;
+}
+```
 
 ## TODO
 
