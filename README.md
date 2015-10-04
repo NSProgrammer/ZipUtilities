@@ -58,7 +58,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 
 - `NOZCompressRequest` is the object that encapsulates the _what_ and _how_ for the compression operation to act upon
 - `NOZCompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
-- `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`.  It provides callbacks for progress and completion.
+- `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`. It provides callbacks for progress and completion.
 - `NOZCompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
 
 *Example:*
@@ -85,7 +85,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
     dispatch_async(dispatch_get_main_queue(), ^{
 	    self.completionBlock(result.didSuccess, result.operationError);
     });
-} 
+}
 
 - (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress
 {
@@ -101,7 +101,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 
 - `NOZDecompressRequest` is the object that encapsulates the _what_ and _how_ for the decompression operation to act upon
 - `NOZDecompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
-- `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`.  It provides callbacks for progress, overwriting output files and completion.
+- `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`. It provides callbacks for progress, overwriting output files and completion.
 - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
 
 *Example:*
@@ -109,9 +109,9 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 ```obj-c
 - (NSOperation *)startDecompression
 {
-	NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:self.zipFilePath];
+    NOZDecompressRequest *request = [[NOZDecompressRequest ialloc] initWithSourceFilePath:self.zipFilePath];
 
-    NOZDecompressionOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:self];
     [self.operationQueue addOperation:op];
 
     // return operation so that a handle can be maintained and cancelled if necessary
@@ -123,7 +123,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
     dispatch_async(dispatch_get_main_queue(), ^{
 	    self.completionBlock(result.didSuccess, result.destinationFiles, result.operationError);
     });
-} 
+}
 
 - (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress
 {
