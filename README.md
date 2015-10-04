@@ -100,7 +100,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 `NOZDecompress.h` contains the service oriented interfaces related to decompressing from a zip archive.
 
 - `NOZDecompressRequest` is the object that encapsulates the _what_ and _how_ for the decompression operation to act upon
-- `NOZDecompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
+- `NOZDecompressOperation` is the `NSOperation` subclass object that performs the decompression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
 - `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`.  It provides callbacks for progress, overwriting output files and completion.
 - `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
 
@@ -111,7 +111,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 {
 	NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:self.zipFilePath];
 
-    NOZDecompressionOperation *op = [[NOZCompressOperation alloc] initWithRequest:request delegate:self];
+    NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:self];
     [self.operationQueue addOperation:op];
 
     // return operation so that a handle can be maintained and cancelled if necessary
