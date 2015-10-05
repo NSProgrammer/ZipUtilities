@@ -61,9 +61,28 @@
     }
 }
 
++ (BOOL)canTestWithMethod:(NOZCompressionMethod)method
+{
+    id<NOZEncoder> checkEncoder = NOZEncoderForCompressionMethod(method);
+    id<NOZDecoder> checkDecoder = NOZDecoderForCompressionMethod(method);
+
+    if (!checkEncoder || !checkDecoder) {
+        return NO;
+    }
+
+    if (![NOZXAppleCompressionCoder isSupported]) {
+        if ([checkEncoder isKindOfClass:[NOZXAppleCompressionCoder class]] ||
+            [checkDecoder isKindOfClass:[NOZXAppleCompressionCoder class]]) {
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
 - (void)runCodingWithMethod:(NOZCompressionMethod)method
 {
-    if (![NOZXAppleCompressionCoder isSupported]) {
+    if (![[self class] canTestWithMethod:method]) {
         return;
     }
 
@@ -107,6 +126,10 @@
 
 - (void)runCategoryCodingTest:(NOZCompressionMethod)method
 {
+    if (![[self class] canTestWithMethod:method]) {
+        return;
+    }
+
     NSString *sourceFile = [[NSBundle bundleForClass:[self class]] pathForResource:@"Aesop" ofType:@"txt"];
     NSData *sourceData = [NSData dataWithContentsOfFile:sourceFile];
 

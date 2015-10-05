@@ -64,18 +64,20 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
     CFOptionFlags _requestedEvents;
 }
 
+/*
+ NSInputStreams MUST call [super init] when subclassing (will crash with unrecognized selector before iOS 9).
+ But there are designated initializers making warnings show.
+ Suppress the warnings and get things working again without complaint.
+ */
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
 - (nonnull instancetype)initWithInputStream:(nonnull NSInputStream *)stream
                                     encoder:(nonnull id<NOZEncoder>)encoder
                            compressionLevel:(NOZCompressionLevel)compressionLevel
 {
-    static NSData *sData = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        char c = 0;
-        sData = [NSData dataWithBytes:&c length:1];
-    });
-
-    if (self = [super initWithData:sData]) {
+    if (self = [super init]) {
         _stream = stream;
         _encoder = encoder;
         _compressionLevel = compressionLevel;
@@ -84,6 +86,8 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
 
     return self;
 }
+
+#pragma clang diagnostic pop
 
 - (void)dealloc
 {
