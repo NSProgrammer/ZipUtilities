@@ -45,6 +45,9 @@ Add _ZipUtilities_ to your `Cartfile`
 github "NSProgrammer/ZipUtilities"
 ```
 
+## Documentation
+
+You can either build the documentation with appledoc locally or you can visit the documentation online at http://cocoadocs.org/docsets/ZipUtilities
 
 ## Overview
 
