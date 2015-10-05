@@ -105,7 +105,7 @@
     [[NSFileManager defaultManager] removeItemAtPath:zipDirectory error:NULL];
 }
 
-- (void)runDataCodingTest:(NOZCompressionMethod)method
+- (void)runCategoryCodingTest:(NOZCompressionMethod)method
 {
     NSString *sourceFile = [[NSBundle bundleForClass:[self class]] pathForResource:@"Aesop" ofType:@"txt"];
     NSData *sourceData = [NSData dataWithContentsOfFile:sourceFile];
@@ -116,29 +116,55 @@
     id<NOZDecoder> decoder = NOZDecoderForCompressionMethod(method);
     BOOL isRaw = NOZCompressionMethodNone == method;
 
-    compressedData = [sourceData noz_dataByCompressing:encoder
-                                      compressionLevel:NOZCompressionLevelMax];
-    if (encoder) {
-        XCTAssertNotNil(compressedData);
-        if (!isRaw) {
-            XCTAssertLessThan(compressedData.length, sourceData.length);
-            XCTAssertNotEqualObjects(compressedData, sourceData);
+    for (NSUInteger i = 0; i < 2; i++) {
+        if (i == 0) {
+            compressedData = [sourceData noz_dataByCompressing:encoder
+                                              compressionLevel:NOZCompressionLevelMax];
         } else {
-            XCTAssertEqual(compressedData.length, sourceData.length);
-            XCTAssertEqualObjects(compressedData, sourceData);
+            NSInputStream *sourceStream = (i == 1) ? [NSInputStream inputStreamWithFileAtPath:sourceFile] : [NSInputStream inputStreamWithData:sourceData];
+            sourceStream = [NSInputStream noz_compressedInputStream:sourceStream withEncoder:encoder compressionLevel:NOZCompressionLevelMax];
+
+            const size_t bufferSize = NSPageSize();
+            Byte buffer[bufferSize];
+            NSMutableData *compressedDataM = [NSMutableData data];
+
+            [sourceStream open];
+            NSInteger bytesRead = 1;
+            while (sourceStream.hasBytesAvailable && bytesRead > 0) {
+                bytesRead = [sourceStream read:buffer maxLength:bufferSize];
+                if (bytesRead > 0) {
+                    [compressedDataM appendBytes:buffer length:(NSUInteger)bytesRead];
+                }
+            }
+            [sourceStream close];
+
+            XCTAssertFalse(sourceStream.hasBytesAvailable);
+            XCTAssertGreaterThan(compressedDataM.length, (NSUInteger)0);
+            compressedData = (!sourceStream.hasBytesAvailable && compressedDataM.length > 0) ? [compressedDataM copy] : nil;
         }
 
-        decompressedData = [compressedData noz_dataByDecompressing:decoder];
+        if (encoder) {
+            XCTAssertNotNil(compressedData);
+            if (!isRaw) {
+                XCTAssertLessThan(compressedData.length, sourceData.length);
+                XCTAssertNotEqualObjects(compressedData, sourceData);
+            } else {
+                XCTAssertEqual(compressedData.length, sourceData.length);
+                XCTAssertEqualObjects(compressedData, sourceData);
+            }
 
-        if (decoder) {
-            XCTAssertNotNil(decompressedData);
-            XCTAssertEqual(decompressedData.length, sourceData.length);
-            XCTAssertEqualObjects(decompressedData, sourceData);
+            decompressedData = [compressedData noz_dataByDecompressing:decoder];
+
+            if (decoder) {
+                XCTAssertNotNil(decompressedData);
+                XCTAssertEqual(decompressedData.length, sourceData.length);
+                XCTAssertEqualObjects(decompressedData, sourceData);
+            } else {
+                XCTAssertNil(decompressedData);
+            }
         } else {
-            XCTAssertNil(decompressedData);
+            XCTAssertNil(compressedData);
         }
-    } else {
-        XCTAssertNil(compressedData);
     }
 }
 
@@ -154,7 +180,7 @@
     NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
-    [self runDataCodingTest:NOZCompressionMethodDeflate];
+    [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
     NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, originalEncoder);
     NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, originalDecoder);
@@ -162,14 +188,14 @@
     // Both original
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
-    [self runDataCodingTest:NOZCompressionMethodDeflate];
+    [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
     // Original Encoder / Custom Decoder
 
     NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
-    [self runDataCodingTest:NOZCompressionMethodDeflate];
+    [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
     NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, originalDecoder);
 
@@ -178,7 +204,7 @@
     NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
-    [self runDataCodingTest:NOZCompressionMethodDeflate];
+    [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
     NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, originalEncoder);
 
@@ -187,25 +213,25 @@
 - (void)testLZMACoding
 {
     [self runCodingWithMethod:NOZCompressionMethodLZMA];
-    [self runDataCodingTest:NOZCompressionMethodLZMA];
+    [self runCategoryCodingTest:NOZCompressionMethodLZMA];
 }
 
 - (void)testLZ4Coding
 {
     [self runCodingWithMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
-    [self runDataCodingTest:(NOZCompressionMethod)COMPRESSION_LZ4];
+    [self runCategoryCodingTest:(NOZCompressionMethod)COMPRESSION_LZ4];
 }
 
 - (void)testLZFSECoding
 {
     [self runCodingWithMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
-    [self runDataCodingTest:(NOZCompressionMethod)COMPRESSION_LZFSE];
+    [self runCategoryCodingTest:(NOZCompressionMethod)COMPRESSION_LZFSE];
 }
 
 - (void)testRawCoding
 {
     [self runCodingWithMethod:NOZCompressionMethodNone];
-    [self runDataCodingTest:NOZCompressionMethodNone];
+    [self runCategoryCodingTest:NOZCompressionMethodNone];
 }
 
 @end

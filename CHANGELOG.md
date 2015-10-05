@@ -2,6 +2,11 @@
 
 ## History
 
+### 1.6.5  (Oct 4, 2015) - Nolan O'Brien
+
+- Fix bug in Apple Encoder/Decoder
+- Add convenience NSInputStream for compressed streams (could be optimized further)
+
 ### 1.6.0  (Sep 26, 2015) - Nolan O'Brien
 
 - Rename NOZCompressionEncoder/Decoder to NOZEncoder/Decoder
