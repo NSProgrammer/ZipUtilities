@@ -1,7 +1,5 @@
 # ZipUtilities
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NSProgrammer/ZipUtilities/master/LICENSE.md)
-
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/ZipUtilities.svg?style=flat)](https://CocoaPods.org) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NSProgrammer/ZipUtilities/master/LICENSE.md) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/ZipUtilities.svg?style=flat)](https://CocoaPods.org) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ![Targets](https://img.shields.io/badge/Targets-OSX.Framework_iOS.Framework_iOS.lib-lightgrey.svg)
 
@@ -385,6 +383,7 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
 
 ### Eventually
 
+- 64-bit file support (big file archiving)
 - add password support
   - This is low priority as encrypting zip file content is not the appropriate way to secure data
 - add support for per entry "extra info" in an archive
