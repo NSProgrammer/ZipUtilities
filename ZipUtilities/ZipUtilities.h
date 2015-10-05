@@ -48,3 +48,4 @@ FOUNDATION_EXPORT const unsigned char ZipUtilitiesVersionString[];
 #import "NOZZipper.h"
 
 #import "NSData+NOZAdditions.h"
+#import "NSStream+NOZAdditions.h"

@@ -223,13 +223,17 @@
         }
         context.compressedDataPosition += oldDstSize - stream->dst_size;
 
-        if (stream->dst_size == 0) {
-            if (!context.flushCallback(self, context, context.compressedDataBuffer, context.compressedDataPosition)) {
-                success = NO;
+        if (stream->dst_size == 0 || (final && stream->src_size == 0)) {
+            if (context.compressedDataPosition > 0) {
+                if (!context.flushCallback(self, context, context.compressedDataBuffer, context.compressedDataPosition)) {
+                    success = NO;
+                }
+                context.compressedDataPosition = 0;
+                stream->dst_size = context.compressedDataBufferSize;
+                stream->dst_ptr = context.compressedDataBuffer;
+            } else if (final && stream->src_size == 0 && COMPRESSION_STATUS_OK == status) {
+                status = COMPRESSION_STATUS_END;
             }
-            context.compressedDataPosition = 0;
-            stream->dst_size = context.compressedDataBufferSize;
-            stream->dst_ptr = context.compressedDataBuffer;
         }
 
         if (COMPRESSION_STATUS_END == status) {

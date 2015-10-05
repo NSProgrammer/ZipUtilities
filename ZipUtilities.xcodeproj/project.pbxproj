@@ -55,6 +55,12 @@
 		1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
 		1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
 		1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79C1B899804004AD418 /* NOZRawCoders.m */; };
+		1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD441BE1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD441BF1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD441C01BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		1CD441C11BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		1CD441C21BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
 		1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB31B757A38000B93C4 /* Aesop.txt */; };
 		1CD9BAB61B757E3F000B93C4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9BAB51B757E3F000B93C4 /* libz.dylib */; };
 		1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB81B75B419000B93C4 /* Directory.zip */; };
@@ -210,6 +216,8 @@
 		1CCAC7971B890FAD004AD418 /* NOZCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompression.m; sourceTree = "<group>"; };
 		1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDeflateCoders.m; sourceTree = "<group>"; };
 		1CCAC79C1B899804004AD418 /* NOZRawCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZRawCoders.m; sourceTree = "<group>"; };
+		1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+NOZAdditions.h"; sourceTree = "<group>"; };
+		1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+NOZAdditions.m"; sourceTree = "<group>"; };
 		1CD9BAB31B757A38000B93C4 /* Aesop.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aesop.txt; sourceTree = "<group>"; };
 		1CD9BAB51B757E3F000B93C4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1CD9BAB81B75B419000B93C4 /* Directory.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Directory.zip; sourceTree = "<group>"; };
@@ -349,6 +357,8 @@
 				1C05422A1B7BDD97007CE7BA /* NOZZipper.m */,
 				1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */,
 				1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */,
+				1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */,
+				1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */,
 				1C6BF7AF1B74769400969629 /* Project */,
 			);
 			path = ZipUtilities;
@@ -408,9 +418,9 @@
 		4623A8A81B9A8A6B00A56535 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 				4623A8311B9A828A00A56535 /* Info.plist */,
 				4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */,
+				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -447,6 +457,7 @@
 				1C7634321BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
+				1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
 				1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */,
@@ -462,6 +473,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CD441BE1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
 				4623A88F1B9A83FE00A56535 /* NOZ_Project.h in Headers */,
 				4623A8831B9A83E200A56535 /* NOZUtils.h in Headers */,
 				4623A8871B9A83E900A56535 /* NOZZipEntry.h in Headers */,
@@ -484,6 +496,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CD441BF1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
 				4623A8901B9A83FE00A56535 /* NOZ_Project.h in Headers */,
 				4623A8841B9A83E300A56535 /* NOZUtils.h in Headers */,
 				4623A8881B9A83EA00A56535 /* NOZZipEntry.h in Headers */,
@@ -728,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */,
+				1CD441C01BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */,
 				1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
@@ -759,6 +773,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4623A8651B9A83AE00A56535 /* NOZ_Project.m in Sources */,
+				1CD441C11BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				4623A8731B9A83C900A56535 /* NOZDeflateCoders.m in Sources */,
 				4623A87D1B9A83D900A56535 /* NOZSyncStepOperation.m in Sources */,
 				4623A8771B9A83D000A56535 /* NOZError.m in Sources */,
@@ -790,6 +805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4623A8661B9A83AF00A56535 /* NOZ_Project.m in Sources */,
+				1CD441C21BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				4623A8741B9A83CA00A56535 /* NOZDeflateCoders.m in Sources */,
 				4623A87E1B9A83D900A56535 /* NOZSyncStepOperation.m in Sources */,
 				4623A8781B9A83D000A56535 /* NOZError.m in Sources */,
