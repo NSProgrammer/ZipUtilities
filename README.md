@@ -100,11 +100,16 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 func startCompression() -> NSOperation
 {
     let request = NOZCompressRequest.init(destinationPath: self.zipFilePath)
-    request.addEntriesInDirectory(maniacDir as String, compressionSelectionBlock: nil)
-    request.addFileEntry(aesopFile as String)
+    request.addEntriesInDirectory(self.sourceDirectoryPath, compressionSelectionBlock: nil)
+    request.addDataEntry(self.data name:"Aesop.txt")
+    for entry in self.additionalEntries {
+        request.addEntry(entry)
+    }
 
     let operation = NOZCompressOperation.init(request: request, delegate: self)
     zipQueue?.addOperation(operation)
+    
+    // return operation so that a handle can be maintained and cancelled if necessary
     return operation
 }
 
