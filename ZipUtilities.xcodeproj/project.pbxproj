@@ -51,6 +51,8 @@
 		1C7634421BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634431BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634441BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; settings = {ASSET_TAGS = (); }; };
+		1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; settings = {ASSET_TAGS = (); }; };
 		1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
 		1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
@@ -212,6 +214,9 @@
 		1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NOZAdditions.m"; sourceTree = "<group>"; };
 		1C7634381BB64F2100BBFECF /* NOZEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZEncoder.h; sourceTree = "<group>"; };
 		1C7634401BB6522800BBFECF /* NOZDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZDecoder.h; sourceTree = "<group>"; };
+		1C7B085F1BC46D1500C14196 /* FrameworkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FrameworkTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C7B08601BC46D1500C14196 /* OSXFrameworkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OSXFrameworkTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NOZSwiftTests.swift; sourceTree = "<group>"; };
 		1CCAC7961B890FAD004AD418 /* NOZCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZCompression.h; sourceTree = "<group>"; };
 		1CCAC7971B890FAD004AD418 /* NOZCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompression.m; sourceTree = "<group>"; };
 		1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDeflateCoders.m; sourceTree = "<group>"; };
@@ -372,6 +377,9 @@
 				1C6BF7B61B7564A700969629 /* NOZCompressTests.m */,
 				1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */,
 				1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */,
+				1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */,
+				1C7B085F1BC46D1500C14196 /* FrameworkTests-Bridging-Header.h */,
+				1C7B08601BC46D1500C14196 /* OSXFrameworkTests-Bridging-Header.h */,
 			);
 			path = ZipUtilitiesTests;
 			sourceTree = "<group>";
@@ -633,6 +641,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NOZ;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = NSProgrammer;
 				TargetAttributes = {
@@ -793,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */,
 				4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */,
 				1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				4623A8A31B9A883600A56535 /* NOZCompressTests.m in Sources */,
@@ -825,6 +835,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */,
 				4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */,
 				1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */,
@@ -989,6 +1000,7 @@
 		1C6BF7881B74086000969629 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1005,6 +1017,7 @@
 		1C6BF7891B74086000969629 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1069,6 +1082,7 @@
 		4623A8451B9A828A00A56535 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1080,12 +1094,15 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/FrameworkTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4623A8461B9A828A00A56535 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -1093,6 +1110,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/FrameworkTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1152,6 +1170,7 @@
 		4623A8631B9A82AF00A56535 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1169,12 +1188,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/OSXFrameworkTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4623A8641B9A82AF00A56535 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1187,6 +1209,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/OSXFrameworkTests-Bridging-Header.h";
 			};
 			name = Release;
 		};

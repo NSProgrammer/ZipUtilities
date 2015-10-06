@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.6.5'
+pod 'ZipUtilities', '~> 1.6.6'
 ```
 
 #### Carthage
@@ -96,6 +96,33 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 }
 ```
 
+```swift
+func startCompression() -> NSOperation
+{
+    let request = NOZCompressRequest.init(destinationPath: self.zipFilePath)
+    request.addEntriesInDirectory(maniacDir as String, compressionSelectionBlock: nil)
+    request.addFileEntry(aesopFile as String)
+
+    let operation = NOZCompressOperation.init(request: request, delegate: self)
+    zipQueue?.addOperation(operation)
+    return operation
+}
+
+func compressOperation(op: NOZCompressOperation, didCompleteWithResult result: NOZCompressResult)
+{
+    dispatch_async(dispatch_get_main_queue(), {
+        self.completionBlock(result.didSuccess, result.operationError);
+    })
+}
+
+func compressOperation(op: NOZCompressOperation, didUpdateProgress progress: Float)
+{
+    dispatch_async(dispatch_get_main_queue(), {
+        self.progressBlock(progress);
+    })
+}
+```
+
 **`NOZDecompress.h`**
 
 `NOZDecompress.h` contains the service oriented interfaces related to decompressing from a zip archive.
@@ -110,7 +137,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 ```obj-c
 - (NSOperation *)startDecompression
 {
-    NOZDecompressRequest *request = [[NOZDecompressRequest ialloc] initWithSourceFilePath:self.zipFilePath];
+    NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:self.zipFilePath];
 
     NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:self];
     [self.operationQueue addOperation:op];
@@ -131,6 +158,30 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 	dispatch_async(dispatch_get_main_queue(), ^{
 	    self.progressBlock(progress);
 	});
+}
+```
+
+```swift
+func startDecompression() -> NSOperation
+{
+    let request = NOZDecompressRequest.init(sourceFilePath: self.zipFilePath)
+    let operation = NOZDecompressOperation.init(request: request, delegate: self)
+    zipQueue?.addOperation(operation)
+    return operation
+}
+
+func decompressOperation(op: NOZDecompressOperation, didCompleteWithResult result: NOZDecompressResult)
+{
+    dispatch_async(dispatch_get_main_queue(), {
+        self.completionBlock(result.didSuccess, result.destinationFiles, result.operationError);
+    })
+}
+
+func decompressOperation(op: NOZDecompressOperation, didUpdateProgress progress: Float)
+{
+    dispatch_async(dispatch_get_main_queue(), {
+        self.progressBlock(progress);
+    })
 }
 ```
 

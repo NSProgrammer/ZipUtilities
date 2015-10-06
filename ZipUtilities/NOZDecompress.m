@@ -221,8 +221,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         result.didSucceed = YES;
         result.destinationFiles = _entryPaths;
 
-        result.uncompressedSize = (SInt64)[[fm attributesOfItemAtPath:_request.sourceFilePath error:NULL] fileSize];
-        result.compressedSize = _expectedUncompressedSize;
+        result.uncompressedSize = _expectedUncompressedSize;
+        result.compressedSize = (SInt64)[[fm attributesOfItemAtPath:_request.sourceFilePath error:NULL] fileSize];
     }
     _result = result;
 

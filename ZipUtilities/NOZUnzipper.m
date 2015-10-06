@@ -322,7 +322,12 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         return NO;
     }
 
-    FILE *file = fopen(destinationFile.UTF8String, overwrite ? "w+" : "r+");
+    if (!overwrite && [fm fileExistsAtPath:destinationFile]) {
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EEXIST userInfo:nil];
+        return NO;
+    }
+
+    FILE *file = fopen(destinationFile.UTF8String, "w+");
     if (!file) {
         stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
         return NO;
