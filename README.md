@@ -62,7 +62,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 - `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`. It provides callbacks for progress and completion.
 - `NOZCompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
 
-*Example:*
+*Example (Objective-C):*
 
 ```obj-c
 - (NSOperation *)startCompression
@@ -93,6 +93,45 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 	dispatch_async(dispatch_get_main_queue(), ^{
 	    self.progressBlock(progress);
 	});
+}
+```
+
+*Example (Swift):*
+
+```swift
+import Foundation
+import ZipUtilities
+
+class ProjectCompressor {
+    typealias ProjectCompressorCompletionHandler = (success: Bool) -> ()
+    
+    private let directoryURL: NSURL
+    
+    init(directoryURL: NSURL) {
+        self.directoryURL = directoryURL
+    }
+    
+    fun compress(completion: ProjectCompressorCompletionHandler) {
+        let destinationPath = directoryURL.URLByAppendingPathComponent("archive.zip").path!
+        let request = NOZCompressRequest(destinationPath: destinationPath)
+        request.addEntriesInDirectory(directoryURL.path!, compressionSelectionBlock: nil)
+        
+        let op = NOZCompressOperation(request: request) { operation, result in
+            completion(success: result.didSucceed)
+        }
+        NSOperationQueue.currentQueue()?.addOperation(op)
+    }
+}
+
+// ...
+
+let compressor = ProjectCompressor(directoryURL: projectURL)
+compressor.compress  { success in
+    if success {
+        print("compressed!")
+    } else {
+        print("failed to compress...")
+    }
 }
 ```
 
