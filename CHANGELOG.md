@@ -2,6 +2,13 @@
 
 ## History
 
+### 1.6.6  (Oct 6, 2015) - Nolan O'Brien
+
+- Fix bug in Unzipper when "overwrite" is NO
+- Add Swift unit tests
+- Add Swift example code for operation based compression/decompression
+- Fix compression ratio of NOZDecompressResult
+
 ### 1.6.5  (Oct 4, 2015) - Nolan O'Brien
 
 - Fix bug in Apple Encoder/Decoder
