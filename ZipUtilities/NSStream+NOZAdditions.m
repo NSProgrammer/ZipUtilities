@@ -161,6 +161,7 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
 {
     if (len == 0) {
         _encoderError = NOZErrorCreate(NOZErrorCodeZipFailedToCompressEntry, @{ @"reason" : @"cannot read with zero length buffer" });
+        return -1;
     }
 
     if (self.streamError) {
