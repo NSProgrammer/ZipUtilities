@@ -406,7 +406,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return YES;
 }
 
-- (void)compressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
+- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
 {
     if (_completionBlock) {
         _completionBlock(op, result);

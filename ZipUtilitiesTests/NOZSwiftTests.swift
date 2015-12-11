@@ -157,4 +157,15 @@ func TearDownZipQueue()
             // NSLog("Progress: \(progress)%")
         })
     }
+    
+    func testCompletionClosureIsCalled() {
+        let expectation = expectationWithDescription("completion closure is called")
+        let request = NOZDecompressRequest(sourceFilePath: "")
+        let operation = NOZDecompressOperation(request: request) { (operation, result) -> Void in
+            expectation.fulfill()
+        }
+        zipQueue?.addOperation(operation)
+        operation.waitUntilFinished()
+        waitForExpectationsWithTimeout(0.0, handler: nil)
+    }
 }
