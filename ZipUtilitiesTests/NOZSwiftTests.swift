@@ -165,7 +165,6 @@ func TearDownZipQueue()
             expectation.fulfill()
         }
         zipQueue?.addOperation(operation)
-        operation.waitUntilFinished()
-        waitForExpectationsWithTimeout(0.0, handler: nil)
+        waitForExpectationsWithTimeout(10.0, handler: nil)
     }
 }
