@@ -2,6 +2,12 @@
 
 ## History
 
+### 1.7.0  (Dec 15, 2015) - Nolan O'Brien
+
+- Fix NOZErrorCodes (paging was off)
+- Fix Decoding large files with Deflate
+- Added unit tests
+
 ### 1.6.6  (Oct 6, 2015) - Nolan O'Brien
 
 - Fix bug in Unzipper when "overwrite" is NO

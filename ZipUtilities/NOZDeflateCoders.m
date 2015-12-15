@@ -240,6 +240,9 @@
 @property (nonatomic, readonly) Byte *decompressedDataBuffer;
 @property (nonatomic, readonly) size_t decompressedDataBufferSize;
 //@property (nonatomic) size_t decompressedDataPosition;
+
+- (void)doubleDecompressDataBuffer;
+
 @end
 
 @implementation NOZDeflateDecoderContext
@@ -273,6 +276,26 @@
 - (z_stream *)zStream
 {
     return &_zStream;
+}
+
+- (void)doubleDecompressDataBuffer
+{
+    static const size_t kMaxBufferSize = 5 * 1024 * 1024; // 5MBs
+    if (_decompressedDataBufferSize == kMaxBufferSize) {
+        _decompressedDataBufferSize = 0;
+        free(_decompressedDataBuffer);
+        _decompressedDataBuffer = NULL;
+        return;
+    }
+
+    size_t newSize = _decompressedDataBufferSize * 2;
+    if (newSize > kMaxBufferSize) {
+        newSize = kMaxBufferSize;
+    }
+    _decompressedDataBuffer = reallocf(_decompressedDataBuffer, newSize);
+    if (NULL != _decompressedDataBuffer) {
+        _decompressedDataBufferSize = newSize;
+    }
 }
 
 @end
@@ -318,13 +341,36 @@
         zStream->avail_out = (UInt32)context.decompressedDataBufferSize;
         zStream->next_out = context.decompressedDataBuffer;
 
-        zErr = inflate(zStream, Z_NO_FLUSH);
+        if (zStream->avail_out > 0) {
+            zErr = inflate(zStream, Z_NO_FLUSH);
+        } else {
+            // no memory provided (likely due to running out of memory)
+            zErr = Z_MEM_ERROR;
+        }
 
-        if (zErr == Z_OK || zErr == Z_STREAM_END) {
+        if (zErr == Z_OK || zErr == Z_STREAM_END || zErr == Z_BUF_ERROR) {
 
             size_t consumed = context.decompressedDataBufferSize - zStream->avail_out;
-            if (!context.flushCallback(self, context, context.decompressedDataBuffer, consumed)) {
-                zErr = Z_UNKNOWN;
+            if (consumed > 0) {
+                if (!context.flushCallback(self, context, context.decompressedDataBuffer, consumed)) {
+                    zErr = Z_UNKNOWN;
+                }
+            }
+
+            // Z_BUF_ERROR is not fatal
+            if (zErr == Z_BUF_ERROR) {
+
+                // did we run out of output buffer?
+                if (zStream->avail_out == 0 && zStream->avail_in > 0) {
+                    // not enough buffer, double it
+                    [context doubleDecompressDataBuffer];
+
+                    // retry
+                    zStream->avail_out = 0;
+                    zErr = Z_OK;
+                }
+                // else, we ran out of input buffer... move along!
+
             }
 
         }
@@ -333,6 +379,8 @@
 
     if (zErr == Z_STREAM_END) {
         context.hasFinished = YES;
+    } else if (zErr == Z_BUF_ERROR && length > 0) {
+        // continue
     } else if (zErr != Z_OK) {
         return NO;
     }

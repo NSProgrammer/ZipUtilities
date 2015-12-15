@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.6.6'
+pod 'ZipUtilities', '~> 1.7'
 ```
 
 #### Carthage
@@ -60,7 +60,7 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 - `NOZCompressRequest` is the object that encapsulates the _what_ and _how_ for the compression operation to act upon
 - `NOZCompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
 - `NOZCompressDelegate` is the delegate for the `NOZCompressOperation`. It provides callbacks for progress and completion.
-- `NOZCompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
+- `NOZCompressResult` is the object that encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the path to the created zip archive and other informative metrics like duration and compression ratio.
 
 *Example:*
 
@@ -135,7 +135,7 @@ func compressOperation(op: NOZCompressOperation, didUpdateProgress progress: Flo
 - `NOZDecompressRequest` is the object that encapsulates the _what_ and _how_ for the decompression operation to act upon
 - `NOZDecompressOperation` is the `NSOperation` subclass object that performs the compression. By being an `NSOperation`, consumers can take advantage of cancelling, prioritization and dependencies.  Progress is also provided with the operation and can be observed via _KVO_ on the `progress` property or via the delegate callback.
 - `NOZDecompressDelegate` is the delegate for the `NOZDecompressOperation`. It provides callbacks for progress, overwriting output files and completion.
-- `NOZDecompressResult` is the object taht encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
+- `NOZDecompressResult` is the object that encapsulates the result of a compress operation. It holds whether or not the operation succeed, the error if it didn't succeed, the paths to the output unarchived files and other informative metrics like duration and compression ratio.
 
 *Example:*
 
@@ -451,6 +451,6 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
 ## Dependencies
 
 ### Test files for zipping/unzipping
-As a part of unit testing, Aesop's Fables and Maniac Mansion are both used for unit testing.  Neither has a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.
+As a part of unit testing Aesop's Fables, the Star Wars Episode VII trailer and Maniac Mansion are used for unit testing.  Aesop's Fables and Maniac Mansion no longer hold a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.  The Star Wars Episode VII Trailer is free for distribution and also provides a useful file for testing by being a large file.
 
 ![MANIAC.EXE](https://media.giphy.com/media/DPQ4G030oJdcc/giphy.gif)
