@@ -14,15 +14,21 @@
 		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
-		1C19A25A1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A25A1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; };
+		1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; };
+		1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */; };
 		1C19A25E1BA3925D004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C19A25F1BA3926A004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C19A2611BA39284004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A2601BA39284004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
-		1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; settings = {ASSET_TAGS = (); }; };
+		1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; };
+		1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; };
+		1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; };
+		1C2DFB3B1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */; };
+		1C2DFB3C1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */; };
+		1C2DFB3D1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */; };
+		1C2DFB3F1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */; };
+		1C2DFB401C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */; };
+		1C2DFB411C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */; };
 		1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223791B77BE9F00DC0A33 /* NOZError.m */; };
@@ -42,17 +48,17 @@
 		1C7634321BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634331BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634341BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C7634351BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		1C7634361BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		1C7634371BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		1C7634351BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; };
+		1C7634361BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; };
+		1C7634371BB6455700BBFECF /* NSData+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */; };
 		1C76343A1BB64F2100BBFECF /* NOZEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634381BB64F2100BBFECF /* NOZEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C76343B1BB64F2100BBFECF /* NOZEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634381BB64F2100BBFECF /* NOZEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C76343C1BB64F2100BBFECF /* NOZEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634381BB64F2100BBFECF /* NOZEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634421BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634431BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634441BB6522800BBFECF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; settings = {ASSET_TAGS = (); }; };
-		1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; settings = {ASSET_TAGS = (); }; };
+		1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; };
+		1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; };
 		1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
 		1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
@@ -60,9 +66,9 @@
 		1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CD441BE1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CD441BF1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1CD441C01BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		1CD441C11BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		1CD441C21BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		1CD441C01BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; };
+		1CD441C11BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; };
+		1CD441C21BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; };
 		1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB31B757A38000B93C4 /* Aesop.txt */; };
 		1CD9BAB61B757E3F000B93C4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9BAB51B757E3F000B93C4 /* libz.dylib */; };
 		1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB81B75B419000B93C4 /* Directory.zip */; };
@@ -189,6 +195,8 @@
 		1C19A2601BA39284004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libcompression.tbd; sourceTree = DEVELOPER_DIR; };
 		1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXAppleCompressionCoder.h; path = Extra/NOZXAppleCompressionCoder.h; sourceTree = "<group>"; };
 		1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXAppleCompressionCoder.m; path = Extra/NOZXAppleCompressionCoder.m; sourceTree = "<group>"; };
+		1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Star.Wars.7.Trailer.mp4.zip; sourceTree = "<group>"; };
+		1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Star.Wars.7.Trailer.mp4; sourceTree = "<group>"; };
 		1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDecompressTests.m; sourceTree = "<group>"; };
 		1C3223781B77BE9F00DC0A33 /* NOZError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZError.h; sourceTree = "<group>"; };
 		1C3223791B77BE9F00DC0A33 /* NOZError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZError.m; sourceTree = "<group>"; };
@@ -419,6 +427,8 @@
 				1CD9BAB91B75B419000B93C4 /* File.zip */,
 				1C16F4F01B787EC100963AB3 /* maniac-mansion */,
 				1CD9BABA1B75B419000B93C4 /* Mixed.zip */,
+				1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */,
+				1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -693,8 +703,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */,
+				1C2DFB3F1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				1C3223851B78501A00DC0A33 /* Data.zip in Resources */,
 				1CD9BABD1B75B419000B93C4 /* File.zip in Resources */,
+				1C2DFB3B1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
 				1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */,
 				1CD9BABE1B75B419000B93C4 /* Mixed.zip in Resources */,
 				1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */,
@@ -714,8 +726,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4623A8971B9A882700A56535 /* Aesop.txt in Resources */,
+				1C2DFB401C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				4623A89A1B9A882700A56535 /* File.zip in Resources */,
 				4623A89B1B9A882700A56535 /* Mixed.zip in Resources */,
+				1C2DFB3C1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
 				4623A8991B9A882700A56535 /* Directory.zip in Resources */,
 				4623A8981B9A882700A56535 /* Data.zip in Resources */,
 				4623A8A11B9A882D00A56535 /* maniac-mansion in Resources */,
@@ -734,8 +748,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4623A89C1B9A882800A56535 /* Aesop.txt in Resources */,
+				1C2DFB411C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				4623A89F1B9A882800A56535 /* File.zip in Resources */,
 				4623A8A01B9A882800A56535 /* Mixed.zip in Resources */,
+				1C2DFB3D1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
 				4623A89E1B9A882800A56535 /* Directory.zip in Resources */,
 				4623A89D1B9A882800A56535 /* Data.zip in Resources */,
 				4623A8A21B9A882D00A56535 /* maniac-mansion in Resources */,
