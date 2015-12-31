@@ -277,7 +277,9 @@ static NSOperationQueue *sQueue = nil;
     NSString *zipFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"maniac-mansion.zip"];
 
     NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:zipFilePath];
-    [request addEntriesInDirectory:sourceDirectoryPath compressionSelectionBlock:NULL];
+    [request addEntriesInDirectory:sourceDirectoryPath filterBlock:^BOOL(NSString *filePath) {
+        return [filePath.lastPathComponent hasPrefix:@"."];
+    } compressionSelectionBlock:NULL];
 
     [self runGambitWithRequest:request expectedOutputZipName:nil];
 }
@@ -290,7 +292,9 @@ static NSOperationQueue *sQueue = nil;
     NSString *zipFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Mixed.zip"];
 
     NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:zipFilePath];
-    [request addEntriesInDirectory:sourceDirectoryPath compressionSelectionBlock:NULL];
+    [request addEntriesInDirectory:sourceDirectoryPath filterBlock:^BOOL(NSString *filePath) {
+        return [filePath.lastPathComponent hasPrefix:@"."];
+    } compressionSelectionBlock:NULL];
     [request addDataEntry:data name:@"Aesop.txt"];
 
     [self runGambitWithRequest:request expectedOutputZipName:nil];

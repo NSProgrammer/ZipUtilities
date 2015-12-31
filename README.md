@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.7.0'
+pod 'ZipUtilities', '~> 1.7.1'
 ```
 
 #### Carthage
@@ -68,7 +68,11 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 - (NSOperation *)startCompression
 {
 	NOZCompressRequest *request = [[NOZCompressRequest alloc] initWithDestinationPath:self.zipFilePath];
-    [request addEntriesInDirectory:self.sourceDirectoryPath compressionSelectionBlock:NULL];
+    [request addEntriesInDirectory:self.sourceDirectoryPath 
+                       filterBlock:^BOOL(NSString *filePath) {
+        return [filePath.lastPathComponent hasPrefix:@"."];
+    }
+        compressionSelectionBlock:NULL];
     [request addDataEntry:self.data name:@"Aesop.txt"];
     for (id<NOZZippableEntry> entry in self.additionalEntries) {
         [request addEntry:entry];
@@ -100,7 +104,9 @@ The primary value of _ZipUtilities_ is that it provides an easy to use interface
 func startCompression() -> NSOperation
 {
     let request = NOZCompressRequest.init(destinationPath: self.zipFilePath)
-    request.addEntriesInDirectory(self.sourceDirectoryPath, compressionSelectionBlock: nil)
+    request.addEntriesInDirectory(self.sourceDirectoryPath, filterBlock: { (filePath: String) -> Bool in
+        return ((filePath as NSString).lastPathComponent as NSString).hasPrefix(".")
+    }, compressionSelectionBlock: nil)
     request.addDataEntry(self.data name:"Aesop.txt")
     for entry in self.additionalEntries {
         request.addEntry(entry)

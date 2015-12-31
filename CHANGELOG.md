@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.7.1  (Dec 31, 2015) - Nolan O'Brien
+
+- Add ability to filter files being added to an NOZCompressRequest when adding files via containing directory path
+
 ### 1.7.0  (Dec 15, 2015) - Nolan O'Brien
 
 - Fix NOZErrorCodes (paging was off)
