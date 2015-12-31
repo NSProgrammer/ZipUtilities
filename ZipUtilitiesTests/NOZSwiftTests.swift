@@ -88,7 +88,9 @@ func TearDownZipQueue()
         let maniacDir : NSString = sourceDir.stringByAppendingPathComponent("maniac-mansion")
 
         let request = NOZCompressRequest.init(destinationPath: zipFilePath)
-        request.addEntriesInDirectory(maniacDir as String, compressionSelectionBlock: nil)
+        request.addEntriesInDirectory(maniacDir as String, filterBlock: { (filePath: String) -> Bool in
+            return ((filePath as NSString).lastPathComponent as NSString).hasPrefix(".")
+            }, compressionSelectionBlock: nil)
         request.addFileEntry(aesopFile as String)
 
         let operation = NOZCompressOperation.init(request: request, delegate: self)

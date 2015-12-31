@@ -458,13 +458,25 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
     [_mutableEntries addObject:[entry copy]];
 }
 
-- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)block
+- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(NOZCompressionSelectionBlock)block
+{
+    [self addEntriesInDirectory:directoryPath filterBlock:NULL compressionSelectionBlock:block];
+}
+
+- (void)addEntriesInDirectory:(NSString *)directoryPath filterBlock:(NOZCompressionShouldExcludeFileBlock)filterBlock compressionSelectionBlock:(NOZCompressionSelectionBlock)selectionBlock
 {
     for (NOZFileZipEntry *entry in NOZEntriesFromDirectory(directoryPath)) {
-        if (block) {
+        if (filterBlock) {
+            if (filterBlock(entry.filePath)) {
+                // skip this file
+                continue;
+            }
+        }
+
+        if (selectionBlock) {
             NOZCompressionMethod method = NOZCompressionMethodDeflate;
             NOZCompressionLevel level = NOZCompressionLevelDefault;
-            block(entry.filePath, &method, &level);
+            selectionBlock(entry.filePath, &method, &level);
             entry.compressionLevel = level;
             entry.compressionMethod = method;
         }
