@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.7.2  (Jan 11, 2016) - Nolan O'Brien
+
+- Provide options when saving a record so that we can support writing an entry to disk without the interim path
+
 ### 1.7.1  (Dec 31, 2015) - Nolan O'Brien
 
 - Add ability to filter files being added to an NOZCompressRequest when adding files via containing directory path

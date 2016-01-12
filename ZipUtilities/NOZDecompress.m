@@ -297,7 +297,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         NSError *innerError = nil;
         [_unzipper saveRecord:record
                   toDirectory:_sanitizedDestinationDirectoryPath
-              shouldOverwrite:overwrite
+                      options:(overwrite) ? NOZUnzipperSaveRecordOptionOverwriteExisting : NOZUnzipperSaveRecordOptionsNone
                 progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort) {
                     if (self.isCancelled) {
                         stackError = kCancelledError;

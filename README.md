@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.7.1'
+pod 'ZipUtilities', '~> 1.7.2'
 ```
 
 #### Carthage
@@ -366,7 +366,7 @@ into destinations (NSData, streams and/or files).
         return YES;
     }
 
-    return [self saveRecord:record toDirectory:someDestinationRootDirectory shouldOverwrite:NO progressBlock:NULL error:error];
+    return [self saveRecord:record toDirectory:someDestinationRootDirectory options:NOZUnzipperSaveRecordOptionsNone progressBlock:NULL error:error];
 }
 ```
 
