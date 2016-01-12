@@ -303,11 +303,24 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return data;
 }
 
-- (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)record
-       toDirectory:(nonnull NSString *)destinationRootDirectory
+- (BOOL)saveRecord:(NOZCentralDirectoryRecord *)record
+       toDirectory:(NSString *)destinationRootDirectory
    shouldOverwrite:(BOOL)overwrite
      progressBlock:(nullable NOZProgressBlock)progressBlock
              error:(out NSError * __nullable __autoreleasing * __nullable)error
+{
+    return [self saveRecord:record
+                toDirectory:destinationRootDirectory
+                    options:NOZUnzipperSaveRecordOptionOverwriteExisting
+              progressBlock:progressBlock
+                      error:error];
+}
+
+- (BOOL)saveRecord:(NOZCentralDirectoryRecord *)record
+       toDirectory:(NSString *)destinationRootDirectory
+           options:(NOZUnzipperSaveRecordOptions)options
+     progressBlock:(NOZProgressBlock)progressBlock
+             error:(out NSError * _Nullable __autoreleasing *)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -315,8 +328,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
             *error = stackError;
         }
     });
+
+    BOOL overwrite = (options & NOZUnzipperSaveRecordOptionOverwriteExisting) != 0;
+    BOOL followIntermediatePaths = !(options & NOZUnzipperSaveRecordOptionIgnoreIntermediatePath);
+
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy] stringByStandardizingPath];
+    NSString *destinationFile = nil;
+    if (followIntermediatePaths) {
+        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy] stringByStandardizingPath];
+    } else {
+        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy.lastPathComponent] stringByStandardizingPath];
+    }
 
     if (![fm createDirectoryAtPath:[destinationFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:error]) {
         return NO;

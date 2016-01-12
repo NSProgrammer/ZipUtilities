@@ -109,7 +109,7 @@
     XCTAssertTrue([unzipper openAndReturnError:NULL]);
     XCTAssertTrue([unzipper readCentralDirectoryAndReturnError:NULL]);
     [unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord *record, NSUInteger index, BOOL *stop) {
-        XCTAssertTrue([unzipper saveRecord:record toDirectory:zipDirectory shouldOverwrite:YES progressBlock:NULL error:NULL]);
+        XCTAssertTrue([unzipper saveRecord:record toDirectory:zipDirectory options:NOZUnzipperSaveRecordOptionOverwriteExisting progressBlock:NULL error:NULL]);
         NSString *unzippedFilePath = [zipDirectory stringByAppendingPathComponent:record.name];
         XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:unzippedFilePath]);
         if ([record.name isEqualToString:sourceFile.lastPathComponent]) {
