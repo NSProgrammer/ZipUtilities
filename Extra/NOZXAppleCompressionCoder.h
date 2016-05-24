@@ -6,7 +6,7 @@
 //  Copyright © 2015 NSProgrammer. All rights reserved.
 //
 
-#import <ZipUtilities/ZipUtilities.h>
+@import ZipUtilities;
 
 #if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 #define COMPRESSION_LIB_AVAILABLE 1

@@ -144,6 +144,8 @@
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8AC1B9A8CA400A56535 /* OSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */; };
+		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +249,7 @@
 		4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		4623A8AD1B9A8D3500A56535 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4623A8AE1B9A8D3500A56535 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B3F87BF41CF4C08A00FBBFEF /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +322,7 @@
 				1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */,
 				1C6BF7721B74086000969629 /* ZipUtilities */,
 				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
+				B3F87BF31CF4C08A00FBBFEF /* Support */,
 				4623A8A91B9A8AD300A56535 /* Frameworks */,
 				1C6BF7711B74086000969629 /* Products */,
 				4623A8AE1B9A8D3500A56535 /* README.md */,
@@ -372,6 +376,7 @@
 				1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */,
 				1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */,
 				1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */,
+				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 				1C6BF7AF1B74769400969629 /* Project */,
 			);
 			path = ZipUtilities;
@@ -438,7 +443,6 @@
 			children = (
 				4623A8311B9A828A00A56535 /* Info.plist */,
 				4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */,
-				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -462,6 +466,14 @@
 			name = OSX;
 			sourceTree = "<group>";
 		};
+		B3F87BF31CF4C08A00FBBFEF /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B3F87BF41CF4C08A00FBBFEF /* module.modulemap */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -482,8 +494,10 @@
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
 				1C76343A1BB64F2100BBFECF /* NOZEncoder.h in Headers */,
+				B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
 				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
+				B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
