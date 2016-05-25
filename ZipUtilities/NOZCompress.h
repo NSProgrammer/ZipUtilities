@@ -89,8 +89,6 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 @protocol NOZCompressDelegate <NSObject>
 @optional
 
-/** To force a strong reference by the `NOZCompressOperation`, return `YES`.  Default == `NO`. */
-- (BOOL)requiresStrongReference;
 /** Override to provide a different GCD queue for the completion callback (default is the main queue) */
 - (dispatch_queue_t)completionQueue;
 

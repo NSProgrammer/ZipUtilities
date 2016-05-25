@@ -111,7 +111,7 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 - (instancetype)initWithRequest:(NOZCompressRequest *)request delegate:(id<NOZCompressDelegate>)delegate
 {
     if (self = [super init]) {
-        if ([delegate respondsToSelector:@selector(requiresStrongReference)]) {
+        if ([delegate isKindOfClass:[NOZCompressDelegateInternal class]]) {
             _strongDelegate = delegate;
         }
         _weakDelegate = delegate;
@@ -359,11 +359,6 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
         _completionBlock = [completion copy];
     }
     return self;
-}
-
-- (BOOL)requiresStrongReference
-{
-    return YES;
 }
 
 - (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result

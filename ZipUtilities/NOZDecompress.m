@@ -114,7 +114,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (instancetype)initWithRequest:(NOZDecompressRequest *)request delegate:(id<NOZDecompressDelegate>)delegate
 {
     if (self = [super init]) {
-        if ([delegate respondsToSelector:@selector(requiresStrongReference)]) {
+        if ([delegate isKindOfClass:[NOZDecompressDelegateInternal class]]) {
             _strongDelegate = delegate;
         }
         _weakDelegate = delegate;
@@ -399,11 +399,6 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         _completionBlock = [completion copy];
     }
     return self;
-}
-
-- (BOOL)requiresStrongReference
-{
-    return YES;
 }
 
 - (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result

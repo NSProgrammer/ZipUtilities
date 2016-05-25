@@ -48,6 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
  Useful for subclasses to examine during `handleFinishing`.
  */
 @property (atomic, readonly, nullable) NSError *operationError;
+/**
+ A context object for convenience
+ */
+@property (nonatomic, nullable) id context;
 
 @end
 
