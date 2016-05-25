@@ -27,8 +27,7 @@
 
 @import Foundation;
 @import XCTest;
-
-#import "NOZCompress.h"
+@import ZipUtilities;
 
 //#define TESTLOG(...) NSLog(__VA_ARGS__)
 #define TESTLOG(...) ((void)0)

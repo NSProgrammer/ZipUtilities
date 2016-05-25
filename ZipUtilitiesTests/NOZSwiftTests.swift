@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import ZipUtilities
 
 var zipQueue : NSOperationQueue? = nil;
 

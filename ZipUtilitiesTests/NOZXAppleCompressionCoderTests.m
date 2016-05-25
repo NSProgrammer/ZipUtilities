@@ -6,9 +6,10 @@
 //  Copyright © 2015 NSProgrammer. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-#import "ZipUtilities.h"
 #import "NOZXAppleCompressionCoder.h"
+
+@import XCTest;
+@import ZipUtilities;
 
 #if COMPRESSION_LIB_AVAILABLE
 
