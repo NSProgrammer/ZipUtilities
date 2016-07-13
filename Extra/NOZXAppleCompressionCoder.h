@@ -8,9 +8,9 @@
 
 @import ZipUtilities;
 
-#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+#if TARGET_OS_IOS && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 #define COMPRESSION_LIB_AVAILABLE 1
-#elif TARGET_OS_MAC && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1011
+#elif TARGET_OS_MAC && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101100
 #define COMPRESSION_LIB_AVAILABLE 1
 #else
 #define COMPRESSION_LIB_AVAILABLE 0
@@ -27,8 +27,8 @@
 + (nullable id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm;
 + (nullable id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm;
 
-- (nullable instancetype)init NS_UNAVAILABLE;
-+ (nullable instancetype)new NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 @end
 

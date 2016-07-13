@@ -43,7 +43,7 @@
  11-15	Hour (0–23 on a 24-hour clock)
  */
 
-void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16* dateOut, UInt16* timeOut)
+void noz_dos_date_from_NSDate(NSDate *dateObject, UInt16* dateOut, UInt16* timeOut)
 {
     if (!dateObject) {
         *dateOut = 0;

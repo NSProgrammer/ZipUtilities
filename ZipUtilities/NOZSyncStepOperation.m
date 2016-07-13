@@ -146,7 +146,7 @@
     return YES;
 }
 
-+ (nonnull NSError *)operationCancelledError
++ (NSError *)operationCancelledError
 {
     @throw [NSException exceptionWithName:NSInvalidArgumentException
                                    reason:@"does not recognize selector!"

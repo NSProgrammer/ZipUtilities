@@ -179,9 +179,9 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 /**
  Open the zip archive.
@@ -269,9 +269,9 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 @property (nonatomic, readonly) SInt64 uncompressedSize;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
 /**
@@ -300,8 +300,8 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 @property (nonatomic, readonly) SInt64 totalUncompressedSize;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
