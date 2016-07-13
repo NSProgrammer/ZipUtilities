@@ -113,9 +113,9 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath NS_DESIGNATED_INITIALIZER;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 /** 
  Open the Zipper.

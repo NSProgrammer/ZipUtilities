@@ -57,7 +57,7 @@
     return &_zStream;
 }
 
-- (nonnull instancetype)init
+- (instancetype)init
 {
     if (self = [super init]) {
         _compressedDataBuffer = malloc(NSPageSize());
@@ -90,7 +90,7 @@
 
 @implementation NOZDeflateEncoder
 
-- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry
+- (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
 {
     switch (entry.compressionLevel) {
         case 9:
@@ -105,9 +105,9 @@
     }
 }
 
-- (nonnull NOZDeflateEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
-                                               compressionLevel:(NOZCompressionLevel)level
-                                                  flushCallback:(nonnull NOZFlushCallback)callback;
+- (NOZDeflateEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
+                                       compressionLevel:(NOZCompressionLevel)level
+                                          flushCallback:(NOZFlushCallback)callback;
 {
     NOZDeflateEncoderContext *context = [[NOZDeflateEncoderContext alloc] init];
     context.flushCallback = callback;
@@ -115,7 +115,7 @@
     return context;
 }
 
-- (BOOL)initializeEncoderContext:(nonnull NOZDeflateEncoderContext *)context
+- (BOOL)initializeEncoderContext:(NOZDeflateEncoderContext *)context
 {
     if (Z_OK != deflateInit2(context.zStream,
                              context.compressionLevel,
@@ -130,9 +130,9 @@
     return YES;
 }
 
-- (BOOL)encodeBytes:(nonnull const Byte*)bytes
+- (BOOL)encodeBytes:(const Byte*)bytes
              length:(size_t)length
-            context:(nonnull NOZDeflateEncoderContext *)context
+            context:(NOZDeflateEncoderContext *)context
 {
     if (!context.zStreamOpen) {
         return NO;
@@ -171,7 +171,7 @@
     return success;
 }
 
-- (BOOL)finalizeEncoderContext:(nonnull NOZDeflateEncoderContext *)context
+- (BOOL)finalizeEncoderContext:(NOZDeflateEncoderContext *)context
 {
     if (!context.zStreamOpen) {
         return NO;
@@ -302,15 +302,15 @@
 
 @implementation NOZDeflateDecoder
 
-- (nonnull NOZDeflateDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
-                                                             flushCallback:(nonnull NOZFlushCallback)callback
+- (NOZDeflateDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
+                                                     flushCallback:(NOZFlushCallback)callback
 {
     NOZDeflateDecoderContext *context = [[NOZDeflateDecoderContext alloc] init];
     context.flushCallback = callback;
     return context;
 }
 
-- (BOOL)initializeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
+- (BOOL)initializeDecoderContext:(NOZDeflateDecoderContext *)context
 {
     if (Z_OK != inflateInit2(context.zStream, -MAX_WBITS)) {
         return NO;
@@ -319,9 +319,9 @@
     return YES;
 }
 
-- (BOOL)decodeBytes:(nonnull const Byte*)bytes
+- (BOOL)decodeBytes:(const Byte*)bytes
              length:(size_t)length
-            context:(nonnull NOZDeflateDecoderContext *)context
+            context:(NOZDeflateDecoderContext *)context
 {
     if (context.hasFinished) {
         return YES;
@@ -392,7 +392,7 @@
     return YES;
 }
 
-- (BOOL)finalizeDecoderContext:(nonnull NOZDeflateDecoderContext *)context
+- (BOOL)finalizeDecoderContext:(NOZDeflateDecoderContext *)context
 {
     if (context.zStreamOpen) {
         inflateEnd(context.zStream);

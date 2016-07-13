@@ -94,7 +94,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     [self closeAndReturnError:NULL];
 }
 
-- (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath
+- (instancetype)initWithZipFile:(NSString *)zipFilePath
 {
     if (self = [super init]) {
         _zipFilePath = [zipFilePath copy];
@@ -108,7 +108,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     abort();
 }
 
-- (BOOL)openAndReturnError:(out NSError *__autoreleasing  __nullable * __nullable)error
+- (BOOL)openAndReturnError:(out NSError **)error
 {
     NSError *stackError = NOZError(NOZErrorCodeUnzipCannotOpenZip, @{ @"zipFilePath" : [self zipFilePath] ?: [NSNull null] });
     _standardizedFilePath = [self.zipFilePath stringByStandardizingPath];
@@ -132,7 +132,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return NO;
 }
 
-- (BOOL)closeAndReturnError:(out NSError *__autoreleasing  __nullable * __nullable)error
+- (BOOL)closeAndReturnError:(out NSError **)error
 {
     _centralDirectory = nil;
     if (_internal.file) {
@@ -142,7 +142,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (nullable NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError * __nullable * __nullable)error
+- (NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError **)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -175,7 +175,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return cd;
 }
 
-- (nullable NOZCentralDirectoryRecord *)readRecordAtIndex:(NSUInteger)index error:(out NSError * __nullable * __nullable)error
+- (NOZCentralDirectoryRecord *)readRecordAtIndex:(NSUInteger)index error:(out NSError **)error
 {
     if (index >= _centralDirectory.recordCount) {
         if (error) {
@@ -186,12 +186,12 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return [_centralDirectory recordAtIndex:index];
 }
 
-- (NSUInteger)indexForRecordWithName:(nonnull NSString *)name
+- (NSUInteger)indexForRecordWithName:(NSString *)name
 {
     return (_centralDirectory) ? [_centralDirectory indexForRecordWithName:name] : NSNotFound;
 }
 
-- (void)enumerateManifestEntriesUsingBlock:(nonnull NOZUnzipRecordEnumerationBlock)block
+- (void)enumerateManifestEntriesUsingBlock:(NOZUnzipRecordEnumerationBlock)block
 {
     [_centralDirectory.internalRecords enumerateObjectsUsingBlock:block];
 }
@@ -283,9 +283,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (NSData *)readDataFromRecord:(nonnull NOZCentralDirectoryRecord *)record
-                 progressBlock:(nullable NOZProgressBlock)progressBlock
-                         error:(out NSError * __nullable __autoreleasing * __nullable)error
+- (NSData *)readDataFromRecord:(NOZCentralDirectoryRecord *)record
+                 progressBlock:(NOZProgressBlock)progressBlock
+                         error:(out NSError **)error
 {
     __block NSMutableData *data = nil;
     if (![self enumerateByteRangesOfRecord:record
@@ -306,8 +306,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 - (BOOL)saveRecord:(NOZCentralDirectoryRecord *)record
        toDirectory:(NSString *)destinationRootDirectory
    shouldOverwrite:(BOOL)overwrite
-     progressBlock:(nullable NOZProgressBlock)progressBlock
-             error:(out NSError * __nullable __autoreleasing * __nullable)error
+     progressBlock:(NOZProgressBlock)progressBlock
+             error:(out NSError **)error
 {
     return [self saveRecord:record
                 toDirectory:destinationRootDirectory
@@ -320,7 +320,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
        toDirectory:(NSString *)destinationRootDirectory
            options:(NOZUnzipperSaveRecordOptions)options
      progressBlock:(NOZProgressBlock)progressBlock
-             error:(out NSError * _Nullable __autoreleasing *)error
+             error:(out NSError **)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -393,7 +393,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 @implementation NOZUnzipper (Private)
 
-- (BOOL)private_flushDecompressedBytes:(const Byte *)buffer length:(size_t)length block:(nonnull NOZUnzipByteRangeEnumerationBlock)block
+- (BOOL)private_flushDecompressedBytes:(const Byte *)buffer length:(size_t)length block:(NOZUnzipByteRangeEnumerationBlock)block
 {
     _currentUnzipping.crc32 = (UInt32)crc32(_currentUnzipping.crc32, buffer, (UInt32)length);
     _currentUnzipping.bytesDecompressed += length;
@@ -519,7 +519,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block error:(out NSError * __nullable __autoreleasing * __nullable)error
+- (BOOL)private_deflateWithProgressBlock:(NOZProgressBlock)progressBlock
+                              usingBlock:(NOZUnzipByteRangeEnumerationBlock)block
+                                   error:(out NSError **)error
 {
     __block BOOL success = YES;
     noz_defer(^{
@@ -586,13 +588,13 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 {
 }
 
-- (nullable instancetype)init
+- (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     abort();
 }
 
-- (nonnull instancetype)initWithKnownFileSize:(SInt64)fileSize
+- (instancetype)initWithKnownFileSize:(SInt64)fileSize
 {
     if (self = [super init]) {
         _totalUncompressedSize = fileSize;

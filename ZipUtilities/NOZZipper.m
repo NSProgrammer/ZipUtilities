@@ -100,7 +100,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     abort();
 }
 
-- (instancetype)initWithZipFile:(nonnull NSString *)zipFilePath
+- (instancetype)initWithZipFile:(NSString *)zipFilePath
 {
     if (self = [super init]) {
         _zipFilePath = [zipFilePath copy];
@@ -119,7 +119,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     [self private_freeLinkedList];
 }
 
-- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError * __nullable * __nullable)error
+- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError **)error
 {
     if (_internal.file) {
         return YES;
@@ -198,19 +198,19 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return YES;
 }
 
-- (BOOL)closeAndReturnError:(out NSError * __nullable * __nullable)error
+- (BOOL)closeAndReturnError:(out NSError **)error
 {
     return [self private_forciblyClose:NO error:error];
 }
 
-- (BOOL)forciblyCloseAndReturnError:(out NSError * __nullable * __nullable)error
+- (BOOL)forciblyCloseAndReturnError:(out NSError **)error
 {
     return [self private_forciblyClose:YES error:error];
 }
 
-- (BOOL)addEntry:(nonnull id<NOZZippableEntry>)entry
-   progressBlock:(__attribute__((noescape)) NOZProgressBlock __nullable)progressBlock
-           error:(out NSError * __nullable * __nullable)error
+- (BOOL)addEntry:(id<NOZZippableEntry>)entry
+   progressBlock:(__attribute__((noescape)) NOZProgressBlock)progressBlock
+           error:(out NSError **)error
 {
     if (![self private_openEntry:entry error:error]) {
         return NO;
@@ -237,7 +237,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 @implementation NOZZipper (Private)
 
-- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError * __nullable * __nullable)error
+- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError **)error
 {
     if (!_internal.file) {
         return YES;
@@ -288,8 +288,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return YES;
 }
 
-- (BOOL)private_openEntry:(nonnull id<NOZZippableEntry>)entry
-                    error:(out NSError * __nullable * __nullable)error
+- (BOOL)private_openEntry:(id<NOZZippableEntry>)entry
+                    error:(out NSError **)error
 {
     __block BOOL errorEncountered = NO;
     noz_defer(^{ if (errorEncountered && error) { *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
@@ -368,10 +368,10 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return YES;
 }
 
-- (BOOL)private_writeEntry:(nonnull id<NOZZippableEntry>)entry
-             progressBlock:(nullable NOZProgressBlock)progressBlock
-                     error:(out NSError * __nullable * __nullable)error
-                  abortRef:(nonnull BOOL *)abort
+- (BOOL)private_writeEntry:(id<NOZZippableEntry>)entry
+             progressBlock:(NOZProgressBlock)progressBlock
+                     error:(out NSError **)error
+                  abortRef:(BOOL *)abort
 {
     __block BOOL success = YES;
     noz_defer(^{
@@ -384,14 +384,14 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         }
     });
 
-    if (success && (!_internal.currentEntry || !entry.inputStream)) {
+    NSInputStream *inputStream = entry.inputStream;
+    if (success && (!_internal.currentEntry || !inputStream)) {
         success = NO;
         return NO;
     }
 
     const SInt64 totalBytes = entry.sizeInBytes;
     if (success) {
-        NSInputStream *inputStream = entry.inputStream;
         [inputStream open];
         noz_defer(^{ [inputStream close]; });
         NSInteger bytesRead;
@@ -435,7 +435,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return success;
 }
 
-- (BOOL)private_closeCurrentOpenEntryAndReturnError:(out NSError * __nullable * __nullable)error
+- (BOOL)private_closeCurrentOpenEntryAndReturnError:(out NSError **)error
 {
     if (!_internal.currentEntry) {
         return YES;
@@ -491,7 +491,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return success;
 }
 
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry error:(out NSError * __nullable * __nullable)error
+- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(id<NOZZippableEntry>)entry error:(out NSError **)error
 {
     NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX) {
@@ -612,7 +612,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return (diff == expectedBytesWritten);
 }
 
-- (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError * __nullable * __nullable)error
+- (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError **)error
 {
     BOOL success = YES;
     NOZFileEntryT *entry = _internal.currentEntry;

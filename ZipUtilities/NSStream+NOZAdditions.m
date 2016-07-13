@@ -73,8 +73,8 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
-- (nonnull instancetype)initWithInputStream:(nonnull NSInputStream *)stream
-                                    encoder:(nonnull id<NOZEncoder>)encoder
+- (nonnull instancetype)initWithInputStream:(NSInputStream *)stream
+                                    encoder:(id<NOZEncoder>)encoder
                            compressionLevel:(NOZCompressionLevel)compressionLevel
 {
     if (self = [super init]) {
@@ -213,7 +213,7 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
     return returnValue;
 }
 
-- (BOOL)getBuffer:(uint8_t * __nullable * __nonnull)buffer length:(NSUInteger *)len
+- (BOOL)getBuffer:(uint8_t **)buffer length:(NSUInteger *)len
 {
     return NO;
 }

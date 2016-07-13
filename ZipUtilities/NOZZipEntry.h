@@ -60,8 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (SInt64)sizeInBytes;
 /** Is the entry valid for zipping. */
 - (BOOL)canBeZipped;
-/** Input Stream for reading the entry into the zip file. */
-- (NSInputStream *)inputStream;
+/** Input Stream for reading the entry into the zip file.  Return `nil` if no input stream is available. */
+- (nullable NSInputStream *)inputStream;
 
 @end
 

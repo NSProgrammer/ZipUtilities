@@ -39,7 +39,7 @@
     abort();
 }
 
-- (instancetype)initWithName:(nonnull NSString *)name
+- (instancetype)initWithName:(NSString *)name
 {
     if (self = [super init]) {
         _name = [name copy];
@@ -49,7 +49,7 @@
     return self;
 }
 
-- (instancetype)initWithEntry:(nonnull NOZAbstractZipEntry *)entry
+- (instancetype)initWithEntry:(NOZAbstractZipEntry *)entry
 {
     return [self initWithName:entry.name];
 }
@@ -82,13 +82,13 @@
 
 @implementation NOZDataZipEntry
 
-- (instancetype)initWithName:(nonnull NSString *)name
+- (instancetype)initWithName:(NSString *)name
 {
     [self doesNotRecognizeSelector:_cmd];
     abort();
 }
 
-- (instancetype)initWithData:(nonnull NSData *)data name:(nonnull NSString *)name
+- (instancetype)initWithData:(NSData *)data name:(NSString *)name
 {
     if (self = [super initWithName:name]) {
         _data = data;
@@ -96,7 +96,7 @@
     return self;
 }
 
-- (instancetype)initWithEntry:(nonnull NOZDataZipEntry *)entry
+- (instancetype)initWithEntry:(NOZDataZipEntry *)entry
 {
     return [self initWithData:entry.data name:entry.name];
 }
@@ -125,13 +125,13 @@
 
 @implementation NOZFileZipEntry
 
-- (instancetype)initWithName:(nonnull NSString *)name
+- (instancetype)initWithName:(NSString *)name
 {
     [self doesNotRecognizeSelector:_cmd];
     abort();
 }
 
-- (instancetype)initWithFilePath:(nonnull NSString *)filePath name:(nonnull NSString *)name
+- (instancetype)initWithFilePath:(NSString *)filePath name:(NSString *)name
 {
     if (self = [super initWithName:name]) {
         _filePath = [filePath copy];
@@ -139,12 +139,12 @@
     return self;
 }
 
-- (instancetype)initWithFilePath:(nonnull NSString *)filePath
+- (instancetype)initWithFilePath:(NSString *)filePath
 {
     return [self initWithFilePath:filePath name:filePath.lastPathComponent];
 }
 
-- (instancetype)initWithEntry:(nonnull NOZFileZipEntry *)entry
+- (instancetype)initWithEntry:(NOZFileZipEntry *)entry
 {
     return [self initWithFilePath:entry.filePath name:entry.name];
 }

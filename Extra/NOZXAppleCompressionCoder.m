@@ -71,12 +71,12 @@
 #endif
 }
 
-+ (nullable id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
++ (id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
 {
     return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_ENCODE] : nil;
 }
 
-+ (nullable id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
++ (id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
 {
     return [self isSupported] ? [[self alloc] initWithAlgorithm:algorithm operation:COMPRESSION_STREAM_DECODE] : nil;
 }
