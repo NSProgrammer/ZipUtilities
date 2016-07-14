@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = "Nolan O'Brien"
   s.social_media_url = "https://twitter.com/NolanOBrien"
-  s.ios.deployment_target = "5.0"
-  s.osx.deployment_target = "10.7"
+  s.ios.deployment_target = "6.0"
+  s.osx.deployment_target = "10.9"
   s.source        = { :git => "https://github.com/NSProgrammer/ZipUtilities.git", :tag => s.version }
   s.source_files  = "ZipUtilities/*.{h,m}"
   s.exclude_files = "ZipUtilities/ZipUtilities.h", "ZipUtilities/*Info.plist"
