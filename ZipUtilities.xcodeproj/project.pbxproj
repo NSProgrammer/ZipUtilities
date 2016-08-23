@@ -143,7 +143,6 @@
 		4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
-		4623A8AC1B9A8CA400A56535 /* OSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */; };
 		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -733,7 +732,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4623A8AC1B9A8CA400A56535 /* OSX-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
