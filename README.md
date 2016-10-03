@@ -376,13 +376,13 @@ into destinations (NSData, streams and/or files).
 
 _ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
 
-Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
+Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZCompressionLibrary`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with the `NOZCompressionLibrary`.
 
 *Example:*
 
 ```objc
-NOZUpdateCompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Encoder alloc] init]);
-NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder alloc] init]);
+[[NOZCompressionLibrary sharedInstance] setEncoder:[[MyBZIP2Encoder alloc] init] forMethod:NOZCompressionMethodBZip2];
+[[NOZCompressionLibrary sharedInstance] setDecoder:[[MyBZIP2Decoder alloc] init] forMethod:NOZCompressionMethodBZip2];
 ```
 
 *Apple compression library as an extra*
@@ -399,20 +399,22 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
         return NO;
     }
 
+    NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
+
     // DEFLATE
     // Replace existing default DEFLATE coders with Apple Compression variant
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]
+              forMethod:NOZCompressionMethodDeflate];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]
+              forMethod:NOZCompressionMethodDeflate];
     
     // LZMA
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodLZMA,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodLZMA,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]
+              forMethod:NOZCompressionMethodLZMA];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]
+              forMethod:NOZCompressionMethodLZMA];
 
     // The following coders are not defined as known ZIP compression methods, 
     // however that doesn't mean we can't extend the enumeration of ZIP methods
@@ -425,17 +427,17 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
 
     // LZ4
 
-    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZ4,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]);
-    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZ4,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
 
     // Apple LZFSE - the new hotness for compression from Apple
 
-    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZFSE,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]);
-    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZFSE,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
 
     return YES;
 }
