@@ -22,20 +22,22 @@
 {
     if ([NOZXAppleCompressionCoder isSupported]) {
 
+        NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
+
         // LZMA
 
-        NOZUpdateCompressionMethodEncoder(NOZCompressionMethodLZMA, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]);
-        NOZUpdateCompressionMethodDecoder(NOZCompressionMethodLZMA, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]);
+        [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA] forMethod:NOZCompressionMethodLZMA];
+        [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA] forMethod:NOZCompressionMethodLZMA];
 
         // LZ4
 
-        NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZ4, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]);
-        NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZ4, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]);
+        [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4] forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
+        [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4] forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
 
         // Apple LZFSE
 
-        NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZFSE, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]);
-        NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZFSE, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]);
+        [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE] forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
+        [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE] forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
 
     }
 }
@@ -44,28 +46,32 @@
 {
     if ([NOZXAppleCompressionCoder isSupported]) {
 
+        NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
+
         // LZMA
 
-        NOZUpdateCompressionMethodEncoder(NOZCompressionMethodLZMA, nil);
-        NOZUpdateCompressionMethodDecoder(NOZCompressionMethodLZMA, nil);
+        [library setEncoder:nil forMethod:NOZCompressionMethodLZMA];
+        [library setDecoder:nil forMethod:NOZCompressionMethodLZMA];
 
         // LZ4
 
-        NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZ4, nil);
-        NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZ4, nil);
+        [library setEncoder:nil forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
+        [library setDecoder:nil forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
 
         // Apple LZFSE
 
-        NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZFSE, nil);
-        NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZFSE, nil);
+        [library setEncoder:nil forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
+        [library setDecoder:nil forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
 
     }
 }
 
 + (BOOL)canTestWithMethod:(NOZCompressionMethod)method
 {
-    id<NOZEncoder> checkEncoder = NOZEncoderForCompressionMethod(method);
-    id<NOZDecoder> checkDecoder = NOZDecoderForCompressionMethod(method);
+    NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
+
+    id<NOZEncoder> checkEncoder = [library encoderForMethod:method];
+    id<NOZDecoder> checkDecoder = [library decoderForMethod:method];
 
     if (!checkEncoder || !checkDecoder) {
         return NO;
@@ -133,11 +139,12 @@
 
     NSString *sourceFile = [[NSBundle bundleForClass:[self class]] pathForResource:@"Aesop" ofType:@"txt"];
     NSData *sourceData = [NSData dataWithContentsOfFile:sourceFile];
+    NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
 
     NSData *compressedData;
     NSData *decompressedData;
-    id<NOZEncoder> encoder = NOZEncoderForCompressionMethod(method);
-    id<NOZDecoder> decoder = NOZDecoderForCompressionMethod(method);
+    id<NOZEncoder> encoder = [library encoderForMethod:method];
+    id<NOZDecoder> decoder = [library decoderForMethod:method];
     BOOL isRaw = NOZCompressionMethodNone == method;
 
     for (NSUInteger i = 0; i < 2; i++) {
@@ -194,20 +201,21 @@
 
 - (void)testDeflate
 {
+    NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
 
-    id<NOZEncoder> originalEncoder = NOZEncoderForCompressionMethod(NOZCompressionMethodDeflate);
-    id<NOZDecoder> originalDecoder = NOZDecoderForCompressionMethod(NOZCompressionMethodDeflate);
+    id<NOZEncoder> originalEncoder = [library encoderForMethod:NOZCompressionMethodDeflate];
+    id<NOZDecoder> originalDecoder = [library decoderForMethod:NOZCompressionMethodDeflate];
 
     // Both custom
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB] forMethod:NOZCompressionMethodDeflate];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB] forMethod:NOZCompressionMethodDeflate];
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
     [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, originalEncoder);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, originalDecoder);
+    [library setEncoder:originalEncoder forMethod:NOZCompressionMethodDeflate];
+    [library setDecoder:originalDecoder forMethod:NOZCompressionMethodDeflate];
 
     // Both original
 
@@ -216,21 +224,21 @@
 
     // Original Encoder / Custom Decoder
 
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB] forMethod:NOZCompressionMethodDeflate];
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
     [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate, originalDecoder);
+    [library setDecoder:originalDecoder forMethod:NOZCompressionMethodDeflate];
 
     // Custom Encoder / Original Decoder
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB] forMethod:NOZCompressionMethodDeflate];
 
     [self runCodingWithMethod:NOZCompressionMethodDeflate];
     [self runCategoryCodingTest:NOZCompressionMethodDeflate];
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate, originalEncoder);
+    [library setEncoder:originalEncoder forMethod:NOZCompressionMethodDeflate];
 
 }
 

@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -162,7 +162,7 @@ static NSOperationQueue *sQueue = nil;
             entry.compressionMethod = method;
         }
 
-        if (NOZEncoderForCompressionMethod(method) != nil) {
+        if ([[NOZCompressionLibrary sharedInstance] encoderForMethod:method] != nil) {
             [self runValidCompressRequest:request withQueue:sQueue];
             [[NSFileManager defaultManager] removeItemAtPath:request.destinationPath error:NULL];
         } else {

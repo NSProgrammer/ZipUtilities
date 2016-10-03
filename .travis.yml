@@ -1,19 +1,6 @@
-osx_image: xcode7 # note: Xcode 7 support is broken for xctool https://github.com/facebook/xctool/issues/528
-#before_install:
-#  - brew update; brew update # Workaround for https://github.com/Homebrew/homebrew/issues/42553
-#  - brew uninstall xctool && brew install xctool ## `brew install --HEAD xctool` to get latest from master instead
+osx_image: xcode8
 language: objective-c
 script:
-- xcodebuild -destination "platform=iOS Simulator,name=iPhone 6" -project ZipUtilities.xcodeproj -scheme ZipUtilities -sdk iphonesimulator9.0 build test
-- xcodebuild -destination "platform=iOS Simulator,name=iPhone 6" -project ZipUtilities.xcodeproj -scheme "ZipUtilities Framework" -sdk iphonesimulator9.0 build test
+- xcodebuild -destination "platform=iOS Simulator,name=iPhone 7" -project ZipUtilities.xcodeproj -scheme ZipUtilities -sdk iphonesimulator10.0 build test
+- xcodebuild -destination "platform=iOS Simulator,name=iPhone 7" -project ZipUtilities.xcodeproj -scheme "ZipUtilities Framework" -sdk iphonesimulator10.0 build test
 - xcodebuild -project ZipUtilities.xcodeproj -scheme "ZipUtilities OSX Framework" build test
-#xcode_project: ZipUtilities.xcodeproj
-#matrix:
-#  include:
-#    - xcode_scheme: ZipUtilities
-#      xcode_sdk: iphonesimulator9.0
-#      xctool_args: -destination "platform=iOS Simulator,name=iPhone 6"
-#    - xcode_scheme: ZipUtilities Framework
-#      xcode_sdk: iphonesimulator9.0
-#      xctool_args: -destination "platform=iOS Simulator,name=iPhone 6"
-#    - xcode_scheme: ZipUtilities OSX Framework
