@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 /**
  `NOZZipper` encapsulates zipping sources into a zip archive.
  
- Uses the globally registered compression encoders.  See `NOZEncoderForCompressionMethod` and `NOZUpdateCompressionMethodEncoder` in `NOZCompression.h`.
+ Uses the globally registered compression encoders.  See `NOZEncoderForCompressionMethod` and `NOZCompressionLibrary`.
  
  By default, `NOZZipper` is optimized to compress in a single pass.
  If you need `NOZZipper` to output without this optimization, define `NOZ_SINGLE_PASS_ZIP` as `0`

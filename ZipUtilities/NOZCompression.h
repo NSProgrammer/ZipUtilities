@@ -50,21 +50,10 @@ typedef NS_ENUM(SInt16, NOZCompressionLevel)
 };
 
 /**
-
  The compression method to use.
  Only 0 (don't compress) and 8 (deflate) are supported by default.
  Additional methods can be supported by updating the compression encoders and decoders.
-
- ### `NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);`
-
- Updates the known compression method encoder to be _encoder_.
- Provide `nil` to make the _method_ unsupported for compression.
-
- ### `NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);`
- 
- Updates the known compression method decoder to be _decoder_.
- Provide `nil` to make the _method_ unsupported for decompression.
-
+ See `NOZCompressionLibrary` for updating encoders/decoders.
  */
 typedef NS_ENUM(UInt16, NOZCompressionMethod)
 {
