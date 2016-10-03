@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @protocol NOZZipEntry;
 
@@ -118,16 +118,3 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
 
 //! Block for flushing a buffer of bytes
 typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const Byte* __nonnull bufferToFlush, size_t length);
-
-@protocol NOZDecoder;
-@protocol NOZEncoder;
-
-//! Retrieve the compression encoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method);
-//! Set the compression encoder for a given method.  Setting `nil` will clear the encoder.  Whatever encoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);
-
-//! Retrieve the compression decoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method);
-//! Set the compression decoder for a given method.  Setting `nil` will clear the decoder.  Whatever decoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);

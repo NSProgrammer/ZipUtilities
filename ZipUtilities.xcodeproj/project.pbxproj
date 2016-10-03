@@ -60,9 +60,14 @@
 		1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; };
 		1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */; };
 		1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
 		1CCAC79B1B8997F4004AD418 /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
 		1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79C1B899804004AD418 /* NOZRawCoders.m */; };
+		1CD3DA271DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD3DA281DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD3DA291DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CD3DA2A1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3DA261DA2047D0007A693 /* NOZCompressionLibrary.m */; };
+		1CD3DA2B1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3DA261DA2047D0007A693 /* NOZCompressionLibrary.m */; };
+		1CD3DA2C1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD3DA261DA2047D0007A693 /* NOZCompressionLibrary.m */; };
 		1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CD441BE1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CD441BF1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,8 +91,6 @@
 		4623A86A1B9A83B900A56535 /* NOZCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF78D1B74093B00969629 /* NOZCompress.m */; };
 		4623A86B1B9A83BC00A56535 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4623A86C1B9A83BC00A56535 /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4623A86D1B9A83BF00A56535 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
-		4623A86E1B9A83C000A56535 /* NOZCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC7971B890FAD004AD418 /* NOZCompression.m */; };
 		4623A86F1B9A83C200A56535 /* NOZDecompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78F1B74095500969629 /* NOZDecompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4623A8701B9A83C300A56535 /* NOZDecompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78F1B74095500969629 /* NOZDecompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4623A8711B9A83C600A56535 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
@@ -227,9 +230,10 @@
 		1C7B08601BC46D1500C14196 /* OSXFrameworkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OSXFrameworkTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NOZSwiftTests.swift; sourceTree = "<group>"; };
 		1CCAC7961B890FAD004AD418 /* NOZCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZCompression.h; sourceTree = "<group>"; };
-		1CCAC7971B890FAD004AD418 /* NOZCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompression.m; sourceTree = "<group>"; };
 		1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZDeflateCoders.m; sourceTree = "<group>"; };
 		1CCAC79C1B899804004AD418 /* NOZRawCoders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZRawCoders.m; sourceTree = "<group>"; };
+		1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZCompressionLibrary.h; sourceTree = "<group>"; };
+		1CD3DA261DA2047D0007A693 /* NOZCompressionLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressionLibrary.m; sourceTree = "<group>"; };
 		1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+NOZAdditions.h"; sourceTree = "<group>"; };
 		1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+NOZAdditions.m"; sourceTree = "<group>"; };
 		1CD9BAB31B757A38000B93C4 /* Aesop.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Aesop.txt; sourceTree = "<group>"; };
@@ -352,7 +356,8 @@
 				1C6BF78C1B74093B00969629 /* NOZCompress.h */,
 				1C6BF78D1B74093B00969629 /* NOZCompress.m */,
 				1CCAC7961B890FAD004AD418 /* NOZCompression.h */,
-				1CCAC7971B890FAD004AD418 /* NOZCompression.m */,
+				1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */,
+				1CD3DA261DA2047D0007A693 /* NOZCompressionLibrary.m */,
 				1C7634401BB6522800BBFECF /* NOZDecoder.h */,
 				1C6BF78F1B74095500969629 /* NOZDecompress.h */,
 				1C6BF7901B74095500969629 /* NOZDecompress.m */,
@@ -375,8 +380,8 @@
 				1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */,
 				1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */,
 				1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */,
-				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 				1C6BF7AF1B74769400969629 /* Project */,
+				4623A8321B9A828A00A56535 /* ZipUtilities.h */,
 			);
 			path = ZipUtilities;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
+				1CD3DA271DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */,
 				1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */,
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
@@ -516,6 +522,7 @@
 				4623A86F1B9A83C200A56535 /* NOZDecompress.h in Headers */,
 				4623A87B1B9A83D600A56535 /* NOZSyncStepOperation.h in Headers */,
 				4623A86B1B9A83BC00A56535 /* NOZCompression.h in Headers */,
+				1CD3DA281DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */,
 				4623A8331B9A828A00A56535 /* ZipUtilities.h in Headers */,
 				1C76343B1BB64F2100BBFECF /* NOZEncoder.h in Headers */,
 				4623A87F1B9A83DC00A56535 /* NOZUnzipper.h in Headers */,
@@ -539,6 +546,7 @@
 				4623A8701B9A83C300A56535 /* NOZDecompress.h in Headers */,
 				4623A87C1B9A83D700A56535 /* NOZSyncStepOperation.h in Headers */,
 				4623A86C1B9A83BC00A56535 /* NOZCompression.h in Headers */,
+				1CD3DA291DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */,
 				4623A8801B9A83DC00A56535 /* NOZUnzipper.h in Headers */,
 				1C76343C1BB64F2100BBFECF /* NOZEncoder.h in Headers */,
 				4623A8931B9A849400A56535 /* ZipUtilities.h in Headers */,
@@ -684,9 +692,11 @@
 					};
 					4623A84B1B9A82AF00A56535 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 					};
 					4623A8551B9A82AF00A56535 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -779,9 +789,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CCAC7991B890FAD004AD418 /* NOZCompression.m in Sources */,
 				1CD441C01BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */,
+				1CD3DA2A1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */,
 				1CCAC79D1B899804004AD418 /* NOZRawCoders.m in Sources */,
 				1C32237B1B77BE9F00DC0A33 /* NOZError.m in Sources */,
 				1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */,
@@ -814,6 +824,7 @@
 				4623A8651B9A83AE00A56535 /* NOZ_Project.m in Sources */,
 				1CD441C11BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				4623A8731B9A83C900A56535 /* NOZDeflateCoders.m in Sources */,
+				1CD3DA2B1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */,
 				4623A87D1B9A83D900A56535 /* NOZSyncStepOperation.m in Sources */,
 				4623A8771B9A83D000A56535 /* NOZError.m in Sources */,
 				4623A8691B9A83B800A56535 /* NOZCompress.m in Sources */,
@@ -822,7 +833,6 @@
 				4623A8711B9A83C600A56535 /* NOZDecompress.m in Sources */,
 				4623A88D1B9A83F300A56535 /* NOZZipper.m in Sources */,
 				4623A8791B9A83D300A56535 /* NOZRawCoders.m in Sources */,
-				4623A86D1B9A83BF00A56535 /* NOZCompression.m in Sources */,
 				4623A8811B9A83DF00A56535 /* NOZUnzipper.m in Sources */,
 				4623A8891B9A83EC00A56535 /* NOZZipEntry.m in Sources */,
 			);
@@ -847,6 +857,7 @@
 				4623A8661B9A83AF00A56535 /* NOZ_Project.m in Sources */,
 				1CD441C21BBCDDA500F40FAB /* NSStream+NOZAdditions.m in Sources */,
 				4623A8741B9A83CA00A56535 /* NOZDeflateCoders.m in Sources */,
+				1CD3DA2C1DA2047D0007A693 /* NOZCompressionLibrary.m in Sources */,
 				4623A87E1B9A83D900A56535 /* NOZSyncStepOperation.m in Sources */,
 				4623A8781B9A83D000A56535 /* NOZError.m in Sources */,
 				4623A86A1B9A83B900A56535 /* NOZCompress.m in Sources */,
@@ -855,7 +866,6 @@
 				4623A8721B9A83C600A56535 /* NOZDecompress.m in Sources */,
 				4623A88E1B9A83F300A56535 /* NOZZipper.m in Sources */,
 				4623A87A1B9A83D300A56535 /* NOZRawCoders.m in Sources */,
-				4623A86E1B9A83C000A56535 /* NOZCompression.m in Sources */,
 				4623A8821B9A83DF00A56535 /* NOZUnzipper.m in Sources */,
 				4623A88A1B9A83ED00A56535 /* NOZZipEntry.m in Sources */,
 			);
@@ -952,6 +962,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1006,6 +1017,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1135,7 +1147,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/FrameworkTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1151,7 +1162,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/FrameworkTests-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1179,6 +1189,7 @@
 				PRODUCT_NAME = ZipUtilities;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1203,6 +1214,7 @@
 				PRODUCT_NAME = ZipUtilities;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1231,6 +1243,7 @@
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/OSXFrameworkTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1251,6 +1264,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "ZipUtilitiesTests/OSXFrameworkTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

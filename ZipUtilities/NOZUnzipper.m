@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 //
 
 #import "NOZ_Project.h"
+#import "NOZCompressionLibrary.h"
 #import "NOZError.h"
 #import "NOZUnzipper.h"
 #import "NOZUtils_Project.h"
@@ -243,7 +244,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     _currentUnzipping.crc32 = 0;
 
     __unsafe_unretained typeof(self) rawSelf = self;
-    _currentDecoder = NOZDecoderForCompressionMethod(record.internalEntry->fileHeader.compressionMethod);
+    _currentDecoder = [[NOZCompressionLibrary sharedInstance] decoderForMethod:record.internalEntry->fileHeader.compressionMethod];
     _currentDecoderContext = [_currentDecoder createContextForDecodingWithBitFlags:record.internalEntry->fileHeader.bitFlag
                                                                      flushCallback:^BOOL(id coder, id context, const Byte* bufferToFlush, size_t length) {
         if (rawSelf->_currentDecoder != coder) {

@@ -6,7 +6,7 @@
 //  Copyright © 2015 NSProgrammer. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZCompression.h"
 

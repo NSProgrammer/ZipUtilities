@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 //
 
 #import "NOZ_Project.h"
+#import "NOZCompressionLibrary.h"
 #import "NOZError.h"
 #import "NOZUtils_Project.h"
 #import "NOZZipper.h"
@@ -334,7 +335,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     __unsafe_unretained typeof(self) rawSelf = self;
-    _currentEncoder = NOZEncoderForCompressionMethod(_internal.currentEntry->fileHeader.compressionMethod);
+    _currentEncoder = [[NOZCompressionLibrary sharedInstance] encoderForMethod:_internal.currentEntry->fileHeader.compressionMethod];
     _currentEncoderContext = [_currentEncoder createContextWithBitFlags:_internal.currentEntry->fileHeader.bitFlag
                                                        compressionLevel:entry.compressionLevel
                                                           flushCallback:^BOOL(id<NOZEncoder> encoder, id<NOZEncoderContext> context, const Byte* buffer, size_t length) {
@@ -535,7 +536,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
             /* Bit Flag */
             {
                 record->fileHeader->bitFlag = 0;
-                id<NOZEncoder> encoder = NOZEncoderForCompressionMethod(entry.compressionMethod);
+                id<NOZEncoder> encoder = [[NOZCompressionLibrary sharedInstance] encoderForMethod:entry.compressionMethod];
                 if (encoder) {
                     record->fileHeader->bitFlag |= [encoder bitFlagsForEntry:entry];
                 }
