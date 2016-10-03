@@ -29,7 +29,7 @@
 
 /**
  Decompress the receiver
- @param encoder the `NOZDecoder` to decompress with
+ @param decoder the `NOZDecoder` to decompress with
  @return The decompressed data or `nil` if an error was encountered
  */
 - (nullable NSData *)noz_dataByDecompressing:(nonnull id<NOZDecoder>)decoder;
