@@ -72,7 +72,7 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
  Convenience initializer
 
  @param request The `NOZCompressRequest` of the what and how for compressing.
- @param delegate The `NOZCompressCompletionBlock` to call once operation is finished.
+ @param completion The `NOZCompressCompletionBlock` to call once operation is finished.
  */
 - (instancetype)initWithRequest:(NOZCompressRequest *)request completion:(nullable NOZCompressCompletionBlock)completion;
 
