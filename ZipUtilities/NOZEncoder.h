@@ -33,7 +33,7 @@
 
 /**
  Create a new context object to track the encoding process.
- @param flags The bit flags that were specefied for this encoder.
+ @param bitFlags The bit flags that were specified for this encoder.
  @param level The level of compression requested
  @param callback The `NOZFlushCallback` that will be used to output the compressed data
  @return the new context object
