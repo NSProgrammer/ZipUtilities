@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.7.2'
+pod 'ZipUtilities', '~> 1.8.0'
 ```
 
 #### Carthage
@@ -457,6 +457,10 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
   - per file progress
 
 ## Dependencies
+
+### ZStandard
+ZipUtilities also includes v1.1.1 of Facebook's ZStandard (zstd) compression library.
+[www.zstd.net](http://www.zstd.net)
 
 ### Test files for zipping/unzipping
 As a part of unit testing Aesop's Fables, the Star Wars Episode VII trailer and Maniac Mansion are used for unit testing.  Aesop's Fables and Maniac Mansion no longer hold a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.  The Star Wars Episode VII Trailer is free for distribution and also provides a useful file for testing by being a large file.

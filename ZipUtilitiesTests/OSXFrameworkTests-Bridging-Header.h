@@ -3,3 +3,4 @@
 //
 
 #import "NOZXAppleCompressionCoder.h"
+#import "NOZXZStandardCompressionCoder.h"

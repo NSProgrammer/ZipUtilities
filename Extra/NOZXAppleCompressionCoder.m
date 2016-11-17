@@ -8,7 +8,38 @@
 
 #import "NOZXAppleCompressionCoder.h"
 
-#if COMPRESSION_LIB_AVAILABLE
+#if TARGET_OS_IOS && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+#define COMPRESSION_LIB_AVAILABLE 1
+#elif TARGET_OS_MAC && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101100
+#define COMPRESSION_LIB_AVAILABLE 1
+#else
+#define COMPRESSION_LIB_AVAILABLE 0
+#endif
+
+#if !COMPRESSION_LIB_AVAILABLE
+
+@implementation NOZXAppleCompressionCoder
+
++ (BOOL)isSupported
+{
+    return NO;
+}
+
++ (id<NOZEncoder>)encoderWithAlgorithm:(compression_algorithm)algorithm
+{
+    return nil;
+}
+
++ (id<NOZDecoder>)decoderWithAlgorithm:(compression_algorithm)algorithm
+{
+    return nil;
+}
+
+@end
+
+#else // COMPRESSION_LIB_AVAILABLE
+
+#import <ZipUtilities/ZipUtilities.h>
 
 @interface NOZXAppleCompressionCoderContext : NSObject <NOZDecoderContext, NOZEncoderContext>
 @property (nonatomic) compression_stream_operation operation;
@@ -179,10 +210,6 @@
 
 - (BOOL)initializeWithContext:(NOZXAppleCompressionCoderContext *)context
 {
-    if (![[self class] isSupported]) {
-        return NO;
-    }
-
     if (COMPRESSION_STATUS_OK != compression_stream_init(context.stream,
                                                          context.operation,
                                                          context.algorithm)) {
@@ -200,10 +227,6 @@
             final:(BOOL)final
           context:(NOZXAppleCompressionCoderContext *)context
 {
-    if (![[self class] isSupported]) {
-        return NO;
-    }
-
     if (final && context.hasFinished) {
         return YES;
     }
@@ -250,10 +273,6 @@
 
 - (BOOL)finalizeWithContext:(NOZXAppleCompressionCoderContext *)context
 {
-    if (![[self class] isSupported]) {
-        return NO;
-    }
-
     BOOL success = [self codeBytes:NULL length:0 final:YES context:context];
     compression_stream_destroy(context.stream);
     context.flushCallback = nil;
