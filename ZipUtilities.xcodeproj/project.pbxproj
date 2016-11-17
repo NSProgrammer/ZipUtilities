@@ -146,6 +146,104 @@
 		4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
+		8B3C0C6E1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */; };
+		8B3C0C6F1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */; };
+		8B3C0C701DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */; };
+		8B3C0C861DDC1FEC000C7DE1 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C871DDC1FEC000C7DE1 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C881DDC1FEC000C7DE1 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C891DDC1FEC000C7DE1 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8A1DDC1FEC000C7DE1 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8B1DDC1FEC000C7DE1 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8C1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8D1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8E1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C8F1DDC1FEC000C7DE1 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C901DDC1FEC000C7DE1 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C911DDC1FEC000C7DE1 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C921DDC1FEC000C7DE1 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C931DDC1FEC000C7DE1 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C941DDC1FEC000C7DE1 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C9B1DDC200E000C7DE1 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C961DDC200E000C7DE1 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C9C1DDC200E000C7DE1 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C961DDC200E000C7DE1 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C9D1DDC200E000C7DE1 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C961DDC200E000C7DE1 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C9E1DDC200E000C7DE1 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C971DDC200E000C7DE1 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0C9F1DDC200E000C7DE1 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C971DDC200E000C7DE1 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA01DDC200E000C7DE1 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C971DDC200E000C7DE1 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA11DDC200E000C7DE1 /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA21DDC200E000C7DE1 /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA31DDC200E000C7DE1 /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA41DDC200E000C7DE1 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA51DDC200E000C7DE1 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CA61DDC200E000C7DE1 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CAF1DDC2036000C7DE1 /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB01DDC2036000C7DE1 /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB11DDC2036000C7DE1 /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB21DDC2036000C7DE1 /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB31DDC2036000C7DE1 /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB41DDC2036000C7DE1 /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB51DDC2036000C7DE1 /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB61DDC2036000C7DE1 /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CB71DDC2036000C7DE1 /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CBD1DDC204C000C7DE1 /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CBE1DDC204C000C7DE1 /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CBF1DDC204C000C7DE1 /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CC01DDC204C000C7DE1 /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CBB1DDC204C000C7DE1 /* zdict.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CC11DDC204C000C7DE1 /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CBB1DDC204C000C7DE1 /* zdict.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CC21DDC204C000C7DE1 /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CBB1DDC204C000C7DE1 /* zdict.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B3C0CE91DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CE81DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m */; };
+		8B3C0CEA1DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CE81DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m */; };
+		8B3C0CEB1DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CE81DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m */; };
+		8B3C0CED1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */; };
+		8B3C0CEE1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */; };
+		8B3C0CEF1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */; };
+		8B3C0CF11DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CF01DDCEF39000C7DE1 /* NOZComparisonTest.m */; };
+		8B3C0CF21DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CF01DDCEF39000C7DE1 /* NOZComparisonTest.m */; };
+		8B3C0CF31DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CF01DDCEF39000C7DE1 /* NOZComparisonTest.m */; };
+		8B602DF41DDE32310058D7E6 /* book.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */; };
+		8B8D5A971DDD153E00037E0E /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A961DDD153E00037E0E /* timeline.json */; };
+		8B8D5A981DDD153E00037E0E /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A961DDD153E00037E0E /* timeline.json */; };
+		8B8D5A991DDD153E00037E0E /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A961DDD153E00037E0E /* timeline.json */; };
+		8B8D5AA21DDD2E9100037E0E /* htl.128.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */; };
+		8B8D5AA31DDD2E9100037E0E /* htl.128.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */; };
+		8B8D5AA41DDD2E9100037E0E /* htl.128.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */; };
+		8B8D5AA51DDD2E9100037E0E /* htl.256.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */; };
+		8B8D5AA61DDD2E9100037E0E /* htl.256.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */; };
+		8B8D5AA71DDD2E9100037E0E /* htl.256.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */; };
+		8B8D5AA81DDD2E9100037E0E /* htl.512.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */; };
+		8B8D5AA91DDD2E9100037E0E /* htl.512.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */; };
+		8B8D5AAA1DDD2E9100037E0E /* htl.512.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */; };
+		8B8D5AAB1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */; };
+		8B8D5AAC1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */; };
+		8B8D5AAD1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */; };
+		8B8D5AE11DDD465C00037E0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8D5AE01DDD465C00037E0E /* main.m */; };
+		8B8D5AE41DDD465C00037E0E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8D5AE31DDD465C00037E0E /* AppDelegate.m */; };
+		8B8D5AE71DDD465C00037E0E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8D5AE61DDD465C00037E0E /* ViewController.m */; };
+		8B8D5AEC1DDD465C00037E0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AEB1DDD465C00037E0E /* Assets.xcassets */; };
+		8B8D5AEF1DDD465C00037E0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AED1DDD465C00037E0E /* LaunchScreen.storyboard */; };
+		8B8D5AF61DDD574900037E0E /* NOZXAppleCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */; };
+		8B8D5AF71DDD574900037E0E /* NOZXZStandardCompressionCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */; };
+		8B8D5AF81DDD574F00037E0E /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AF91DDD574F00037E0E /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFA1DDD574F00037E0E /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFB1DDD574F00037E0E /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFC1DDD574F00037E0E /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFD1DDD575300037E0E /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C961DDC200E000C7DE1 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFE1DDD575300037E0E /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C971DDC200E000C7DE1 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5AFF1DDD575300037E0E /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B001DDD575300037E0E /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B011DDD575700037E0E /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B021DDD575700037E0E /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B031DDD575700037E0E /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B041DDD575C00037E0E /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B051DDD575C00037E0E /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B3C0CBB1DDC204C000C7DE1 /* zdict.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		8B8D5B061DDD644E00037E0E /* htl.128.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */; };
+		8B8D5B071DDD644E00037E0E /* htl.256.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */; };
+		8B8D5B081DDD644E00037E0E /* htl.512.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */; };
+		8B8D5B091DDD644E00037E0E /* htl.1024.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */; };
+		8B8D5B0A1DDD644E00037E0E /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A961DDD153E00037E0E /* timeline.json */; };
+		8B8D5B0B1DDD6A9800037E0E /* ZipUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; };
+		8BDA6F921DDD7524004EEF12 /* ZipUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -172,6 +270,13 @@
 			remoteGlobalIDString = 4623A84B1B9A82AF00A56535;
 			remoteInfo = OSXZipUtilities;
 		};
+		8B8D5B0C1DDD6A9E00037E0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C6BF7681B74086000969629 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4623A82D1B9A828A00A56535;
+			remoteInfo = ZipUtilities;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -182,6 +287,17 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BDA6F931DDD7524004EEF12 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8BDA6F921DDD7524004EEF12 /* ZipUtilities.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -252,6 +368,52 @@
 		4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		4623A8AD1B9A8D3500A56535 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4623A8AE1B9A8D3500A56535 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8B3C0C6C1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXZStandardCompressionCoder.h; path = Extra/NOZXZStandardCompressionCoder.h; sourceTree = "<group>"; };
+		8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXZStandardCompressionCoder.m; path = Extra/NOZXZStandardCompressionCoder.m; sourceTree = "<group>"; };
+		8B3C0C761DDC1FC9000C7DE1 /* zstd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd.h; path = zstd/zstd.h; sourceTree = "<group>"; };
+		8B3C0C781DDC1FEC000C7DE1 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitstream.h; path = zstd/common/bitstream.h; sourceTree = "<group>"; };
+		8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entropy_common.c; path = zstd/common/entropy_common.c; sourceTree = "<group>"; };
+		8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error_private.c; path = zstd/common/error_private.c; sourceTree = "<group>"; };
+		8B3C0C7B1DDC1FEC000C7DE1 /* error_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = error_private.h; path = zstd/common/error_private.h; sourceTree = "<group>"; };
+		8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_decompress.c; path = zstd/common/fse_decompress.c; sourceTree = "<group>"; };
+		8B3C0C7D1DDC1FEC000C7DE1 /* fse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fse.h; path = zstd/common/fse.h; sourceTree = "<group>"; };
+		8B3C0C7E1DDC1FEC000C7DE1 /* huf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huf.h; path = zstd/common/huf.h; sourceTree = "<group>"; };
+		8B3C0C7F1DDC1FEC000C7DE1 /* mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mem.h; path = zstd/common/mem.h; sourceTree = "<group>"; };
+		8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xxhash.c; path = zstd/common/xxhash.c; sourceTree = "<group>"; };
+		8B3C0C811DDC1FEC000C7DE1 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xxhash.h; path = zstd/common/xxhash.h; sourceTree = "<group>"; };
+		8B3C0C821DDC1FEC000C7DE1 /* zbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zbuff.h; path = zstd/common/zbuff.h; sourceTree = "<group>"; };
+		8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = zstd/common/zstd_common.c; sourceTree = "<group>"; };
+		8B3C0C841DDC1FEC000C7DE1 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = zstd/common/zstd_errors.h; sourceTree = "<group>"; };
+		8B3C0C851DDC1FEC000C7DE1 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = zstd/common/zstd_internal.h; sourceTree = "<group>"; };
+		8B3C0C961DDC200E000C7DE1 /* fse_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_compress.c; path = zstd/compress/fse_compress.c; sourceTree = "<group>"; };
+		8B3C0C971DDC200E000C7DE1 /* huf_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huf_compress.c; path = zstd/compress/huf_compress.c; sourceTree = "<group>"; };
+		8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zbuff_compress.c; path = zstd/compress/zbuff_compress.c; sourceTree = "<group>"; };
+		8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_compress.c; path = zstd/compress/zstd_compress.c; sourceTree = "<group>"; };
+		8B3C0C9A1DDC200E000C7DE1 /* zstd_opt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_opt.h; path = zstd/compress/zstd_opt.h; sourceTree = "<group>"; };
+		8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huf_decompress.c; path = zstd/decompress/huf_decompress.c; sourceTree = "<group>"; };
+		8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zbuff_decompress.c; path = zstd/decompress/zbuff_decompress.c; sourceTree = "<group>"; };
+		8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_decompress.c; path = zstd/decompress/zstd_decompress.c; sourceTree = "<group>"; };
+		8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = divsufsort.c; path = zstd/dictBuilder/divsufsort.c; sourceTree = "<group>"; };
+		8B3C0CBA1DDC204C000C7DE1 /* divsufsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = divsufsort.h; path = zstd/dictBuilder/divsufsort.h; sourceTree = "<group>"; };
+		8B3C0CBB1DDC204C000C7DE1 /* zdict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zdict.c; path = zstd/dictBuilder/zdict.c; sourceTree = "<group>"; };
+		8B3C0CBC1DDC204C000C7DE1 /* zdict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zdict.h; path = zstd/dictBuilder/zdict.h; sourceTree = "<group>"; };
+		8B3C0CE81DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZXZStandardCoderTests.m; sourceTree = "<group>"; };
+		8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = book.zstd_dict; sourceTree = "<group>"; };
+		8B3C0CF01DDCEF39000C7DE1 /* NOZComparisonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZComparisonTest.m; sourceTree = "<group>"; };
+		8B8D5A961DDD153E00037E0E /* timeline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timeline.json; sourceTree = "<group>"; };
+		8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.128.zstd_dict; sourceTree = "<group>"; };
+		8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.256.zstd_dict; sourceTree = "<group>"; };
+		8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.512.zstd_dict; sourceTree = "<group>"; };
+		8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.1024.zstd_dict; sourceTree = "<group>"; };
+		8B8D5ADD1DDD465C00037E0E /* ZipUtilitiesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZipUtilitiesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B8D5AE01DDD465C00037E0E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8B8D5AE21DDD465C00037E0E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8B8D5AE31DDD465C00037E0E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8B8D5AE51DDD465C00037E0E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8B8D5AE61DDD465C00037E0E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8B8D5AEB1DDD465C00037E0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B8D5AEE1DDD465C00037E0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B8D5AF01DDD465C00037E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3F87BF41CF4C08A00FBBFEF /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,14 +469,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B8D5ADA1DDD465C00037E0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B8D5B0B1DDD6A9800037E0E /* ZipUtilities.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */ = {
 			isa = PBXGroup;
 			children = (
+				8B3C0C751DDC1FBC000C7DE1 /* zstd */,
 				1C19A2621BA4881D004E8D6C /* NOZXAppleCompressionCoder.h */,
 				1C19A2631BA4881D004E8D6C /* NOZXAppleCompressionCoder.m */,
+				8B3C0C6C1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.h */,
+				8B3C0C6D1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m */,
 			);
 			name = "Extra Encoders/Decoders";
 			sourceTree = "<group>";
@@ -322,17 +495,18 @@
 		1C6BF7671B74086000969629 = {
 			isa = PBXGroup;
 			children = (
-				1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */,
-				1C6BF7721B74086000969629 /* ZipUtilities */,
-				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
-				B3F87BF31CF4C08A00FBBFEF /* Support */,
-				4623A8A91B9A8AD300A56535 /* Frameworks */,
-				1C6BF7711B74086000969629 /* Products */,
-				4623A8AE1B9A8D3500A56535 /* README.md */,
+				1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */,
 				1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */,
 				4623A8AD1B9A8D3500A56535 /* LICENSE */,
-				1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */,
+				4623A8AE1B9A8D3500A56535 /* README.md */,
 				1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */,
+				1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */,
+				8B8D5ADE1DDD465C00037E0E /* ZipUtilitiesApp */,
+				4623A8A91B9A8AD300A56535 /* Frameworks */,
+				1C6BF7711B74086000969629 /* Products */,
+				B3F87BF31CF4C08A00FBBFEF /* Support */,
+				1C6BF7721B74086000969629 /* ZipUtilities */,
+				1C6BF77F1B74086000969629 /* ZipUtilitiesTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -345,6 +519,7 @@
 				4623A8381B9A828A00A56535 /* FrameworkTests.xctest */,
 				4623A84C1B9A82AF00A56535 /* ZipUtilities.framework */,
 				4623A8561B9A82AF00A56535 /* OSXFrameworkTests.xctest */,
+				8B8D5ADD1DDD465C00037E0E /* ZipUtilitiesApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,14 +564,16 @@
 		1C6BF77F1B74086000969629 /* ZipUtilitiesTests */ = {
 			isa = PBXGroup;
 			children = (
-				4623A8A71B9A887400A56535 /* Resources */,
-				1C6BF7801B74086000969629 /* Supporting Files */,
+				1C7B085F1BC46D1500C14196 /* FrameworkTests-Bridging-Header.h */,
+				8B3C0CF01DDCEF39000C7DE1 /* NOZComparisonTest.m */,
 				1C6BF7B61B7564A700969629 /* NOZCompressTests.m */,
 				1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */,
-				1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */,
 				1C7B08611BC46D1600C14196 /* NOZSwiftTests.swift */,
-				1C7B085F1BC46D1500C14196 /* FrameworkTests-Bridging-Header.h */,
+				1C19A2591BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m */,
+				8B3C0CE81DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m */,
 				1C7B08601BC46D1500C14196 /* OSXFrameworkTests-Bridging-Header.h */,
+				4623A8A71B9A887400A56535 /* Resources */,
+				1C6BF7801B74086000969629 /* Supporting Files */,
 			);
 			path = ZipUtilitiesTests;
 			sourceTree = "<group>";
@@ -431,13 +608,19 @@
 			isa = PBXGroup;
 			children = (
 				1CD9BAB31B757A38000B93C4 /* Aesop.txt */,
+				8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */,
 				1C3223841B78501A00DC0A33 /* Data.zip */,
 				1CD9BAB81B75B419000B93C4 /* Directory.zip */,
 				1CD9BAB91B75B419000B93C4 /* File.zip */,
+				8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */,
+				8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */,
+				8B8D5AA01DDD2E9100037E0E /* htl.512.zstd_dict */,
+				8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */,
 				1C16F4F01B787EC100963AB3 /* maniac-mansion */,
 				1CD9BABA1B75B419000B93C4 /* Mixed.zip */,
 				1C2DFB3E1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 */,
 				1C2DFB3A1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip */,
+				8B8D5A961DDD153E00037E0E /* timeline.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -468,6 +651,95 @@
 				4623A8951B9A85E000A56535 /* libz.dylib */,
 			);
 			name = OSX;
+			sourceTree = "<group>";
+		};
+		8B3C0C751DDC1FBC000C7DE1 /* zstd */ = {
+			isa = PBXGroup;
+			children = (
+				8B3C0C771DDC1FDB000C7DE1 /* common */,
+				8B3C0C951DDC1FFF000C7DE1 /* compress */,
+				8B3C0CAB1DDC2027000C7DE1 /* decompress */,
+				8B3C0CB81DDC203A000C7DE1 /* dictBuilder */,
+				8B3C0C761DDC1FC9000C7DE1 /* zstd.h */,
+			);
+			name = zstd;
+			sourceTree = "<group>";
+		};
+		8B3C0C771DDC1FDB000C7DE1 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				8B3C0C791DDC1FEC000C7DE1 /* entropy_common.c */,
+				8B3C0C7A1DDC1FEC000C7DE1 /* error_private.c */,
+				8B3C0C7C1DDC1FEC000C7DE1 /* fse_decompress.c */,
+				8B3C0C801DDC1FEC000C7DE1 /* xxhash.c */,
+				8B3C0C831DDC1FEC000C7DE1 /* zstd_common.c */,
+				8B3C0C781DDC1FEC000C7DE1 /* bitstream.h */,
+				8B3C0C7B1DDC1FEC000C7DE1 /* error_private.h */,
+				8B3C0C7D1DDC1FEC000C7DE1 /* fse.h */,
+				8B3C0C7E1DDC1FEC000C7DE1 /* huf.h */,
+				8B3C0C7F1DDC1FEC000C7DE1 /* mem.h */,
+				8B3C0C811DDC1FEC000C7DE1 /* xxhash.h */,
+				8B3C0C821DDC1FEC000C7DE1 /* zbuff.h */,
+				8B3C0C841DDC1FEC000C7DE1 /* zstd_errors.h */,
+				8B3C0C851DDC1FEC000C7DE1 /* zstd_internal.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		8B3C0C951DDC1FFF000C7DE1 /* compress */ = {
+			isa = PBXGroup;
+			children = (
+				8B3C0C961DDC200E000C7DE1 /* fse_compress.c */,
+				8B3C0C971DDC200E000C7DE1 /* huf_compress.c */,
+				8B3C0C981DDC200E000C7DE1 /* zbuff_compress.c */,
+				8B3C0C991DDC200E000C7DE1 /* zstd_compress.c */,
+				8B3C0C9A1DDC200E000C7DE1 /* zstd_opt.h */,
+			);
+			name = compress;
+			sourceTree = "<group>";
+		};
+		8B3C0CAB1DDC2027000C7DE1 /* decompress */ = {
+			isa = PBXGroup;
+			children = (
+				8B3C0CAC1DDC2036000C7DE1 /* huf_decompress.c */,
+				8B3C0CAD1DDC2036000C7DE1 /* zbuff_decompress.c */,
+				8B3C0CAE1DDC2036000C7DE1 /* zstd_decompress.c */,
+			);
+			name = decompress;
+			sourceTree = "<group>";
+		};
+		8B3C0CB81DDC203A000C7DE1 /* dictBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				8B3C0CB91DDC204C000C7DE1 /* divsufsort.c */,
+				8B3C0CBB1DDC204C000C7DE1 /* zdict.c */,
+				8B3C0CBA1DDC204C000C7DE1 /* divsufsort.h */,
+				8B3C0CBC1DDC204C000C7DE1 /* zdict.h */,
+			);
+			name = dictBuilder;
+			sourceTree = "<group>";
+		};
+		8B8D5ADE1DDD465C00037E0E /* ZipUtilitiesApp */ = {
+			isa = PBXGroup;
+			children = (
+				8B8D5AE21DDD465C00037E0E /* AppDelegate.h */,
+				8B8D5AE31DDD465C00037E0E /* AppDelegate.m */,
+				8B8D5AE51DDD465C00037E0E /* ViewController.h */,
+				8B8D5AE61DDD465C00037E0E /* ViewController.m */,
+				8B8D5AEB1DDD465C00037E0E /* Assets.xcassets */,
+				8B8D5AED1DDD465C00037E0E /* LaunchScreen.storyboard */,
+				8B8D5AF01DDD465C00037E0E /* Info.plist */,
+				8B8D5ADF1DDD465C00037E0E /* Supporting Files */,
+			);
+			path = ZipUtilitiesApp;
+			sourceTree = "<group>";
+		};
+		8B8D5ADF1DDD465C00037E0E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B8D5AE01DDD465C00037E0E /* main.m */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B3F87BF31CF4C08A00FBBFEF /* Support */ = {
@@ -665,6 +937,25 @@
 			productReference = 4623A8561B9A82AF00A56535 /* OSXFrameworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8B8D5ADC1DDD465C00037E0E /* ZipUtilitiesApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B8D5AF11DDD465C00037E0E /* Build configuration list for PBXNativeTarget "ZipUtilitiesApp" */;
+			buildPhases = (
+				8B8D5AD91DDD465C00037E0E /* Sources */,
+				8B8D5ADA1DDD465C00037E0E /* Frameworks */,
+				8B8D5ADB1DDD465C00037E0E /* Resources */,
+				8BDA6F931DDD7524004EEF12 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B8D5B0D1DDD6A9E00037E0E /* PBXTargetDependency */,
+			);
+			name = ZipUtilitiesApp;
+			productName = ZipUtilitiesApp;
+			productReference = 8B8D5ADD1DDD465C00037E0E /* ZipUtilitiesApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -684,6 +975,7 @@
 					};
 					4623A82D1B9A828A00A56535 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = BFWTTPG966;
 						LastSwiftMigration = 0800;
 					};
 					4623A8371B9A828A00A56535 = {
@@ -698,6 +990,11 @@
 						CreatedOnToolsVersion = 6.4;
 						LastSwiftMigration = 0800;
 					};
+					8B8D5ADC1DDD465C00037E0E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = BFWTTPG966;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 1C6BF76B1B74086000969629 /* Build configuration list for PBXProject "ZipUtilities" */;
@@ -706,6 +1003,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1C6BF7671B74086000969629;
 			productRefGroup = 1C6BF7711B74086000969629 /* Products */;
@@ -718,6 +1016,7 @@
 				4623A8371B9A828A00A56535 /* FrameworkTests */,
 				4623A84B1B9A82AF00A56535 /* OSXZipUtilities */,
 				4623A8551B9A82AF00A56535 /* OSXFrameworkTests */,
+				8B8D5ADC1DDD465C00037E0E /* ZipUtilitiesApp */,
 			);
 		};
 /* End PBXProject section */
@@ -727,14 +1026,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8D5A971DDD153E00037E0E /* timeline.json in Resources */,
 				1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */,
+				8B8D5AA51DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
 				1C2DFB3F1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
+				8B8D5AA21DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				1C3223851B78501A00DC0A33 /* Data.zip in Resources */,
 				1CD9BABD1B75B419000B93C4 /* File.zip in Resources */,
 				1C2DFB3B1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8B8D5AA81DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */,
+				8B8D5AAB1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,
 				1CD9BABE1B75B419000B93C4 /* Mixed.zip in Resources */,
 				1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */,
+				8B3C0CED1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,14 +1054,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8D5A981DDD153E00037E0E /* timeline.json in Resources */,
 				4623A8971B9A882700A56535 /* Aesop.txt in Resources */,
+				8B8D5AA61DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
 				1C2DFB401C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
+				8B8D5AA31DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				4623A89A1B9A882700A56535 /* File.zip in Resources */,
 				4623A89B1B9A882700A56535 /* Mixed.zip in Resources */,
 				1C2DFB3C1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8B8D5AA91DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				4623A8991B9A882700A56535 /* Directory.zip in Resources */,
+				8B8D5AAC1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,
 				4623A8981B9A882700A56535 /* Data.zip in Resources */,
 				4623A8A11B9A882D00A56535 /* maniac-mansion in Resources */,
+				8B3C0CEE1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,14 +1082,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8D5A991DDD153E00037E0E /* timeline.json in Resources */,
 				4623A89C1B9A882800A56535 /* Aesop.txt in Resources */,
+				8B8D5AA71DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
 				1C2DFB411C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
+				8B8D5AA41DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				4623A89F1B9A882800A56535 /* File.zip in Resources */,
 				4623A8A01B9A882800A56535 /* Mixed.zip in Resources */,
 				1C2DFB3D1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8B8D5AAA1DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				4623A89E1B9A882800A56535 /* Directory.zip in Resources */,
+				8B8D5AAD1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,
 				4623A89D1B9A882800A56535 /* Data.zip in Resources */,
 				4623A8A21B9A882D00A56535 /* maniac-mansion in Resources */,
+				8B3C0CEF1DDCEAAE000C7DE1 /* book.zstd_dict in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B8D5ADB1DDD465C00037E0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B8D5B0A1DDD644E00037E0E /* timeline.json in Resources */,
+				8B8D5AEF1DDD465C00037E0E /* LaunchScreen.storyboard in Resources */,
+				8B8D5B061DDD644E00037E0E /* htl.128.zstd_dict in Resources */,
+				8B8D5B071DDD644E00037E0E /* htl.256.zstd_dict in Resources */,
+				8B8D5AEC1DDD465C00037E0E /* Assets.xcassets in Resources */,
+				8B8D5B081DDD644E00037E0E /* htl.512.zstd_dict in Resources */,
+				8B8D5B091DDD644E00037E0E /* htl.1024.zstd_dict in Resources */,
+				8B602DF41DDE32310058D7E6 /* book.zstd_dict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,7 +1145,24 @@
 				1C3223771B76FB7C00DC0A33 /* NOZDecompressTests.m in Sources */,
 				1C19A25A1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */,
+				8B3C0C6E1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */,
+				8B3C0CF11DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */,
 				1C19A26A1BA48B24004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
+				8B3C0CE91DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */,
+				8B3C0C9B1DDC200E000C7DE1 /* fse_compress.c in Sources */,
+				8B3C0CA41DDC200E000C7DE1 /* zstd_compress.c in Sources */,
+				8B3C0CB21DDC2036000C7DE1 /* zbuff_decompress.c in Sources */,
+				8B3C0C891DDC1FEC000C7DE1 /* error_private.c in Sources */,
+				8B3C0C921DDC1FEC000C7DE1 /* zstd_common.c in Sources */,
+				8B3C0C8C1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */,
+				8B3C0CB51DDC2036000C7DE1 /* zstd_decompress.c in Sources */,
+				8B3C0CAF1DDC2036000C7DE1 /* huf_decompress.c in Sources */,
+				8B3C0C861DDC1FEC000C7DE1 /* entropy_common.c in Sources */,
+				8B3C0C9E1DDC200E000C7DE1 /* huf_compress.c in Sources */,
+				8B3C0C8F1DDC1FEC000C7DE1 /* xxhash.c in Sources */,
+				8B3C0CC01DDC204C000C7DE1 /* zdict.c in Sources */,
+				8B3C0CBD1DDC204C000C7DE1 /* divsufsort.c in Sources */,
+				8B3C0CA11DDC200E000C7DE1 /* zbuff_compress.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,10 +1192,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C7B08631BC46D1600C14196 /* NOZSwiftTests.swift in Sources */,
+				8B3C0C6F1DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */,
+				1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
 				4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */,
 				1C19A25B1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
+				8B3C0CEA1DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */,
+				8B3C0CF21DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */,
 				4623A8A31B9A883600A56535 /* NOZCompressTests.m in Sources */,
-				1C19A26B1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
+				8B3C0C8D1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */,
+				8B3C0CA51DDC200E000C7DE1 /* zstd_compress.c in Sources */,
+				8B3C0C931DDC1FEC000C7DE1 /* zstd_common.c in Sources */,
+				8B3C0CBE1DDC204C000C7DE1 /* divsufsort.c in Sources */,
+				8B3C0CA21DDC200E000C7DE1 /* zbuff_compress.c in Sources */,
+				8B3C0CB01DDC2036000C7DE1 /* huf_decompress.c in Sources */,
+				8B3C0CC11DDC204C000C7DE1 /* zdict.c in Sources */,
+				8B3C0C8A1DDC1FEC000C7DE1 /* error_private.c in Sources */,
+				8B3C0C9C1DDC200E000C7DE1 /* fse_compress.c in Sources */,
+				8B3C0C901DDC1FEC000C7DE1 /* xxhash.c in Sources */,
+				8B3C0CB31DDC2036000C7DE1 /* zbuff_decompress.c in Sources */,
+				8B3C0CB61DDC2036000C7DE1 /* zstd_decompress.c in Sources */,
+				8B3C0C871DDC1FEC000C7DE1 /* entropy_common.c in Sources */,
+				8B3C0C9F1DDC200E000C7DE1 /* huf_compress.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,10 +1242,53 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C7B08641BC46D1600C14196 /* NOZSwiftTests.swift in Sources */,
+				8B3C0C701DDC1BA5000C7DE1 /* NOZXZStandardCompressionCoder.m in Sources */,
 				4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */,
 				1C19A25C1BA39001004E8D6C /* NOZXAppleCompressionCoderTests.m in Sources */,
 				4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */,
 				1C19A26C1BA48B25004E8D6C /* NOZXAppleCompressionCoder.m in Sources */,
+				8B3C0CEB1DDCCB4F000C7DE1 /* NOZXZStandardCoderTests.m in Sources */,
+				8B3C0CF31DDCEF39000C7DE1 /* NOZComparisonTest.m in Sources */,
+				8B3C0C8E1DDC1FEC000C7DE1 /* fse_decompress.c in Sources */,
+				8B3C0CA61DDC200E000C7DE1 /* zstd_compress.c in Sources */,
+				8B3C0C941DDC1FEC000C7DE1 /* zstd_common.c in Sources */,
+				8B3C0CBF1DDC204C000C7DE1 /* divsufsort.c in Sources */,
+				8B3C0CA31DDC200E000C7DE1 /* zbuff_compress.c in Sources */,
+				8B3C0CB11DDC2036000C7DE1 /* huf_decompress.c in Sources */,
+				8B3C0CC21DDC204C000C7DE1 /* zdict.c in Sources */,
+				8B3C0C8B1DDC1FEC000C7DE1 /* error_private.c in Sources */,
+				8B3C0C9D1DDC200E000C7DE1 /* fse_compress.c in Sources */,
+				8B3C0C911DDC1FEC000C7DE1 /* xxhash.c in Sources */,
+				8B3C0CB41DDC2036000C7DE1 /* zbuff_decompress.c in Sources */,
+				8B3C0CB71DDC2036000C7DE1 /* zstd_decompress.c in Sources */,
+				8B3C0C881DDC1FEC000C7DE1 /* entropy_common.c in Sources */,
+				8B3C0CA01DDC200E000C7DE1 /* huf_compress.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B8D5AD91DDD465C00037E0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B8D5AFD1DDD575300037E0E /* fse_compress.c in Sources */,
+				8B8D5B001DDD575300037E0E /* zstd_compress.c in Sources */,
+				8B8D5B021DDD575700037E0E /* zbuff_decompress.c in Sources */,
+				8B8D5AF91DDD574F00037E0E /* error_private.c in Sources */,
+				8B8D5AFC1DDD574F00037E0E /* zstd_common.c in Sources */,
+				8B8D5AFA1DDD574F00037E0E /* fse_decompress.c in Sources */,
+				8B8D5B031DDD575700037E0E /* zstd_decompress.c in Sources */,
+				8B8D5B011DDD575700037E0E /* huf_decompress.c in Sources */,
+				8B8D5AF81DDD574F00037E0E /* entropy_common.c in Sources */,
+				8B8D5AFE1DDD575300037E0E /* huf_compress.c in Sources */,
+				8B8D5AFB1DDD574F00037E0E /* xxhash.c in Sources */,
+				8B8D5B051DDD575C00037E0E /* zdict.c in Sources */,
+				8B8D5B041DDD575C00037E0E /* divsufsort.c in Sources */,
+				8B8D5AFF1DDD575300037E0E /* zbuff_compress.c in Sources */,
+				8B8D5AE11DDD465C00037E0E /* main.m in Sources */,
+				8B8D5AE71DDD465C00037E0E /* ViewController.m in Sources */,
+				8B8D5AE41DDD465C00037E0E /* AppDelegate.m in Sources */,
+				8B8D5AF61DDD574900037E0E /* NOZXAppleCompressionCoder.m in Sources */,
+				8B8D5AF71DDD574900037E0E /* NOZXZStandardCompressionCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,7 +1310,23 @@
 			target = 4623A84B1B9A82AF00A56535 /* OSXZipUtilities */;
 			targetProxy = 4623A8581B9A82AF00A56535 /* PBXContainerItemProxy */;
 		};
+		8B8D5B0D1DDD6A9E00037E0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4623A82D1B9A828A00A56535 /* ZipUtilities */;
+			targetProxy = 8B8D5B0C1DDD6A9E00037E0E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8B8D5AED1DDD465C00037E0E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B8D5AEE1DDD465C00037E0E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1C6BF7821B74086000969629 /* Debug */ = {
@@ -1081,6 +1506,7 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BFWTTPG966;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1109,6 +1535,7 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BFWTTPG966;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1266,6 +1693,41 @@
 			};
 			name = Release;
 		};
+		8B8D5AF21DDD465C00037E0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BFWTTPG966;
+				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsprogrammer.ZipUtilitiesApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8B8D5AF31DDD465C00037E0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = BFWTTPG966;
+				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsprogrammer.ZipUtilitiesApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1328,6 +1790,15 @@
 			buildConfigurations = (
 				4623A8631B9A82AF00A56535 /* Debug */,
 				4623A8641B9A82AF00A56535 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B8D5AF11DDD465C00037E0E /* Build configuration list for PBXNativeTarget "ZipUtilitiesApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B8D5AF21DDD465C00037E0E /* Debug */,
+				8B8D5AF31DDD465C00037E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

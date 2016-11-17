@@ -140,7 +140,8 @@ func TearDownZipQueue()
         if #available(iOS 9.0, OSX 10.11, *) {
             let library = NOZCompressionLibrary.sharedInstance()
             let oldEncoder = library.encoder(for: NOZCompressionMethod.deflate)
-            library.setEncoder(NOZXAppleCompressionCoder.encoder(with: COMPRESSION_ZLIB), for: NOZCompressionMethod.deflate)
+            let encoder = NOZXAppleCompressionCoder.encoder(with: COMPRESSION_ZLIB)
+            library.setEncoder(encoder, for: NOZCompressionMethod.deflate)
             testLargeZipCompress()
             library.setEncoder(oldEncoder, for: NOZCompressionMethod.deflate)
         }

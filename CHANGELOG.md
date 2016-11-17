@@ -2,6 +2,15 @@
 
 ## History
 
+### 1.8.0  (Nov 17, 2016) - Nolan O'Brien
+
+- Add ZStandard support as an extra encoder/decoder
+- Clean up some files
+- Fix an edge case in NSData+NOZAdditions category
+- Clean up schemes
+- Add codec comparison unit test
+- Add ZipUtilitiesApp iOS app for testing codec perf on device
+
 ### 1.7.2  (Jan 11, 2016) - Nolan O'Brien
 
 - Provide options when saving a record so that we can support writing an entry to disk without the interim path

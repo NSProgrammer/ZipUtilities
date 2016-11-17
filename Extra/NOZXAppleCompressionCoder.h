@@ -6,19 +6,11 @@
 //  Copyright © 2015 NSProgrammer. All rights reserved.
 //
 
-@import ZipUtilities;
-
-#if TARGET_OS_IOS && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-#define COMPRESSION_LIB_AVAILABLE 1
-#elif TARGET_OS_MAC && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101100
-#define COMPRESSION_LIB_AVAILABLE 1
-#else
-#define COMPRESSION_LIB_AVAILABLE 0
-#endif
-
-#if COMPRESSION_LIB_AVAILABLE
-
 #import <compression.h>
+#import <Foundation/Foundation.h>
+
+@protocol NOZEncoder;
+@protocol NOZDecoder;
 
 @interface NOZXAppleCompressionCoder : NSObject
 
@@ -31,5 +23,3 @@
 + (nonnull instancetype)new NS_UNAVAILABLE;
 
 @end
-
-#endif // COMPRESSION_LIB_AVAILABLE

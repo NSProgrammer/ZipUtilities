@@ -11,8 +11,6 @@
 @import XCTest;
 @import ZipUtilities;
 
-#if COMPRESSION_LIB_AVAILABLE
-
 @interface NOZXAppleCompressionCoderTests : XCTestCase
 @end
 
@@ -267,5 +265,3 @@
 }
 
 @end
-
-#endif
