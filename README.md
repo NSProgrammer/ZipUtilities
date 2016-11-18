@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.8.0'
+pod 'ZipUtilities', '~> 1.8.1'
 ```
 
 #### Carthage
