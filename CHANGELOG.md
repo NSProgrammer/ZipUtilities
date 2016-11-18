@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.8.1 (Nov 18, 2016) - Nolan O'Brien
+
+- Fix up project
+
 ### 1.8.0  (Nov 17, 2016) - Nolan O'Brien
 
 - Add ZStandard support as an extra encoder/decoder
