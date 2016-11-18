@@ -998,7 +998,6 @@
 					};
 					8B8D5ADC1DDD465C00037E0E = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = BFWTTPG966;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1706,7 +1705,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = BFWTTPG966;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsprogrammer.ZipUtilitiesApp;
@@ -1722,7 +1721,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BFWTTPG966;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsprogrammer.ZipUtilitiesApp;
