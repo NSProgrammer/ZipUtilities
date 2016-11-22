@@ -72,7 +72,7 @@
     if ([self respondsToSelector:@selector(sizeInBytes)]) {
         [string appendFormat:@", size=%lli", [(id<NOZZippableEntry>)self sizeInBytes]];
     }
-    [string appendFormat:@", zipLevel=%hi", self.compressionLevel];
+    [string appendFormat:@", zipLevel=%.3f", self.compressionLevel];
     [string appendFormat:@", zipMethod=%hi", self.compressionMethod];
     [string appendString:@">"];
     return string;

@@ -35,9 +35,11 @@
 
 #pragma mark - Deflate Encoder
 
+static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
+
 @interface NOZDeflateEncoderContext : NSObject <NOZEncoderContext>
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
-@property (nonatomic) NOZCompressionLevel compressionLevel;
+@property (nonatomic) int compressionLevel;
 @property (nonatomic) BOOL zStreamOpen;
 
 @property (nonatomic, readonly) z_stream *zStream;
@@ -60,11 +62,12 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _compressedDataBuffer = malloc(NSPageSize());
-        _compressedDataBufferSize = NSPageSize();
+        const size_t bufferSize = NOZBufferSize();
+        _compressedDataBuffer = malloc(bufferSize);
+        _compressedDataBufferSize = bufferSize;
 
         _zStream.avail_in = 0;
-        _zStream.avail_out = (UInt32)NSPageSize();
+        _zStream.avail_out = (UInt32)bufferSize;
         _zStream.next_out = _compressedDataBuffer;
         _zStream.total_in = 0;
         _zStream.total_out = 0;
@@ -73,7 +76,7 @@
         _zStream.zfree = NULL;
         _zStream.opaque = NULL;
 
-        _compressionLevel = NOZCompressionLevelDefault;
+        _compressionLevel = 6;
     }
     return self;
 }
@@ -90,15 +93,26 @@
 
 @implementation NOZDeflateEncoder
 
+- (NSUInteger)numberOfCompressionLevels
+{
+    return 1 + Z_BEST_COMPRESSION - Z_BEST_SPEED;
+}
+
+- (NSUInteger)defaultCompressionLevel
+{
+    return 6;
+}
+
 - (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
 {
-    switch (entry.compressionLevel) {
-        case 9:
-        case 8:
+    const NSUInteger level = NOZCompressionLevelToEncoderSpecificLevel(self, entry.compressionLevel);
+    switch (level) {
+        case Z_BEST_COMPRESSION:
+        case Z_BEST_COMPRESSION - 1:
             return NOZFlagBitsMaxDeflate;
-        case 2:
+        case Z_BEST_SPEED + 1:
             return NOZFlagBitsFastDeflate;
-        case 1:
+        case Z_BEST_SPEED:
             return NOZFlagBitsSuperFastDeflate;
         default:
             return NOZFlagBitsNormalDeflate;
@@ -111,7 +125,7 @@
 {
     NOZDeflateEncoderContext *context = [[NOZDeflateEncoderContext alloc] init];
     context.flushCallback = callback;
-    context.compressionLevel = level;
+    context.compressionLevel = NOZCompressionLevelToDeflateLevel(level);
     return context;
 }
 
@@ -259,7 +273,7 @@
         _zStream.next_in = 0;
         _zStream.avail_in = 0;
 
-        _decompressedDataBufferSize = NSPageSize();
+        _decompressedDataBufferSize = NOZBufferSize();
         _decompressedDataBuffer = malloc(_decompressedDataBufferSize);
     }
     return self;
@@ -402,3 +416,8 @@
 }
 
 @end
+
+static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level)
+{
+    return (UInt16)NOZCompressionLevelToCustomEncoderLevel(level, Z_BEST_SPEED, Z_BEST_COMPRESSION, 6);
+}

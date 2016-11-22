@@ -45,6 +45,8 @@
 #define _noz_macro_concat(a, b) a##b
 #define noz_macro_concat(a, b) _noz_macro_concat(a, b)
 
+#define NOZBufferSize() (4 * NSPageSize())
+
 #pragma mark Defer Support
 
 /**

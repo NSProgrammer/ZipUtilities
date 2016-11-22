@@ -82,4 +82,19 @@
  */
 - (BOOL)finalizeEncoderContext:(nonnull id<NOZEncoderContext>)context;
 
+@optional
+
+/**
+ (optional) Number of compression levels.
+ If present, must return at least `1`.
+ e.g. DEFLATE has 9 (1-9), Brotli has 12 (0-11), zstd has 22 (1-22 if you ignore the unused 0th)
+ */
+- (NSUInteger)numberOfCompressionLevels;
+
+/**
+ (optional) Value between `0` and `numberOfCompressionLevels` `- 1`
+ Example: DEFLATE is levels 1 through 9 with default of 6, so the return value here would be `5`
+ */
+- (NSUInteger)defaultCompressionLevel;
+
 @end

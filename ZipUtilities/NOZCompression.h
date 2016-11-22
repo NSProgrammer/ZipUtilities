@@ -28,26 +28,22 @@
 #import <Foundation/Foundation.h>
 
 @protocol NOZZipEntry;
+@protocol NOZEncoder;
 
-/**
- The compression level to use.
- Lower levels execute faster, while higher levels will achieve a higher compression ratio.
- */
-typedef NS_ENUM(SInt16, NOZCompressionLevel)
-{
-    NOZCompressionLevelNone = 0,
-    NOZCompressionLevelMin = 1,
-    NOZCompressionLevelVeryLow = 2,
-    NOZCompressionLevelLow = 3,
-    NOZCompressionLevelMediumLow = 4,
-    NOZCompressionLevelMedium = 5,
-    NOZCompressionLevelMediumHigh = 6,
-    NOZCompressionLevelHigh = 7,
-    NOZCompressionLevelVeryHigh = 8,
-    NOZCompressionLevelMax = 9,
+//! The compression level for use with encoding, from `0.0f` to `1.0f`
+typedef float NOZCompressionLevel;
+//! The max compression level
+#define NOZCompressionLevelMax      (1.f)
+//! The min compression level
+#define NOZCompressionLevelMin      (0.f)
+//! The default compression level for any decoder
+#define NOZCompressionLevelDefault  (-1.f)
 
-    NOZCompressionLevelDefault = -1,
-};
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> __nullable encoder);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NOZCompressionLevel level);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NSUInteger encoderSpecificLevel);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger defaultCustomLevel);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger customLevel);
 
 /**
  The compression method to use.

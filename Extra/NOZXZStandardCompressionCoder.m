@@ -7,10 +7,12 @@
 //
 
 #define ZSTD_STATIC_LINKING_ONLY 1
-#include "zstd.h"
+#include <zstd/zstd.h>
 
 #import <ZipUtilities/ZipUtilities.h>
 #import "NOZXZStandardCompressionCoder.h"
+
+#define kZSTD_DEFAULT_LEVEL (7)
 
 static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 
@@ -185,6 +187,16 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 
 @implementation NOZXZStandardEncoder
 
+- (NSUInteger)numberOfCompressionLevels
+{
+    return (NSUInteger)ZSTD_maxCLevel(); // levels 1 through X == X levels
+}
+
+- (NSUInteger)defaultCompressionLevel
+{
+    return kZSTD_DEFAULT_LEVEL - 1; // zero indexed, so subtract 1
+}
+
 - (instancetype)initWithDictionaryData:(NSData *)dict
 {
     if (self = [super init]) {
@@ -352,12 +364,5 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 
 static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level)
 {
-    if (NOZCompressionLevelDefault == level) {
-        return 5;
-    }
-
-    float max = ZSTD_maxCLevel();
-    float step = max / (float)NOZCompressionLevelMax;
-    float levelDouble = level * step;
-    return (int)levelDouble;
+    return (int)NOZCompressionLevelToCustomEncoderLevel(level, (NSUInteger)1, (NSUInteger)ZSTD_maxCLevel(), (NSUInteger)kZSTD_DEFAULT_LEVEL);
 }

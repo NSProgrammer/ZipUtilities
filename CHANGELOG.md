@@ -2,6 +2,19 @@
 
 ## History
 
+### 1.9.0 (Nov 22, 2016) - Nolan O'Brien
+
+- Add Brotli support as an extra encoder/decoder
+- Refactor compression level
+  - decouples from ZLib levels (1-9) and moves to a float range (from 0.0 to 1.0)
+  - can map to any encoder with multiple levels now
+- Fix memory leak in Apple extra encoders/decoders
+- Bump up buffer sizes from 4KB to 16KB
+- Update unit tests
+- Update test app
+- rearrange some code paths for better 3rd party codec support
+- improve memory management to reduce memory footprint when multiple encodes/decodes happen
+
 ### 1.8.1 (Nov 18, 2016) - Nolan O'Brien
 
 - Fix up project

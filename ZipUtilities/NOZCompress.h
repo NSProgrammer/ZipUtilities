@@ -118,6 +118,8 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 @property (nonatomic, copy) NSString *destinationPath;
 /** The array of objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
 @property (nonatomic, copy) NSArray<id<NOZZippableEntry>> *entries;
+/** Total uncompressed size for the current set of entries */
+@property (nonatomic, readonly) SInt64 totalSizeOfUncompressedEntries;
 /** A comment embedded in the resulting zip file */
 @property (nonatomic, copy, nullable) NSString *comment;
 
