@@ -235,9 +235,7 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 
 - (NSError *)private_prepareProgress
 {
-    for (id<NOZZippableEntry> entry in _request.entries) {
-        _totalUncompressedBytes += entry.sizeInBytes;
-    }
+    _totalUncompressedBytes = _request.totalSizeOfUncompressedEntries;
     if (!_totalUncompressedBytes) {
         return NOZError(NOZErrorCodeCompressNoEntriesToCompress, nil);
     }
@@ -267,7 +265,8 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 - (NSError *)private_addEntries
 {
     NSError *error = NOZError(NOZErrorCodeCompressNoEntriesToCompress, nil);
-    for (id<NOZZippableEntry> entry in _request.entries) {
+    NSArray<id<NOZZippableEntry>> *entries = _request.entries; // deep copy
+    for (id<NOZZippableEntry> entry in entries) {
         @autoreleasepool {
             if (self.isCancelled) {
                 return kCancelledError;
@@ -429,6 +428,15 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
     copy.comment = self.comment;
     copy->_mutableEntries = [self.entries mutableCopy];
     return copy;
+}
+
+- (SInt64)totalSizeOfUncompressedEntries
+{
+    SInt64 size = 0;
+    for (id<NOZZippableEntry> entry in _mutableEntries) {
+        size += entry.sizeInBytes;
+    }
+    return size;
 }
 
 - (NSArray<id<NOZZippableEntry>> *)entries

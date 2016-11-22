@@ -289,10 +289,15 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _compressedDataBufferSize = NSPageSize();
+        _compressedDataBufferSize = 4 * NSPageSize();
         _compressedDataBuffer = malloc(_compressedDataBufferSize);
     }
     return self;
+}
+
+- (void)dealloc
+{
+    free(_compressedDataBuffer);
 }
 
 - (compression_stream *)stream

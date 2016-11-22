@@ -7,16 +7,11 @@
 //
 
 #import "NOZXAppleCompressionCoder.h"
+#import "NOZXBrotliCompressionCoder.h"
 #import "NOZXZStandardCompressionCoder.h"
 #import "ViewController.h"
 
 @import ZipUtilities;
-
-@interface FastZSTDDecoder : NSObject <NOZDecoder>
-@property (nonatomic, nullable, readonly) NSData *dictionaryData;
-- (instancetype)initWithDictionaryData:(NSData *)dictionaryData;
-- (instancetype)init NS_UNAVAILABLE;
-@end
 
 #define NOZCompressionMethodZStandard       (100)
 #define NOZCompressionMethodZStandard_D128  (101)
@@ -24,6 +19,10 @@
 #define NOZCompressionMethodZStandard_D512  (104)
 #define NOZCompressionMethodZStandard_D1024 (108)
 #define NOZCompressionMethodZStandard_DBOOK (190)
+
+#define NOZCompressionMethodBrotli          (200)
+
+#define kRUN_COUNT (20)
 
 typedef struct _Coder {
     const char *name;
@@ -42,16 +41,20 @@ typedef struct _RunResult {
 @end
 
 static const Coder kMethods[] = {
-    { "deflate.6", NOZCompressionMethodDeflate, 6 },
-    { "lzma.6", NOZCompressionMethodLZMA, 9 },
-    { "lz4", (NOZCompressionMethod)COMPRESSION_LZ4, 9 },
-    { "lzfse", (NOZCompressionMethod)COMPRESSION_LZFSE, 9 },
-    { "zstd.7", NOZCompressionMethodZStandard, 3 },
-    { "zstd.book.7", NOZCompressionMethodZStandard_DBOOK, 3 },
-    { "zstd.128.7", NOZCompressionMethodZStandard_D128, 3 },
-    { "zstd.256.7", NOZCompressionMethodZStandard_D256, 3 },
-    { "zstd.512.7", NOZCompressionMethodZStandard_D512, 3 },
-    { "zstd.1024.7", NOZCompressionMethodZStandard_D1024, 3 },
+    { "deflate.6", NOZCompressionMethodDeflate, ((6.f - 1.f) / (9.f - 1.f)) },
+    { "lzma.6", NOZCompressionMethodLZMA, NOZCompressionLevelMax },
+    { "lz4", (NOZCompressionMethod)COMPRESSION_LZ4, NOZCompressionLevelMax },
+    { "lzfse", (NOZCompressionMethod)COMPRESSION_LZFSE, NOZCompressionLevelMax },
+    { "brotli.5", NOZCompressionMethodBrotli, ((5.f - 0.f) / (11.f - 0.f)) },
+    { "brotli.6", NOZCompressionMethodBrotli, ((6.f - 0.f) / (11.f - 0.f)) },
+    { "brotli.7", NOZCompressionMethodBrotli, ((7.f - 0.f) / (11.f - 0.f)) },
+    { "brotli.8", NOZCompressionMethodBrotli, ((8.f - 0.f) / (11.f - 0.f)) },
+    { "zstd.7", NOZCompressionMethodZStandard, ((7.f - 1.f) / (22.f - 1.f)) },
+    { "zstd.book.7", NOZCompressionMethodZStandard_DBOOK, ((7.f - 1.f) / (22.f - 1.f)) },
+    { "zstd.128.7", NOZCompressionMethodZStandard_D128, ((7.f - 1.f) / (22.f - 1.f)) },
+    { "zstd.256.7", NOZCompressionMethodZStandard_D256, ((7.f - 1.f) / (22.f - 1.f)) },
+    { "zstd.512.7", NOZCompressionMethodZStandard_D512, ((7.f - 1.f) / (22.f - 1.f)) },
+    { "zstd.1024.7", NOZCompressionMethodZStandard_D1024, ((7.f - 1.f) / (22.f - 1.f)) },
 };
 
 static NSData *sSourceData = nil;
@@ -110,6 +113,9 @@ static NSData *sSourceData = nil;
     [library setEncoder:[NOZXZStandardCompressionCoder encoderWithDictionaryData:d1024Data] forMethod:NOZCompressionMethodZStandard_D1024];
     [library setDecoder:[NOZXZStandardCompressionCoder decoderWithDictionaryData:d1024Data] forMethod:NOZCompressionMethodZStandard_D1024];
 
+    [library setEncoder:[NOZXBrotliCompressionCoder encoder] forMethod:NOZCompressionMethodBrotli];
+    [library setDecoder:[NOZXBrotliCompressionCoder decoder] forMethod:NOZCompressionMethodBrotli];
+
     NSString *sourceFile = [bundle pathForResource:@"timeline" ofType:@"json"];
     sSourceData = [NSData dataWithContentsOfFile:sourceFile];
 }
@@ -164,17 +170,6 @@ static NSData *sSourceData = nil;
             [self _updateText:string];
         }
 
-        [string appendFormat:@"Custom ZStandard:\n"];
-        for (size_t i = 0; i < sizeof(kMethods) / sizeof(kMethods[0]); i++) {
-            Coder coder = kMethods[i];
-            if ((int)coder.method >= 100 && (int)coder.method < 200) {
-                [string appendFormat:@"%12s: ", coder.name];
-                RunResult result = [self _runCustomCoder:coder];
-                [string appendFormat:@"c=%.4fs, d=%.4fs, r=%02.2f\n", result.compressDuration, result.decompressDuration, result.compressionRatio];
-                [self _updateText:string];
-            }
-        }
-
         [string appendString:@"Done!"];
         [self _updateText:string];
 
@@ -191,19 +186,11 @@ static NSData *sSourceData = nil;
     return [self _runEncoder:encoder decoder:decoder level:coder.level];
 }
 
-- (RunResult)_runCustomCoder:(Coder)coder
-{
-    id<NOZEncoder, CoderWithDictionary> encoder = (id)[[NOZCompressionLibrary sharedInstance] encoderForMethod:coder.method];
-    NSData *dictionaryData = [encoder dictionaryData];
-    id<NOZDecoder> decoder = [[FastZSTDDecoder alloc] initWithDictionaryData:dictionaryData];
-    return [self _runEncoder:encoder decoder:decoder level:coder.level];
-}
-
 - (RunResult)_runEncoder:(id<NOZEncoder>)encoder decoder:(id<NOZDecoder>)decoder level:(NOZCompressionLevel)level
 {
     NSTimeInterval totalCompressDuration = 0, totalDecompressDuration = 0;
     double totalCompressRatio = 0;
-    const NSUInteger count = 20;
+    const NSUInteger count = kRUN_COUNT;
     for (NSUInteger i = 0; i < count; i++) {
         @autoreleasepool {
             CFTimeInterval start = CFAbsoluteTimeGetCurrent();
@@ -213,7 +200,7 @@ static NSData *sSourceData = nil;
             start = CFAbsoluteTimeGetCurrent();
             data = [data noz_dataByDecompressing:decoder];
             totalDecompressDuration += CFAbsoluteTimeGetCurrent() - start;
-            NSAssert(data.length == sSourceData.length, @"decompress wasn't accurate!");
+            NSAssert(data.length == sSourceData.length, @"decompress wasn't accurate! %@ %@ %tu", encoder, decoder, level);
         }
     }
     return (RunResult){ totalCompressDuration / (double)count, totalDecompressDuration / (double)count, totalCompressRatio / (double)count };
@@ -225,116 +212,6 @@ static NSData *sSourceData = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         self->_textView.text = str;
     });
-}
-
-@end
-
-@interface FastZSTDDecoderContext : NSObject <NOZDecoderContext>
-@property (nonatomic, readonly, unsafe_unretained) id<NOZDecoder> decoder;
-@property (nonatomic, readonly, nullable) NSData *dictionaryData;
-@property (nonatomic, copy, readonly) NOZFlushCallback flushCallback;
-@property (nonatomic, readonly) BOOL hasFinished;
-- (instancetype)initWithDecoder:(id<NOZDecoder>)decoder dictionaryData:(NSData *)dictionaryData flushCallback:(NOZFlushCallback)flushCallback;
-- (BOOL)initialize;
-- (BOOL)decodeBytes:(const Byte *)bytes length:(size_t)length;
-- (BOOL)finalize;
-@end
-
-@implementation FastZSTDDecoder
-
-- (instancetype)initWithDictionaryData:(NSData *)dictionaryData
-{
-    if (self = [super init]) {
-        _dictionaryData = dictionaryData;
-    }
-    return self;
-}
-
-- (id<NOZDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags flushCallback:(NOZFlushCallback)callback
-{
-    return [[FastZSTDDecoderContext alloc] initWithDecoder:self dictionaryData:_dictionaryData flushCallback:callback];
-}
-
-- (BOOL)initializeDecoderContext:(id<NOZDecoderContext>)context
-{
-    return [(FastZSTDDecoderContext *)context initialize];
-}
-
-- (BOOL)decodeBytes:(const Byte *)bytes length:(size_t)length context:(id<NOZDecoderContext>)context
-{
-    return [(FastZSTDDecoderContext *)context decodeBytes:bytes length:length];
-}
-
-- (BOOL)finalizeDecoderContext:(id<NOZDecoderContext>)context
-{
-    return [(FastZSTDDecoderContext *)context finalize];
-}
-
-@end
-
-#include "zstd.h"
-
-@implementation FastZSTDDecoderContext
-{
-    NSMutableData *_buffer;
-}
-
-- (instancetype)initWithDecoder:(id<NOZDecoder>)decoder dictionaryData:(NSData *)dictionaryData flushCallback:(NOZFlushCallback)flushCallback
-{
-    if (self = [super init]) {
-        _decoder = decoder;
-        _dictionaryData = dictionaryData;
-        _flushCallback = [flushCallback copy];
-    }
-    return self;
-}
-
-- (BOOL)initialize
-{
-    _buffer = [NSMutableData data];
-    return YES;
-}
-
-- (BOOL)decodeBytes:(const Byte *)bytes length:(size_t)length
-{
-    if (!_buffer || _hasFinished) {
-        return NO;
-    }
-
-    if (length) {
-        [_buffer appendBytes:bytes length:length];
-    } else {
-        _hasFinished = YES;
-    }
-
-    return YES;
-}
-
-- (BOOL)finalize
-{
-    if (!_buffer) {
-        return NO;
-    }
-
-    const size_t decompressSize = sSourceData.length*2;
-    Byte *decompressBuffer = malloc(decompressSize);
-    size_t decompressReturnValue;
-    if (_dictionaryData) {
-        ZSTD_DCtx *context = ZSTD_createDCtx();
-        decompressReturnValue = ZSTD_decompress_usingDict(context, decompressBuffer, decompressSize, _buffer.bytes, _buffer.length, _dictionaryData.bytes, _dictionaryData.length);
-        ZSTD_freeDCtx(context);
-    } else {
-        decompressReturnValue = ZSTD_decompress(decompressBuffer, decompressSize, _buffer.bytes, _buffer.length);
-    }
-
-    BOOL success = !ZSTD_isError(decompressReturnValue);
-    if (success) {
-        success = _flushCallback(_decoder, self, decompressBuffer, decompressReturnValue);
-    }
-
-    free(decompressBuffer);
-
-    return success;
 }
 
 @end

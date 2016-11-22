@@ -109,7 +109,7 @@ static NSOperationQueue *sQueue = nil;
         if ([entry isKindOfClass:[NOZFileZipEntry class]]) {
             NSString *extension = [[(NOZFileZipEntry *)entry filePath].pathExtension lowercaseString];
             if ([sAlreadyCompressedExtensions containsObject:extension]) {
-                entry.compressionLevel = NOZCompressionLevelNone;
+                entry.compressionMethod = NOZCompressionMethodNone;
             }
         }
         entry.compressionLevel = level;

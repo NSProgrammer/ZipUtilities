@@ -213,25 +213,34 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
    progressBlock:(__attribute__((noescape)) NOZProgressBlock)progressBlock
            error:(out NSError **)error
 {
-    if (![self private_openEntry:entry error:error]) {
-        return NO;
-    }
-
-    BOOL writeSuccess = NO;
-    BOOL shouldAbort = NO;
-
-    if (!shouldAbort) {
-        writeSuccess = [self private_writeEntry:entry progressBlock:progressBlock error:error abortRef:&shouldAbort];
-    }
-
-    if (![self private_closeCurrentOpenEntryAndReturnError:(writeSuccess) ? error : NULL] || !writeSuccess) {
-        if (!writeSuccess && shouldAbort && error && !*error) {
-            *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
+    __block NSError *stackError = nil;
+    noz_defer(^{
+        if (stackError && error) {
+            *error = stackError;
         }
-        return NO;
-    }
+    });
 
-    return YES;
+    @autoreleasepool {
+        if (![self private_openEntry:entry error:&stackError]) {
+            return NO;
+        }
+
+        BOOL writeSuccess = NO;
+        BOOL shouldAbort = NO;
+
+        if (!shouldAbort) {
+            writeSuccess = [self private_writeEntry:entry progressBlock:progressBlock error:&stackError abortRef:&shouldAbort];
+        }
+
+        if (![self private_closeCurrentOpenEntryAndReturnError:(writeSuccess) ? (&stackError) : NULL] || !writeSuccess) {
+            if (!writeSuccess && shouldAbort && !stackError) {
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
+            }
+            return NO;
+        }
+        
+        return YES;
+    }
 }
 
 @end
@@ -396,7 +405,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         [inputStream open];
         noz_defer(^{ [inputStream close]; });
         NSInteger bytesRead;
-        const size_t pageSize = NSPageSize();
+        const size_t pageSize = NOZBufferSize();
         Byte buffer[pageSize];
 
         do {
@@ -487,7 +496,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         success = NO;
     }
 
-    _internal.currentEntry->fileDescriptor.compressedSize += bytesWritten;
+    _internal.currentEntry->fileDescriptor.compressedSize += (UInt32)bytesWritten;
 
     return success;
 }

@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)name;
 /** Optional comment for entry */
 - (nullable NSString *)comment;
-/** Compression level for entry */
+/** Compression level for entry, from `0.0f` to `1.0f` */
 - (NOZCompressionLevel)compressionLevel;
 /** Compression Method for entry */
 - (NOZCompressionMethod)compressionMethod;
