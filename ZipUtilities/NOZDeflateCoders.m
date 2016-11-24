@@ -33,6 +33,8 @@
 
 #include "zlib.h"
 
+#define kDEFLATE_DEFAULT_COMPRESSION_LEVEL (6)
+
 #pragma mark - Deflate Encoder
 
 static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
@@ -76,7 +78,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
         _zStream.zfree = NULL;
         _zStream.opaque = NULL;
 
-        _compressionLevel = 6;
+        _compressionLevel = kDEFLATE_DEFAULT_COMPRESSION_LEVEL;
     }
     return self;
 }
@@ -100,7 +102,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 - (NSUInteger)defaultCompressionLevel
 {
-    return 6;
+    return kDEFLATE_DEFAULT_COMPRESSION_LEVEL;
 }
 
 - (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
@@ -419,5 +421,5 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level)
 {
-    return (UInt16)NOZCompressionLevelToCustomEncoderLevel(level, Z_BEST_SPEED, Z_BEST_COMPRESSION, 6);
+    return (UInt16)NOZCompressionLevelToCustomEncoderLevel(level, Z_BEST_SPEED, Z_BEST_COMPRESSION, kDEFLATE_DEFAULT_COMPRESSION_LEVEL);
 }

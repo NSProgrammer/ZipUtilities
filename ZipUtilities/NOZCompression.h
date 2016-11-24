@@ -33,11 +33,11 @@
 //! The compression level for use with encoding, from `0.0f` to `1.0f`
 typedef float NOZCompressionLevel;
 //! The max compression level
-#define NOZCompressionLevelMax      (1.f)
+static const NOZCompressionLevel NOZCompressionLevelMax = 1.f;
 //! The min compression level
-#define NOZCompressionLevelMin      (0.f)
+static const NOZCompressionLevel NOZCompressionLevelMin = 0.f;
 //! The default compression level for any decoder
-#define NOZCompressionLevelDefault  (-1.f)
+static const NOZCompressionLevel NOZCompressionLevelDefault = -1.f;
 
 FOUNDATION_EXTERN NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> __nullable encoder);
 FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NOZCompressionLevel level);
