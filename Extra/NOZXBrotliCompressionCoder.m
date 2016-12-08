@@ -27,7 +27,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 - (instancetype)init NS_UNAVAILABLE;
 - (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
 - (BOOL)encodeBytes:(const Byte*)bytes length:(size_t)length;
-- (BOOL)finalize;
+- (BOOL)finalizeEncoding;
 @end
 
 @interface NOZXBrotliDecoderContext : NSObject <NOZDecoderContext>
@@ -38,7 +38,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 - (instancetype)init NS_UNAVAILABLE;
 - (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
 - (BOOL)decodeBytes:(const Byte*)bytes length:(size_t)length;
-- (BOOL)finalize;
+- (BOOL)finalizeDecoding;
 @end
 
 @interface NOZXBrotliEncoder : NSObject <NOZEncoder>
@@ -173,7 +173,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
     return !_flags.failureEncountered;
 }
 
-- (BOOL)finalize
+- (BOOL)finalizeEncoding
 {
     if (!_flags.initialized || _flags.failureEncountered) {
         return NO;
@@ -264,7 +264,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 
 - (BOOL)finalizeEncoderContext:(id<NOZEncoderContext>)context
 {
-    return [(NOZXBrotliEncoderContext *)context finalize];
+    return [(NOZXBrotliEncoderContext *)context finalizeEncoding];
 }
 
 @end
@@ -352,7 +352,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
     return !_flags.failureEncountered;
 }
 
-- (BOOL)finalize
+- (BOOL)finalizeDecoding
 {
     if (!_flags.initialized || _flags.failureEncountered) {
         return NO;
@@ -403,7 +403,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 
 - (BOOL)finalizeDecoderContext:(id<NOZDecoderContext>)context
 {
-    return [(NOZXBrotliDecoderContext *)context finalize];
+    return [(NOZXBrotliDecoderContext *)context finalizeDecoding];
 }
 
 @end

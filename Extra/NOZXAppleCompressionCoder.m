@@ -197,7 +197,8 @@
                                                   flushCallback:(NOZFlushCallback)callback
 {
     if (![[self class] isSupported]) {
-        return nil;
+        NSAssert(NO, @"Should not have been able to call -[%@ %@]!", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+        return (id __nonnull)nil;
     }
 
     NOZXAppleCompressionCoderContext *context = [[NOZXAppleCompressionCoderContext alloc] init];
