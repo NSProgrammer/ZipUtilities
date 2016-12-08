@@ -25,7 +25,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 - (instancetype)init NS_UNAVAILABLE;
 - (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
 - (BOOL)encodeBytes:(const Byte*)bytes length:(size_t)length;
-- (BOOL)finalize;
+- (BOOL)finalizeEncoding;
 @end
 
 @interface NOZXZStandardDecoderContext : NSObject <NOZDecoderContext>
@@ -36,7 +36,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 - (instancetype)init NS_UNAVAILABLE;
 - (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
 - (BOOL)decodeBytes:(const Byte*)bytes length:(size_t)length;
-- (BOOL)finalize;
+- (BOOL)finalizeDecoding;
 @end
 
 @interface NOZXZStandardEncoder : NSObject <NOZEncoder>
@@ -158,7 +158,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
     return !_flags.failureEncountered;
 }
 
-- (BOOL)finalize
+- (BOOL)finalizeEncoding
 {
     if (!_flags.initialized || _flags.failureEncountered) {
         return NO;
@@ -231,7 +231,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 
 - (BOOL)finalizeEncoderContext:(id<NOZEncoderContext>)context
 {
-    return [(NOZXZStandardEncoderContext *)context finalize];
+    return [(NOZXZStandardEncoderContext *)context finalizeEncoding];
 }
 
 @end
@@ -316,7 +316,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
     return !_flags.failureEncountered;
 }
 
-- (BOOL)finalize
+- (BOOL)finalizeDecoding
 {
     if (!_flags.initialized || _flags.failureEncountered) {
         return NO;
@@ -357,7 +357,7 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 
 - (BOOL)finalizeDecoderContext:(id<NOZDecoderContext>)context
 {
-    return [(NOZXZStandardDecoderContext *)context finalize];
+    return [(NOZXZStandardDecoderContext *)context finalizeDecoding];
 }
 
 @end
