@@ -261,11 +261,17 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
  A central directory record is a zip entry populated with all the pertinent central directory info.
  */
 @interface NOZCentralDirectoryRecord : NSObject <NOZZipEntry>
+/** name of record */
 @property (nonatomic, readonly, nonnull) NSString *name;
+/** comment for record */
 @property (nonatomic, readonly, nullable) NSString *comment;
+/** compression method for record */
 @property (nonatomic, readonly) NOZCompressionMethod compressionMethod;
-@property (nonatomic, readonly) NOZCompressionLevel compressionLevel; // a best guess
+/** compression level for record (best guess when unzipping) */
+@property (nonatomic, readonly) NOZCompressionLevel compressionLevel;
+/** compressed size of record */
 @property (nonatomic, readonly) SInt64 compressedSize;
+/** uncompressed size of record */
 @property (nonatomic, readonly) SInt64 uncompressedSize;
 
 /** Unavailable */
