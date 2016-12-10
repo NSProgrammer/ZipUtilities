@@ -25,7 +25,8 @@
 //  SOFTWARE.
 //
 
-#include <libkern/OSAtomic.h>
+#include <stdatomic.h>
+
 #import "NOZ_Project.h"
 #import "NOZSyncStepOperation.h"
 
@@ -41,7 +42,7 @@
     SInt64 *_stepWeights;
     float *_currentStepProgress;
     SInt64 _totalWeight;
-    volatile uint64_t _testMask;
+    volatile atomic_flag _finishedFlag;
 }
 
 @synthesize cancelled = _internalIsCancelled;
@@ -115,7 +116,7 @@
 
 - (void)finish
 {
-    if (0 == OSAtomicTestAndSet(7 /* 0th bit is the 7th index for OSAtomicTest */, &_testMask)) {
+    if (!atomic_flag_test_and_set(&_finishedFlag)) {
         [self handleFinishing];
     }
 }
