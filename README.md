@@ -459,8 +459,12 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 ## Dependencies
 
 ### ZStandard
-ZipUtilities also includes v1.1.1 of Facebook's ZStandard (zstd) compression library.
+ZipUtilities includes v1.1.1 of Facebook's ZStandard (zstd) compression library.
 [www.zstd.net](http://www.zstd.net)
+
+### Brotli
+ZipUtilities includes v0.5.2 of Google's Brotli (br) compression library.
+[Brotli Github](https://github.com/google/brotli)
 
 ### Test files for zipping/unzipping
 As a part of unit testing Aesop's Fables, the Star Wars Episode VII trailer and Maniac Mansion are used for unit testing.  Aesop's Fables and Maniac Mansion no longer hold a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.  The Star Wars Episode VII Trailer is free for distribution and also provides a useful file for testing by being a large file.
