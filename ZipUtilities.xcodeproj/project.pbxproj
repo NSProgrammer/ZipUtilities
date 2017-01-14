@@ -150,10 +150,8 @@
 		8B0455171DF8D8C000EBB706 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D71DE39289004A35C7 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B04551A1DF8D8C000EBB706 /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F01DE39298004A35C7 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551C1DF8D8C000EBB706 /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35031DE392A5004A35C7 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B04551D1DF8D8C000EBB706 /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35041DE392A5004A35C7 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551E1DF8D8C000EBB706 /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35051DE392A5004A35C7 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551F1DF8D8C000EBB706 /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35121DE392AF004A35C7 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455201DF8D8C000EBB706 /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35141DE392AF004A35C7 /* zdict.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -190,10 +188,8 @@
 		8B0455791DF8DBFD00EBB706 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D71DE39289004A35C7 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557A1DF8DBFD00EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557B1DF8DBFD00EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B04557C1DF8DBFD00EBB706 /* zbuff_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F01DE39298004A35C7 /* zbuff_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557D1DF8DBFD00EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557E1DF8DBFD00EBB706 /* huf_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35031DE392A5004A35C7 /* huf_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B04557F1DF8DBFD00EBB706 /* zbuff_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35041DE392A5004A35C7 /* zbuff_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455801DF8DBFD00EBB706 /* zstd_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35051DE392A5004A35C7 /* zstd_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455811DF8DBFD00EBB706 /* divsufsort.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35121DE392AF004A35C7 /* divsufsort.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455821DF8DBFD00EBB706 /* zdict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E35141DE392AF004A35C7 /* zdict.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -486,17 +482,14 @@
 		8B6E34D31DE39289004A35C7 /* mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mem.h; path = Extra/zstd/common/mem.h; sourceTree = "<group>"; };
 		8B6E34D41DE39289004A35C7 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xxhash.c; path = Extra/zstd/common/xxhash.c; sourceTree = "<group>"; };
 		8B6E34D51DE39289004A35C7 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xxhash.h; path = Extra/zstd/common/xxhash.h; sourceTree = "<group>"; };
-		8B6E34D61DE39289004A35C7 /* zbuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zbuff.h; path = Extra/zstd/common/zbuff.h; sourceTree = "<group>"; };
 		8B6E34D71DE39289004A35C7 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = Extra/zstd/common/zstd_common.c; sourceTree = "<group>"; };
 		8B6E34D81DE39289004A35C7 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/common/zstd_errors.h; sourceTree = "<group>"; };
 		8B6E34D91DE39289004A35C7 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = Extra/zstd/common/zstd_internal.h; sourceTree = "<group>"; };
 		8B6E34EE1DE39298004A35C7 /* fse_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_compress.c; path = Extra/zstd/compress/fse_compress.c; sourceTree = "<group>"; };
 		8B6E34EF1DE39298004A35C7 /* huf_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huf_compress.c; path = Extra/zstd/compress/huf_compress.c; sourceTree = "<group>"; };
-		8B6E34F01DE39298004A35C7 /* zbuff_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zbuff_compress.c; path = Extra/zstd/compress/zbuff_compress.c; sourceTree = "<group>"; };
 		8B6E34F11DE39298004A35C7 /* zstd_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_compress.c; path = Extra/zstd/compress/zstd_compress.c; sourceTree = "<group>"; };
 		8B6E34F21DE39298004A35C7 /* zstd_opt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_opt.h; path = Extra/zstd/compress/zstd_opt.h; sourceTree = "<group>"; };
 		8B6E35031DE392A5004A35C7 /* huf_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huf_decompress.c; path = Extra/zstd/decompress/huf_decompress.c; sourceTree = "<group>"; };
-		8B6E35041DE392A5004A35C7 /* zbuff_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zbuff_decompress.c; path = Extra/zstd/decompress/zbuff_decompress.c; sourceTree = "<group>"; };
 		8B6E35051DE392A5004A35C7 /* zstd_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_decompress.c; path = Extra/zstd/decompress/zstd_decompress.c; sourceTree = "<group>"; };
 		8B6E35121DE392AF004A35C7 /* divsufsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = divsufsort.c; path = Extra/zstd/dictBuilder/divsufsort.c; sourceTree = "<group>"; };
 		8B6E35131DE392AF004A35C7 /* divsufsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = divsufsort.h; path = Extra/zstd/dictBuilder/divsufsort.h; sourceTree = "<group>"; };
@@ -890,7 +883,6 @@
 				8B6E34D31DE39289004A35C7 /* mem.h */,
 				8B6E34D41DE39289004A35C7 /* xxhash.c */,
 				8B6E34D51DE39289004A35C7 /* xxhash.h */,
-				8B6E34D61DE39289004A35C7 /* zbuff.h */,
 				8B6E34D71DE39289004A35C7 /* zstd_common.c */,
 				8B6E34D81DE39289004A35C7 /* zstd_errors.h */,
 				8B6E34D91DE39289004A35C7 /* zstd_internal.h */,
@@ -903,7 +895,6 @@
 			children = (
 				8B6E34EE1DE39298004A35C7 /* fse_compress.c */,
 				8B6E34EF1DE39298004A35C7 /* huf_compress.c */,
-				8B6E34F01DE39298004A35C7 /* zbuff_compress.c */,
 				8B6E34F11DE39298004A35C7 /* zstd_compress.c */,
 				8B6E34F21DE39298004A35C7 /* zstd_opt.h */,
 			);
@@ -914,7 +905,6 @@
 			isa = PBXGroup;
 			children = (
 				8B6E35031DE392A5004A35C7 /* huf_decompress.c */,
-				8B6E35041DE392A5004A35C7 /* zbuff_decompress.c */,
 				8B6E35051DE392A5004A35C7 /* zstd_decompress.c */,
 			);
 			name = decompress;
@@ -1647,12 +1637,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0455151DF8D8C000EBB706 /* fse_decompress.c in Sources */,
-				8B04551A1DF8D8C000EBB706 /* zbuff_compress.c in Sources */,
 				8B0455201DF8D8C000EBB706 /* zdict.c in Sources */,
 				8B0455161DF8D8C000EBB706 /* xxhash.c in Sources */,
 				8B04551E1DF8D8C000EBB706 /* zstd_decompress.c in Sources */,
 				8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */,
-				8B04551D1DF8D8C000EBB706 /* zbuff_decompress.c in Sources */,
 				8B04551C1DF8D8C000EBB706 /* huf_decompress.c in Sources */,
 				8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */,
 				8B0455141DF8D8C000EBB706 /* error_private.c in Sources */,
@@ -1695,12 +1683,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B0455771DF8DBFD00EBB706 /* fse_decompress.c in Sources */,
-				8B04557C1DF8DBFD00EBB706 /* zbuff_compress.c in Sources */,
 				8B0455821DF8DBFD00EBB706 /* zdict.c in Sources */,
 				8B0455781DF8DBFD00EBB706 /* xxhash.c in Sources */,
 				8B0455801DF8DBFD00EBB706 /* zstd_decompress.c in Sources */,
 				8B04557A1DF8DBFD00EBB706 /* fse_compress.c in Sources */,
-				8B04557F1DF8DBFD00EBB706 /* zbuff_decompress.c in Sources */,
 				8B04557E1DF8DBFD00EBB706 /* huf_decompress.c in Sources */,
 				8B04557B1DF8DBFD00EBB706 /* huf_compress.c in Sources */,
 				8B0455761DF8DBFD00EBB706 /* error_private.c in Sources */,
