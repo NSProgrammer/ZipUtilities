@@ -73,7 +73,7 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-- (instancetype)new NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 
