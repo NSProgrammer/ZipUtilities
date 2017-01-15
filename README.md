@@ -376,7 +376,7 @@ into destinations (NSData, streams and/or files).
 
 _ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
 
-Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZCompressionLibrary`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with the `NOZCompressionLibrary`.
+Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them for the related `NOZCompressionMethod` with a `NOZCompressionLibrary` (including the `sharedInstance`).  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the known encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with the `NOZCompressionLibrary`.
 
 *Example:*
 
@@ -387,7 +387,7 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 
 *Apple compression library as an extra*
 
-`NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified in as a known compression method in the ZIP archive format.
+`NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified as a known compression method in the ZIP archive format.
 
 *Example of registering the Apple compression library coders:*
 
@@ -459,11 +459,11 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 ## Dependencies
 
 ### ZStandard
-ZipUtilities includes v1.1.1 of Facebook's ZStandard (zstd) compression library.
+ZipUtilities includes Facebook's ZStandard (zstd) compression library.
 [www.zstd.net](http://www.zstd.net)
 
 ### Brotli
-ZipUtilities includes v0.5.2 of Google's Brotli (br) compression library.
+ZipUtilities includes Google's Brotli (br) compression library.
 [Brotli Github](https://github.com/google/brotli)
 
 ### Test files for zipping/unzipping
