@@ -458,7 +458,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
             return 0;
         }
 
-        for (off_t i = (off_t)(sizeToRead - 3); i >= 0; i--) {
+        const size_t bytesToRead = sizeToRead - 3;
+        for (off_t i = (off_t)(bytesToRead - 1); i >= 0; i--) {
             if (buffer[i + 3] == sig[3]) {
                 if (buffer[i + 2] == sig[2]) {
                     if (buffer[i + 1] == sig[1]) {
@@ -470,7 +471,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
             }
         }
 
-        bytesRead += sizeToRead - 3;
+        bytesRead += bytesToRead;
     }
 
     return 0;
