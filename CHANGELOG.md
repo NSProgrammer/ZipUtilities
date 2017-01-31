@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.9.1 (Jan 31, 2017) - Nolan O'Brien
+
+- Miscellaneous minor fixes
+
 ### 1.9.0 (Nov 22, 2016) - Nolan O'Brien
 
 - Add Brotli support as an extra encoder/decoder
