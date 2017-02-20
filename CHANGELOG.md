@@ -2,6 +2,14 @@
 
 ## History
 
+### 1.9.3 (Feb 20, 2017) - Nolan O'Brien
+
+- add checksum error code and record validation method to unzipper
+
+### 1.9.2 (Feb 19, 2017) - Nolan O'Brien
+
+- updated zstd to v1.1.3
+
 ### 1.9.1 (Jan 31, 2017) - Nolan O'Brien
 
 - Miscellaneous minor fixes

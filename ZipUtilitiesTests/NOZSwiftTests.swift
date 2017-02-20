@@ -242,4 +242,39 @@ func TearDownZipQueue()
         }
     }
 
+    func testValidateZip() {
+        var unzipper: NOZUnzipper
+
+        let goodFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("File")
+        unzipper = NOZUnzipper.init(zipFile: goodFilePath)
+        try! unzipper.open()
+        try! unzipper.readCentralDirectory()
+        unzipper.enumerateManifestEntries({ record, index, stop in
+            var caughtError: NSError? = nil
+            do {
+                try unzipper.validate(record, progressBlock: nil)
+            } catch let error as NSError {
+                caughtError = error
+            }
+            XCTAssertNil(caughtError)
+        })
+        try! unzipper.close()
+
+        let badFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("Bad_File")
+        unzipper = NOZUnzipper.init(zipFile: badFilePath)
+        try! unzipper.open()
+        try! unzipper.readCentralDirectory()
+        var didEncouterError: Bool = false
+        unzipper.enumerateManifestEntries({ record, index, stop in
+            do {
+                try unzipper.validate(record, progressBlock: nil)
+            } catch let error as NSError {
+                XCTAssertEqual(NOZErrorCode.init(rawValue: error.code), NOZErrorCode.unzipChecksumMissmatch)
+                didEncouterError = true
+            }
+        })
+        XCTAssertTrue(didEncouterError)
+        try! unzipper.close()
+    }
+
 }

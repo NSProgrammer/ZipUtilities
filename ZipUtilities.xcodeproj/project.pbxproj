@@ -276,6 +276,9 @@
 		8BAE42591E5A9E4200AFD299 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42411E5A9E4200AFD299 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8BAE425A1E5A9E4200AFD299 /* zstd_errors.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42421E5A9E4200AFD299 /* zstd_errors.h */; };
 		8BAE425B1E5A9E4200AFD299 /* zstd_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42431E5A9E4200AFD299 /* zstd_internal.h */; };
+		8BAE425D1E5AAFFE00AFD299 /* Bad_File.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */; };
+		8BAE425E1E5AB56C00AFD299 /* Bad_File.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */; };
+		8BAE425F1E5AB56C00AFD299 /* Bad_File.zip in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */; };
 		8BDA6F921DDD7524004EEF12 /* ZipUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -602,6 +605,7 @@
 		8BAE42411E5A9E4200AFD299 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = Extra/zstd/common/zstd_common.c; sourceTree = "<group>"; };
 		8BAE42421E5A9E4200AFD299 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/common/zstd_errors.h; sourceTree = "<group>"; };
 		8BAE42431E5A9E4200AFD299 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = Extra/zstd/common/zstd_internal.h; sourceTree = "<group>"; };
+		8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Bad_File.zip; sourceTree = "<group>"; };
 		B3F87BF41CF4C08A00FBBFEF /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -840,6 +844,7 @@
 			children = (
 				1CD9BAB31B757A38000B93C4 /* Aesop.txt */,
 				8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */,
+				8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */,
 				1C3223841B78501A00DC0A33 /* Data.zip */,
 				1CD9BAB81B75B419000B93C4 /* Directory.zip */,
 				1CD9BAB91B75B419000B93C4 /* File.zip */,
@@ -1489,6 +1494,7 @@
 				1C3223851B78501A00DC0A33 /* Data.zip in Resources */,
 				1CD9BABD1B75B419000B93C4 /* File.zip in Resources */,
 				1C2DFB3B1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8BAE425D1E5AAFFE00AFD299 /* Bad_File.zip in Resources */,
 				8B8D5AA81DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				1CD9BAB41B757A38000B93C4 /* Aesop.txt in Resources */,
 				8B8D5AAB1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,
@@ -1517,6 +1523,7 @@
 				4623A89A1B9A882700A56535 /* File.zip in Resources */,
 				4623A89B1B9A882700A56535 /* Mixed.zip in Resources */,
 				1C2DFB3C1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8BAE425E1E5AB56C00AFD299 /* Bad_File.zip in Resources */,
 				8B8D5AA91DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				4623A8991B9A882700A56535 /* Directory.zip in Resources */,
 				8B8D5AAC1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,
@@ -1545,6 +1552,7 @@
 				4623A89F1B9A882800A56535 /* File.zip in Resources */,
 				4623A8A01B9A882800A56535 /* Mixed.zip in Resources */,
 				1C2DFB3D1C207E7700C9A238 /* Star.Wars.7.Trailer.mp4.zip in Resources */,
+				8BAE425F1E5AB56C00AFD299 /* Bad_File.zip in Resources */,
 				8B8D5AAA1DDD2E9100037E0E /* htl.512.zstd_dict in Resources */,
 				4623A89E1B9A882800A56535 /* Directory.zip in Resources */,
 				8B8D5AAD1DDD2E9100037E0E /* htl.1024.zstd_dict in Resources */,

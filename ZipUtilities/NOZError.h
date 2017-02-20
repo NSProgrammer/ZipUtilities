@@ -155,6 +155,8 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeUnzipCannotReadFileEntry,
     /** Unzipper couldn't decompress a file entry */
     NOZErrorCodeUnzipCannotDecompressFileEntry,
+    /** Unzipping data didn't match CRC32 checksum */
+    NOZErrorCodeUnzipChecksumMissmatch,
     /** An entry failed to be decompressed */
     NOZErrorCodeUnzipFailedToDecompressEntry,
 };
