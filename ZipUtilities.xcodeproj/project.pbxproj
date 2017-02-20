@@ -143,11 +143,6 @@
 		4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
-		8B0455131DF8D8C000EBB706 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34CD1DE39289004A35C7 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455141DF8D8C000EBB706 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34CE1DE39289004A35C7 /* error_private.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455151DF8D8C000EBB706 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D01DE39289004A35C7 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455161DF8D8C000EBB706 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D41DE39289004A35C7 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455171DF8D8C000EBB706 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D71DE39289004A35C7 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -181,11 +176,6 @@
 		8B04555E1DF8DA7A00EBB706 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B04550A1DF8D81300EBB706 /* libzstd.a */; };
 		8B0455631DF8DA8400EBB706 /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B0455381DF8D97900EBB706 /* libbrotli.a */; };
 		8B0455641DF8DA8400EBB706 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B04550A1DF8D81300EBB706 /* libzstd.a */; };
-		8B0455751DF8DBFD00EBB706 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34CD1DE39289004A35C7 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455761DF8DBFD00EBB706 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34CE1DE39289004A35C7 /* error_private.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455771DF8DBFD00EBB706 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D01DE39289004A35C7 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455781DF8DBFD00EBB706 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D41DE39289004A35C7 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B0455791DF8DBFD00EBB706 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34D71DE39289004A35C7 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557A1DF8DBFD00EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557B1DF8DBFD00EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04557D1DF8DBFD00EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -257,6 +247,35 @@
 		8B8D5B091DDD644E00037E0E /* htl.1024.zstd_dict in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5AA11DDD2E9100037E0E /* htl.1024.zstd_dict */; };
 		8B8D5B0A1DDD644E00037E0E /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B8D5A961DDD153E00037E0E /* timeline.json */; };
 		8B8D5B0B1DDD6A9800037E0E /* ZipUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; };
+		8BAE42031E5A9DDA00AFD299 /* cover.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42021E5A9DDA00AFD299 /* cover.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42041E5A9DDA00AFD299 /* cover.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42021E5A9DDA00AFD299 /* cover.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42071E5A9E0900AFD299 /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42051E5A9E0900AFD299 /* zstdmt_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42081E5A9E0900AFD299 /* zstdmt_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42051E5A9E0900AFD299 /* zstdmt_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42091E5A9E0900AFD299 /* zstdmt_compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42061E5A9E0900AFD299 /* zstdmt_compress.h */; };
+		8BAE42441E5A9E4200AFD299 /* bitstream.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42331E5A9E4200AFD299 /* bitstream.h */; };
+		8BAE42451E5A9E4200AFD299 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42341E5A9E4200AFD299 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42461E5A9E4200AFD299 /* entropy_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42341E5A9E4200AFD299 /* entropy_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42471E5A9E4200AFD299 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42351E5A9E4200AFD299 /* error_private.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42481E5A9E4200AFD299 /* error_private.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42351E5A9E4200AFD299 /* error_private.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42491E5A9E4200AFD299 /* error_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42361E5A9E4200AFD299 /* error_private.h */; };
+		8BAE424A1E5A9E4200AFD299 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42371E5A9E4200AFD299 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE424B1E5A9E4200AFD299 /* fse_decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42371E5A9E4200AFD299 /* fse_decompress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE424C1E5A9E4200AFD299 /* fse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42381E5A9E4200AFD299 /* fse.h */; };
+		8BAE424D1E5A9E4200AFD299 /* huf.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42391E5A9E4200AFD299 /* huf.h */; };
+		8BAE424E1E5A9E4200AFD299 /* mem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE423A1E5A9E4200AFD299 /* mem.h */; };
+		8BAE424F1E5A9E4200AFD299 /* pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423B1E5A9E4200AFD299 /* pool.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42501E5A9E4200AFD299 /* pool.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423B1E5A9E4200AFD299 /* pool.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42511E5A9E4200AFD299 /* pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE423C1E5A9E4200AFD299 /* pool.h */; };
+		8BAE42521E5A9E4200AFD299 /* threading.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423D1E5A9E4200AFD299 /* threading.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42531E5A9E4200AFD299 /* threading.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423D1E5A9E4200AFD299 /* threading.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42541E5A9E4200AFD299 /* threading.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE423E1E5A9E4200AFD299 /* threading.h */; };
+		8BAE42551E5A9E4200AFD299 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423F1E5A9E4200AFD299 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42561E5A9E4200AFD299 /* xxhash.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE423F1E5A9E4200AFD299 /* xxhash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42571E5A9E4200AFD299 /* xxhash.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42401E5A9E4200AFD299 /* xxhash.h */; };
+		8BAE42581E5A9E4200AFD299 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42411E5A9E4200AFD299 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE42591E5A9E4200AFD299 /* zstd_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE42411E5A9E4200AFD299 /* zstd_common.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8BAE425A1E5A9E4200AFD299 /* zstd_errors.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42421E5A9E4200AFD299 /* zstd_errors.h */; };
+		8BAE425B1E5A9E4200AFD299 /* zstd_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42431E5A9E4200AFD299 /* zstd_internal.h */; };
 		8BDA6F921DDD7524004EEF12 /* ZipUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -472,19 +491,6 @@
 		8B6E34321DE36963004A35C7 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = Extra/brotli/types.h; sourceTree = "<group>"; };
 		8B6E34C61DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXBrotliCompressionCoder.h; path = Extra/NOZXBrotliCompressionCoder.h; sourceTree = "<group>"; };
 		8B6E34C71DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXBrotliCompressionCoder.m; path = Extra/NOZXBrotliCompressionCoder.m; sourceTree = "<group>"; };
-		8B6E34CC1DE39289004A35C7 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitstream.h; path = Extra/zstd/common/bitstream.h; sourceTree = "<group>"; };
-		8B6E34CD1DE39289004A35C7 /* entropy_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entropy_common.c; path = Extra/zstd/common/entropy_common.c; sourceTree = "<group>"; };
-		8B6E34CE1DE39289004A35C7 /* error_private.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error_private.c; path = Extra/zstd/common/error_private.c; sourceTree = "<group>"; };
-		8B6E34CF1DE39289004A35C7 /* error_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = error_private.h; path = Extra/zstd/common/error_private.h; sourceTree = "<group>"; };
-		8B6E34D01DE39289004A35C7 /* fse_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_decompress.c; path = Extra/zstd/common/fse_decompress.c; sourceTree = "<group>"; };
-		8B6E34D11DE39289004A35C7 /* fse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fse.h; path = Extra/zstd/common/fse.h; sourceTree = "<group>"; };
-		8B6E34D21DE39289004A35C7 /* huf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huf.h; path = Extra/zstd/common/huf.h; sourceTree = "<group>"; };
-		8B6E34D31DE39289004A35C7 /* mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mem.h; path = Extra/zstd/common/mem.h; sourceTree = "<group>"; };
-		8B6E34D41DE39289004A35C7 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xxhash.c; path = Extra/zstd/common/xxhash.c; sourceTree = "<group>"; };
-		8B6E34D51DE39289004A35C7 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xxhash.h; path = Extra/zstd/common/xxhash.h; sourceTree = "<group>"; };
-		8B6E34D71DE39289004A35C7 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = Extra/zstd/common/zstd_common.c; sourceTree = "<group>"; };
-		8B6E34D81DE39289004A35C7 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/common/zstd_errors.h; sourceTree = "<group>"; };
-		8B6E34D91DE39289004A35C7 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = Extra/zstd/common/zstd_internal.h; sourceTree = "<group>"; };
 		8B6E34EE1DE39298004A35C7 /* fse_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_compress.c; path = Extra/zstd/compress/fse_compress.c; sourceTree = "<group>"; };
 		8B6E34EF1DE39298004A35C7 /* huf_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huf_compress.c; path = Extra/zstd/compress/huf_compress.c; sourceTree = "<group>"; };
 		8B6E34F11DE39298004A35C7 /* zstd_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_compress.c; path = Extra/zstd/compress/zstd_compress.c; sourceTree = "<group>"; };
@@ -576,6 +582,26 @@
 		8B8D5AEB1DDD465C00037E0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B8D5AEE1DDD465C00037E0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B8D5AF01DDD465C00037E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BAE42021E5A9DDA00AFD299 /* cover.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cover.c; path = Extra/zstd/dictBuilder/cover.c; sourceTree = "<group>"; };
+		8BAE42051E5A9E0900AFD299 /* zstdmt_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstdmt_compress.c; path = Extra/zstd/compress/zstdmt_compress.c; sourceTree = "<group>"; };
+		8BAE42061E5A9E0900AFD299 /* zstdmt_compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstdmt_compress.h; path = Extra/zstd/compress/zstdmt_compress.h; sourceTree = "<group>"; };
+		8BAE42331E5A9E4200AFD299 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitstream.h; path = Extra/zstd/common/bitstream.h; sourceTree = "<group>"; };
+		8BAE42341E5A9E4200AFD299 /* entropy_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entropy_common.c; path = Extra/zstd/common/entropy_common.c; sourceTree = "<group>"; };
+		8BAE42351E5A9E4200AFD299 /* error_private.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error_private.c; path = Extra/zstd/common/error_private.c; sourceTree = "<group>"; };
+		8BAE42361E5A9E4200AFD299 /* error_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = error_private.h; path = Extra/zstd/common/error_private.h; sourceTree = "<group>"; };
+		8BAE42371E5A9E4200AFD299 /* fse_decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_decompress.c; path = Extra/zstd/common/fse_decompress.c; sourceTree = "<group>"; };
+		8BAE42381E5A9E4200AFD299 /* fse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fse.h; path = Extra/zstd/common/fse.h; sourceTree = "<group>"; };
+		8BAE42391E5A9E4200AFD299 /* huf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huf.h; path = Extra/zstd/common/huf.h; sourceTree = "<group>"; };
+		8BAE423A1E5A9E4200AFD299 /* mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mem.h; path = Extra/zstd/common/mem.h; sourceTree = "<group>"; };
+		8BAE423B1E5A9E4200AFD299 /* pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pool.c; path = Extra/zstd/common/pool.c; sourceTree = "<group>"; };
+		8BAE423C1E5A9E4200AFD299 /* pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pool.h; path = Extra/zstd/common/pool.h; sourceTree = "<group>"; };
+		8BAE423D1E5A9E4200AFD299 /* threading.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = threading.c; path = Extra/zstd/common/threading.c; sourceTree = "<group>"; };
+		8BAE423E1E5A9E4200AFD299 /* threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threading.h; path = Extra/zstd/common/threading.h; sourceTree = "<group>"; };
+		8BAE423F1E5A9E4200AFD299 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xxhash.c; path = Extra/zstd/common/xxhash.c; sourceTree = "<group>"; };
+		8BAE42401E5A9E4200AFD299 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xxhash.h; path = Extra/zstd/common/xxhash.h; sourceTree = "<group>"; };
+		8BAE42411E5A9E4200AFD299 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = Extra/zstd/common/zstd_common.c; sourceTree = "<group>"; };
+		8BAE42421E5A9E4200AFD299 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/common/zstd_errors.h; sourceTree = "<group>"; };
+		8BAE42431E5A9E4200AFD299 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = Extra/zstd/common/zstd_internal.h; sourceTree = "<group>"; };
 		B3F87BF41CF4C08A00FBBFEF /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -873,19 +899,23 @@
 		8B3C0C771DDC1FDB000C7DE1 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				8B6E34CC1DE39289004A35C7 /* bitstream.h */,
-				8B6E34CD1DE39289004A35C7 /* entropy_common.c */,
-				8B6E34CE1DE39289004A35C7 /* error_private.c */,
-				8B6E34CF1DE39289004A35C7 /* error_private.h */,
-				8B6E34D01DE39289004A35C7 /* fse_decompress.c */,
-				8B6E34D11DE39289004A35C7 /* fse.h */,
-				8B6E34D21DE39289004A35C7 /* huf.h */,
-				8B6E34D31DE39289004A35C7 /* mem.h */,
-				8B6E34D41DE39289004A35C7 /* xxhash.c */,
-				8B6E34D51DE39289004A35C7 /* xxhash.h */,
-				8B6E34D71DE39289004A35C7 /* zstd_common.c */,
-				8B6E34D81DE39289004A35C7 /* zstd_errors.h */,
-				8B6E34D91DE39289004A35C7 /* zstd_internal.h */,
+				8BAE42331E5A9E4200AFD299 /* bitstream.h */,
+				8BAE42341E5A9E4200AFD299 /* entropy_common.c */,
+				8BAE42351E5A9E4200AFD299 /* error_private.c */,
+				8BAE42361E5A9E4200AFD299 /* error_private.h */,
+				8BAE42371E5A9E4200AFD299 /* fse_decompress.c */,
+				8BAE42381E5A9E4200AFD299 /* fse.h */,
+				8BAE42391E5A9E4200AFD299 /* huf.h */,
+				8BAE423A1E5A9E4200AFD299 /* mem.h */,
+				8BAE423B1E5A9E4200AFD299 /* pool.c */,
+				8BAE423C1E5A9E4200AFD299 /* pool.h */,
+				8BAE423D1E5A9E4200AFD299 /* threading.c */,
+				8BAE423E1E5A9E4200AFD299 /* threading.h */,
+				8BAE423F1E5A9E4200AFD299 /* xxhash.c */,
+				8BAE42401E5A9E4200AFD299 /* xxhash.h */,
+				8BAE42411E5A9E4200AFD299 /* zstd_common.c */,
+				8BAE42421E5A9E4200AFD299 /* zstd_errors.h */,
+				8BAE42431E5A9E4200AFD299 /* zstd_internal.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -897,6 +927,8 @@
 				8B6E34EF1DE39298004A35C7 /* huf_compress.c */,
 				8B6E34F11DE39298004A35C7 /* zstd_compress.c */,
 				8B6E34F21DE39298004A35C7 /* zstd_opt.h */,
+				8BAE42051E5A9E0900AFD299 /* zstdmt_compress.c */,
+				8BAE42061E5A9E0900AFD299 /* zstdmt_compress.h */,
 			);
 			name = compress;
 			sourceTree = "<group>";
@@ -913,6 +945,7 @@
 		8B3C0CB81DDC203A000C7DE1 /* dictBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				8BAE42021E5A9DDA00AFD299 /* cover.c */,
 				8B6E35121DE392AF004A35C7 /* divsufsort.c */,
 				8B6E35131DE392AF004A35C7 /* divsufsort.h */,
 				8B6E35141DE392AF004A35C7 /* zdict.c */,
@@ -1134,6 +1167,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAE425A1E5A9E4200AFD299 /* zstd_errors.h in Headers */,
+				8BAE424E1E5A9E4200AFD299 /* mem.h in Headers */,
+				8BAE425B1E5A9E4200AFD299 /* zstd_internal.h in Headers */,
+				8BAE42441E5A9E4200AFD299 /* bitstream.h in Headers */,
+				8BAE424C1E5A9E4200AFD299 /* fse.h in Headers */,
+				8BAE424D1E5A9E4200AFD299 /* huf.h in Headers */,
+				8BAE42491E5A9E4200AFD299 /* error_private.h in Headers */,
+				8BAE42571E5A9E4200AFD299 /* xxhash.h in Headers */,
+				8BAE42091E5A9E0900AFD299 /* zstdmt_compress.h in Headers */,
+				8BAE42511E5A9E4200AFD299 /* pool.h in Headers */,
+				8BAE42541E5A9E4200AFD299 /* threading.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1636,17 +1680,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B0455151DF8D8C000EBB706 /* fse_decompress.c in Sources */,
+				8BAE42521E5A9E4200AFD299 /* threading.c in Sources */,
+				8BAE424F1E5A9E4200AFD299 /* pool.c in Sources */,
+				8BAE42451E5A9E4200AFD299 /* entropy_common.c in Sources */,
 				8B0455201DF8D8C000EBB706 /* zdict.c in Sources */,
-				8B0455161DF8D8C000EBB706 /* xxhash.c in Sources */,
 				8B04551E1DF8D8C000EBB706 /* zstd_decompress.c in Sources */,
+				8BAE424A1E5A9E4200AFD299 /* fse_decompress.c in Sources */,
 				8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */,
+				8BAE42551E5A9E4200AFD299 /* xxhash.c in Sources */,
+				8BAE42071E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8B04551C1DF8D8C000EBB706 /* huf_decompress.c in Sources */,
 				8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */,
-				8B0455141DF8D8C000EBB706 /* error_private.c in Sources */,
-				8B0455171DF8D8C000EBB706 /* zstd_common.c in Sources */,
+				8BAE42581E5A9E4200AFD299 /* zstd_common.c in Sources */,
+				8BAE42031E5A9DDA00AFD299 /* cover.c in Sources */,
+				8BAE42471E5A9E4200AFD299 /* error_private.c in Sources */,
 				8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */,
-				8B0455131DF8D8C000EBB706 /* entropy_common.c in Sources */,
 				8B04551F1DF8D8C000EBB706 /* divsufsort.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1682,17 +1730,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B0455771DF8DBFD00EBB706 /* fse_decompress.c in Sources */,
+				8BAE42531E5A9E4200AFD299 /* threading.c in Sources */,
+				8BAE42501E5A9E4200AFD299 /* pool.c in Sources */,
+				8BAE42461E5A9E4200AFD299 /* entropy_common.c in Sources */,
 				8B0455821DF8DBFD00EBB706 /* zdict.c in Sources */,
-				8B0455781DF8DBFD00EBB706 /* xxhash.c in Sources */,
 				8B0455801DF8DBFD00EBB706 /* zstd_decompress.c in Sources */,
+				8BAE424B1E5A9E4200AFD299 /* fse_decompress.c in Sources */,
 				8B04557A1DF8DBFD00EBB706 /* fse_compress.c in Sources */,
+				8BAE42561E5A9E4200AFD299 /* xxhash.c in Sources */,
+				8BAE42081E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8B04557E1DF8DBFD00EBB706 /* huf_decompress.c in Sources */,
 				8B04557B1DF8DBFD00EBB706 /* huf_compress.c in Sources */,
-				8B0455761DF8DBFD00EBB706 /* error_private.c in Sources */,
-				8B0455791DF8DBFD00EBB706 /* zstd_common.c in Sources */,
+				8BAE42591E5A9E4200AFD299 /* zstd_common.c in Sources */,
+				8BAE42041E5A9DDA00AFD299 /* cover.c in Sources */,
+				8BAE42481E5A9E4200AFD299 /* error_private.c in Sources */,
 				8B04557D1DF8DBFD00EBB706 /* zstd_compress.c in Sources */,
-				8B0455751DF8DBFD00EBB706 /* entropy_common.c in Sources */,
 				8B0455811DF8DBFD00EBB706 /* divsufsort.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2420,6 +2472,7 @@
 				8B0455121DF8D81400EBB706 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B0455351DF8D97900EBB706 /* Build configuration list for PBXNativeTarget "libbrotli" */ = {
 			isa = XCConfigurationList;
@@ -2437,6 +2490,7 @@
 				8B04556C1DF8DBA000EBB706 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B0455721DF8DBD600EBB706 /* Build configuration list for PBXNativeTarget "libbrotli-mac" */ = {
 			isa = XCConfigurationList;
@@ -2445,6 +2499,7 @@
 				8B0455741DF8DBD600EBB706 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B8D5AF11DDD465C00037E0E /* Build configuration list for PBXNativeTarget "ZipUtilitiesApp" */ = {
 			isa = XCConfigurationList;
