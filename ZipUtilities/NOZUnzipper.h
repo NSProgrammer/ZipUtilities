@@ -245,6 +245,13 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
              error:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
 /**
+ Validate a record.
+ */
+- (BOOL)validateRecord:(nonnull NOZCentralDirectoryRecord *)record
+         progressBlock:(nullable NOZProgressBlock)progressBlock
+                 error:(out NSError *__autoreleasing __nullable * __nullable)error;
+
+/**
  *DEPRECATED*: See `saveRecord:toDirectory:options:progressBlock:error:`
  */
 - (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)record

@@ -395,6 +395,18 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
+- (BOOL)validateRecord:(NOZCentralDirectoryRecord *)record
+         progressBlock:(NOZProgressBlock)progressBlock
+                 error:(out NSError **)error
+{
+    return [self enumerateByteRangesOfRecord:record
+                               progressBlock:progressBlock
+                                  usingBlock:^(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop) {
+                                      (void)bytes;
+                                  }
+                                       error:error];
+}
+
 @end
 
 @implementation NOZUnzipper (Private)
@@ -572,8 +584,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     } // while (...)
 
-    if (stop || (_currentUnzipping.crc32 != _currentUnzipping.entry->fileDescriptor.crc32)) {
+    if (stop) {
         success = NO;
+        return NO;
+    }
+
+    if (_currentUnzipping.crc32 != _currentUnzipping.entry->fileDescriptor.crc32) {
+        success = NO;
+        if (error) {
+            *error = NOZError(NOZErrorCodeUnzipChecksumMissmatch, nil);
+        }
+
         return NO;
     }
 
