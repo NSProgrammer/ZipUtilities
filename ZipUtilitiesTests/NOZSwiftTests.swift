@@ -102,7 +102,7 @@ func TearDownZipQueue()
 
     func compressOperation(_ op: NOZCompressOperation, didCompleteWith result: NOZCompressResult)
     {
-        XCTAssertTrue(result.didSucceed, "Failed to compress! \(result.operationError)")
+        XCTAssertTrue(result.didSucceed, "Failed to compress! \(String(describing: result.operationError))")
         if (result.didSucceed) {
             NSLog("Compression Ratio: \(result.compressionRatio())")
         }
@@ -199,7 +199,7 @@ func TearDownZipQueue()
 
     func decompressOperation(_ op: NOZDecompressOperation, didCompleteWith result: NOZDecompressResult)
     {
-        XCTAssertTrue(result.didSucceed, "Failed to decompress! \(result.operationError)")
+        XCTAssertTrue(result.didSucceed, "Failed to decompress! \(String(describing: result.operationError))")
         if (result.didSucceed) {
             NSLog("Compression ratio: \(result.compressionRatio())")
         }
