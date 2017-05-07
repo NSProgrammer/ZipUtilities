@@ -42,6 +42,13 @@
 		1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B31B7476BB00969629 /* NOZ_Project.m */; };
 		1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
+		1C70520E1EBEA7A80071C2FF /* backward_references_hq.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */; };
+		1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
+		1C7052101EBEA7A80071C2FF /* hash_to_binary_tree_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */; };
+		1C7052111EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; };
+		1C7052121EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; };
+		1C7052151EBEA92F0071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; };
+		1C7052161EBEA9300071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; };
 		1C7634321BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634331BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7634341BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -447,6 +454,11 @@
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
+		1C7052091EBEA7A80071C2FF /* backward_references_hq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references_hq.c; path = Extra/brotli/enc/backward_references_hq.c; sourceTree = "<group>"; };
+		1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = backward_references_hq.h; path = Extra/brotli/enc/backward_references_hq.h; sourceTree = "<group>"; };
+		1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_longest_match64_inc.h; path = Extra/brotli/enc/hash_longest_match64_inc.h; sourceTree = "<group>"; };
+		1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_to_binary_tree_inc.h; path = Extra/brotli/enc/hash_to_binary_tree_inc.h; sourceTree = "<group>"; };
+		1C7052131EBEA92B0071C2FF /* dictionary_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dictionary_hash.c; path = Extra/brotli/enc/dictionary_hash.c; sourceTree = "<group>"; };
 		1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NOZAdditions.h"; sourceTree = "<group>"; };
 		1C7634311BB6455700BBFECF /* NSData+NOZAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NOZAdditions.m"; sourceTree = "<group>"; };
 		1C7634381BB64F2100BBFECF /* NOZEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZEncoder.h; sourceTree = "<group>"; };
@@ -987,6 +999,8 @@
 		8B6E342D1DE36946004A35C7 /* enc */ = {
 			isa = PBXGroup;
 			children = (
+				1C7052091EBEA7A80071C2FF /* backward_references_hq.c */,
+				1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */,
 				8B6E35411DE392D9004A35C7 /* backward_references_inc.h */,
 				8B6E35421DE392D9004A35C7 /* backward_references.c */,
 				8B6E35431DE392D9004A35C7 /* backward_references.h */,
@@ -1008,6 +1022,7 @@
 				8B6E35531DE392D9004A35C7 /* compress_fragment.c */,
 				8B6E35541DE392D9004A35C7 /* compress_fragment.h */,
 				8B6E35551DE392D9004A35C7 /* context.h */,
+				1C7052131EBEA92B0071C2FF /* dictionary_hash.c */,
 				8B6E35561DE392D9004A35C7 /* dictionary_hash.h */,
 				8B6E35571DE392D9004A35C7 /* encode.c */,
 				8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */,
@@ -1018,6 +1033,8 @@
 				8B6E355D1DE392D9004A35C7 /* hash_forgetful_chain_inc.h */,
 				8B6E355E1DE392D9004A35C7 /* hash_longest_match_inc.h */,
 				8B6E355F1DE392D9004A35C7 /* hash_longest_match_quickly_inc.h */,
+				1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */,
+				1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */,
 				8B6E35601DE392D9004A35C7 /* hash.h */,
 				8B6E35611DE392D9004A35C7 /* histogram_inc.h */,
 				8B6E35621DE392D9004A35C7 /* histogram.c */,
@@ -1101,11 +1118,13 @@
 			files = (
 				1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */,
 				1C7634421BB6522800BBFECF /* NOZDecoder.h in Headers */,
+				1C70520E1EBEA7A80071C2FF /* backward_references_hq.h in Headers */,
 				1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */,
 				1C7634321BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
 				1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
+				1C7052101EBEA7A80071C2FF /* hash_to_binary_tree_inc.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
 				1CD3DA271DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */,
@@ -1116,6 +1135,7 @@
 				B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
 				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
+				1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */,
 				B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1717,12 +1737,14 @@
 				8B0455411DF8D9BD00EBB706 /* brotli_bit_stream.c in Sources */,
 				8B0455481DF8D9BD00EBB706 /* literal_cost.c in Sources */,
 				8B0455441DF8D9BD00EBB706 /* compress_fragment.c in Sources */,
+				1C7052111EBEA87F0071C2FF /* backward_references_hq.c in Sources */,
 				8B0455401DF8D9BD00EBB706 /* block_splitter.c in Sources */,
 				8B04554B1DF8D9BD00EBB706 /* static_dict.c in Sources */,
 				8B04553B1DF8D9BD00EBB706 /* decode.c in Sources */,
 				8B04554A1DF8D9BD00EBB706 /* metablock.c in Sources */,
 				8B04553F1DF8D9BD00EBB706 /* bit_cost.c in Sources */,
 				8B0455421DF8D9BD00EBB706 /* cluster.c in Sources */,
+				1C7052151EBEA92F0071C2FF /* dictionary_hash.c in Sources */,
 				8B0455391DF8D9BD00EBB706 /* dictionary.c in Sources */,
 				8B04553D1DF8D9BD00EBB706 /* state.c in Sources */,
 				8B0455491DF8D9BD00EBB706 /* memory.c in Sources */,
@@ -1767,12 +1789,14 @@
 				8B04558B1DF8DC1B00EBB706 /* brotli_bit_stream.c in Sources */,
 				8B0455921DF8DC1B00EBB706 /* literal_cost.c in Sources */,
 				8B04558E1DF8DC1B00EBB706 /* compress_fragment.c in Sources */,
+				1C7052121EBEA87F0071C2FF /* backward_references_hq.c in Sources */,
 				8B04558A1DF8DC1B00EBB706 /* block_splitter.c in Sources */,
 				8B0455951DF8DC1B00EBB706 /* static_dict.c in Sources */,
 				8B0455851DF8DC1B00EBB706 /* decode.c in Sources */,
 				8B0455941DF8DC1B00EBB706 /* metablock.c in Sources */,
 				8B0455891DF8DC1B00EBB706 /* bit_cost.c in Sources */,
 				8B04558C1DF8DC1B00EBB706 /* cluster.c in Sources */,
+				1C7052161EBEA9300071C2FF /* dictionary_hash.c in Sources */,
 				8B0455831DF8DC1B00EBB706 /* dictionary.c in Sources */,
 				8B0455871DF8DC1B00EBB706 /* state.c in Sources */,
 				8B0455931DF8DC1B00EBB706 /* memory.c in Sources */,
