@@ -116,7 +116,11 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     if (_standardizedFilePath.UTF8String) {
         _internal.file = fopen(_standardizedFilePath.UTF8String, "r");
         if (_internal.file) {
-            _internal.endOfFilePosition = fseeko(_internal.file, 0, SEEK_END);
+            if (0 == fseeko(_internal.file, 0, SEEK_END)) {
+                _internal.endOfFilePosition = ftello(_internal.file);
+            } else {
+                _internal.endOfFilePosition = (off_t)[[[NSFileManager defaultManager] attributesOfItemAtPath:_standardizedFilePath error:nil] fileSize];
+            }
             _internal.endOfCentralDirectorySignaturePosition = [self private_locateSignature:NOZMagicNumberEndOfCentralDirectoryRecord];
             if (_internal.endOfCentralDirectorySignaturePosition) {
                 return YES;
@@ -625,7 +629,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 - (instancetype)initWithKnownFileSize:(SInt64)fileSize
 {
     if (self = [super init]) {
-        _totalUncompressedSize = fileSize;
+        _totalCompressedSize = fileSize;
     }
     return self;
 }

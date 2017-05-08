@@ -304,7 +304,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     __block BOOL errorEncountered = NO;
     noz_defer(^{ if (errorEncountered && error) { *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
 
-    NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    const NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX || nameSize == 0) {
         errorEncountered = YES;
         return NO;
@@ -488,10 +488,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
     BOOL success = YES;
 
-    size_t bytesWritten = fwrite(buffer,
-                                 1,
-                                 length,
-                                 _internal.file);
+    const size_t bytesWritten = fwrite(buffer, 1, length, _internal.file);
     if (bytesWritten != length) {
         success = NO;
     }
@@ -601,7 +598,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 - (BOOL)private_writeLocalFileHeaderForEntry:(NOZFileEntryT *)entry signature:(BOOL)writeSig
 {
     NOZLocalFileHeaderT* header = &entry->fileHeader;
-    SInt64 oldPosition = ftello(_internal.file);
+    const SInt64 oldPosition = ftello(_internal.file);
 
     if (writeSig) {
         PRIVATE_WRITE(NOZMagicNumberLocalFileHeader);
@@ -617,8 +614,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     PRIVATE_WRITE(header->nameSize);
     PRIVATE_WRITE(header->extraFieldSize);
 
-    SInt64 diff = ftello(_internal.file) - oldPosition;
-    SInt64 expectedBytesWritten = 30;
+    const SInt64 diff = ftello(_internal.file) - oldPosition;
+    const SInt64 expectedBytesWritten = 30;
     return (diff == expectedBytesWritten);
 }
 
@@ -637,7 +634,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     if (success && entry->fileHeader.extraFieldSize > 0) {
-        size_t bytesWritten = fwrite(entry->extraField, 1, (size_t)entry->fileHeader.extraFieldSize, _internal.file);
+        const size_t bytesWritten = fwrite(entry->extraField, 1, (size_t)entry->fileHeader.extraFieldSize, _internal.file);
         if (bytesWritten != (size_t)entry->fileHeader.extraFieldSize) {
             success = NO;
         }
@@ -661,7 +658,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         _currentEncoderContext = nil;
     });
 
-    BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext];
+    const BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext];
     if (_currentEncoderContext.encodedDataWasText) {
         _internal.currentEntry->centralDirectoryRecord.internalFileAttributes |= (1 << 0) /* text */;
     }
@@ -673,7 +670,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     BOOL success = YES;
 
     NOZLocalFileDescriptorT *fileDescriptor = &entry->fileDescriptor;
-    SInt64 oldPosition = ftello(_internal.file);
+    const SInt64 oldPosition = ftello(_internal.file);
 
     if (writeSignature) {
         PRIVATE_WRITE(NOZMagicNumberDataDescriptor);
@@ -715,7 +712,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         _internal.endOfCentralDirectoryRecord.archiveStartToCentralDirectoryStartOffset = (UInt32)(ftello(_internal.file) - _internal.beginBytePosition);
     }
 
-    SInt64 oldPosition = ftello(_internal.file);
+    const SInt64 oldPosition = ftello(_internal.file);
     SInt64 expectedBytesWritten = 46;
     NOZCentralDirectoryFileRecordT *record = &entry->centralDirectoryRecord;
 
@@ -748,7 +745,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         fwrite(entry->comment, 1, (size_t)record->commentSize, _internal.file);
     }
 
-    SInt64 bytesWritten = (ftello(_internal.file) - oldPosition);
+    const SInt64 bytesWritten = (ftello(_internal.file) - oldPosition);
     _internal.endOfCentralDirectoryRecord.centralDirectorySize += bytesWritten;
     if (bytesWritten != expectedBytesWritten) {
         return NO;
@@ -766,7 +763,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 - (BOOL)private_writeEndOfCentralDirectoryRecord
 {
-    SInt64 oldPosition = ftello(_internal.file);
+    const SInt64 oldPosition = ftello(_internal.file);
     SInt64 expectedBytesWritten = 22;
 
     PRIVATE_WRITE(NOZMagicNumberEndOfCentralDirectoryRecord);
@@ -783,7 +780,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         fwrite(_internal.comment, 1, (size_t)_internal.endOfCentralDirectoryRecord.commentSize, _internal.file);
     }
 
-    SInt64 bytesWritten = ftello(_internal.file) - oldPosition;
+    const SInt64 bytesWritten = ftello(_internal.file) - oldPosition;
     return bytesWritten == expectedBytesWritten;
 }
 
