@@ -111,7 +111,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)openAndReturnError:(out NSError **)error
 {
-    NSError *stackError = NOZError(NOZErrorCodeUnzipCannotOpenZip, @{ @"zipFilePath" : [self zipFilePath] ?: [NSNull null] });
+    NSError *stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotOpenZip, @{ @"zipFilePath" : [self zipFilePath] ?: [NSNull null] });
     _standardizedFilePath = [self.zipFilePath stringByStandardizingPath];
     if (_standardizedFilePath.UTF8String) {
         _internal.file = fopen(_standardizedFilePath.UTF8String, "r");
@@ -126,7 +126,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
                 return YES;
             } else {
                 [self closeAndReturnError:NULL];
-                stackError = NOZError(NOZErrorCodeUnzipInvalidZipFile, @{ @"zipFilePath" : self.zipFilePath });
+                stackError = NOZErrorCreate(NOZErrorCodeUnzipInvalidZipFile, @{ @"zipFilePath" : self.zipFilePath });
             }
         }
     }
@@ -157,7 +157,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     });
 
     if (!_internal.file || !_internal.endOfCentralDirectorySignaturePosition) {
-        stackError = NOZError(NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating, nil);
+        stackError = NOZErrorCreate(NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating, nil);
         return nil;
     }
 
@@ -165,12 +165,12 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     @autoreleasepool {
         if (![cd readEndOfCentralDirectoryRecordAtPosition:_internal.endOfCentralDirectorySignaturePosition inFile:_internal.file]) {
-            stackError = NOZError(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
             return nil;
         }
 
         if (![cd readCentralDirectoryEntriesWithFile:_internal.file]) {
-            stackError = NOZError(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
             return nil;
         }
 
@@ -187,7 +187,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 {
     if (index >= _centralDirectory.recordCount) {
         if (error) {
-            *error = NOZError(NOZErrorCodeUnzipIndexOutOfBounds, nil);
+            *error = NOZErrorCreate(NOZErrorCodeUnzipIndexOutOfBounds, nil);
         }
         return nil;
     }
@@ -218,24 +218,24 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     @autoreleasepool {
         if (!_internal.file) {
-            stackError = NOZError(NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating, nil);
             return NO;
         }
 
         if (![record isOwnedByCentralDirectory:_centralDirectory]) {
-            stackError = NOZError(NOZErrorCodeUnzipCannotReadFileEntry, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadFileEntry, nil);
             return NO;
         }
 
         if (![self private_locateCompressedDataOfRecord:record]) {
-            stackError = NOZError(NOZErrorCodeUnzipCannotReadFileEntry, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadFileEntry, nil);
             return NO;
         }
 
         do {
             NOZErrorCode code = [record validate];
             if (0 != code) {
-                stackError = NOZError(code, nil);
+                stackError = NOZErrorCreate(code, nil);
                 return NO;
             }
         } while (0);
@@ -245,7 +245,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
         _currentUnzipping.offsetToFirstByte = ftello(_internal.file);
         if (_currentUnzipping.offsetToFirstByte == -1) {
-            stackError = NOZError(NOZErrorCodeUnzipCannotReadFileEntry, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadFileEntry, nil);
             return NO;
         }
 
@@ -268,12 +268,12 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         });
 
         if (!_currentDecoder || !_currentDecoderContext) {
-            stackError = NOZError(NOZErrorCodeUnzipDecompressionMethodNotSupported, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipDecompressionMethodNotSupported, nil);
             return NO;
         }
         
         if (![_currentDecoder initializeDecoderContext:_currentDecoderContext]) {
-            stackError = NOZError(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
             return NO;
         }
         
@@ -285,7 +285,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
         
         if (![_currentDecoder finalizeDecoderContext:_currentDecoderContext]) {
-            stackError = NOZError(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
+            stackError = NOZErrorCreate(NOZErrorCodeUnzipFailedToDecompressEntry, nil);
             return NO;
         }
     }
@@ -549,7 +549,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     __block BOOL success = YES;
     noz_defer(^{
         if (!success && error && !*error) {
-            *error = NOZError(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
+            *error = NOZErrorCreate(NOZErrorCodeUnzipCannotDecompressFileEntry, nil);
         }
     });
 
@@ -596,7 +596,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     if (_currentUnzipping.crc32 != _currentUnzipping.entry->fileDescriptor.crc32) {
         success = NO;
         if (error) {
-            *error = NOZError(NOZErrorCodeUnzipChecksumMissmatch, nil);
+            *error = NOZErrorCreate(NOZErrorCodeUnzipChecksumMissmatch, nil);
         }
 
         return NO;
@@ -790,7 +790,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     __block NSDictionary *userInfo = nil;
     noz_defer(^{
         if (code && error) {
-            *error = NOZError(code, userInfo);
+            *error = NOZErrorCreate(code, userInfo);
         }
     });
 

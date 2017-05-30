@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
 static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString * __nonnull directoryPath);
 
-#define kCancelledError NOZError(NOZErrorCodeCompressCancelled, nil)
+#define kCancelledError NOZErrorCreate(NOZErrorCodeCompressCancelled, nil)
 
 @interface NOZCompressDelegateInternal : NSObject <NOZCompressDelegate>
 @property (nonatomic, readonly, nonnull) NOZCompressCompletionBlock completionBlock;
@@ -237,7 +237,7 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 {
     _totalUncompressedBytes = _request.totalSizeOfUncompressedEntries;
     if (!_totalUncompressedBytes) {
-        return NOZError(NOZErrorCodeCompressNoEntriesToCompress, nil);
+        return NOZErrorCreate(NOZErrorCodeCompressNoEntriesToCompress, nil);
     }
 
     return nil;
@@ -257,14 +257,14 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 
     if (error) {
         _zipper = nil;
-        return NOZError(NOZErrorCodeCompressFailedToOpenNewZipFile, @{ @"path" : _request.destinationPath ?: @"<null>", NSUnderlyingErrorKey : error });
+        return NOZErrorCreate(NOZErrorCodeCompressFailedToOpenNewZipFile, @{ @"path" : _request.destinationPath ?: @"<null>", NSUnderlyingErrorKey : error });
     }
     return nil;
 }
 
 - (NSError *)private_addEntries
 {
-    NSError *error = NOZError(NOZErrorCodeCompressNoEntriesToCompress, nil);
+    NSError *error = NOZErrorCreate(NOZErrorCodeCompressNoEntriesToCompress, nil);
     NSArray<id<NOZZippableEntry>> *entries = _request.entries; // deep copy
     for (id<NOZZippableEntry> entry in entries) {
         @autoreleasepool {
@@ -289,7 +289,7 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
         if ([_zipper closeAndReturnError:&error]) {
             _zipper = nil;
         } else {
-            return NOZError(NOZErrorCodeCompressFailedToFinalizeNewZipFile, @{ NSUnderlyingErrorKey : error });            return error;
+            return NOZErrorCreate(NOZErrorCodeCompressFailedToFinalizeNewZipFile, @{ NSUnderlyingErrorKey : error });            return error;
         }
     }
     return nil;
@@ -301,10 +301,10 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 {
     // Start
     if (!entry.name) {
-        return NOZError(NOZErrorCodeCompressMissingEntryName, @{ @"entry" : entry });
+        return NOZErrorCreate(NOZErrorCodeCompressMissingEntryName, @{ @"entry" : entry });
     }
     if (!entry.canBeZipped) {
-        return NOZError(NOZErrorCodeCompressEntryCannotBeZipped, @{ @"entry" : entry });
+        return NOZErrorCreate(NOZErrorCodeCompressEntryCannotBeZipped, @{ @"entry" : entry });
     }
 
     NSError *error = nil;
@@ -324,7 +324,7 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 #pragma clang diagnostic pop
 
     if (error) {
-        return NOZError(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry, NSUnderlyingErrorKey : error });
+        return NOZErrorCreate(NOZErrorCodeCompressFailedToAppendEntryToZip, @{ @"entry" : entry, NSUnderlyingErrorKey : error });
     }
 
     return nil;

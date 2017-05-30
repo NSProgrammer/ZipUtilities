@@ -134,7 +134,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     });
 
     if (!_standardizedZipFilePath.UTF8String) {
-        stackError = NOZError(NOZErrorCodeZipInvalidFilePath, _zipFilePath ? @{ @"zipFilePath" : _zipFilePath } : nil);
+        stackError = NOZErrorCreate(NOZErrorCodeZipInvalidFilePath, _zipFilePath ? @{ @"zipFilePath" : _zipFilePath } : nil);
         return NO;
     }
 
@@ -154,7 +154,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 //        {
 //            fopenMode = "r+";
 //            if (![fm fileExistsAtPath:_standardizedZipFilePath]) {
-//                stackError = NOZError(NOZErrorCodeZipCannotOpenExistingZip, @{ @"zipFilePath" : _zipFilePath });
+//                stackError = NOZErrorCreate(NOZErrorCodeZipCannotOpenExistingZip, @{ @"zipFilePath" : _zipFilePath });
 //                return NO;
 //            }
 //            break;
@@ -163,7 +163,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         default:
         {
             if ([fm fileExistsAtPath:_standardizedZipFilePath]) {
-                stackError = NOZError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+                stackError = NOZErrorCreate(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
                 return NO;
             }
             break;
@@ -172,8 +172,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
     _internal.file = fopen(_standardizedZipFilePath.UTF8String, fopenMode);
     if (!_internal.file) {
-        // stackError = NOZError((NOZZipperModeOpenExisting == mode) ? NOZErrorCodeZipCannotOpenExistingZip : NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
-        stackError = NOZError(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+        // stackError = NOZErrorCreate((NOZZipperModeOpenExisting == mode) ? NOZErrorCodeZipCannotOpenExistingZip : NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
+        stackError = NOZErrorCreate(NOZErrorCodeZipCannotCreateZip, @{ @"zipFilePath" : _zipFilePath });
         return NO;
     }
     noz_defer(^{
@@ -260,7 +260,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         [self private_freeLinkedList];
         return NO;
     } else if (!forceClose && NULL != _internal.currentEntry) {
-        stackError = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
+        stackError = NOZErrorCreate(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
         return NO;
     }
 
@@ -286,12 +286,12 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     });
 
     if (![self private_writeCentralDirectoryRecords]) {
-        stackError = NOZError(NOZErrorCodeZipFailedToWriteZip, nil);
+        stackError = NOZErrorCreate(NOZErrorCodeZipFailedToWriteZip, nil);
         return NO;
     }
 
     if (![self private_writeEndOfCentralDirectoryRecord]) {
-        stackError = NOZError(NOZErrorCodeZipFailedToWriteZip, nil);
+        stackError = NOZErrorCreate(NOZErrorCodeZipFailedToWriteZip, nil);
         return NO;
     }
 
@@ -302,7 +302,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
                     error:(out NSError **)error
 {
     __block BOOL errorEncountered = NO;
-    noz_defer(^{ if (errorEncountered && error) { *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
+    noz_defer(^{ if (errorEncountered && error) { *error = NOZErrorCreate(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
 
     const NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX || nameSize == 0) {
@@ -356,7 +356,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }];
     if (!_currentEncoder || !_currentEncoderContext) {
         if (error) {
-            *error = NOZError(NOZErrorCodeZipDoesNotSupportCompressionMethod, @{ @"method" : @(_internal.currentEntry->fileHeader.compressionMethod) });
+            *error = NOZErrorCreate(NOZErrorCodeZipDoesNotSupportCompressionMethod, @{ @"method" : @(_internal.currentEntry->fileHeader.compressionMethod) });
         }
         _currentEncoder = nil;
         _internal.currentEntry = NULL;
@@ -389,7 +389,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
             if ((*abort)) {
                 *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
             } else if (!success && !*error) {
-                *error = NOZError(NOZErrorCodeZipFailedToWriteEntry, nil);
+                *error = NOZErrorCreate(NOZErrorCodeZipFailedToWriteEntry, nil);
             }
         }
     });
@@ -468,7 +468,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     _internal.currentEntry = NULL;
 
     if (!success && error) {
-        *error = NOZError(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
+        *error = NOZErrorCreate(NOZErrorCodeZipFailedToCloseCurrentEntry, nil);
     }
     
     return success;
@@ -517,14 +517,14 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
     if (0 == nameSize) {
         if (error) {
-            *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil);
+            *error = NOZErrorCreate(NOZErrorCodeZipCannotOpenNewEntry, nil);
         }
         return NO;
     }
 
     if (entry.sizeInBytes > UINT32_MAX || (ftello(_internal.file) - _internal.beginBytePosition) > (UINT32_MAX - UINT8_MAX)) {
         if (error) {
-            *error = NOZError(NOZErrorCodeZipDoesNotSupportZip64, nil);
+            *error = NOZErrorCreate(NOZErrorCodeZipDoesNotSupportZip64, nil);
         }
         return NO;
     }
@@ -641,7 +641,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     if (!success && error) {
-        *error = NOZError(NOZErrorCodeZipCannotOpenNewEntry, nil);
+        *error = NOZErrorCreate(NOZErrorCodeZipCannotOpenNewEntry, nil);
     }
 
     return success;

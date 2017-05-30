@@ -69,8 +69,8 @@
     BOOL silenceArchiveInfo = NO;
     NSString *file = nil;
 
-    for (NSUInteger i = 0; i < (args.count - 1); i++) {
-        NSString *arg = args[i];
+    for (NSInteger i = 0; i < ((NSInteger)args.count - 1); i++) {
+        NSString *arg = args[(NSUInteger)i];
         if ([arg isEqualToString:@"-L"]) {
             list = YES;
         } else if ([arg isEqualToString:@"-v"]) {
@@ -79,7 +79,7 @@
             silenceArchiveInfo = YES;
         } else if ([arg isEqualToString:@"-i"]) {
             i++;
-            file = args[i];
+            file = args[(NSUInteger)i];
         } else  {
             return nil;
         }

@@ -28,3 +28,71 @@
 #import "NOZError.h"
 
 NSString * const NOZErrorDomain = @"NOZErrorDomain";
+
+NSString *NOZErrorCodeToString(NOZErrorCode code)
+{
+
+#define SWITCH_CASE(caseCode) \
+    case caseCode : \
+        return @"" #caseCode ;
+
+    switch (code) {
+            SWITCH_CASE(NOZErrorCodeCompressUnknown);
+            SWITCH_CASE(NOZErrorCodeCompressFailedToOpenNewZipFile);
+            SWITCH_CASE(NOZErrorCodeCompressNoEntriesToCompress);
+            SWITCH_CASE(NOZErrorCodeCompressMissingEntryName);
+            SWITCH_CASE(NOZErrorCodeCompressEntryCannotBeZipped);
+            SWITCH_CASE(NOZErrorCodeCompressFailedToAppendEntryToZip);
+            SWITCH_CASE(NOZErrorCodeCompressFailedToFinalizeNewZipFile);
+            SWITCH_CASE(NOZErrorCodeCompressCancelled);
+
+            SWITCH_CASE(NOZErrorCodeDecompressUnknown);
+            SWITCH_CASE(NOZErrorCodeDecompressFailedToOpenZipArchive);
+            SWITCH_CASE(NOZErrorCodeDecompressFailedToCreateDestinationDirectory);
+            SWITCH_CASE(NOZErrorCodeDecompressFailedToReadArchiveEntry);
+            SWITCH_CASE(NOZErrorCodeDecompressFailedToCreateUnarchivedFile);
+            SWITCH_CASE(NOZErrorCodeDecompressCannotOverwriteExistingFile);
+            SWITCH_CASE(NOZErrorCodeDecompressCancelled);
+
+            SWITCH_CASE(NOZErrorCodeZipUnknown);
+            SWITCH_CASE(NOZErrorCodeZipInvalidFilePath);
+            SWITCH_CASE(NOZErrorCodeZipCannotOpenExistingZip);
+            SWITCH_CASE(NOZErrorCodeZipCannotCreateZip);
+            SWITCH_CASE(NOZErrorCodeZipFailedToCloseCurrentEntry);
+            SWITCH_CASE(NOZErrorCodeZipFailedToWriteZip);
+            SWITCH_CASE(NOZErrorCodeZipCannotOpenNewEntry);
+            SWITCH_CASE(NOZErrorCodeZipDoesNotSupportZip64);
+            SWITCH_CASE(NOZErrorCodeZipDoesNotSupportCompressionMethod);
+            SWITCH_CASE(NOZErrorCodeZipFailedToWriteEntry);
+            SWITCH_CASE(NOZErrorCodeZipFailedToCompressEntry);
+
+            SWITCH_CASE(NOZErrorCodeUnzipUnknown);
+            SWITCH_CASE(NOZErrorCodeUnzipCannotOpenZip);
+            SWITCH_CASE(NOZErrorCodeUnzipInvalidZipFile);
+            SWITCH_CASE(NOZErrorCodeUnzipMustOpenUnzipperBeforeManipulating);
+            SWITCH_CASE(NOZErrorCodeUnzipCannotReadCentralDirectory);
+            SWITCH_CASE(NOZErrorCodeUnzipCentralDirectoryRecordCountsDoNotAlign);
+            SWITCH_CASE(NOZErrorCodeUnzipCentralDirectoryRecordsDoNotCompleteWithEOCDRecord);
+            SWITCH_CASE(NOZErrorCodeUnzipMultipleDiskZipArchivesNotSupported);
+            SWITCH_CASE(NOZErrorCodeUnzipCouldNotReadCentralDirectoryRecord);
+            SWITCH_CASE(NOZErrorCodeUnzipUnsupportedRecordVersion);
+            SWITCH_CASE(NOZErrorCodeUnzipDecompressionMethodNotSupported);
+            SWITCH_CASE(NOZErrorCodeUnzipDecompressionEncryptionNotSupported);
+            SWITCH_CASE(NOZErrorCodeUnzipIndexOutOfBounds);
+            SWITCH_CASE(NOZErrorCodeUnzipCannotReadFileEntry);
+            SWITCH_CASE(NOZErrorCodeUnzipCannotDecompressFileEntry);
+            SWITCH_CASE(NOZErrorCodeUnzipChecksumMissmatch);
+            SWITCH_CASE(NOZErrorCodeUnzipFailedToDecompressEntry);
+    }
+
+#undef SWITCH_CASE
+
+    return @"Unknown";
+}
+
+NSError *NOZErrorCreate(NOZErrorCode code, NSDictionary *ui)
+{
+    NSMutableDictionary *mUserInfo = [NSMutableDictionary dictionaryWithDictionary:ui];
+    mUserInfo[@"errorCodeString"] = NOZErrorCodeToString(code);
+    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:mUserInfo];
+}

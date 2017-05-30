@@ -16,7 +16,4 @@
 @end
 
 @interface NOZCLIUnzipMode : NSObject <NOZCLIModeProtocol>
-
-// TODO
-
 @end

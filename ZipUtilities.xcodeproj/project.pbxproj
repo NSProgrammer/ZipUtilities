@@ -45,9 +45,9 @@
 		1C70520E1EBEA7A80071C2FF /* backward_references_hq.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */; };
 		1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
 		1C7052101EBEA7A80071C2FF /* hash_to_binary_tree_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */; };
-		1C7052111EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; };
+		1C7052111EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C7052121EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; };
-		1C7052151EBEA92F0071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; };
+		1C7052151EBEA92F0071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C7052161EBEA9300071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; };
 		1C70521E1EBEBBF20071C2FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C70521D1EBEBBF20071C2FF /* main.m */; };
 		1C7052241EBEBC370071C2FF /* NSStream+NOZAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD441BC1BBCDDA500F40FAB /* NSStream+NOZAdditions.m */; };
@@ -1715,18 +1715,18 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1C6BF76F1B74086000969629 /* libZipUtilities */,
 				8B0455091DF8D81300EBB706 /* libzstd */,
-				8B0455231DF8D97900EBB706 /* libbrotli */,
-				1C6BF77A1B74086000969629 /* ZipUtilitiesTests */,
-				4623A82D1B9A828A00A56535 /* ZipUtilities */,
-				4623A8371B9A828A00A56535 /* FrameworkTests */,
-				4623A84B1B9A82AF00A56535 /* OSXZipUtilities */,
-				4623A8551B9A82AF00A56535 /* OSXFrameworkTests */,
-				8B8D5ADC1DDD465C00037E0E /* ZipUtilitiesApp */,
-				1C7052221EBEBC370071C2FF /* libZipUtilities-mac */,
 				8B0455681DF8DBA000EBB706 /* libzstd-mac */,
+				8B0455231DF8D97900EBB706 /* libbrotli */,
 				8B0455701DF8DBD600EBB706 /* libbrotli-mac */,
+				1C6BF76F1B74086000969629 /* libZipUtilities */,
+				1C7052221EBEBC370071C2FF /* libZipUtilities-mac */,
+				4623A82D1B9A828A00A56535 /* ZipUtilities */,
+				4623A84B1B9A82AF00A56535 /* OSXZipUtilities */,
+				8B8D5ADC1DDD465C00037E0E /* ZipUtilitiesApp */,
+				1C6BF77A1B74086000969629 /* ZipUtilitiesTests */,
+				4623A8371B9A828A00A56535 /* FrameworkTests */,
+				4623A8551B9A82AF00A56535 /* OSXFrameworkTests */,
 				1C70521A1EBEBBF20071C2FF /* noz */,
 			);
 		};
@@ -2800,6 +2800,7 @@
 				1C7052211EBEBBF20071C2FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1C70524A1EBEBC370071C2FF /* Build configuration list for PBXNativeTarget "libZipUtilities-mac" */ = {
 			isa = XCConfigurationList;

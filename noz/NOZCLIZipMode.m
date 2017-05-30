@@ -51,7 +51,7 @@
                  ];
     }
     return @[
-             @"-c COMMENT        provide an archive comment",
+             @"-c COMMENT        provide an archive entry comment",
              @"-M METHOD NUMBER  map a METHOD to a different archive number... this impacts unzipping!",
              ];
 }
