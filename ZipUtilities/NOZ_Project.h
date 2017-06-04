@@ -79,15 +79,6 @@ NS_INLINE void noz_deferFunc(__strong noz_defer_block_t __nonnull * __nonnull bl
     actualBlock();
 }
 
-#pragma mark Error
-
-#import "NOZError.h"
-
-NS_INLINE NSError * __nonnull NOZError(NOZErrorCode code, NSDictionary * __nullable ui)
-{
-    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
-}
-
 #pragma mark DOS Time
 
 FOUNDATION_EXTERN void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16*__nonnull dateOut, UInt16*__nonnull timeOut);

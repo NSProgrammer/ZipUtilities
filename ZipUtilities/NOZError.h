@@ -176,7 +176,10 @@ NS_INLINE BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page)
 //! Is the given _code_ an Unzip Error
 #define NOZErrorCodeIsUnzipError(code)      NOZErrorCodeIsInErrorPage(code, NOZErrorPageUnzip)
 
-//! Convenience macro for creating an `NOZErrorDomain` `NSError`
-#define NOZErrorCreate(errCode, ui) [NSError errorWithDomain:NOZErrorDomain code:(errCode) userInfo:(ui)]
+//! Convenience function for creating an `NOZErrorDomain` `NSError`
+FOUNDATION_EXTERN NSError *NOZErrorCreate(NOZErrorCode code, NSDictionary * __nullable ui);
+
+//! Get a string value for the an error code
+FOUNDATION_EXTERN NSString *NOZErrorCodeToString(NOZErrorCode code);
 
 NS_ASSUME_NONNULL_END
