@@ -7,7 +7,7 @@
 //
 
 #import "NOZCLI.h"
-#import "NOZCLIUnzipMode.h"'
+#import "NOZCLIUnzipMode.h"
 
 @interface NOZCLIUnzipDecompressDelegate : NSObject <NOZDecompressDelegate>
 @end
