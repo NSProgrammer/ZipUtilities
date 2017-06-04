@@ -8,8 +8,6 @@
 
 #import "NOZCLIModeProtocol.h"
 
-// TODO: write unit tests
-
 @interface NOZCLIDumpModeInfo : NSObject <NOZCLIModeInfoProtocol>
 
 @property (nonatomic, readonly) BOOL list;

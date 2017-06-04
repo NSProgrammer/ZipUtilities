@@ -10,8 +10,6 @@
 
 #import <ZipUtilities/ZipUtilities.h>
 
-// TODO: write unit tests
-
 @class MethodInfo;
 
 FOUNDATION_EXTERN int NOZCLI_main(NSString *exe, NSString *exeDir, NSString *currentDir, NSArray<NSString *> *args);

@@ -8,8 +8,6 @@
 
 #import "NOZCLIModeProtocol.h"
 
-// TODO: write unit tests
-
 @interface NOZCLIDecompressModeInfo : NSObject <NOZCLIModeInfoProtocol>
 
 @property (nonatomic, copy, readonly) NSString *method;

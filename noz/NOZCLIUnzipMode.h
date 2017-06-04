@@ -8,8 +8,6 @@
 
 #import "NOZCLIModeProtocol.h"
 
-// TODO: write unit tests
-
 @interface NOZCLIUnzipModeInfo : NSObject <NOZCLIModeInfoProtocol>
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
