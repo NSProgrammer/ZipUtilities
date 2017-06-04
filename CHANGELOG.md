@@ -2,11 +2,11 @@
 
 ## History
 
-### 1.10.0 (May 8, 2017) - Nolan O'Brien
+### 1.10.0 (June 3, 2017) - Nolan O'Brien
 
 - add convenience file-to-file compression/decompression functions in `NOZUtils.h`
 - add CLI for ZipUtilities (called `noz`)
-    - NOTE: still incomplete
+    - NOTE: Zip Mode is not yet implemented
 - fix NOZUnzipper file size measurement bug
 
 ### 1.9.3 (Feb 20, 2017) - Nolan O'Brien
