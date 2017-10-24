@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZError.h"
 #import "NOZSyncStepOperation.h"
@@ -72,7 +72,7 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
  Convenience initializer
 
  @param request The `NOZCompressRequest` of the what and how for compressing.
- @param delegate The `NOZCompressCompletionBlock` to call once operation is finished.
+ @param completion The `NOZCompressCompletionBlock` to call once operation is finished.
  */
 - (instancetype)initWithRequest:(NOZCompressRequest *)request completion:(nullable NOZCompressCompletionBlock)completion;
 
@@ -89,8 +89,6 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 @protocol NOZCompressDelegate <NSObject>
 @optional
 
-/** To force a strong reference by the `NOZCompressOperation`, return `YES`.  Default == `NO`. */
-- (BOOL)requiresStrongReference;
 /** Override to provide a different GCD queue for the completion callback (default is the main queue) */
 - (dispatch_queue_t)completionQueue;
 
@@ -120,6 +118,8 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 @property (nonatomic, copy) NSString *destinationPath;
 /** The array of objects conforming to `NOZZippableEntry` to compress.  Read and write of perform a deep copy. */
 @property (nonatomic, copy) NSArray<id<NOZZippableEntry>> *entries;
+/** Total uncompressed size for the current set of entries */
+@property (nonatomic, readonly) SInt64 totalSizeOfUncompressedEntries;
 /** A comment embedded in the resulting zip file */
 @property (nonatomic, copy, nullable) NSString *comment;
 

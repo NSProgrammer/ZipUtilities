@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZUtils.h"
 #import "NOZZipEntry.h"
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 /**
  `NOZZipper` encapsulates zipping sources into a zip archive.
  
- Uses the globally registered compression encoders.  See `NOZEncoderForCompressionMethod` and `NOZUpdateCompressionMethodEncoder` in `NOZCompression.h`.
+ Uses the globally registered compression encoders.  See `NOZEncoderForCompressionMethod` and `NOZCompressionLibrary`.
  
  By default, `NOZZipper` is optimized to compress in a single pass.
  If you need `NOZZipper` to output without this optimization, define `NOZ_SINGLE_PASS_ZIP` as `0`
@@ -113,9 +113,9 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath NS_DESIGNATED_INITIALIZER;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 /** 
  Open the Zipper.

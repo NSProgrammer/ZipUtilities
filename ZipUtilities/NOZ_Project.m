@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 //
 
 #import "NOZ_Project.h"
+#import "NOZEncoder.h"
 
 /**
  https://msdn.microsoft.com/en-us/library/windows/desktop/ms724247(v=vs.85).aspx
@@ -43,7 +44,7 @@
  11-15	Hour (0–23 on a 24-hour clock)
  */
 
-void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16* dateOut, UInt16* timeOut)
+void noz_dos_date_from_NSDate(NSDate *dateObject, UInt16* dateOut, UInt16* timeOut)
 {
     if (!dateObject) {
         *dateOut = 0;
@@ -128,4 +129,83 @@ NSDate *noz_NSDate_from_dos_date(UInt16 dosDate, UInt16 dosTime)
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [gregorianCalendar dateWithEra:1 year:years month:months day:days hour:hours minute:minutes second:seconds nanosecond:0];
     return date;
+}
+
+NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> encoder, NOZCompressionLevel level)
+{
+    if (![encoder respondsToSelector:@selector(numberOfCompressionLevels)]) {
+        return 0;
+    }
+
+    const NSUInteger maxLevels = encoder.numberOfCompressionLevels;
+    if (level < NOZCompressionLevelMin) {
+        if ([encoder respondsToSelector:@selector(defaultCompressionLevel)]) {
+            const NSUInteger defaultLevel = encoder.defaultCompressionLevel;
+            if (defaultLevel < maxLevels) {
+                return defaultLevel;
+            }
+        }
+        level = NOZCompressionLevelMax;
+    }
+
+    const float mappedLevel = level * (float)maxLevels;
+    return (NSUInteger)roundf(mappedLevel);
+}
+
+NOZCompressionLevel NOZCompressionLevelFromEncoderSpecificLevel(id<NOZEncoder> encoder, NSUInteger encoderSpecificLevel)
+{
+    if (![encoder respondsToSelector:@selector(numberOfCompressionLevels)]) {
+        return NOZCompressionLevelMax;
+    }
+
+    const NSUInteger maxLevels = encoder.numberOfCompressionLevels;
+    if (encoderSpecificLevel > maxLevels) {
+        return NOZCompressionLevelMax;
+    }
+
+    const float mappedLevel = (float)encoderSpecificLevel / (float)maxLevels;
+    return mappedLevel;
+}
+
+NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> encoder)
+{
+    if (![encoder respondsToSelector:@selector(numberOfCompressionLevels)]) {
+        return (NSUInteger)1;
+    }
+
+    return MAX((NSUInteger)1, [encoder numberOfCompressionLevels]);
+}
+
+NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger defaultCustomLevel)
+{
+    NSCParameterAssert(firstCustomLevel <= lastCustomLevel);
+    NSCParameterAssert(defaultCustomLevel >= firstCustomLevel && defaultCustomLevel <= lastCustomLevel);
+
+    if (level < NOZCompressionLevelMin) {
+        return defaultCustomLevel;
+    }
+    if (firstCustomLevel == lastCustomLevel) {
+        return defaultCustomLevel;
+    }
+    if (level > NOZCompressionLevelMax) {
+        level = NOZCompressionLevelMax;
+    }
+
+    NSUInteger delta = lastCustomLevel - firstCustomLevel;
+    float fLevel = ((float)delta * level) + (float)firstCustomLevel;
+    return (NSUInteger)roundf(fLevel);
+}
+
+NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger customLevel)
+{
+    NSCParameterAssert(firstCustomLevel <= lastCustomLevel);
+    NSCParameterAssert(customLevel >= firstCustomLevel && customLevel <= lastCustomLevel);
+
+    if (lastCustomLevel == firstCustomLevel) {
+        return NOZCompressionLevelMax;
+    }
+
+    NSUInteger delta = lastCustomLevel - firstCustomLevel;
+    float fLevel = ((float)customLevel - (float)firstCustomLevel) / (float)delta;
+    return fLevel;
 }

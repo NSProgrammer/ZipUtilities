@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZError.h"
 #import "NOZSyncStepOperation.h"
@@ -73,7 +73,7 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-- (instancetype)new NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 
@@ -83,8 +83,6 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
 @protocol NOZDecompressDelegate <NSObject>
 @optional
 
-/** To force a strong reference by the `NOZCompressOperation`, return `YES`.  Default == `NO`. */
-- (BOOL)requiresStrongReference;
 /** Override to provide a different GCD queue for the completion callback (default is the main queue) */
 - (dispatch_queue_t)completionQueue;
 

@@ -6,27 +6,29 @@
 //  Copyright © 2015 NSProgrammer. All rights reserved.
 //
 
+import Foundation
 import XCTest
+import ZipUtilities
 
-var zipQueue : NSOperationQueue? = nil;
+var zipQueue : OperationQueue? = nil;
 
 func RemoveTemporaryDirectoryContents()
 {
-    let fm = NSFileManager.defaultManager()
-    let tmpDir : NSString = NSTemporaryDirectory()
-    let enumerator = fm.enumeratorAtPath(tmpDir as String)
+    let fm = FileManager.default
+    let tmpDir : NSString = NSTemporaryDirectory() as NSString
+    let enumerator = fm.enumerator(atPath: tmpDir as String)
     enumerator?.skipDescendants();
 
     for object in enumerator! {
         let path = object as! String
-        _ = try? fm.removeItemAtPath(tmpDir.stringByAppendingPathComponent(path))
+        _ = try? fm.removeItem(atPath: tmpDir.appendingPathComponent(path))
     }
 }
 
 func SetUpZipQueue()
 {
-    let q : dispatch_queue_t = dispatch_queue_create("zip.queue", DISPATCH_QUEUE_SERIAL)
-    let opQueue = NSOperationQueue()
+    let q : DispatchQueue = DispatchQueue(label: "zip.queue", attributes: [])
+    let opQueue = OperationQueue()
     opQueue.underlyingQueue = q
     opQueue.name = "Zip.Swift.Queue"
     opQueue.maxConcurrentOperationCount = 1
@@ -41,13 +43,13 @@ func TearDownZipQueue()
 @objc class NOZSwiftCompressionTests: XCTestCase, NOZCompressDelegate
 {
 
-    class func prepareFileForCompression(fileName: String) throws -> String
+    class func prepareFileForCompression(_ fileName: String) throws -> String
     {
-        let tmpDir : NSString = NSTemporaryDirectory()
-        let filePath = tmpDir.stringByAppendingPathComponent(fileName)
-        let bundle = NSBundle.init(forClass: self)
-        let sourceFilePath = bundle.pathForResource(fileName, ofType: nil)!
-        try NSFileManager.defaultManager().copyItemAtPath(sourceFilePath, toPath: filePath)
+        let tmpDir : NSString = NSTemporaryDirectory() as NSString
+        let filePath = tmpDir.appendingPathComponent(fileName)
+        let bundle = Bundle.init(for: self)
+        let sourceFilePath = bundle.path(forResource: fileName, ofType: nil)!
+        try FileManager.default.copyItem(atPath: sourceFilePath, toPath: filePath)
         return filePath
     }
 
@@ -73,22 +75,22 @@ func TearDownZipQueue()
     {
         let op = startCompression()
         op.waitUntilFinished()
-        XCTAssertTrue(op.finished)
+        XCTAssertTrue(op.isFinished)
         XCTAssertTrue(op.result.didSucceed)
     }
 
     func startCompression() -> NOZCompressOperation
     {
-        let tmpDir : NSString = NSTemporaryDirectory()
-        let zipFilePath = tmpDir.stringByAppendingPathComponent("Mixed.zip")
+        let tmpDir : NSString = NSTemporaryDirectory() as NSString
+        let zipFilePath = tmpDir.appendingPathComponent("Mixed.zip")
 
-        let bundle = NSBundle.init(forClass: self.dynamicType)
-        let aesopFile : NSString = bundle.pathForResource("Aesop", ofType: "txt")!
-        let sourceDir : NSString = aesopFile.stringByDeletingLastPathComponent
-        let maniacDir : NSString = sourceDir.stringByAppendingPathComponent("maniac-mansion")
+        let bundle = Bundle.init(for: type(of: self))
+        let aesopFile : NSString = bundle.path(forResource: "Aesop", ofType: "txt")! as NSString
+        let sourceDir : NSString = aesopFile.deletingLastPathComponent as NSString
+        let maniacDir : NSString = sourceDir.appendingPathComponent("maniac-mansion") as NSString
 
         let request = NOZCompressRequest.init(destinationPath: zipFilePath)
-        request.addEntriesInDirectory(maniacDir as String, filterBlock: { (filePath: String) -> Bool in
+        request.addEntries(inDirectory: maniacDir as String, filterBlock: { (filePath: String) -> Bool in
             return ((filePath as NSString).lastPathComponent as NSString).hasPrefix(".")
             }, compressionSelectionBlock: nil)
         request.addFileEntry(aesopFile as String)
@@ -98,17 +100,17 @@ func TearDownZipQueue()
         return operation
     }
 
-    func compressOperation(op: NOZCompressOperation, didCompleteWithResult result: NOZCompressResult)
+    func compressOperation(_ op: NOZCompressOperation, didCompleteWith result: NOZCompressResult)
     {
-        XCTAssertTrue(result.didSucceed, "Failed to compress! \(result.operationError)")
+        XCTAssertTrue(result.didSucceed, "Failed to compress! \(String(describing: result.operationError))")
         if (result.didSucceed) {
             NSLog("Compression Ratio: \(result.compressionRatio())")
         }
     }
 
-    func compressOperation(op: NOZCompressOperation, didUpdateProgress progress: Float)
+    func compressOperation(_ op: NOZCompressOperation, didUpdateProgress progress: Float)
     {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             // NSLog("Progress: \(progress)%")
         })
     }
@@ -116,8 +118,8 @@ func TearDownZipQueue()
     func testLargeZipCompress() {
         var result:NOZCompressResult? = nil
         let filePath = try! NOZSwiftCompressionTests.prepareFileForCompression("Star.Wars.7.Trailer.mp4") as NSString
-        let expectation = expectationWithDescription("completion closure is called");
-        let request = NOZCompressRequest(destinationPath: filePath.stringByAppendingPathExtension("zip")! as String)
+        let expectation = self.expectation(description: "completion closure is called");
+        let request = NOZCompressRequest(destinationPath: filePath.appendingPathExtension("zip")! as String)
         request.addFileEntry(filePath as String)
         let operation = NOZCompressOperation(request: request, completion: {
             (op, res) -> Void in
@@ -126,7 +128,7 @@ func TearDownZipQueue()
         })
 
         zipQueue?.addOperation(operation)
-        waitForExpectationsWithTimeout(5.0 * 60.0, handler: nil)
+        waitForExpectations(timeout: 5.0 * 60.0, handler: nil)
 
         if let realResult = result
         {
@@ -136,10 +138,12 @@ func TearDownZipQueue()
 
     func testLargeZipCompressWithAppleCoder() {
         if #available(iOS 9.0, OSX 10.11, *) {
-            let oldEncoder = NOZEncoderForCompressionMethod(NOZCompressionMethod.Deflate)
-            NOZUpdateCompressionMethodEncoder(NOZCompressionMethod.Deflate, NOZXAppleCompressionCoder.encoderWithAlgorithm(COMPRESSION_ZLIB))
+            let library = NOZCompressionLibrary.sharedInstance()
+            let oldEncoder = library.encoder(for: NOZCompressionMethod.deflate)
+            let encoder = NOZXAppleCompressionCoder.encoder(with: COMPRESSION_ZLIB)
+            library.setEncoder(encoder, for: NOZCompressionMethod.deflate)
             testLargeZipCompress()
-            NOZUpdateCompressionMethodEncoder(NOZCompressionMethod.Deflate, oldEncoder)
+            library.setEncoder(oldEncoder, for: NOZCompressionMethod.deflate)
         }
     }
 
@@ -148,13 +152,13 @@ func TearDownZipQueue()
 @objc class NOZSwiftDecompressionTests: XCTestCase, NOZDecompressDelegate
 {
 
-    class func prepareZipFileForDecompression(fileName: String) throws -> String
+    class func prepareZipFileForDecompression(_ fileName: String) throws -> String
     {
-        let tmpDir : NSString = NSTemporaryDirectory()
-        let zipFilePath = tmpDir.stringByAppendingPathComponent(fileName + ".zip")
-        let bundle = NSBundle.init(forClass: self)
-        let sourceFilePath = bundle.pathForResource(fileName, ofType: "zip")!
-        try NSFileManager.defaultManager().copyItemAtPath(sourceFilePath, toPath: zipFilePath)
+        let tmpDir : NSString = NSTemporaryDirectory() as NSString
+        let zipFilePath = tmpDir.appendingPathComponent(fileName + ".zip")
+        let bundle = Bundle.init(for: self)
+        let sourceFilePath = bundle.path(forResource: fileName, ofType: "zip")!
+        try FileManager.default.copyItem(atPath: sourceFilePath, toPath: zipFilePath)
         return zipFilePath
     }
 
@@ -180,7 +184,7 @@ func TearDownZipQueue()
     {
         let op = startDecompression()
         op.waitUntilFinished()
-        XCTAssertTrue(op.finished)
+        XCTAssertTrue(op.isFinished)
         XCTAssertTrue(op.result.didSucceed)
     }
 
@@ -193,17 +197,17 @@ func TearDownZipQueue()
         return operation
     }
 
-    func decompressOperation(op: NOZDecompressOperation, didCompleteWithResult result: NOZDecompressResult)
+    func decompressOperation(_ op: NOZDecompressOperation, didCompleteWith result: NOZDecompressResult)
     {
-        XCTAssertTrue(result.didSucceed, "Failed to decompress! \(result.operationError)")
+        XCTAssertTrue(result.didSucceed, "Failed to decompress! \(String(describing: result.operationError))")
         if (result.didSucceed) {
             NSLog("Compression ratio: \(result.compressionRatio())")
         }
     }
 
-    func decompressOperation(op: NOZDecompressOperation, didUpdateProgress progress: Float)
+    func decompressOperation(_ op: NOZDecompressOperation, didUpdateProgress progress: Float)
     {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             // NSLog("Progress: \(progress)%")
         })
     }
@@ -211,7 +215,7 @@ func TearDownZipQueue()
     func testLargeZipDecompress() {
         var result:NOZDecompressResult? = nil
         let zipFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("Star.Wars.7.Trailer.mp4")
-        let expectation = expectationWithDescription("completion closure is called");
+        let expectation = self.expectation(description: "completion closure is called");
         let request = NOZDecompressRequest(sourceFilePath: zipFilePath)
         let operation = NOZDecompressOperation(request: request, completion: {
             (op, res) -> Void in
@@ -220,7 +224,7 @@ func TearDownZipQueue()
         })
 
         zipQueue?.addOperation(operation)
-        waitForExpectationsWithTimeout(5.0 * 60.0, handler: nil)
+        waitForExpectations(timeout: 5.0 * 60.0, handler: nil)
 
         if let realResult = result
         {
@@ -230,11 +234,47 @@ func TearDownZipQueue()
 
     func testLargeZipDecompressWithAppleCoder() {
         if #available(iOS 9.0, OSX 10.11, *) {
-            let oldDecoder = NOZDecoderForCompressionMethod(NOZCompressionMethod.Deflate)
-            NOZUpdateCompressionMethodDecoder(NOZCompressionMethod.Deflate, NOZXAppleCompressionCoder.decoderWithAlgorithm(COMPRESSION_ZLIB))
+            let library = NOZCompressionLibrary.sharedInstance()
+            let oldDecoder = library.decoder(for: NOZCompressionMethod.deflate)
+            library.setDecoder(NOZXAppleCompressionCoder.decoder(with: COMPRESSION_ZLIB), for: NOZCompressionMethod.deflate)
             testLargeZipDecompress()
-            NOZUpdateCompressionMethodDecoder(NOZCompressionMethod.Deflate, oldDecoder)
+            library.setDecoder(oldDecoder, for: NOZCompressionMethod.deflate)
         }
+    }
+
+    func testValidateZip() {
+        var unzipper: NOZUnzipper
+
+        let goodFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("File")
+        unzipper = NOZUnzipper.init(zipFile: goodFilePath)
+        try! unzipper.open()
+        try! unzipper.readCentralDirectory()
+        unzipper.enumerateManifestEntries({ record, index, stop in
+            var caughtError: NSError? = nil
+            do {
+                try unzipper.validate(record, progressBlock: nil)
+            } catch let error as NSError {
+                caughtError = error
+            }
+            XCTAssertNil(caughtError)
+        })
+        try! unzipper.close()
+
+        let badFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("Bad_File")
+        unzipper = NOZUnzipper.init(zipFile: badFilePath)
+        try! unzipper.open()
+        try! unzipper.readCentralDirectory()
+        var didEncouterError: Bool = false
+        unzipper.enumerateManifestEntries({ record, index, stop in
+            do {
+                try unzipper.validate(record, progressBlock: nil)
+            } catch let error as NSError {
+                XCTAssertEqual(NOZErrorCode.init(rawValue: error.code), NOZErrorCode.unzipChecksumMissmatch)
+                didEncouterError = true
+            }
+        })
+        XCTAssertTrue(didEncouterError)
+        try! unzipper.close()
     }
 
 }

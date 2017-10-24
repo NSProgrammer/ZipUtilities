@@ -32,7 +32,7 @@ Alternatively you may use one of the following dependency managers:
 Add _ZipUtilities_ to your `Podfile`
 
 ```ruby
-pod 'ZipUtilities', '~> 1.7.2'
+pod 'ZipUtilities', '~> 1.10.0'
 ```
 
 #### Carthage
@@ -376,18 +376,18 @@ into destinations (NSData, streams and/or files).
 
 _ZipUtilities_ provides a modular approach to compressing and decompressing individual entries of a zip archive.  The _Zip_ file format specifies what compression method is used for any given entry in an archive.  The two most common algorithms for zip archivers and unarchivers are *Deflate* and *Raw*.  Given those are the two most common, _ZipUtilities_ comes with those algorithms built in with *Deflate* being provided from the _zlib_ library present on iOS and OS X and *Raw* simply being unmodified bytes (no compression).  With the combination of `NOZCompressionLevel` and `NOZCompressionMethod` you can optimize the way you compress multiple entries in a file.  For example: you might have a text file, an image and a binary to archive.  You could add the text file with `NOZCompressionLevelDefault` and `NOZCompressionMethodDeflate`, the image with `NOZCompressionMethodNone` and the binary with `NOZCompressionLevelVeryLow` and `NOZCompressionMethodDeflate` (aka Fast).
 
-Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them with the related `NOZCompressionMethod` with `NOZUpdateCompressionMethodEncoder(method,encoder)` and `NOZUpdateCompressionMethodDecoder(method,decoder)`.  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the know encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with `NOZUpdateCompressionMethodEncoder` and `NOZUpdateCompressionMethodDecoder`.
+Since _ZipUtilities_ takes a modular approach for compression methods, adding support for additional compression encoders and decoders is very straightforward.  You simply implement the `NOZEncoder` and `NOZDecoder` protocols and register them for the related `NOZCompressionMethod` with a `NOZCompressionLibrary` (including the `sharedInstance`).  For instance, you might want to add _BZIP2_ support: just implement `MyBZIP2Encoder<NOZEncoder>` and `MyBZIP2Decoder<NOZDecoder>` and update the known encoders and decoders for `NOZCompressionMethodBZip2` in _ZipUtilities_ before you start zipping or unzipping with the `NOZCompressionLibrary`.
 
 *Example:*
 
 ```objc
-NOZUpdateCompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Encoder alloc] init]);
-NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder alloc] init]);
+[[NOZCompressionLibrary sharedInstance] setEncoder:[[MyBZIP2Encoder alloc] init] forMethod:NOZCompressionMethodBZip2];
+[[NOZCompressionLibrary sharedInstance] setDecoder:[[MyBZIP2Decoder alloc] init] forMethod:NOZCompressionMethodBZip2];
 ```
 
 *Apple compression library as an extra*
 
-`NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified in as a known compression method in the ZIP archive format.
+`NOZXAppleCompressionCoder` has been written as an example of how to construct your own coders.  Supports all algorithms provided by libcompression, including LZMA which is specified as a known compression method in the ZIP archive format.
 
 *Example of registering the Apple compression library coders:*
 
@@ -399,20 +399,22 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
         return NO;
     }
 
+    NOZCompressionLibrary *library = [NOZCompressionLibrary sharedInstance];
+
     // DEFLATE
     // Replace existing default DEFLATE coders with Apple Compression variant
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodDeflate,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodDeflate,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_ZLIB]
+              forMethod:NOZCompressionMethodDeflate];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_ZLIB]
+              forMethod:NOZCompressionMethodDeflate];
     
     // LZMA
 
-    NOZUpdateCompressionMethodEncoder(NOZCompressionMethodLZMA,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]);
-    NOZUpdateCompressionMethodDecoder(NOZCompressionMethodLZMA,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZMA]
+              forMethod:NOZCompressionMethodLZMA];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZMA]
+              forMethod:NOZCompressionMethodLZMA];
 
     // The following coders are not defined as known ZIP compression methods, 
     // however that doesn't mean we can't extend the enumeration of ZIP methods
@@ -425,17 +427,17 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
 
     // LZ4
 
-    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZ4,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]);
-    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZ4,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZ4]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZ4]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZ4];
 
     // Apple LZFSE - the new hotness for compression from Apple
 
-    NOZUpdateCompressionMethodEncoder((NOZCompressionMethod)COMPRESSION_LZFSE,
-                                      [NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]);
-    NOZUpdateCompressionMethodDecoder((NOZCompressionMethod)COMPRESSION_LZFSE,
-                                      [NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]);
+    [library setEncoder:[NOZXAppleCompressionCoder encoderWithAlgorithm:COMPRESSION_LZFSE]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
+    [library setDecoder:[NOZXAppleCompressionCoder decoderWithAlgorithm:COMPRESSION_LZFSE]
+              forMethod:(NOZCompressionMethod)COMPRESSION_LZFSE];
 
     return YES;
 }
@@ -455,6 +457,14 @@ NOZUpdateDecompressionMethodEncoder(NOZCompressionMethodBZip2, [[MyBZIP2Decoder 
   - per file progress
 
 ## Dependencies
+
+### ZStandard
+ZipUtilities includes Facebook's ZStandard (zstd) compression library.
+[www.zstd.net](http://www.zstd.net)
+
+### Brotli
+ZipUtilities includes Google's Brotli (br) compression library.
+[Brotli Github](https://github.com/google/brotli)
 
 ### Test files for zipping/unzipping
 As a part of unit testing Aesop's Fables, the Star Wars Episode VII trailer and Maniac Mansion are used for unit testing.  Aesop's Fables and Maniac Mansion no longer hold a copyright anymore and can be freely be distributed including the unorthodox use as test files for unit testing zip archiving and unarchiving.  The Star Wars Episode VII Trailer is free for distribution and also provides a useful file for testing by being a large file.

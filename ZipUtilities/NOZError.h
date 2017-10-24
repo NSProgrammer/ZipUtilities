@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -155,6 +155,8 @@ typedef NS_ENUM(NSInteger, NOZErrorCode)
     NOZErrorCodeUnzipCannotReadFileEntry,
     /** Unzipper couldn't decompress a file entry */
     NOZErrorCodeUnzipCannotDecompressFileEntry,
+    /** Unzipping data didn't match CRC32 checksum */
+    NOZErrorCodeUnzipChecksumMissmatch,
     /** An entry failed to be decompressed */
     NOZErrorCodeUnzipFailedToDecompressEntry,
 };
@@ -174,7 +176,10 @@ NS_INLINE BOOL NOZErrorCodeIsInErrorPage(NOZErrorCode code, NOZErrorPage page)
 //! Is the given _code_ an Unzip Error
 #define NOZErrorCodeIsUnzipError(code)      NOZErrorCodeIsInErrorPage(code, NOZErrorPageUnzip)
 
-//! Convenience macro for creating an `NOZErrorDomain` `NSError`
-#define NOZErrorCreate(errCode, ui) [NSError errorWithDomain:NOZErrorDomain code:(errCode) userInfo:(ui)]
+//! Convenience function for creating an `NOZErrorDomain` `NSError`
+FOUNDATION_EXTERN NSError *NOZErrorCreate(NOZErrorCode code, NSDictionary * __nullable ui);
+
+//! Get a string value for the an error code
+FOUNDATION_EXTERN NSString *NOZErrorCodeToString(NOZErrorCode code);
 
 NS_ASSUME_NONNULL_END

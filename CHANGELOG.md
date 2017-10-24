@@ -2,6 +2,51 @@
 
 ## History
 
+### 1.10.0 (June 3, 2017) - Nolan O'Brien
+
+- add convenience file-to-file compression/decompression functions in `NOZUtils.h`
+- add CLI for ZipUtilities (called `noz`)
+    - NOTE: Zip Mode is not yet implemented
+- fix NOZUnzipper file size measurement bug
+
+### 1.9.3 (Feb 20, 2017) - Nolan O'Brien
+
+- add checksum error code and record validation method to unzipper
+
+### 1.9.2 (Feb 19, 2017) - Nolan O'Brien
+
+- updated zstd to v1.1.3
+
+### 1.9.1 (Jan 31, 2017) - Nolan O'Brien
+
+- Miscellaneous minor fixes
+
+### 1.9.0 (Nov 22, 2016) - Nolan O'Brien
+
+- Add Brotli support as an extra encoder/decoder
+- Refactor compression level
+  - decouples from ZLib levels (1-9) and moves to a float range (from 0.0 to 1.0)
+  - can map to any encoder with multiple levels now
+- Fix memory leak in Apple extra encoders/decoders
+- Bump up buffer sizes from 4KB to 16KB
+- Update unit tests
+- Update test app
+- rearrange some code paths for better 3rd party codec support
+- improve memory management to reduce memory footprint when multiple encodes/decodes happen
+
+### 1.8.1 (Nov 18, 2016) - Nolan O'Brien
+
+- Fix up project
+
+### 1.8.0  (Nov 17, 2016) - Nolan O'Brien
+
+- Add ZStandard support as an extra encoder/decoder
+- Clean up some files
+- Fix an edge case in NSData+NOZAdditions category
+- Clean up schemes
+- Add codec comparison unit test
+- Add ZipUtilitiesApp iOS app for testing codec perf on device
+
 ### 1.7.2  (Jan 11, 2016) - Nolan O'Brien
 
 - Provide options when saving a record so that we can support writing an entry to disk without the interim path

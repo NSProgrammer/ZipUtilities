@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,46 +25,31 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @protocol NOZZipEntry;
+@protocol NOZEncoder;
+
+//! The compression level for use with encoding, from `0.0f` to `1.0f`
+typedef float NOZCompressionLevel;
+//! The max compression level
+static const NOZCompressionLevel NOZCompressionLevelMax = 1.f;
+//! The min compression level
+static const NOZCompressionLevel NOZCompressionLevelMin = 0.f;
+//! The default compression level for any decoder
+static const NOZCompressionLevel NOZCompressionLevelDefault = -1.f;
+
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> __nullable encoder);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NOZCompressionLevel level);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NSUInteger encoderSpecificLevel);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger defaultCustomLevel);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger customLevel);
 
 /**
- The compression level to use.
- Lower levels execute faster, while higher levels will achieve a higher compression ratio.
- */
-typedef NS_ENUM(SInt16, NOZCompressionLevel)
-{
-    NOZCompressionLevelNone = 0,
-    NOZCompressionLevelMin = 1,
-    NOZCompressionLevelVeryLow = 2,
-    NOZCompressionLevelLow = 3,
-    NOZCompressionLevelMediumLow = 4,
-    NOZCompressionLevelMedium = 5,
-    NOZCompressionLevelMediumHigh = 6,
-    NOZCompressionLevelHigh = 7,
-    NOZCompressionLevelVeryHigh = 8,
-    NOZCompressionLevelMax = 9,
-
-    NOZCompressionLevelDefault = -1,
-};
-
-/**
-
  The compression method to use.
  Only 0 (don't compress) and 8 (deflate) are supported by default.
  Additional methods can be supported by updating the compression encoders and decoders.
-
- ### `NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);`
-
- Updates the known compression method encoder to be _encoder_.
- Provide `nil` to make the _method_ unsupported for compression.
-
- ### `NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);`
- 
- Updates the known compression method decoder to be _decoder_.
- Provide `nil` to make the _method_ unsupported for decompression.
-
+ See `NOZCompressionLibrary` for updating encoders/decoders.
  */
 typedef NS_ENUM(UInt16, NOZCompressionMethod)
 {
@@ -118,16 +103,3 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
 
 //! Block for flushing a buffer of bytes
 typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const Byte* __nonnull bufferToFlush, size_t length);
-
-@protocol NOZDecoder;
-@protocol NOZEncoder;
-
-//! Retrieve the compression encoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZEncoder> __nullable NOZEncoderForCompressionMethod(NOZCompressionMethod method);
-//! Set the compression encoder for a given method.  Setting `nil` will clear the encoder.  Whatever encoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodEncoder(NOZCompressionMethod method, id<NOZEncoder> __nullable encoder);
-
-//! Retrieve the compression decoder for a given method.  Will return `nil` if nothing is registered.
-FOUNDATION_EXTERN id<NOZDecoder> __nullable NOZDecoderForCompressionMethod(NOZCompressionMethod method);
-//! Set the compression decoder for a given method.  Setting `nil` will clear the decoder.  Whatever decoder is registered for a given method will be used when _ZipUtilities_ compression occurs.
-FOUNDATION_EXTERN void NOZUpdateCompressionMethodDecoder(NOZCompressionMethod method, id<NOZDecoder> __nullable decoder);

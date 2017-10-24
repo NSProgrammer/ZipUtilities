@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     NOZDecompressStepClose,
 };
 
-#define kCancelledError NOZError(NOZErrorCodeDecompressCancelled, nil)
+#define kCancelledError NOZErrorCreate(NOZErrorCodeDecompressCancelled, nil)
 
 @interface NOZDecompressResult ()
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
@@ -114,7 +114,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (instancetype)initWithRequest:(NOZDecompressRequest *)request delegate:(id<NOZDecompressDelegate>)delegate
 {
     if (self = [super init]) {
-        if ([delegate respondsToSelector:@selector(requiresStrongReference)]) {
+        if ([delegate isKindOfClass:[NOZDecompressDelegateInternal class]]) {
             _strongDelegate = delegate;
         }
         _weakDelegate = delegate;
@@ -246,7 +246,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     NSError *error = nil;
     _unzipper = [[NOZUnzipper alloc] initWithZipFile:_request.sourceFilePath];
     if (![_unzipper openAndReturnError:&error]) {
-        return NOZError(NOZErrorCodeDecompressFailedToOpenZipArchive, @{ NSUnderlyingErrorKey : error });
+        return NOZErrorCreate(NOZErrorCodeDecompressFailedToOpenZipArchive, @{ NSUnderlyingErrorKey : error });
     }
 
     _sanitizedDestinationDirectoryPath = _request.destinationDirectoryPath;
@@ -256,7 +256,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     _sanitizedDestinationDirectoryPath = [_sanitizedDestinationDirectoryPath stringByStandardizingPath];
 
     if (![[NSFileManager defaultManager] createDirectoryAtPath:_sanitizedDestinationDirectoryPath withIntermediateDirectories:YES attributes:nil error:NULL]) {
-        return NOZError(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: [NSNull null]) });
+        return NOZErrorCreate(NOZErrorCodeDecompressFailedToCreateDestinationDirectory, @{ @"destinationDirectoryPath" : (_request.destinationDirectoryPath ?: [NSNull null]) });
     }
 
     return nil;
@@ -268,7 +268,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
     NSError *error;
     if (![_unzipper readCentralDirectoryAndReturnError:&error]) {
-        return NOZError(NOZErrorCodeDecompressFailedToReadArchiveEntry, @{ NSUnderlyingErrorKey : error });
+        return NOZErrorCreate(NOZErrorCodeDecompressFailedToReadArchiveEntry, @{ NSUnderlyingErrorKey : error });
     }
 
     _expectedEntryCount = _unzipper.centralDirectory.recordCount;
@@ -399,11 +399,6 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         _completionBlock = [completion copy];
     }
     return self;
-}
-
-- (BOOL)requiresStrongReference
-{
-    return YES;
 }
 
 - (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result

@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -43,28 +43,28 @@
 
 @implementation NOZRawEncoder
 
-- (UInt16)bitFlagsForEntry:(nonnull id<NOZZipEntry>)entry
+- (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
 {
     return 0;
 }
 
-- (nonnull NOZRawEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
-                                           compressionLevel:(NOZCompressionLevel)level
-                                              flushCallback:(nonnull NOZFlushCallback)callback;
+- (NOZRawEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
+                                   compressionLevel:(NOZCompressionLevel)level
+                                      flushCallback:(NOZFlushCallback)callback;
 {
     NOZRawEncoderContext *context = [[NOZRawEncoderContext alloc] init];
     context.flushCallback = callback;
     return context;
 }
 
-- (BOOL)initializeEncoderContext:(nonnull NOZRawEncoderContext *)context
+- (BOOL)initializeEncoderContext:(NOZRawEncoderContext *)context
 {
     return YES;
 }
 
-- (BOOL)encodeBytes:(nonnull const Byte*)bytes
+- (BOOL)encodeBytes:(const Byte*)bytes
              length:(size_t)length
-            context:(nonnull NOZRawEncoderContext *)context
+            context:(NOZRawEncoderContext *)context
 {
     // direct passthrough
     if (!context.flushCallback(self, context, bytes, length)) {
@@ -74,7 +74,7 @@
     return YES;
 }
 
-- (BOOL)finalizeEncoderContext:(nonnull NOZRawEncoderContext *)context
+- (BOOL)finalizeEncoderContext:(NOZRawEncoderContext *)context
 {
     context.flushCallback = NULL;
     return YES;
@@ -94,22 +94,22 @@
 
 @implementation NOZRawDecoder
 
-- (nonnull NOZRawDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
-                                                         flushCallback:(nonnull NOZFlushCallback)callback
+- (NOZRawDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags
+                                                 flushCallback:(NOZFlushCallback)callback
 {
     NOZRawDecoderContext *context = [[NOZRawDecoderContext alloc] init];
     context.flushCallback = callback;
     return context;
 }
 
-- (BOOL)initializeDecoderContext:(nonnull NOZRawDecoderContext *)context
+- (BOOL)initializeDecoderContext:(NOZRawDecoderContext *)context
 {
     return YES;
 }
 
-- (BOOL)decodeBytes:(nonnull const Byte*)bytes
+- (BOOL)decodeBytes:(const Byte*)bytes
              length:(size_t)length
-            context:(nonnull NOZRawDecoderContext *)context
+            context:(NOZRawDecoderContext *)context
 {
     if (context.hasFinished) {
         return YES;
@@ -127,7 +127,7 @@
     return YES;
 }
 
-- (BOOL)finalizeDecoderContext:(nonnull NOZRawDecoderContext *)context
+- (BOOL)finalizeDecoderContext:(NOZRawDecoderContext *)context
 {
     context.flushCallback = NULL;
     return YES;

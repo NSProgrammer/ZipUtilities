@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZUtils.h"
 #import "NOZZipEntry.h"
@@ -179,9 +179,9 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 - (nonnull instancetype)initWithZipFile:(nonnull NSString *)zipFilePath;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 
 /**
  Open the zip archive.
@@ -245,6 +245,13 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
              error:(out NSError *__autoreleasing  __nullable * __nullable)error;
 
 /**
+ Validate a record.
+ */
+- (BOOL)validateRecord:(nonnull NOZCentralDirectoryRecord *)record
+         progressBlock:(nullable NOZProgressBlock)progressBlock
+                 error:(out NSError *__autoreleasing __nullable * __nullable)error;
+
+/**
  *DEPRECATED*: See `saveRecord:toDirectory:options:progressBlock:error:`
  */
 - (BOOL)saveRecord:(nonnull NOZCentralDirectoryRecord *)record
@@ -261,17 +268,23 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
  A central directory record is a zip entry populated with all the pertinent central directory info.
  */
 @interface NOZCentralDirectoryRecord : NSObject <NOZZipEntry>
+/** name of record */
 @property (nonatomic, readonly, nonnull) NSString *name;
+/** comment for record */
 @property (nonatomic, readonly, nullable) NSString *comment;
+/** compression method for record */
 @property (nonatomic, readonly) NOZCompressionMethod compressionMethod;
-@property (nonatomic, readonly) NOZCompressionLevel compressionLevel; // a best guess
+/** compression level for record (best guess when unzipping) */
+@property (nonatomic, readonly) NOZCompressionLevel compressionLevel;
+/** compressed size of record */
 @property (nonatomic, readonly) SInt64 compressedSize;
+/** uncompressed size of record */
 @property (nonatomic, readonly) SInt64 uncompressedSize;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
 /**
@@ -300,8 +313,8 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 @property (nonatomic, readonly) SInt64 totalUncompressedSize;
 
 /** Unavailable */
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
-+ (nullable instancetype)new NS_UNAVAILABLE;
++ (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 

@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,6 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
  Useful for subclasses to examine during `handleFinishing`.
  */
 @property (atomic, readonly, nullable) NSError *operationError;
+/**
+ A context object for convenience
+ */
+@property (nonatomic, nullable) id context;
 
 @end
 

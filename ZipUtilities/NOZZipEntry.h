@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #import "NOZCompression.h"
 
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)name;
 /** Optional comment for entry */
 - (nullable NSString *)comment;
-/** Compression level for entry */
+/** Compression level for entry, from `0.0f` to `1.0f` */
 - (NOZCompressionLevel)compressionLevel;
 /** Compression Method for entry */
 - (NOZCompressionMethod)compressionMethod;
@@ -60,8 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (SInt64)sizeInBytes;
 /** Is the entry valid for zipping. */
 - (BOOL)canBeZipped;
-/** Input Stream for reading the entry into the zip file. */
-- (NSInputStream *)inputStream;
+/** Input Stream for reading the entry into the zip file.  Return `nil` if no input stream is available. */
+- (nullable NSInputStream *)inputStream;
 
 @end
 

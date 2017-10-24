@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 #pragma mark Utils
 
@@ -45,6 +45,8 @@
 #define _noz_macro_concat(a, b) a##b
 #define noz_macro_concat(a, b) _noz_macro_concat(a, b)
 
+#define NOZBufferSize() (4 * NSPageSize())
+
 #pragma mark Defer Support
 
 /**
@@ -57,7 +59,15 @@
  
  *Example:*
 
-     FILE *file
+     FILE *file = fopen(fileStr);
+     noz_defer(^{ fclose(file); });
+     ... work ...
+     if (some failure) {
+         return NO; // fclose will auto happen
+     }
+     ... more work ...
+     // complete
+     return YES; // fclose will auto happen
  */
 #define noz_defer(deferBlock) \
 __strong noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock
@@ -67,15 +77,6 @@ NS_INLINE void noz_deferFunc(__strong noz_defer_block_t __nonnull * __nonnull bl
 {
     noz_defer_block_t actualBlock = *blockRef;
     actualBlock();
-}
-
-#pragma mark Error
-
-#import "NOZError.h"
-
-NS_INLINE NSError * __nonnull NOZError(NOZErrorCode code, NSDictionary * __nullable ui)
-{
-    return [NSError errorWithDomain:NOZErrorDomain code:code userInfo:ui];
 }
 
 #pragma mark DOS Time

@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,16 @@
 //  SOFTWARE.
 //
 
-@import Foundation;
+#import "NOZCompression.h"
+
+@protocol NOZEncoder;
+@protocol NOZDecoder;
 
 //! Block for providing progress to.  Used by `NOZCompressOperation` and `NOZDecompressOperation`.
-typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort);
+typedef void(^NOZProgressBlock)(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL * __nonnull abort);
+
+//! Convenience function to compress a file without ZIP archive wrapping
+FOUNDATION_EXTERN BOOL NOZEncodeFile(NSString * __nonnull sourceFile, NSString * __nonnull destinationFile, id<NOZEncoder> __nonnull encoder, NOZCompressionLevel level, NSError * __nullable * __nullable error);
+
+//! Convenience function to decompress a file without ZIP archive wrapping
+FOUNDATION_EXTERN BOOL NOZDecodeFile(NSString * __nonnull sourceFile, NSString * __nonnull destinationFile, id<NOZDecoder> __nonnull decoder, NSError * __nullable * __nullable error);

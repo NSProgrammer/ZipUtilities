@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +27,7 @@
 
 @import Foundation;
 @import XCTest;
-
-#import "NOZDecompress.h"
+@import ZipUtilities;
 
 //#define TESTLOG(...) NSLog(__VA_ARGS__)
 #define TESTLOG(...) ((void)0)

@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Nolan O'Brien
+//  Copyright (c) 2016 Nolan O'Brien
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,18 +25,9 @@
 //  SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-
-//! Project version number for ZipUtilities.
-FOUNDATION_EXPORT double ZipUtilitiesVersionNumber;
-
-//! Project version string for ZipUtilities.
-FOUNDATION_EXPORT const unsigned char ZipUtilitiesVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import "PublicHeader.h"
-
 #import "NOZCompress.h"
 #import "NOZCompression.h"
+#import "NOZCompressionLibrary.h"
 #import "NOZDecoder.h"
 #import "NOZDecompress.h"
 #import "NOZEncoder.h"
