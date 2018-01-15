@@ -147,7 +147,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError **)error
+- (NOZCentralDirectory *)readCentralDirectoryAndReturnError:(out NSError * __autoreleasing * )error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -207,7 +207,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 - (BOOL)enumerateByteRangesOfRecord:(NOZCentralDirectoryRecord *)record
                       progressBlock:(NOZProgressBlock)progressBlock
                          usingBlock:(NOZUnzipByteRangeEnumerationBlock)block
-                              error:(out NSError **)error
+                              error:(out NSError * __autoreleasing *)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -330,7 +330,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
        toDirectory:(NSString *)destinationRootDirectory
            options:(NOZUnzipperSaveRecordOptions)options
      progressBlock:(NOZProgressBlock)progressBlock
-             error:(out NSError **)error
+             error:(out NSError * __autoreleasing *)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -544,7 +544,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)private_deflateWithProgressBlock:(NOZProgressBlock)progressBlock
                               usingBlock:(NOZUnzipByteRangeEnumerationBlock)block
-                                   error:(out NSError **)error
+                                   error:(out NSError * __autoreleasing *)error
 {
     __block BOOL success = YES;
     noz_defer(^{
@@ -784,7 +784,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return _records;
 }
 
-- (BOOL)validateCentralDirectoryAndReturnError:(NSError **)error
+- (BOOL)validateCentralDirectoryAndReturnError:(NSError * __autoreleasing *)error
 {
     __block NOZErrorCode code = 0;
     __block NSDictionary *userInfo = nil;

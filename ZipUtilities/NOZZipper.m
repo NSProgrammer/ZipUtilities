@@ -120,7 +120,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     [self private_freeLinkedList];
 }
 
-- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError **)error
+- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError * __autoreleasing *)error
 {
     if (_internal.file) {
         return YES;
@@ -211,7 +211,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 - (BOOL)addEntry:(id<NOZZippableEntry>)entry
    progressBlock:(__attribute__((noescape)) NOZProgressBlock)progressBlock
-           error:(out NSError **)error
+           error:(out NSError * __autoreleasing *)error
 {
     __block NSError *stackError = nil;
     noz_defer(^{
@@ -247,7 +247,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 @implementation NOZZipper (Private)
 
-- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError **)error
+- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError * __autoreleasing *)error
 {
     if (!_internal.file) {
         return YES;
@@ -299,7 +299,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 }
 
 - (BOOL)private_openEntry:(id<NOZZippableEntry>)entry
-                    error:(out NSError **)error
+                    error:(out NSError * __autoreleasing *)error
 {
     __block BOOL errorEncountered = NO;
     noz_defer(^{ if (errorEncountered && error) { *error = NOZErrorCreate(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
@@ -380,7 +380,7 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 - (BOOL)private_writeEntry:(id<NOZZippableEntry>)entry
              progressBlock:(NOZProgressBlock)progressBlock
-                     error:(out NSError **)error
+                     error:(out NSError * __autoreleasing *)error
                   abortRef:(BOOL *)abort
 {
     __block BOOL success = YES;
