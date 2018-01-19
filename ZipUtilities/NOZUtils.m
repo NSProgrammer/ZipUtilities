@@ -85,8 +85,8 @@ void NOZFileEntryCleanFree(NOZFileEntryT* entry)
     }
 }
 
-static BOOL _NOZOpenInputOutputFiles(NSString * __nonnull sourceFilePath, FILE * __nullable * __nonnull sourceFile, NSString * __nonnull destinationFilePath, FILE * __nonnull * __nullable destinationFile, NSError * __nullable * __nullable error);
-static BOOL _NOZOpenInputOutputFiles(NSString *sourceFilePath, FILE **sourceFile, NSString *destinationFilePath, FILE **destinationFile, NSError **error)
+static BOOL _NOZOpenInputOutputFiles(NSString * __nonnull sourceFilePath, FILE * __nullable * __nonnull sourceFile, NSString * __nonnull destinationFilePath, FILE * __nonnull * __nullable destinationFile, NSError * __autoreleasing __nullable * __nullable error);
+static BOOL _NOZOpenInputOutputFiles(NSString *sourceFilePath, FILE **sourceFile, NSString *destinationFilePath, FILE **destinationFile, NSError * __autoreleasing * error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *inFile = NULL;
@@ -138,7 +138,7 @@ static BOOL _NOZOpenInputOutputFiles(NSString *sourceFilePath, FILE **sourceFile
     return YES;
 }
 
-BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncoder> encoder, NOZCompressionLevel level, NSError **error)
+BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncoder> encoder, NOZCompressionLevel level, NSError * __autoreleasing * error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *uncompressedFile = NULL;
@@ -208,7 +208,7 @@ BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncode
     return YES;
 }
 
-BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecoder> decoder, NSError **error)
+BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecoder> decoder, NSError * __autoreleasing * error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *uncompressedFile = NULL;
