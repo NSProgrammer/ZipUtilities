@@ -39,8 +39,6 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     NOZCompressStepClose
 };
 
-static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString * __nonnull directoryPath);
-
 #define kCancelledError NOZErrorCreate(NOZErrorCodeCompressCancelled, nil)
 
 @interface NOZCompressDelegateInternal : NSObject <NOZCompressDelegate>
@@ -517,11 +515,15 @@ static NSArray<NOZFileZipEntry *> * __nonnull NOZEntriesFromDirectory(NSString *
 
 @end
 
-static NSArray<NOZFileZipEntry *> * NOZEntriesFromDirectory(NSString * directoryPath)
+NSArray<NOZFileZipEntry *> * NOZEntriesFromDirectory(NSString * directoryPath)
 {
-    NSMutableArray<NOZFileZipEntry *> *entries = [[NSMutableArray alloc] init];
     NSFileManager *fm = [NSFileManager defaultManager];
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:directoryPath];
+    if (!enumerator) {
+        return nil;
+    }
+
+    NSMutableArray<NOZFileZipEntry *> *entries = [[NSMutableArray alloc] init];
     NSString *filePath = nil;
     while (nil != (filePath = enumerator.nextObject)) {
         NSString *fullPath = [directoryPath stringByAppendingPathComponent:filePath];

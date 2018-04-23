@@ -26,8 +26,11 @@ int main(int argc, const char * argv[])
             retVal = NOZCLI_main(exe, path, currentDir, args);
         }
 
-        if (retVal == -1) {
-            NOZCLI_printUsage(exe);
+        if (retVal != 0) {
+            if (retVal != -1) {
+                printf("\n\n----------------------------------------\n\n");
+            }
+            NOZCLI_printUsage(exe, args.firstObject);
         }
     }
 

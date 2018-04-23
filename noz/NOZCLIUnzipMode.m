@@ -190,21 +190,8 @@
 
 + (int)run:(NOZCLIUnzipModeInfo *)info
 {
-    NOZCompressionLibrary *lib = [NOZCompressionLibrary sharedInstance];
-    NSMutableDictionary<NSNumber *, MethodInfo *> *methodMap = [[NSMutableDictionary alloc] init];
-    for (NSString *methodName in info.methodToNumberMap.allKeys) {
-        MethodInfo *methodInfo = NOZCLI_lookupMethodByName(methodName);
-        if (!methodInfo) {
-            printf("No such method name: %s\n", methodName.UTF8String);
-            return -1;
-        }
-        NSNumber *methodNumber = info.methodToNumberMap[methodName];
-        methodMap[methodNumber] = methodInfo;
-    }
-    for (NSNumber *methodNumber in methodMap.allKeys) {
-        MethodInfo *methodInfo = methodMap[methodNumber];
-        [lib setEncoder:methodInfo.encoder forMethod:methodNumber.unsignedShortValue];
-        [lib setDecoder:methodInfo.decoder forMethod:methodNumber.unsignedShortValue];
+    if (!NOZCLI_registerMethodToNumberMap(info.methodToNumberMap)) {
+        return -1;
     }
 
     if (0 == info.entryInfos.count) {
@@ -302,12 +289,14 @@
         return nil;
     }
 
-    NSUInteger prevIndex = NSNotFound;
+    NSUInteger prevIndex = 0;
     do {
         const NSUInteger curIndex = eIndexes.firstIndex;
         [eIndexes removeIndex:curIndex];
         if (prevIndex != NSNotFound) {
-            [entryArgs addObject:[args subarrayWithRange:NSMakeRange(prevIndex, curIndex - prevIndex)]];
+            if (prevIndex != curIndex) {
+                [entryArgs addObject:[args subarrayWithRange:NSMakeRange(prevIndex, curIndex - prevIndex)]];
+            }
             if (!eIndexes.count) {
                 [entryArgs addObject:[args subarrayWithRange:NSMakeRange(curIndex, args.count - curIndex)]];
             }

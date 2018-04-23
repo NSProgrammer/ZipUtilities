@@ -167,8 +167,81 @@
 
 + (int)run:(NOZCLIZipModeInfo *)info
 {
-    printf("NYI!\n");
-    return -1;
+    if (!info) {
+        return -1;
+    }
+
+    if (!NOZCLI_registerMethodToNumberMap(info.methodToNumberMap)) {
+        return -1;
+    }
+
+    NSError *error;
+    NOZZipper *zipper = [[NOZZipper alloc] initWithZipFile:info.outputFile];
+    zipper.globalComment = info.globalComment;
+
+    if (![zipper openWithMode:NOZZipperModeCreate error:&error]) {
+        NOZCLI_printError(error);
+        return -1;
+    }
+
+    for (NOZCLIZipModeEntryInfo *entryInfo in info.entryInfos) {
+        MethodInfo *methodInfo = (entryInfo.methodName) ? NOZCLI_lookupMethodByName(entryInfo.methodName) : NOZCLI_lookupMethod(NOZCompressionMethodDeflate);
+        if (!methodInfo) {
+            printf("unrecognized compression method '%s'\n", entryInfo.methodName.UTF8String);
+            return -1;
+        }
+
+        UInt16 overrideMethodNumber = methodInfo.method;
+        if (entryInfo.methodName && info.methodToNumberMap[entryInfo.methodName]) {
+            overrideMethodNumber = info.methodToNumberMap[entryInfo.methodName].unsignedShortValue;
+        }
+
+        // TODO - support preventing recursion
+        // TODO - support avoiding hidden files
+
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:entryInfo.entryPath];
+        if (!enumerator) {
+            NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:entryInfo.entryPath];
+            if (![self _zip:zipper entry:entry methodInfo:methodInfo entryInfo:entryInfo method:overrideMethodNumber]) {
+                return -1;
+            }
+        } else {
+            NSString *filePath = nil;
+            while (nil != (filePath = enumerator.nextObject)) {
+                NSString *fullPath = [entryInfo.entryPath stringByAppendingPathComponent:filePath];
+                BOOL isDir = NO;
+                if ([fm fileExistsAtPath:fullPath isDirectory:&isDir] && !isDir) {
+                    NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:fullPath name:filePath];
+                    if (![self _zip:zipper entry:entry methodInfo:methodInfo entryInfo:entryInfo method:overrideMethodNumber]) {
+                        return -1;
+                    }
+                }
+            }
+        }
+    }
+
+    if (![zipper closeAndReturnError:&error]) {
+        NOZCLI_printError(error);
+        return -1;
+    }
+
+    return 0;
+}
+
++ (BOOL)_zip:(NOZZipper *)zipper entry:(NOZFileZipEntry *)entry methodInfo:(MethodInfo *)methodInfo entryInfo:(NOZCLIZipModeEntryInfo *)entryInfo method:(NOZCompressionMethod)method
+{
+    entry.compressionMethod = method;
+    entry.compressionLevel = NOZCompressionLevelFromCustomEncoderLevel(1, 1 + methodInfo.levels, entryInfo.level ? (NSUInteger)[entryInfo.level integerValue] : methodInfo.defaultLevel);
+    entry.comment = entryInfo.comment;
+
+    printf("%s  ...\n", entry.filePath.UTF8String);
+    NSError *error;
+    if (![zipper addEntry:entry progressBlock:NULL error:&error]) {
+        NOZCLI_printError(error);
+        return NO;
+    }
+    return YES;
 }
 
 @end
@@ -187,12 +260,14 @@
         return nil;
     }
 
-    NSUInteger prevIndex = NSNotFound;
+    NSUInteger prevIndex = 0;
     do {
         const NSUInteger curIndex = eIndexes.firstIndex;
         [eIndexes removeIndex:curIndex];
         if (prevIndex != NSNotFound) {
-            [entryArgs addObject:[args subarrayWithRange:NSMakeRange(prevIndex, curIndex - prevIndex)]];
+            if (prevIndex != curIndex) {
+                [entryArgs addObject:[args subarrayWithRange:NSMakeRange(prevIndex, curIndex - prevIndex)]];
+            }
             if (!eIndexes.count) {
                 [entryArgs addObject:[args subarrayWithRange:NSMakeRange(curIndex, args.count - curIndex)]];
             }
@@ -276,7 +351,7 @@
         }
     }
 
-    entryPath = NOZCLI_normalizedPath(envPath, envPath);
+    entryPath = NOZCLI_normalizedPath(envPath, entryPath);
     if (!entryPath) {
         return nil;
     }

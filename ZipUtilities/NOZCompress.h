@@ -172,4 +172,7 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 
 @end
 
+//! Enumerate files in directory.  Returns `nil` if `directoryPath` is not a directory.
+FOUNDATION_EXTERN NSArray<NOZFileZipEntry *> *NOZEntriesFromDirectory(NSString *directoryPath);
+
 NS_ASSUME_NONNULL_END

@@ -13,7 +13,7 @@
 @class MethodInfo;
 
 FOUNDATION_EXTERN int NOZCLI_main(NSString *exe, NSString *exeDir, NSString *currentDir, NSArray<NSString *> *args);
-FOUNDATION_EXTERN void NOZCLI_printUsage(NSString *exe);
+FOUNDATION_EXTERN void NOZCLI_printUsage(NSString *exe, NSString *modeFlag);
 
 FOUNDATION_EXTERN void NOZCLI_registerExtraEncoders(void);
 
@@ -28,6 +28,7 @@ FOUNDATION_EXTERN NSArray<MethodInfo *> *NOZCLI_allMethods(void);
 FOUNDATION_EXTERN NSArray<MethodInfo *> *NOZCLI_allUnsupportedMethods(void);
 FOUNDATION_EXTERN NSArray<MethodInfo *> *NOZCLI_allDefaultMethods(void);
 FOUNDATION_EXTERN NSArray<MethodInfo *> *NOZCLI_allExtendedMethods(void);
+FOUNDATION_EXTERN BOOL NOZCLI_registerMethodToNumberMap(NSDictionary<NSString *, NSNumber *> *methodToNumberMap);
 
 FOUNDATION_EXTERN NSArray<Class> *NOZCLI_allModes(void);
 

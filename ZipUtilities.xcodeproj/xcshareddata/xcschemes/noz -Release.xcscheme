@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0920"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -43,10 +42,9 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
+      buildConfiguration = "Release"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -63,56 +61,6 @@
             ReferencedContainer = "container:ZipUtilities.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-A"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-D -L -i ~/Desktop/Maniac\ Mansion/Maniac_Mansion.zip"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-D"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-u"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-z -M Brotli 101 -c &quot;Encoded (101) using Brotli&quot; -o ~/Desktop/XC9.zip -i /Applications/Xcode_9_GM.app -m Brotli -l 10 "
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-u -M ZStandard 102 -M Brotli 101 -M LZMA 14 -M LZ4 256 -M LZFSE 2049 -b ~/Desktop/TestNOZ -i ~/Desktop/maniac-mansion.zip -e -o MANIAC.EXE -m Deflate Maniac\ Mansion/Game/MANIAC.EXE -e Maniac\ Mansion/Music/Midi/dave.mid -e Maniac\ Mansion/Manual\ and\ cheats/walkthrough.txt -e Maniac\ Mansion/Manual\ and\ cheats/Manual/ca1.jpeg"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-u -M ZStandard 102 -M Brotli 101 -M LZMA 14 -M LZ4 256 -M LZFSE 2049 -b ~/Desktop/TestNOZ -i ~/Developer/ZipUtilities/ZipUtilitiesTests/Directory.zip -e -o MANIAC.EXE -m Deflate Game/MANIAC.EXE -e Walkthrough/walkthrough.txt -e Game/12.LFL -e ca1.jpeg"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-u  -b ~/Desktop/TestNOZ -i ~/Developer/ZipUtilities/ZipUtilitiesTests/Directory.zip"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-c -m ZStandard -l 14 -i ~/Developer/ZipUtilities/ZipUtilitiesTests/Aesop.txt -o ~/Desktop/Aesop.zstd"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-d -m ZStandard -i ~/Desktop/Aesop.zstd -o ~/Desktop/Aesop.txt"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-D -L -v -i ~/Downloads/openjpeg-version.2.1.zip"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-D -L -s -i ~/Downloads/openjpeg-version.2.1.zip"
-            isEnabled = "NO">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

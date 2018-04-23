@@ -112,7 +112,7 @@ int NOZCLI_main(NSString *exe, NSString *exeDir, NSString *currentDir, NSArray<N
     return -1;
 }
 
-void NOZCLI_printUsage(NSString *exe)
+void NOZCLI_printUsage(NSString *exe, NSString *modeFlag)
 {
     if (exe) {
         exe = @"noz";
@@ -121,6 +121,16 @@ void NOZCLI_printUsage(NSString *exe)
     printf("%s is the ZipUtilities CLI\n\n", exe.UTF8String);
 
     NSArray<Class> *modes = NOZCLI_allModes();
+
+    if (modeFlag) {
+        // if a mode was selected, just print how to use that mode
+        for (Class mode in modes) {
+            if ([[mode modeFlag] isEqualToString:modeFlag]) {
+                modes = @[mode];
+                break;
+            }
+        }
+    }
 
     for (Class mode in modes) {
         NSString *modeDescription = [NSString stringWithFormat:@"%@ mode:\n\t%@ %@ %@", [mode modeName], exe, [mode modeFlag], [mode modeExecutionDescription]];
@@ -309,4 +319,25 @@ NSArray<MethodInfo *> *NOZCLI_allExtendedMethods()
     }
 
     return methods;
+}
+
+BOOL NOZCLI_registerMethodToNumberMap(NSDictionary<NSString *, NSNumber *> * __nullable methodToNumberMap)
+{
+    NOZCompressionLibrary *lib = [NOZCompressionLibrary sharedInstance];
+    NSMutableDictionary<NSNumber *, MethodInfo *> *methodMap = [[NSMutableDictionary alloc] init];
+    for (NSString *methodName in methodToNumberMap.allKeys) {
+        MethodInfo *methodInfo = NOZCLI_lookupMethodByName(methodName);
+        if (!methodInfo) {
+            printf("No such method name: %s\n", methodName.UTF8String);
+            return NO;
+        }
+        NSNumber *methodNumber = methodToNumberMap[methodName];
+        methodMap[methodNumber] = methodInfo;
+    }
+    for (NSNumber *methodNumber in methodMap.allKeys) {
+        MethodInfo *methodInfo = methodMap[methodNumber];
+        [lib setEncoder:methodInfo.encoder forMethod:methodNumber.unsignedShortValue];
+        [lib setDecoder:methodInfo.decoder forMethod:methodNumber.unsignedShortValue];
+    }
+    return YES;
 }
