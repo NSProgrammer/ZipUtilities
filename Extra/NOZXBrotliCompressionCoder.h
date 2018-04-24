@@ -14,9 +14,7 @@
 @interface NOZXBrotliCompressionCoder : NSObject
 
 + (nullable id<NOZEncoder>)encoder;
-+ (nullable id<NOZEncoder>)encoderWithDictionaryData:(nullable NSData *)dict;
 + (nullable id<NOZDecoder>)decoder;
-+ (nullable id<NOZDecoder>)decoderWithDictionaryData:(nullable NSData *)dict;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 + (nonnull instancetype)new NS_UNAVAILABLE;

@@ -25,7 +25,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 @property (nonatomic, readonly, copy, nonnull) NOZFlushCallback flushCallback;
 - (instancetype)initWithEncoder:(nonnull id<NOZEncoder>)encoder quality:(uint32_t)quality flushCallback:(NOZFlushCallback)callback;
 - (instancetype)init NS_UNAVAILABLE;
-- (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
+- (BOOL)initializeContext;
 - (BOOL)encodeBytes:(const Byte*)bytes length:(size_t)length;
 - (BOOL)finalizeEncoding;
 @end
@@ -36,43 +36,27 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 @property (nonatomic, readonly, nonnull, unsafe_unretained) id<NOZDecoder> decoder;
 - (instancetype)initWithDecoder:(id<NOZDecoder>)decoder flushCallback:(NOZFlushCallback)callback;
 - (instancetype)init NS_UNAVAILABLE;
-- (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData;
+- (BOOL)initializeContext;
 - (BOOL)decodeBytes:(const Byte*)bytes length:(size_t)length;
 - (BOOL)finalizeDecoding;
 @end
 
 @interface NOZXBrotliEncoder : NSObject <NOZEncoder>
-@property (nonatomic, readonly, nullable) NSData *dictionaryData;
-- (instancetype)initWithDictionaryData:(nullable NSData *)dict;
-- (instancetype)init NS_UNAVAILABLE;
 @end
 
 @interface NOZXBrotliDecoder : NSObject <NOZDecoder>
-@property (nonatomic, readonly, nullable) NSData *dictionaryData;
-- (instancetype)initWithDictionaryData:(nullable NSData *)dict;
-- (instancetype)init NS_UNAVAILABLE;
 @end
 
 @implementation NOZXBrotliCompressionCoder
 
 + (id<NOZEncoder>)encoder
 {
-    return [self encoderWithDictionaryData:nil];
-}
-
-+ (id<NOZEncoder>)encoderWithDictionaryData:(NSData *)dict
-{
-    return [[NOZXBrotliEncoder alloc] initWithDictionaryData:dict];
+    return [[NOZXBrotliEncoder alloc] init];
 }
 
 + (id<NOZDecoder>)decoder
 {
-    return [self decoderWithDictionaryData:nil];
-}
-
-+ (id<NOZDecoder>)decoderWithDictionaryData:(NSData *)dict
-{
-    return [[NOZXBrotliDecoder alloc] initWithDictionaryData:dict];
+    return [[NOZXBrotliDecoder alloc] init];
 }
 
 @end
@@ -117,7 +101,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
     }
 }
 
-- (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData
+- (BOOL)initializeContext
 {
     if (!_flags.initialized) {
         static uint32_t lgwin = 21; // 2MB
@@ -132,10 +116,6 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
         });
         (void)BrotliEncoderSetParameter(_encoderState, BROTLI_PARAM_QUALITY, _quality);
         (void)BrotliEncoderSetParameter(_encoderState, BROTLI_PARAM_LGWIN, lgwin);
-        if (dictionaryData.length) {
-            (void)BrotliEncoderSetParameter(_encoderState, BROTLI_PARAM_LGWIN, BROTLI_DEFAULT_WINDOW);
-            BrotliEncoderSetCustomDictionary(_encoderState, dictionaryData.length, dictionaryData.bytes);
-        }
 
         _encoderBufferPointer = _encoderBuffer;
         _encoderBufferRemainingBytesCount = sizeof(_encoderBuffer);
@@ -230,14 +210,6 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
     return kBROTLI_QUALITY_LEVEL_DEFAULT;
 }
 
-- (instancetype)initWithDictionaryData:(NSData *)dict
-{
-    if (self = [super init]) {
-        _dictionaryData = dict;
-    }
-    return self;
-}
-
 - (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
 {
     return 0;
@@ -252,7 +224,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 
 - (BOOL)initializeEncoderContext:(id<NOZEncoderContext>)context
 {
-    return [(NOZXBrotliEncoderContext *)context initializeWithDictionaryData:_dictionaryData];
+    return [(NOZXBrotliEncoderContext *)context initializeContext];
 }
 
 - (BOOL)encodeBytes:(const Byte*)bytes
@@ -301,12 +273,9 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
     }
 }
 
-- (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData
+- (BOOL)initializeContext
 {
     if (!_flags.initialized) {
-        if (dictionaryData.length) {
-            (void)BrotliDecoderSetCustomDictionary(_decoderState, dictionaryData.length, dictionaryData.bytes);
-        }
         _decoderBufferPointer = _decoderBuffer;
         _decoderBufferRemainingBytesCount = sizeof(_decoderBuffer);
         _flags.initialized = 1;
@@ -375,14 +344,6 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 
 @implementation NOZXBrotliDecoder
 
-- (instancetype)initWithDictionaryData:(NSData *)dict
-{
-    if (self = [super init]) {
-        _dictionaryData = dict;
-    }
-    return self;
-}
-
 - (id<NOZDecoderContext>)createContextForDecodingWithBitFlags:(UInt16)flags
                                                 flushCallback:(NOZFlushCallback)callback
 {
@@ -391,7 +352,7 @@ static uint32_t NOZXBrotliQualityFromNOZCompressionLevel(NOZCompressionLevel lev
 
 - (BOOL)initializeDecoderContext:(id<NOZDecoderContext>)context
 {
-    return [(NOZXBrotliDecoderContext *)context initializeWithDictionaryData:_dictionaryData];
+    return [(NOZXBrotliDecoderContext *)context initializeContext];
 }
 
 - (BOOL)decodeBytes:(const Byte*)bytes

@@ -2,6 +2,11 @@
 
 ## History
 
+### 1.11.0 (April 24, 2018) - Nolan O'Brien
+
+- Update Brotli (v1.0.4) and ZStandard (v1.3.4)
+  - eliminates shared custom dictionary support from brotli
+
 ### 1.10.1 (April 23, 2018) - Nolan O'Brien
 
 - Add _Zip Mode_ support to `noz`

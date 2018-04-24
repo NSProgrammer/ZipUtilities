@@ -204,9 +204,9 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
     _currentReadBufferLength = len;
     _currentReadBufferUsed = 0;
     noz_defer(^{
-        _currentReadBufferUsed = 0;
-        _currentReadBufferLength = 0;
-        _currentReadBuffer = NULL;
+        self->_currentReadBufferUsed = 0;
+        self->_currentReadBufferLength = 0;
+        self->_currentReadBuffer = NULL;
     });
 
     const size_t intermediateBufferSize = len;

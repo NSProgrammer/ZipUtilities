@@ -178,10 +178,10 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
     noz_defer(^{
         if (stackError != nil) {
-            fclose(_internal.file);
-            _internal.file = NULL;
+            fclose(self->_internal.file);
+            self->_internal.file = NULL;
             if (NOZZipperModeCreate == mode) {
-                [[NSFileManager defaultManager] removeItemAtPath:_standardizedZipFilePath error:NULL];
+                [[NSFileManager defaultManager] removeItemAtPath:self->_standardizedZipFilePath error:NULL];
             }
         }
     });
