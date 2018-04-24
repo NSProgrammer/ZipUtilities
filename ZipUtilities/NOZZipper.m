@@ -276,12 +276,12 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     noz_defer(^{
-        fclose(_internal.file);
-        _internal.file = NULL;
+        fclose(self->_internal.file);
+        self->_internal.file = NULL;
         [self private_freeLinkedList];
-        if (_internal.ownsComment) {
-            free(_internal.comment);
-            _internal.comment = NULL;
+        if (self->_internal.ownsComment) {
+            free(self->_internal.comment);
+            self->_internal.comment = NULL;
         }
     });
 
@@ -654,8 +654,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     noz_defer(^{
-        _currentEncoder = nil;
-        _currentEncoderContext = nil;
+        self->_currentEncoder = nil;
+        self->_currentEncoderContext = nil;
     });
 
     const BOOL success = [_currentEncoder finalizeEncoderContext:_currentEncoderContext];

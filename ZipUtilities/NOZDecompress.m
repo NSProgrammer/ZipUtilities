@@ -319,7 +319,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         if (stackError) {
             *stop = YES;
         } else {
-            [_entryPaths addObject:record.name];
+            [self->_entryPaths addObject:record.name];
         }
 
     }];
