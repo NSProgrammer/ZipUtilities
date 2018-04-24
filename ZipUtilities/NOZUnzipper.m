@@ -241,7 +241,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         } while (0);
 
         _currentUnzipping.isUnzipping = YES;
-        noz_defer(^{ _currentUnzipping.isUnzipping = NO; });
+        noz_defer(^{ self->_currentUnzipping.isUnzipping = NO; });
 
         _currentUnzipping.offsetToFirstByte = ftello(_internal.file);
         if (_currentUnzipping.offsetToFirstByte == -1) {
@@ -263,8 +263,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
                                                                          }];
 
         noz_defer(^{
-            _currentDecoder = nil;
-            _currentDecoderContext = nil;
+            self->_currentDecoder = nil;
+            self->_currentDecoderContext = nil;
         });
 
         if (!_currentDecoder || !_currentDecoderContext) {
@@ -278,7 +278,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
         
         _currentUnzipping.entry = record.internalEntry;
-        noz_defer(^{ _currentUnzipping.entry = NULL; });
+        noz_defer(^{ self->_currentUnzipping.entry = NULL; });
         
         if (![self private_deflateWithProgressBlock:progressBlock usingBlock:block error:&stackError]) {
             return NO;
@@ -386,7 +386,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
                                         *stop = YES;
                                     } else {
 #if DEBUG
-                                        if ((byteRange.length + byteRange.location) == _currentUnzipping.entry->fileDescriptor.uncompressedSize) {
+                                        if ((byteRange.length + byteRange.location) == self->_currentUnzipping.entry->fileDescriptor.uncompressedSize) {
                                             fflush(file);
                                         }
 #endif

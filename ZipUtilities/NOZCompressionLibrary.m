@@ -75,7 +75,7 @@
 {
     __block NSDictionary<NSNumber *, id<NOZEncoder>> *encoders;
     dispatch_sync(_coderQueue, ^{
-        encoders = [_encoders copy];
+        encoders = [self->_encoders copy];
     });
     return encoders;
 }
@@ -84,7 +84,7 @@
 {
     __block NSDictionary<NSNumber *, id<NOZEncoder>> *decoders;
     dispatch_sync(_coderQueue, ^{
-        decoders = [_decoders copy];
+        decoders = [self->_decoders copy];
     });
     return decoders;
 }
@@ -93,7 +93,7 @@
 {
     __block id<NOZEncoder> encoder;
     dispatch_sync(_coderQueue, ^{
-        encoder = _encoders[@(method)];
+        encoder = self->_encoders[@(method)];
     });
     return encoder;
 }
@@ -102,7 +102,7 @@
 {
     __block id<NOZDecoder> decoder;
     dispatch_sync(_coderQueue, ^{
-        decoder = _decoders[@(method)];
+        decoder = self->_decoders[@(method)];
     });
     return decoder;
 }
@@ -111,9 +111,9 @@
 {
     dispatch_barrier_async(_coderQueue, ^{
         if (encoder) {
-            _encoders[@(method)] = encoder;
+            self->_encoders[@(method)] = encoder;
         } else {
-            [_encoders removeObjectForKey:@(method)];
+            [self->_encoders removeObjectForKey:@(method)];
         }
     });
 }
@@ -122,9 +122,9 @@
 {
     dispatch_barrier_async(_coderQueue, ^{
         if (decoder) {
-            _decoders[@(method)] = decoder;
+            self->_decoders[@(method)] = decoder;
         } else {
-            [_decoders removeObjectForKey:@(method)];
+            [self->_decoders removeObjectForKey:@(method)];
         }
     });
 }

@@ -290,13 +290,13 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
         }
 
         BOOL overwrite = NO;
-        if (_flags.delegateHasOverwriteCheck) {
-            overwrite = [self.delegate shouldDecompressOperation:self overwriteFileAtPath:[_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:record.name]];
+        if (self->_flags.delegateHasOverwriteCheck) {
+            overwrite = [self.delegate shouldDecompressOperation:self overwriteFileAtPath:[self->_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:record.name]];
         }
 
         NSError *innerError = nil;
-        [_unzipper saveRecord:record
-                  toDirectory:_sanitizedDestinationDirectoryPath
+        [self->_unzipper saveRecord:record
+                  toDirectory:self->_sanitizedDestinationDirectoryPath
                       options:(overwrite) ? NOZUnzipperSaveRecordOptionOverwriteExisting : NOZUnzipperSaveRecordOptionsNone
                 progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort) {
                     if (self.isCancelled) {
