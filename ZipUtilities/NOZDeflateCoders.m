@@ -123,7 +123,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 - (NOZDeflateEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
                                        compressionLevel:(NOZCompressionLevel)level
-                                          flushCallback:(NOZFlushCallback)callback;
+                                          flushCallback:(NOZFlushCallback)callback
 {
     NOZDeflateEncoderContext *context = [[NOZDeflateEncoderContext alloc] init];
     context.flushCallback = callback;

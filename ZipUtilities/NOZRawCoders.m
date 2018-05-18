@@ -50,7 +50,7 @@
 
 - (NOZRawEncoderContext *)createContextWithBitFlags:(UInt16)bitFlags
                                    compressionLevel:(NOZCompressionLevel)level
-                                      flushCallback:(NOZFlushCallback)callback;
+                                      flushCallback:(NOZFlushCallback)callback
 {
     NOZRawEncoderContext *context = [[NOZRawEncoderContext alloc] init];
     context.flushCallback = callback;
