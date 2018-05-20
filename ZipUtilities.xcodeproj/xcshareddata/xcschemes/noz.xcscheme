@@ -67,6 +67,22 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-z -i -m Brotli -l 12 /Applications/Doxygen.app -o /Users/nobrien/Doxygen.zip"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-z -o /Users/nobrien/Doxygen.zip -i -m Brotli -l 12 /Applications/Doxygen.app"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-z -o /Users/nobrien/Doxygen.zip -i /Applications/Doxygen.app -m Brotli -l 12"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-z -o /Users/nobrien/Desktop/Doxygen.app.tar.zip -i /Users/nobrien/Desktop/Doxygen.app.tar -m Brotli -l 12"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-D -L -i ~/Desktop/Maniac\ Mansion/Maniac_Mansion.zip"
             isEnabled = "NO">
          </CommandLineArgument>
@@ -76,7 +92,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-u"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-z -M Brotli 101 -c &quot;Encoded (101) using Brotli&quot; -o ~/Desktop/XC9.zip -i /Applications/Xcode_9_GM.app -m Brotli -l 10 "

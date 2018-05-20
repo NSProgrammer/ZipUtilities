@@ -201,15 +201,19 @@
         [op start]; // will run synchronously
         NOZDecompressResult *result = op.result;
         if (result.operationError) {
+            printf("\n");
             NOZCLI_printError(result.operationError);
             return -2;
         }
 
         if (!result.didSucceed) {
+            printf("\n");
             printf("FAILED!\n");
             return -2;
         }
 
+        fprintf(stdout, "\r");
+        fflush(stdout);
         printf("compression ratio: %f\n", result.compressionRatio);
         return 0;
     }
@@ -228,8 +232,9 @@
     }
 
     NOZProgressBlock progressBlock = ^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
-//        const double progress = (double)bytesComplete / (double)totalBytes;
-//        printf("%zi%%\n", (NSInteger)(progress * 100.));
+        const double progress = (double)bytesComplete / (double)totalBytes;
+        fprintf(stdout, "\r%li%%", (long)progress);
+        fflush(stdout);
     };
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *tmpDir = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSUUID UUID].UUIDString];
@@ -251,9 +256,12 @@
 
         if (![unzipper saveRecord:record toDirectory:tmpDir options:NOZUnzipperSaveRecordOptionIgnoreIntermediatePath progressBlock:progressBlock error:&error]) {
             [fm removeItemAtPath:tmpDir error:NULL];
+            printf("\n");
             NOZCLI_printError(error);
             return -2;
         }
+        fprintf(stdout, "\r");
+        fflush(stdout);
 
         NSString *tmpPath = [tmpDir stringByAppendingPathComponent:record.name.lastPathComponent];
         NSString *dstPath = entry.outputPath ?: [info.baseOutputPath stringByAppendingPathComponent:entry.entryName];
@@ -392,7 +400,7 @@
 
 @implementation NOZCLIUnzipDecompressDelegate
 {
-    NSInteger _lastProgress;
+    long _lastProgress;
 }
 
 - (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
@@ -401,12 +409,13 @@
 
 - (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress
 {
-    const NSInteger progressInt = (NSInteger)(progress * 100.f);
+    const long progressInt = (long)(progress * 100.f);
     if (progressInt == _lastProgress) {
         return;
     }
     _lastProgress = progressInt;
-    // printf("%zi%%\n", progressInt);
+    fprintf(stdout, "\r%li%%", progressInt);
+    fflush(stdout);
 }
 
 - (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path

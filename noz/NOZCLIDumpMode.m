@@ -124,7 +124,7 @@
         }];
     }
 
-    return 1;
+    return 0;
 }
 
 + (void)dumpCentralDirectory:(NOZCentralDirectory *)centralDirectory info:(NOZCLIDumpModeInfo *)info

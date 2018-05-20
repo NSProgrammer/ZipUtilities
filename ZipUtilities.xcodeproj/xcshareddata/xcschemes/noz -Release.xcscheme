@@ -61,6 +61,16 @@
             ReferencedContainer = "container:ZipUtilities.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-z -o /Users/nobrien/Doxygen.zip -i /Applications/Doxygen.app -m Brotli -l 12"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-z -o /Users/nobrien/Desktop/Doxygen.app.tar.zip -i /Users/nobrien/Desktop/Doxygen.app.tar -m Brotli -l 12"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

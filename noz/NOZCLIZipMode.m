@@ -56,12 +56,12 @@
 
 + (NSString *)modeName
 {
-    return @"Zip (NYI)";
+    return @"Zip";
 }
 
 + (NSString *)modeExecutionDescription
 {
-    return @"[zip_options] -o output_file -i [file_options] input_file1 [... [-i [file_options] intpu_fileN]]";
+    return @"[zip_options] -o output_file -i input_file1 [file_options] [... [-i intput_fileN [file_options]]]";
 }
 
 + (NSUInteger)modeExtraArgumentsSectionCount
@@ -200,13 +200,17 @@
         // TODO - support avoiding hidden files
 
         NSFileManager *fm = [NSFileManager defaultManager];
-        NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:entryInfo.entryPath];
-        if (!enumerator) {
+        BOOL entryIsDirectory = NO;
+        if (![fm fileExistsAtPath:entryInfo.entryPath isDirectory:&entryIsDirectory]) {
+            entryIsDirectory = NO;
+        }
+        if (!entryIsDirectory) {
             NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:entryInfo.entryPath];
             if (![self _zip:zipper entry:entry methodInfo:methodInfo entryInfo:entryInfo method:overrideMethodNumber]) {
                 return -1;
             }
         } else {
+            NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:entryInfo.entryPath];
             NSString *filePath = nil;
             while (nil != (filePath = enumerator.nextObject)) {
                 NSString *fullPath = [entryInfo.entryPath stringByAppendingPathComponent:filePath];
@@ -236,11 +240,22 @@
     entry.comment = entryInfo.comment;
 
     printf("%s  ...\n", entry.filePath.UTF8String);
+    NOZProgressBlock progress = ^(int64_t totalBytes,
+                                  int64_t bytesComplete,
+                                  int64_t bytesCompletedThisPass,
+                                  BOOL * __nonnull abort) {
+        fprintf(stdout, "\r%%%li", (long)(100 * ((double)bytesComplete / (double)totalBytes)));
+        fflush(stdout);
+    };
+
     NSError *error;
-    if (![zipper addEntry:entry progressBlock:NULL error:&error]) {
+    if (![zipper addEntry:entry progressBlock:progress error:&error]) {
+        printf("\n");
         NOZCLI_printError(error);
         return NO;
     }
+    fprintf(stdout, "\r");
+    fflush(stdout);
     return YES;
 }
 
@@ -287,6 +302,8 @@
                 printf("%s ", arg.UTF8String);
             }
             printf("\n");
+            fflush(stdout);
+            return nil;
         }
         [entries addObject:entry];
     }
