@@ -13,7 +13,10 @@
 
 @implementation NOZCLIDumpModeInfo
 
-- (instancetype)initWithFilePath:(NSString *)filePath list:(BOOL)list verbose:(BOOL)verbose silenceArchiveInfo:(BOOL)silence
+- (instancetype)initWithFilePath:(NSString *)filePath
+                            list:(BOOL)list
+                         verbose:(BOOL)verbose
+              silenceArchiveInfo:(BOOL)silence
 {
     if (self = [super init]) {
         _filePath = [filePath copy];
@@ -62,7 +65,8 @@
              ];
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     BOOL list = NO;
     BOOL verbose = NO;
@@ -92,7 +96,10 @@
         return nil;
     }
 
-    return [[NOZCLIDumpModeInfo alloc] initWithFilePath:file list:list verbose:verbose silenceArchiveInfo:silenceArchiveInfo];
+    return [[NOZCLIDumpModeInfo alloc] initWithFilePath:file
+                                                   list:list
+                                                verbose:verbose
+                                     silenceArchiveInfo:silenceArchiveInfo];
 }
 
 + (int)run:(NOZCLIDumpModeInfo *)info
@@ -127,10 +134,13 @@
     return 0;
 }
 
-+ (void)dumpCentralDirectory:(NOZCentralDirectory *)centralDirectory info:(NOZCLIDumpModeInfo *)info
++ (void)dumpCentralDirectory:(NOZCentralDirectory *)centralDirectory
+                        info:(NOZCLIDumpModeInfo *)info
 {
-    NSString *compressedSize = [NSByteCountFormatter stringFromByteCount:centralDirectory.totalCompressedSize countStyle:NSByteCountFormatterCountStyleBinary];
-    NSString *uncompressedSize = [NSByteCountFormatter stringFromByteCount:centralDirectory.totalUncompressedSize countStyle:NSByteCountFormatterCountStyleBinary];
+    NSString *compressedSize = [NSByteCountFormatter stringFromByteCount:centralDirectory.totalCompressedSize
+                                                              countStyle:NSByteCountFormatterCountStyleBinary];
+    NSString *uncompressedSize = [NSByteCountFormatter stringFromByteCount:centralDirectory.totalUncompressedSize
+                                                                countStyle:NSByteCountFormatterCountStyleBinary];
     double ratio = NOZCLI_computeCompressionRatio(centralDirectory.totalUncompressedSize, centralDirectory.totalCompressedSize);
 
     printf("uncompressed: %s", uncompressedSize.UTF8String);
@@ -159,8 +169,10 @@
 {
     printf("%s\n", record.name.UTF8String);
     if (info.verbose) {
-        NSString *compressedSize = [NSByteCountFormatter stringFromByteCount:record.compressedSize countStyle:NSByteCountFormatterCountStyleBinary];
-        NSString *uncompressedSize = [NSByteCountFormatter stringFromByteCount:record.uncompressedSize countStyle:NSByteCountFormatterCountStyleBinary];
+        NSString *compressedSize = [NSByteCountFormatter stringFromByteCount:record.compressedSize
+                                                                  countStyle:NSByteCountFormatterCountStyleBinary];
+        NSString *uncompressedSize = [NSByteCountFormatter stringFromByteCount:record.uncompressedSize
+                                                                    countStyle:NSByteCountFormatterCountStyleBinary];
         double ratio = NOZCLI_computeCompressionRatio(record.uncompressedSize, record.compressedSize);
 
         printf("\tuncompressed: %s, (%lli bytes)\n", uncompressedSize.UTF8String, record.uncompressedSize);

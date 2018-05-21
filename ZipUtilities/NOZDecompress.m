@@ -111,7 +111,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return [_request copy];
 }
 
-- (instancetype)initWithRequest:(NOZDecompressRequest *)request delegate:(id<NOZDecompressDelegate>)delegate
+- (instancetype)initWithRequest:(NOZDecompressRequest *)request
+                       delegate:(id<NOZDecompressDelegate>)delegate
 {
     if (self = [super init]) {
         if ([delegate isKindOfClass:[NOZDecompressDelegateInternal class]]) {
@@ -125,7 +126,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return self;
 }
 
-- (instancetype)initWithRequest:(NOZDecompressRequest *)request completion:(NOZDecompressCompletionBlock)completion
+- (instancetype)initWithRequest:(NOZDecompressRequest *)request
+                     completion:(NOZDecompressCompletionBlock)completion
 {
     NOZDecompressDelegateInternal *delegate = (completion) ? [[NOZDecompressDelegateInternal alloc] initWithCompletion:completion] : nil;
     return [self initWithRequest:request delegate:delegate];
@@ -282,7 +284,9 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (NSError *)private_unzipAllEntries
 {
     __block NSError *stackError = nil;
-    [_unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord * __nonnull record, NSUInteger index, BOOL * __nonnull stop) {
+    [_unzipper enumerateManifestEntriesUsingBlock:^(NOZCentralDirectoryRecord * __nonnull record,
+                                                    NSUInteger index,
+                                                    BOOL * __nonnull stop) {
 
         // Skip these entries
         if (record.isZeroLength || record.isMacOSXDSStore || record.isMacOSXAttribute) {
@@ -291,14 +295,18 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
         BOOL overwrite = NO;
         if (self->_flags.delegateHasOverwriteCheck) {
-            overwrite = [self.delegate shouldDecompressOperation:self overwriteFileAtPath:[self->_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:record.name]];
+            overwrite = [self.delegate shouldDecompressOperation:self
+                                             overwriteFileAtPath:[self->_sanitizedDestinationDirectoryPath stringByAppendingPathComponent:record.name]];
         }
 
         NSError *innerError = nil;
         [self->_unzipper saveRecord:record
                   toDirectory:self->_sanitizedDestinationDirectoryPath
                       options:(overwrite) ? NOZUnzipperSaveRecordOptionOverwriteExisting : NOZUnzipperSaveRecordOptionsNone
-                progressBlock:^(int64_t totalBytes, int64_t bytesComplete, int64_t byteWrittenThisPass, BOOL *abort) {
+                progressBlock:^(int64_t totalBytes,
+                                int64_t bytesComplete,
+                                int64_t byteWrittenThisPass,
+                                BOOL *abort) {
                     if (self.isCancelled) {
                         stackError = kCancelledError;
                         *abort = YES;
@@ -368,7 +376,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return self;
 }
 
-- (instancetype)initWithSourceFilePath:(NSString *)path destinationDirectoryPath:(NSString *)destinationDirectoryPath
+- (instancetype)initWithSourceFilePath:(NSString *)path
+              destinationDirectoryPath:(NSString *)destinationDirectoryPath
 {
     if (self = [self initWithSourceFilePath:path]) {
         _destinationDirectoryPath = [destinationDirectoryPath copy];
@@ -401,7 +410,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     return self;
 }
 
-- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
+- (void)decompressOperation:(NOZDecompressOperation *)op
+      didCompleteWithResult:(NOZDecompressResult *)result
 {
     if (_completionBlock) {
         _completionBlock(op, result);

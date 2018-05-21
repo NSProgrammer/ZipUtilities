@@ -151,7 +151,10 @@
 {
     @throw [NSException exceptionWithName:NSInvalidArgumentException
                                    reason:@"does not recognize selector!"
-                                 userInfo:@{ @"Class" : NSStringFromClass(self), @"selector" : NSStringFromSelector(_cmd) }];
+                                 userInfo:@{
+                                            @"Class" : NSStringFromClass(self),
+                                            @"selector" : NSStringFromSelector(_cmd)
+                                            }];
 }
 
 #pragma mark Override methods

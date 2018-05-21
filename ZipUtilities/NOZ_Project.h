@@ -81,13 +81,18 @@ NS_INLINE void noz_deferFunc(__strong noz_defer_block_t __nonnull * __nonnull bl
 
 #pragma mark DOS Time
 
-FOUNDATION_EXTERN void noz_dos_date_from_NSDate(NSDate *__nullable dateObject, UInt16*__nonnull dateOut, UInt16*__nonnull timeOut);
-FOUNDATION_EXTERN NSDate * __nullable noz_NSDate_from_dos_date(UInt16 dosDate, UInt16 dosTime);
+FOUNDATION_EXTERN void noz_dos_date_from_NSDate(NSDate *__nullable dateObject,
+                                                UInt16*__nonnull dateOut,
+                                                UInt16*__nonnull timeOut);
+FOUNDATION_EXTERN NSDate * __nullable noz_NSDate_from_dos_date(UInt16 dosDate,
+                                                               UInt16 dosTime);
 
 #pragma mark CRC32 exposed
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern unsigned long crc32(unsigned long crc, const unsigned char *buf, unsigned int len);
+extern unsigned long crc32(unsigned long crc,
+                           const unsigned char *buf,
+                           unsigned int len);
 
 NS_ASSUME_NONNULL_END

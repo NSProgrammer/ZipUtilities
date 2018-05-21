@@ -21,7 +21,8 @@
 + (NSString *)modeExtraArgumentsSectionName:(NSUInteger)sectionIndex;
 + (NSArray<NSString *> *)modeExtraArgumentsSectionDescriptions:(NSUInteger)sectionIndex;
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath;
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath;
 + (int)run:(id<NOZCLIModeInfoProtocol>)info;
 
 @end

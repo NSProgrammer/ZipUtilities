@@ -15,7 +15,9 @@
 
 @implementation NOZCLIDecompressModeInfo
 
-- (instancetype)initWithMethodInfo:(MethodInfo *)methodInfo inputFile:(NSString *)inputFile outputFile:(NSString *)outputFile
+- (instancetype)initWithMethodInfo:(MethodInfo *)methodInfo
+                         inputFile:(NSString *)inputFile
+                        outputFile:(NSString *)outputFile
 {
     if (self = [super init]) {
         _methodInfo = methodInfo;
@@ -60,7 +62,8 @@
     return nil;
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     NSString *inputFile = nil;
     NSString *outputFile = nil;
@@ -115,7 +118,9 @@
         return nil;
     }
 
-    return [[NOZCLIDecompressModeInfo alloc] initWithMethodInfo:methodInfo inputFile:inputFile outputFile:outputFile];
+    return [[NOZCLIDecompressModeInfo alloc] initWithMethodInfo:methodInfo
+                                                      inputFile:inputFile
+                                                     outputFile:outputFile];
 }
 
 + (int)run:(NOZCLIDecompressModeInfo *)info

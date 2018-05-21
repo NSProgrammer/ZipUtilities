@@ -106,7 +106,8 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     return [_request copy];
 }
 
-- (instancetype)initWithRequest:(NOZCompressRequest *)request delegate:(id<NOZCompressDelegate>)delegate
+- (instancetype)initWithRequest:(NOZCompressRequest *)request
+                       delegate:(id<NOZCompressDelegate>)delegate
 {
     if (self = [super init]) {
         if ([delegate isKindOfClass:[NOZCompressDelegateInternal class]]) {
@@ -119,7 +120,8 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     return self;
 }
 
-- (instancetype)initWithRequest:(NOZCompressRequest *)request completion:(NOZCompressCompletionBlock)completion
+- (instancetype)initWithRequest:(NOZCompressRequest *)request
+                     completion:(NOZCompressCompletionBlock)completion
 {
     NOZCompressDelegateInternal *delegate = (completion) ? [[NOZCompressDelegateInternal alloc] initWithCompletion:completion] : nil;
     return [self initWithRequest:request delegate:delegate];
@@ -194,7 +196,9 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 - (void)handleFinishing
 {
     id<NOZCompressDelegate> delegate = self.delegate;
-    dispatch_queue_t completionQueue = [delegate respondsToSelector:@selector(completionQueue)] ? [delegate completionQueue] : NULL;
+    dispatch_queue_t completionQueue = [delegate respondsToSelector:@selector(completionQueue)] ?
+                                            [delegate completionQueue] :
+                                            NULL;
     if (!completionQueue) {
         completionQueue = dispatch_get_main_queue();
     }
@@ -247,7 +251,11 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
     NSError *error = nil;
     NSString *path = [_request.destinationPath stringByStandardizingPath];
-    if ([[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&error]) {
+    const BOOL didCreateDir = [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent]
+                                                        withIntermediateDirectories:YES
+                                                                         attributes:nil
+                                                                              error:&error];
+    if (didCreateDir) {
         _zipper = [[NOZZipper alloc] initWithZipFile:path];
         _zipper.globalComment = _request.comment;
         [_zipper openWithMode:NOZZipperModeCreate error:&error];
@@ -358,7 +366,8 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     return self;
 }
 
-- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result
+- (void)compressOperation:(NOZCompressOperation *)op
+    didCompleteWithResult:(NOZCompressResult *)result
 {
     if (_completionBlock) {
         _completionBlock(op, result);
@@ -459,12 +468,17 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     [_mutableEntries addObject:[entry copy]];
 }
 
-- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(NOZCompressionSelectionBlock)block
+- (void)addEntriesInDirectory:(NSString *)directoryPath
+    compressionSelectionBlock:(NOZCompressionSelectionBlock)block
 {
-    [self addEntriesInDirectory:directoryPath filterBlock:NULL compressionSelectionBlock:block];
+    [self addEntriesInDirectory:directoryPath
+                    filterBlock:NULL
+      compressionSelectionBlock:block];
 }
 
-- (void)addEntriesInDirectory:(NSString *)directoryPath filterBlock:(NOZCompressionShouldExcludeFileBlock)filterBlock compressionSelectionBlock:(NOZCompressionSelectionBlock)selectionBlock
+- (void)addEntriesInDirectory:(NSString *)directoryPath
+                  filterBlock:(NOZCompressionShouldExcludeFileBlock)filterBlock
+    compressionSelectionBlock:(NOZCompressionSelectionBlock)selectionBlock
 {
     for (NOZFileZipEntry *entry in NOZEntriesFromDirectory(directoryPath)) {
         if (filterBlock) {

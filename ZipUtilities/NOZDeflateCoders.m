@@ -421,5 +421,8 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level)
 {
-    return (UInt16)NOZCompressionLevelToCustomEncoderLevel(level, Z_BEST_SPEED, Z_BEST_COMPRESSION, kDEFLATE_DEFAULT_COMPRESSION_LEVEL);
+    return (UInt16)NOZCompressionLevelToCustomEncoderLevel(level,
+                                                           Z_BEST_SPEED,
+                                                           Z_BEST_COMPRESSION,
+                                                           kDEFLATE_DEFAULT_COMPRESSION_LEVEL);
 }

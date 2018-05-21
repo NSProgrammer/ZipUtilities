@@ -15,7 +15,10 @@
 
 @implementation NOZCLICompressModeInfo
 
-- (instancetype)initWithMethodInfo:(MethodInfo *)methodInfo level:(NSInteger)level inputFile:(NSString *)inputFile outputFile:(NSString *)outputFile
+- (instancetype)initWithMethodInfo:(MethodInfo *)methodInfo
+                             level:(NSInteger)level
+                         inputFile:(NSString *)inputFile
+                        outputFile:(NSString *)outputFile
 {
     if (self = [super init]) {
         _methodInfo = methodInfo;
@@ -61,7 +64,8 @@
     return nil;
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     NSString *level = nil;
     NSString *inputFile = nil;
@@ -131,7 +135,10 @@
         }
     }
 
-    return [[NOZCLICompressModeInfo alloc] initWithMethodInfo:methodInfo level:levelValue inputFile:inputFile outputFile:outputFile];
+    return [[NOZCLICompressModeInfo alloc] initWithMethodInfo:methodInfo
+                                                        level:levelValue
+                                                    inputFile:inputFile
+                                                   outputFile:outputFile];
 }
 
 + (int)run:(NOZCLICompressModeInfo *)info

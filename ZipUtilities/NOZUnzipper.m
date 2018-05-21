@@ -252,15 +252,21 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         _currentUnzipping.crc32 = 0;
 
         __unsafe_unretained typeof(self) rawSelf = self;
+        NOZFlushCallback flushCallback = ^BOOL(id coder,
+                                               id context,
+                                               const Byte* bufferToFlush,
+                                               size_t length) {
+            if (rawSelf->_currentDecoder != coder) {
+                return NO;
+            }
+
+            return [rawSelf private_flushDecompressedBytes:bufferToFlush
+                                                    length:length
+                                                     block:block];
+        };
         _currentDecoder = [[NOZCompressionLibrary sharedInstance] decoderForMethod:record.internalEntry->fileHeader.compressionMethod];
         _currentDecoderContext = [_currentDecoder createContextForDecodingWithBitFlags:record.internalEntry->fileHeader.bitFlag
-                                                                         flushCallback:^BOOL(id coder, id context, const Byte* bufferToFlush, size_t length) {
-                                                                             if (rawSelf->_currentDecoder != coder) {
-                                                                                 return NO;
-                                                                             }
-
-                                                                             return [rawSelf private_flushDecompressedBytes:bufferToFlush length:length block:block];
-                                                                         }];
+                                                                         flushCallback:flushCallback];
 
         noz_defer(^{
             self->_currentDecoder = nil;
@@ -300,7 +306,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     __block NSMutableData *data = nil;
     if (![self enumerateByteRangesOfRecord:record
                              progressBlock:progressBlock
-                                usingBlock:^(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop) {
+                                usingBlock:^(const void * __nonnull bytes,
+                                             NSRange byteRange,
+                                             BOOL * __nonnull stop) {
                                     if (!data) {
                                         data = [NSMutableData dataWithCapacity:byteRange.length];
                                     }
@@ -365,7 +373,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         return NO;
     }
 
-    NSDate *fileDate = noz_NSDate_from_dos_date(record.internalEntry->fileHeader.dosDate, record.internalEntry->fileHeader.dosTime);
+    NSDate *fileDate = noz_NSDate_from_dos_date(record.internalEntry->fileHeader.dosDate,
+                                                record.internalEntry->fileHeader.dosTime);
 
     noz_defer(^{
         off_t offset = ftello(file);
@@ -381,7 +390,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     if (![self enumerateByteRangesOfRecord:record
                              progressBlock:progressBlock
-                                usingBlock:^(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop) {
+                                usingBlock:^(const void * __nonnull bytes,
+                                             NSRange byteRange,
+                                             BOOL * __nonnull stop) {
                                     if (fwrite(bytes, 1, byteRange.length, file) != byteRange.length) {
                                         *stop = YES;
                                     } else {
@@ -405,7 +416,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 {
     return [self enumerateByteRangesOfRecord:record
                                progressBlock:progressBlock
-                                  usingBlock:^(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop) {
+                                  usingBlock:^(const void * __nonnull bytes,
+                                               NSRange byteRange,
+                                               BOOL * __nonnull stop) {
                                       (void)bytes;
                                   }
                                        error:error];
@@ -415,7 +428,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 @implementation NOZUnzipper (Private)
 
-- (BOOL)private_flushDecompressedBytes:(const Byte *)buffer length:(size_t)length block:(NOZUnzipByteRangeEnumerationBlock)block
+- (BOOL)private_flushDecompressedBytes:(const Byte *)buffer
+                                length:(size_t)length
+                                 block:(NOZUnzipByteRangeEnumerationBlock)block
 {
     _currentUnzipping.crc32 = (UInt32)crc32(_currentUnzipping.crc32, buffer, (UInt32)length);
     _currentUnzipping.bytesDecompressed += length;
@@ -573,14 +588,20 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
         compressedBytesLeft -= compressedBufferSize;
 
-        if (![_currentDecoder decodeBytes:compressedBuffer length:compressedBufferSize context:_currentDecoderContext]) {
+        const BOOL decoded = [_currentDecoder decodeBytes:compressedBuffer
+                                                   length:compressedBufferSize
+                                                  context:_currentDecoderContext];
+        if (!decoded) {
             success = NO;
             return NO;
         }
 
         if (progressBlock) {
             BOOL progressStop = NO;
-            progressBlock(compressedBytesTotal, compressedBytesTotal - compressedBytesLeft, (SInt64)compressedBufferSize, &progressStop);
+            progressBlock(compressedBytesTotal,
+                          compressedBytesTotal - compressedBytesLeft,
+                          (SInt64)compressedBufferSize,
+                          &progressStop);
             if (progressStop) {
                 stop = YES;
             }
@@ -848,12 +869,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (NSString *)nameNoCopy
 {
-    return [[NSString alloc] initWithBytesNoCopy:(void *)_entry.name length:_entry.fileHeader.nameSize encoding:NSUTF8StringEncoding freeWhenDone:NO];
+    return [[NSString alloc] initWithBytesNoCopy:(void *)_entry.name
+                                          length:_entry.fileHeader.nameSize
+                                        encoding:NSUTF8StringEncoding
+                                    freeWhenDone:NO];
 }
 
 - (NSString *)name
 {
-    return [[NSString alloc] initWithBytes:_entry.name length:_entry.fileHeader.nameSize encoding:NSUTF8StringEncoding];
+    return [[NSString alloc] initWithBytes:_entry.name
+                                    length:_entry.fileHeader.nameSize
+                                  encoding:NSUTF8StringEncoding];
 }
 
 - (NSString *)comment
@@ -861,7 +887,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     if (!_entry.comment) {
         return nil;
     }
-    return [[NSString alloc] initWithBytes:_entry.comment length:_entry.centralDirectoryRecord.commentSize encoding:NSUTF8StringEncoding];
+    return [[NSString alloc] initWithBytes:_entry.comment
+                                    length:_entry.centralDirectoryRecord.commentSize
+                                  encoding:NSUTF8StringEncoding];
 }
 
 - (NOZCompressionLevel)compressionLevel

@@ -24,12 +24,30 @@
 
 @implementation MethodInfo
 
-+ (instancetype)methodInfoWithName:(NSString *)name method:(NOZCompressionMethod)method levels:(NSUInteger)levels defaultLevel:(NSUInteger)defaultLevel encoder:(id<NOZEncoder>)encoder decoder:(id<NOZDecoder>)decoder isDefault:(BOOL)defaultEncoder
++ (instancetype)methodInfoWithName:(NSString *)name
+                            method:(NOZCompressionMethod)method
+                            levels:(NSUInteger)levels
+                      defaultLevel:(NSUInteger)defaultLevel
+                           encoder:(id<NOZEncoder>)encoder
+                           decoder:(id<NOZDecoder>)decoder
+                         isDefault:(BOOL)defaultEncoder
 {
-    return [[self alloc] initWithName:name method:method levels:levels defaultLevel:defaultLevel encoder:encoder decoder:decoder isDefault:defaultEncoder];
+    return [[self alloc] initWithName:name
+                               method:method
+                               levels:levels
+                         defaultLevel:defaultLevel
+                              encoder:encoder
+                              decoder:decoder
+                            isDefault:defaultEncoder];
 }
 
-- (instancetype)initWithName:(NSString *)name method:(NOZCompressionMethod)method levels:(NSUInteger)levels defaultLevel:(NSUInteger)defaultLevel encoder:(id<NOZEncoder>)encoder decoder:(id<NOZDecoder>)decoder isDefault:(BOOL)defaultEncoder
+- (instancetype)initWithName:(NSString *)name
+                      method:(NOZCompressionMethod)method
+                      levels:(NSUInteger)levels
+                defaultLevel:(NSUInteger)defaultLevel
+                     encoder:(id<NOZEncoder>)encoder
+                     decoder:(id<NOZDecoder>)decoder
+                   isDefault:(BOOL)defaultEncoder
 {
     if (self = [super init]) {
         _name = [name copy];
@@ -89,7 +107,10 @@ do { \
     [(theArray) addObject:METHOD((theName), the_method, 0, 0, nil, nil, NO)]; \
 } while (0)
 
-int NOZCLI_main(NSString *exe, NSString *exeDir, NSString *currentDir, NSArray<NSString *> *args)
+int NOZCLI_main(NSString *exe,
+                NSString *exeDir,
+                NSString *currentDir,
+                NSArray<NSString *> *args)
 {
     if (args.count == 0) {
         return -1;
@@ -336,8 +357,10 @@ BOOL NOZCLI_registerMethodToNumberMap(NSDictionary<NSString *, NSNumber *> * __n
     }
     for (NSNumber *methodNumber in methodMap.allKeys) {
         MethodInfo *methodInfo = methodMap[methodNumber];
-        [lib setEncoder:methodInfo.encoder forMethod:methodNumber.unsignedShortValue];
-        [lib setDecoder:methodInfo.decoder forMethod:methodNumber.unsignedShortValue];
+        [lib setEncoder:methodInfo.encoder
+              forMethod:methodNumber.unsignedShortValue];
+        [lib setDecoder:methodInfo.decoder
+              forMethod:methodNumber.unsignedShortValue];
     }
     return YES;
 }

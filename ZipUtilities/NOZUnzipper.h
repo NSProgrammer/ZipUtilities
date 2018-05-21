@@ -35,9 +35,13 @@
 @class NOZCentralDirectoryRecord;
 
 //! Callback when enumerating Central Directory Record.  Set _stop_ to `YES` to end the enumeration early.
-typedef void(^NOZUnzipRecordEnumerationBlock)(NOZCentralDirectoryRecord * __nonnull record, NSUInteger index, BOOL * __nonnull stop);
+typedef void(^NOZUnzipRecordEnumerationBlock)(NOZCentralDirectoryRecord * __nonnull record,
+                                              NSUInteger index,
+                                              BOOL * __nonnull stop);
 //! Callback when enumerating bytes being decompressed for an entry.  Set _stop_ to `YES` to end the enumeration early.
-typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes, NSRange byteRange, BOOL * __nonnull stop);
+typedef void(^NOZUnzipByteRangeEnumerationBlock)(const void * __nonnull bytes,
+                                                 NSRange byteRange,
+                                                 BOOL * __nonnull stop);
 
 //! Values for options when saving a record to disk
 typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)

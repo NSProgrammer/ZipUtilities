@@ -122,7 +122,8 @@ typedef NS_ENUM(NSInteger, NOZZipperMode)
  This is the first step before any other method can be called.
  Should be balanced with a call to `closeAndReturnError:`.
  */
-- (BOOL)openWithMode:(NOZZipperMode)mode error:(out NSError * __nullable * __nullable)error;
+- (BOOL)openWithMode:(NOZZipperMode)mode
+               error:(out NSError * __nullable * __nullable)error;
 
 /** Close the Zipper. */
 - (BOOL)closeAndReturnError:(out NSError * __nullable * __nullable)error;

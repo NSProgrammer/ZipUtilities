@@ -29,6 +29,12 @@
 #import "NOZUtils_Project.h"
 #include "zlib.h"
 
+static BOOL _NOZOpenInputOutputFiles(NSString * __nonnull sourceFilePath,
+                                     FILE * __nullable * __nonnull sourceFile,
+                                     NSString * __nonnull destinationFilePath,
+                                     FILE * __nonnull * __nullable destinationFile,
+                                     NSError * __autoreleasing __nullable * __nullable error);
+
 void NOZFileEntryInit(NOZFileEntryT* entry)
 {
     if (entry) {
@@ -85,8 +91,11 @@ void NOZFileEntryCleanFree(NOZFileEntryT* entry)
     }
 }
 
-static BOOL _NOZOpenInputOutputFiles(NSString * __nonnull sourceFilePath, FILE * __nullable * __nonnull sourceFile, NSString * __nonnull destinationFilePath, FILE * __nonnull * __nullable destinationFile, NSError * __autoreleasing __nullable * __nullable error);
-static BOOL _NOZOpenInputOutputFiles(NSString *sourceFilePath, FILE **sourceFile, NSString *destinationFilePath, FILE **destinationFile, NSError * __autoreleasing * error)
+static BOOL _NOZOpenInputOutputFiles(NSString * __nonnull sourceFilePath,
+                                     FILE * __nullable * __nonnull sourceFile,
+                                     NSString * __nonnull destinationFilePath,
+                                     FILE * __nonnull * __nullable destinationFile,
+                                     NSError * __autoreleasing __nullable * __nullable error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *inFile = NULL;
@@ -116,29 +125,43 @@ static BOOL _NOZOpenInputOutputFiles(NSString *sourceFilePath, FILE **sourceFile
 
     inFile = fopen(sourceFilePath.UTF8String, "r");
     if (!inFile) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:@{ @"sourceFile" : sourceFilePath ?: [NSNull null] }];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:errno
+                                     userInfo:@{ @"sourceFile" : sourceFilePath ?: [NSNull null] }];
         return NO;
     }
 
-    if (![fm createDirectoryAtPath:[destinationFilePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&stackError]) {
+    const BOOL didCreateDir = [fm createDirectoryAtPath:[destinationFilePath stringByDeletingLastPathComponent]
+                            withIntermediateDirectories:YES
+                                             attributes:nil
+                                                  error:&stackError];
+    if (!didCreateDir) {
         return NO;
     }
 
     if ([fm fileExistsAtPath:destinationFilePath]) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EEXIST userInfo:@{ @"destinationFile" : destinationFilePath }];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EEXIST
+                                     userInfo:@{ @"destinationFile" : destinationFilePath }];
         return NO;
     }
 
     outFile = fopen(destinationFilePath.UTF8String, "w");
     if (!outFile) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:@{ @"destinationFile" : destinationFilePath }];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:errno
+                                     userInfo:@{ @"destinationFile" : destinationFilePath }];
         return NO;
     }
 
     return YES;
 }
 
-BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncoder> encoder, NOZCompressionLevel level, NSError * __autoreleasing * error)
+BOOL NOZEncodeFile(NSString *sourceFile,
+                   NSString *destinationFile,
+                   id<NOZEncoder> encoder,
+                   NOZCompressionLevel level,
+                   NSError * __autoreleasing * error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *uncompressedFile = NULL;
@@ -162,15 +185,28 @@ BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncode
     });
 
     if (!encoder) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EINVAL userInfo:NULL];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EINVAL
+                                     userInfo:NULL];
         return NO;
     }
 
-    if (!_NOZOpenInputOutputFiles(sourceFile, &uncompressedFile, destinationFile, &compressedFile, &stackError)) {
+    const BOOL didOpenFiles = _NOZOpenInputOutputFiles(sourceFile,
+                                                       &uncompressedFile,
+                                                       destinationFile,
+                                                       &compressedFile,
+                                                       &stackError);
+    if (!didOpenFiles) {
         return NO;
     }
 
-    id<NOZEncoderContext> context = [encoder createContextWithBitFlags:0 compressionLevel:level flushCallback:^BOOL(id<NOZEncoder> theEncoder, id<NOZEncoderContext> theContext, const Byte *bufferToFlush, size_t length) {
+    id<NOZEncoderContext> context;
+    context = [encoder createContextWithBitFlags:0
+                                compressionLevel:level
+                                   flushCallback:^BOOL(id<NOZEncoder> theEncoder,
+                                                       id<NOZEncoderContext> theContext,
+                                                       const Byte *bufferToFlush,
+                                                       size_t length) {
         if (length != fwrite(bufferToFlush, 1, length, compressedFile)) {
             return NO;
         }
@@ -178,7 +214,9 @@ BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncode
     }];
 
     if (![encoder initializeEncoderContext:context]) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EIO
+                                     userInfo:nil];
         return NO;
     }
 
@@ -186,20 +224,32 @@ BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncode
         const size_t bufferSize = 1024 * 1024;
         Byte buffer[bufferSize];
         while (!feof(uncompressedFile)) {
+
             const size_t bytesRead = fread(buffer, 1, bufferSize, uncompressedFile);
             if (bytesRead < bufferSize && ferror(uncompressedFile)) {
-                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                                 code:EIO
+                                             userInfo:nil];
                 return NO;
             }
-            if (![encoder encodeBytes:buffer length:bytesRead context:context]) {
-                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+
+            const BOOL didEncode = [encoder encodeBytes:buffer
+                                                 length:bytesRead
+                                                context:context];
+            if (!didEncode) {
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                                 code:EIO
+                                             userInfo:nil];
                 return NO;
             }
+
         }
     } while (0);
 
     if (![encoder finalizeEncoderContext:context]) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EIO
+                                     userInfo:nil];
         return NO;
     }
 
@@ -208,7 +258,10 @@ BOOL NOZEncodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZEncode
     return YES;
 }
 
-BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecoder> decoder, NSError * __autoreleasing * error)
+BOOL NOZDecodeFile(NSString *sourceFile,
+                   NSString *destinationFile,
+                   id<NOZDecoder> decoder,
+                   NSError * __autoreleasing * error)
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     __block FILE *uncompressedFile = NULL;
@@ -232,15 +285,27 @@ BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecode
     });
 
     if (!decoder) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EINVAL userInfo:NULL];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EINVAL
+                                     userInfo:NULL];
         return NO;
     }
 
-    if (!_NOZOpenInputOutputFiles(sourceFile, &compressedFile, destinationFile, &uncompressedFile, &stackError)) {
+    const BOOL didOpenFiles = _NOZOpenInputOutputFiles(sourceFile,
+                                                       &compressedFile,
+                                                       destinationFile,
+                                                       &uncompressedFile,
+                                                       &stackError);
+    if (!didOpenFiles) {
         return NO;
     }
 
-    id<NOZDecoderContext> context = [decoder createContextForDecodingWithBitFlags:0 flushCallback:^BOOL(id<NOZDecoder> theDecoder, id<NOZDecoderContext> theContext, const Byte *bufferToFlush, size_t length) {
+    id<NOZDecoderContext> context;
+    context = [decoder createContextForDecodingWithBitFlags:0
+                                              flushCallback:^BOOL(id<NOZDecoder> theDecoder,
+                                                                  id<NOZDecoderContext> theContext,
+                                                                  const Byte *bufferToFlush,
+                                                                  size_t length) {
         if (length != fwrite(bufferToFlush, 1, length, uncompressedFile)) {
             return NO;
         }
@@ -248,7 +313,9 @@ BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecode
     }];
 
     if (![decoder initializeDecoderContext:context]) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EIO
+                                     userInfo:nil];
         return NO;
     }
 
@@ -258,18 +325,24 @@ BOOL NOZDecodeFile(NSString *sourceFile, NSString *destinationFile, id<NOZDecode
         while (!context.hasFinished) {
             const size_t bytesRead = fread(buffer, 1, bufferSize, compressedFile);
             if (ferror(compressedFile)) {
-                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                                 code:EIO
+                                             userInfo:nil];
                 return NO;
             }
             if (![decoder decodeBytes:buffer length:bytesRead context:context]) {
-                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                                 code:EIO
+                                             userInfo:nil];
                 return NO;
             }
         }
     } while (0);
 
     if (![decoder finalizeDecoderContext:context]) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EIO userInfo:nil];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:EIO
+                                     userInfo:nil];
         return NO;
     }
 

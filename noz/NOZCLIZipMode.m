@@ -19,8 +19,10 @@
 @property (nonatomic, readonly) BOOL permitHiddenFiles;
 @property (nonatomic, readonly) BOOL recurse;
 
-+ (NSArray<NOZCLIZipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath;
-+ (instancetype)entryFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath;
++ (NSArray<NOZCLIZipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args
+                                          environmentPath:(NSString *)envPath;
++ (instancetype)entryFromArgs:(NSArray<NSString *> *)args
+              environmentPath:(NSString *)envPath;
 - (instancetype)initWithEntryPath:(NSString *)entryPath
                              name:(NSString *)name
                             level:(NSString *)level
@@ -95,7 +97,8 @@
              ];
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     NSString *globalComment = nil;
     NSMutableDictionary<NSString *, NSNumber *> *methodToNumberMap = [[NSMutableDictionary alloc] init];
@@ -146,7 +149,8 @@
             }
         } else if ([arg isEqualToString:@"-i"]) {
             NSArray<NSString *> *subargs = [args subarrayWithRange:NSMakeRange(i, args.count - i)];
-            entryInfos = [NOZCLIZipModeEntryInfo entryInfosFromArgs:subargs environmentPath:envPath];
+            entryInfos = [NOZCLIZipModeEntryInfo entryInfosFromArgs:subargs
+                                                    environmentPath:envPath];
             if (entryInfos.count == 0) {
                 return nil;
             } else {
@@ -206,7 +210,12 @@
         }
         if (!entryIsDirectory) {
             NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:entryInfo.entryPath];
-            if (![self _zip:zipper entry:entry methodInfo:methodInfo entryInfo:entryInfo method:overrideMethodNumber]) {
+            const BOOL didZipSucceed = [self _zip:zipper
+                                            entry:entry
+                                       methodInfo:methodInfo
+                                        entryInfo:entryInfo
+                                           method:overrideMethodNumber];
+            if (!didZipSucceed) {
                 return -1;
             }
         } else {
@@ -217,7 +226,12 @@
                 BOOL isDir = NO;
                 if ([fm fileExistsAtPath:fullPath isDirectory:&isDir] && !isDir) {
                     NOZFileZipEntry *entry = [[NOZFileZipEntry alloc] initWithFilePath:fullPath name:filePath];
-                    if (![self _zip:zipper entry:entry methodInfo:methodInfo entryInfo:entryInfo method:overrideMethodNumber]) {
+                    const BOOL didZipSucceed = [self _zip:zipper
+                                                    entry:entry
+                                               methodInfo:methodInfo
+                                                entryInfo:entryInfo
+                                                   method:overrideMethodNumber];
+                    if (!didZipSucceed) {
                         return -1;
                     }
                 }
@@ -233,7 +247,11 @@
     return 0;
 }
 
-+ (BOOL)_zip:(NOZZipper *)zipper entry:(NOZFileZipEntry *)entry methodInfo:(MethodInfo *)methodInfo entryInfo:(NOZCLIZipModeEntryInfo *)entryInfo method:(NOZCompressionMethod)method
++ (BOOL)_zip:(NOZZipper *)zipper
+       entry:(NOZFileZipEntry *)entry
+  methodInfo:(MethodInfo *)methodInfo
+   entryInfo:(NOZCLIZipModeEntryInfo *)entryInfo
+      method:(NOZCompressionMethod)method
 {
     entry.compressionMethod = method;
     entry.compressionLevel = NOZCompressionLevelFromCustomEncoderLevel(1, 1 + methodInfo.levels, entryInfo.level ? (NSUInteger)[entryInfo.level integerValue] : methodInfo.defaultLevel);
@@ -263,7 +281,8 @@
 
 @implementation NOZCLIZipModeEntryInfo
 
-+ (NSArray<NOZCLIZipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (NSArray<NOZCLIZipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args
+                                          environmentPath:(NSString *)envPath
 {
     NSMutableArray<NOZCLIZipModeEntryInfo *> *entries = [[NSMutableArray alloc] init];
     NSMutableIndexSet *eIndexes = [[args indexesOfObjectsPassingTest:^BOOL(NSString *arg, NSUInteger idx, BOOL *stop) {
@@ -373,7 +392,13 @@
         return nil;
     }
 
-    return [[self alloc] initWithEntryPath:entryPath name:name level:level methodName:methodName comment:comment permitHiddenFiles:permitHiddenFiles recurse:recurse];
+    return [[self alloc] initWithEntryPath:entryPath
+                                      name:name
+                                     level:level
+                                methodName:methodName
+                                   comment:comment
+                         permitHiddenFiles:permitHiddenFiles
+                                   recurse:recurse];
 }
 
 - (instancetype)initWithEntryPath:(NSString *)entryPath

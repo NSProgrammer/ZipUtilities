@@ -35,8 +35,13 @@
 #define NOZ_SINGLE_PASS_ZIP 1
 #endif
 
-static UInt8 noz_fwrite_value(UInt64 x, const UInt8 byteCount, FILE *file);
-static UInt8 noz_store_value(UInt64 x, const UInt8 byteCount, Byte *buffer, const Byte *bufferEnd);
+static UInt8 noz_fwrite_value(UInt64 x,
+                              const UInt8 byteCount,
+                              FILE *file);
+static UInt8 noz_store_value(UInt64 x,
+                             const UInt8 byteCount,
+                             Byte *buffer,
+                             const Byte *bufferEnd);
 
 #define PRIVATE_WRITE(v) \
 noz_fwrite_value((v), sizeof(v), _internal.file)
@@ -44,7 +49,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 @interface NOZZipper (Private)
 
 // Top level methods
-- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError * __nullable * __nullable)error;
+- (BOOL)private_forciblyClose:(BOOL)forceClose
+                        error:(out NSError * __nullable * __nullable)error;
 
 // Entry methods
 - (BOOL)private_openEntry:(nonnull id<NOZZippableEntry>)entry
@@ -61,11 +67,14 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 - (void)private_freeLinkedList;
 
 // Records
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry error:(out NSError * __nullable * __nullable)error;
+- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry
+                                                      error:(out NSError * __nullable * __nullable)error;
 - (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError * __nullable * __nullable)error;
-- (BOOL)private_writeLocalFileHeaderForEntry:(NOZFileEntryT *)entry signature:(BOOL)writeSig;
+- (BOOL)private_writeLocalFileHeaderForEntry:(NOZFileEntryT *)entry
+                                   signature:(BOOL)writeSig;
 - (BOOL)private_writeCurrentLocalFileDescriptor:(BOOL)writeSignature;
-- (BOOL)private_writeLocalFileDescriptorForEntry:(NOZFileEntryT *)entry signature:(BOOL)writeSig;
+- (BOOL)private_writeLocalFileDescriptorForEntry:(NOZFileEntryT *)entry
+                                       signature:(BOOL)writeSig;
 - (BOOL)private_writeCentralDirectoryRecords;
 - (BOOL)private_writeCentralDirectoryRecord:(NOZFileEntryT *)entry;
 - (BOOL)private_writeEndOfCentralDirectoryRecord;
@@ -187,13 +196,17 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     });
 
     if (0 != fseeko(_internal.file, 0, SEEK_END)) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo: @{ @"zipFilePath" : _zipFilePath }];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:errno
+                                     userInfo: @{ @"zipFilePath" : _zipFilePath }];
         return NO;
     }
 
     _internal.beginBytePosition = ftello(_internal.file);
     if (_internal.beginBytePosition < 0) {
-        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:@{ @"zipFilePath" : _zipFilePath }];
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                         code:errno
+                                     userInfo:@{ @"zipFilePath" : _zipFilePath }];
         return NO;
     }
     return YES;
@@ -229,12 +242,17 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         BOOL shouldAbort = NO;
 
         if (!shouldAbort) {
-            writeSuccess = [self private_writeEntry:entry progressBlock:progressBlock error:&stackError abortRef:&shouldAbort];
+            writeSuccess = [self private_writeEntry:entry
+                                      progressBlock:progressBlock
+                                              error:&stackError
+                                           abortRef:&shouldAbort];
         }
 
         if (![self private_closeCurrentOpenEntryAndReturnError:(writeSuccess) ? (&stackError) : NULL] || !writeSuccess) {
             if (!writeSuccess && shouldAbort && !stackError) {
-                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
+                stackError = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                                 code:ECANCELED
+                                             userInfo:nil];
             }
             return NO;
         }
@@ -247,7 +265,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 @implementation NOZZipper (Private)
 
-- (BOOL)private_forciblyClose:(BOOL)forceClose error:(out NSError * __autoreleasing *)error
+- (BOOL)private_forciblyClose:(BOOL)forceClose
+                        error:(out NSError * __autoreleasing *)error
 {
     if (!_internal.file) {
         return YES;
@@ -344,16 +363,20 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     }
 
     __unsafe_unretained typeof(self) rawSelf = self;
-    _currentEncoder = [[NOZCompressionLibrary sharedInstance] encoderForMethod:_internal.currentEntry->fileHeader.compressionMethod];
-    _currentEncoderContext = [_currentEncoder createContextWithBitFlags:_internal.currentEntry->fileHeader.bitFlag
-                                                       compressionLevel:entry.compressionLevel
-                                                          flushCallback:^BOOL(id<NOZEncoder> encoder, id<NOZEncoderContext> context, const Byte* buffer, size_t length) {
+    NOZFlushCallback flushCallback = ^BOOL(id<NOZEncoder> encoder,
+                                           id<NOZEncoderContext> context,
+                                           const Byte* buffer,
+                                           size_t length) {
         if (rawSelf->_currentEncoder != encoder) {
             return NO;
         }
 
         return [rawSelf private_flushWriteBuffer:buffer length:length];
-    }];
+    };
+    _currentEncoder = [[NOZCompressionLibrary sharedInstance] encoderForMethod:_internal.currentEntry->fileHeader.compressionMethod];
+    _currentEncoderContext = [_currentEncoder createContextWithBitFlags:_internal.currentEntry->fileHeader.bitFlag
+                                                       compressionLevel:entry.compressionLevel
+                                                          flushCallback:flushCallback];
     if (!_currentEncoder || !_currentEncoderContext) {
         if (error) {
             *error = NOZErrorCreate(NOZErrorCodeZipDoesNotSupportCompressionMethod, @{ @"method" : @(_internal.currentEntry->fileHeader.compressionMethod) });
@@ -387,7 +410,9 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     noz_defer(^{
         if (error) {
             if ((*abort)) {
-                *error = [NSError errorWithDomain:NSPOSIXErrorDomain code:ECANCELED userInfo:nil];
+                *error = [NSError errorWithDomain:NSPOSIXErrorDomain
+                                             code:ECANCELED
+                                         userInfo:nil];
             } else if (!success && !*error) {
                 *error = NOZErrorCreate(NOZErrorCodeZipFailedToWriteEntry, nil);
             }
@@ -422,7 +447,9 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
             _internal.currentEntry->fileDescriptor.crc32 = (UInt32)crc32(_internal.currentEntry->fileDescriptor.crc32, buffer, (UInt32)bytesRead);
 
-            success = [_currentEncoder encodeBytes:buffer length:(size_t)bytesRead context:_currentEncoderContext];
+            success = [_currentEncoder encodeBytes:buffer
+                                            length:(size_t)bytesRead
+                                           context:_currentEncoderContext];
             if (!success) {
                 if (error) {
                     *error = [NSError errorWithDomain:NOZErrorDomain
@@ -498,7 +525,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
     return success;
 }
 
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(id<NOZZippableEntry>)entry error:(out NSError **)error
+- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(id<NOZZippableEntry>)entry
+                                                      error:(out NSError **)error
 {
     NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     if (nameSize > UINT16_MAX) {
@@ -688,7 +716,8 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
 
 - (BOOL)private_writeCurrentLocalFileDescriptor:(BOOL)writeSignature
 {
-    return [self private_writeLocalFileDescriptorForEntry:_internal.currentEntry signature:writeSignature];
+    return [self private_writeLocalFileDescriptorForEntry:_internal.currentEntry
+                                                signature:writeSignature];
 }
 
 - (BOOL)private_writeCentralDirectoryRecords

@@ -40,10 +40,17 @@ static const NOZCompressionLevel NOZCompressionLevelMin = 0.f;
 static const NOZCompressionLevel NOZCompressionLevelDefault = -1.f;
 
 FOUNDATION_EXTERN NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> __nullable encoder);
-FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NOZCompressionLevel level);
-FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromEncoderSpecificLevel(id<NOZEncoder> __nullable encoder, NSUInteger encoderSpecificLevel);
-FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger defaultCustomLevel);
-FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger customLevel);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToEncoderSpecificLevel(id<NOZEncoder> __nullable encoder,
+                                                                       NOZCompressionLevel level);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromEncoderSpecificLevel(id<NOZEncoder> __nullable encoder,
+                                                                                  NSUInteger encoderSpecificLevel);
+FOUNDATION_EXTERN NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level,
+                                                                     NSUInteger firstCustomLevel,
+                                                                     NSUInteger lastCustomLevel,
+                                                                     NSUInteger defaultCustomLevel);
+FOUNDATION_EXTERN NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel,
+                                                                                NSUInteger lastCustomLevel,
+                                                                                NSUInteger customLevel);
 
 /**
  The compression method to use.
@@ -102,4 +109,7 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
 };
 
 //! Block for flushing a buffer of bytes
-typedef BOOL(^NOZFlushCallback)(id __nonnull coder, id __nonnull context, const Byte* __nonnull bufferToFlush, size_t length);
+typedef BOOL(^NOZFlushCallback)(id __nonnull coder,
+                                id __nonnull context,
+                                const Byte* __nonnull bufferToFlush,
+                                size_t length);

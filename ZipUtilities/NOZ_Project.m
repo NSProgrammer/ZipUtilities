@@ -44,7 +44,9 @@
  11-15	Hour (0–23 on a 24-hour clock)
  */
 
-void noz_dos_date_from_NSDate(NSDate *dateObject, UInt16* dateOut, UInt16* timeOut)
+void noz_dos_date_from_NSDate(NSDate *dateObject,
+                              UInt16* dateOut,
+                              UInt16* timeOut)
 {
     if (!dateObject) {
         *dateOut = 0;
@@ -127,7 +129,14 @@ NSDate *noz_NSDate_from_dos_date(UInt16 dosDate, UInt16 dosTime)
     years = dosDate + 1980;
 
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *date = [gregorianCalendar dateWithEra:1 year:years month:months day:days hour:hours minute:minutes second:seconds nanosecond:0];
+    NSDate *date = [gregorianCalendar dateWithEra:1
+                                             year:years
+                                            month:months
+                                              day:days
+                                             hour:hours
+                                           minute:minutes
+                                           second:seconds
+                                       nanosecond:0];
     return date;
 }
 
@@ -176,7 +185,10 @@ NSUInteger NOZCompressionLevelsForEncoder(id<NOZEncoder> encoder)
     return MAX((NSUInteger)1, [encoder numberOfCompressionLevels]);
 }
 
-NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger defaultCustomLevel)
+NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level,
+                                                   NSUInteger firstCustomLevel,
+                                                   NSUInteger lastCustomLevel,
+                                                   NSUInteger defaultCustomLevel)
 {
     NSCParameterAssert(firstCustomLevel <= lastCustomLevel);
     NSCParameterAssert(defaultCustomLevel >= firstCustomLevel && defaultCustomLevel <= lastCustomLevel);
@@ -196,7 +208,9 @@ NSUInteger NOZCompressionLevelToCustomEncoderLevel(NOZCompressionLevel level, NS
     return (NSUInteger)roundf(fLevel);
 }
 
-NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel, NSUInteger lastCustomLevel, NSUInteger customLevel)
+NOZCompressionLevel NOZCompressionLevelFromCustomEncoderLevel(NSUInteger firstCustomLevel,
+                                                              NSUInteger lastCustomLevel,
+                                                              NSUInteger customLevel)
 {
     NSCParameterAssert(firstCustomLevel <= lastCustomLevel);
     NSCParameterAssert(customLevel >= firstCustomLevel && customLevel <= lastCustomLevel);

@@ -33,7 +33,8 @@
 
 @implementation NSData (NOZAdditions)
 
-- (NSData *)noz_dataByCompressing:(id<NOZEncoder>)encoder compressionLevel:(NOZCompressionLevel)compressionLevel
+- (NSData *)noz_dataByCompressing:(id<NOZEncoder>)encoder
+                 compressionLevel:(NOZCompressionLevel)compressionLevel
 {
     if (self.length == 0) {
         return nil;
@@ -45,7 +46,10 @@
         id<NOZEncoderContext> context =
         [encoder createContextWithBitFlags:0
                           compressionLevel:compressionLevel
-                             flushCallback:^BOOL(id<NOZEncoder> callbackEncoder, id<NOZEncoderContext> encoderContext, const Byte *bufferToFlush, size_t length) {
+                             flushCallback:^BOOL(id<NOZEncoder> callbackEncoder,
+                                                 id<NOZEncoderContext> encoderContext,
+                                                 const Byte *bufferToFlush,
+                                                 size_t length) {
                                  [encodedData appendBytes:bufferToFlush length:length];
                                  return YES;
                              }];
@@ -55,8 +59,12 @@
         }
 
         __block BOOL wasError = NO;
-        [self enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-            wasError = ![encoder encodeBytes:(const Byte *)bytes length:byteRange.length context:context];
+        [self enumerateByteRangesUsingBlock:^(const void *bytes,
+                                              NSRange byteRange,
+                                              BOOL *stop) {
+            wasError = ![encoder encodeBytes:(const Byte *)bytes
+                                      length:byteRange.length
+                                     context:context];
             if (wasError) {
                 *stop = YES;
             }
@@ -81,7 +89,10 @@
     @autoreleasepool {
         id<NOZDecoderContext> context =
         [decoder createContextForDecodingWithBitFlags:0
-                                        flushCallback:^BOOL(id<NOZDecoder> callbackDecoder, id<NOZDecoderContext> decoderContext, const Byte *bufferToFlush, size_t length) {
+                                        flushCallback:^BOOL(id<NOZDecoder> callbackDecoder,
+                                                            id<NOZDecoderContext> decoderContext,
+                                                            const Byte *bufferToFlush,
+                                                            size_t length) {
                                             [decodedData appendBytes:bufferToFlush length:length];
                                             return YES;
                                         }];
@@ -91,8 +102,12 @@
         }
 
         __block BOOL wasError = NO;
-        [self enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-            wasError = ![decoder decodeBytes:(const Byte *)bytes length:byteRange.length context:context];
+        [self enumerateByteRangesUsingBlock:^(const void *bytes,
+                                              NSRange byteRange,
+                                              BOOL *stop) {
+            wasError = ![decoder decodeBytes:(const Byte *)bytes
+                                      length:byteRange.length
+                                     context:context];
             if (wasError) {
                 *stop = YES;
             }

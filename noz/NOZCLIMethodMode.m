@@ -50,7 +50,8 @@
     return nil;
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     return [[NOZCLIMethodModeInfo alloc] initInternal];
 }

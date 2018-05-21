@@ -12,7 +12,10 @@
 
 @class MethodInfo;
 
-FOUNDATION_EXTERN int NOZCLI_main(NSString *exe, NSString *exeDir, NSString *currentDir, NSArray<NSString *> *args);
+FOUNDATION_EXTERN int NOZCLI_main(NSString *exe,
+                                  NSString *exeDir,
+                                  NSString *currentDir,
+                                  NSArray<NSString *> *args);
 FOUNDATION_EXTERN void NOZCLI_printUsage(NSString *exe, NSString *modeFlag);
 
 FOUNDATION_EXTERN void NOZCLI_registerExtraEncoders(void);

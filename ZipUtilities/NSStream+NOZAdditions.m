@@ -36,10 +36,10 @@ typedef void (*StreamCreateBoundPairFunc)(CFAllocatorRef,
                                           CFReadStreamRef *,
                                           CFWriteStreamRef *,
                                           CFIndex);
-static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
-                                           CFReadStreamRef *    readStreamPtr,
-                                           CFWriteStreamRef *   writeStreamPtr,
-                                           CFIndex              transferBufferSize);
+static void NOZStreamCreateBoundPairCompat(CFAllocatorRef alloc,
+                                           CFReadStreamRef *readStreamPtr,
+                                           CFWriteStreamRef *writeStreamPtr,
+                                           CFIndex transferBufferSize);
 
 @interface NOZEncodingInputStream : NSInputStream <NSStreamDelegate>
 
@@ -57,7 +57,9 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
                                          withEncoder:(nonnull id<NOZEncoder>)encoder
                                     compressionLevel:(NOZCompressionLevel)compressionLevel
 {
-    return [[NOZEncodingInputStream alloc] initWithInputStream:stream encoder:encoder compressionLevel:compressionLevel];
+    return [[NOZEncodingInputStream alloc] initWithInputStream:stream
+                                                       encoder:encoder
+                                              compressionLevel:compressionLevel];
 }
 
 @end
@@ -124,7 +126,10 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
 
     _encoderContext = [_encoder createContextWithBitFlags:0
                                          compressionLevel:_compressionLevel
-                                            flushCallback:^BOOL(id<NOZEncoder> encoder, id<NOZEncoderContext> context, const Byte *bufferToFlush, size_t length) {
+                                            flushCallback:^BOOL(id<NOZEncoder> encoder,
+                                                                id<NOZEncoderContext> context,
+                                                                const Byte *bufferToFlush,
+                                                                size_t length) {
                                                 return [self private_flushBytes:bufferToFlush length:length];
                                             }];
 
@@ -223,7 +228,10 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
             break;
         }
 
-        if (![_encoder encodeBytes:intermediateBuffer length:(size_t)rawBytesRead context:_encoderContext]) {
+        const BOOL didEncode = [_encoder encodeBytes:intermediateBuffer
+                                              length:(size_t)rawBytesRead
+                                             context:_encoderContext];
+        if (!didEncode) {
             _encoderError = NOZErrorCreate(NOZErrorCodeZipFailedToCompressEntry, nil);
             return -1;
         }
@@ -310,8 +318,8 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
                       outputStream:(NSOutputStream **)outputStreamPtr
                         bufferSize:(NSUInteger)bufferSize
 {
-    CFReadStreamRef     readStream;
-    CFWriteStreamRef    writeStream;
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
 
     assert( (inputStreamPtr != NULL) || (outputStreamPtr != NULL) );
 
@@ -337,21 +345,21 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
 
 @end
 
-static void NOZStreamCreateBoundPairCompat(CFAllocatorRef       alloc,
-                                           CFReadStreamRef *    readStreamPtr,
-                                           CFWriteStreamRef *   writeStreamPtr,
-                                           CFIndex              transferBufferSize)
+static void NOZStreamCreateBoundPairCompat(CFAllocatorRef alloc,
+                                           CFReadStreamRef *readStreamPtr,
+                                           CFWriteStreamRef *writeStreamPtr,
+                                           CFIndex transferBufferSize)
 // This is a drop-in replacement for CFStreamCreateBoundPair that is necessary because that
 // code is broken on iOS versions prior to iOS 5.0 <rdar://problem/7027394> <rdar://problem/7027406>.
 // This emulates a bound pair by creating a pair of UNIX domain sockets and wrapper each end in a
 // CFSocketStream.  This won't give great performance, but it doesn't crash!
 {
 #pragma unused(transferBufferSize)
-    int                 err;
-    Boolean             success;
-    CFReadStreamRef     readStream;
-    CFWriteStreamRef    writeStream;
-    int                 fds[2];
+    int err;
+    Boolean success;
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    int fds[2];
 
     assert(readStreamPtr != NULL);
     assert(writeStreamPtr != NULL);

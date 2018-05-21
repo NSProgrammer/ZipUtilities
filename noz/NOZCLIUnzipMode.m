@@ -18,7 +18,9 @@
 @property (nonatomic, copy, readonly, nullable) NSString *outputPath;
 @property (nonatomic, copy, readonly, nonnull) NSString *entryName;
 
-+ (NSArray<NOZCLIUnzipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args basePath:(NSString *)basePath environmentPath:(NSString *)envPath;
++ (NSArray<NOZCLIUnzipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args
+                                                   basePath:(NSString *)basePath
+                                            environmentPath:(NSString *)envPath;
 
 @end
 
@@ -108,7 +110,8 @@
              ];
 }
 
-+ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args environmentPath:(NSString *)envPath
++ (id<NOZCLIModeInfoProtocol>)infoFromArgs:(NSArray<NSString *> *)args
+                           environmentPath:(NSString *)envPath
 {
     BOOL forceGuessUnknownMethod = NO;
     BOOL forceFailUnknownMethod = NO;
@@ -158,7 +161,9 @@
             }
         } else if ([arg isEqualToString:@"-e"]) {
             NSArray<NSString *> *subargs = [args subarrayWithRange:NSMakeRange(i, args.count - i)];
-            entryInfos = [NOZCLIUnzipModeEntryInfo entryInfosFromArgs:subargs basePath:baseOutputPath environmentPath:envPath];
+            entryInfos = [NOZCLIUnzipModeEntryInfo entryInfosFromArgs:subargs
+                                                             basePath:baseOutputPath
+                                                      environmentPath:envPath];
             if (entryInfos.count == 0) {
                 return nil;
             } else {
@@ -177,7 +182,8 @@
     }
 
     if (!baseOutputPath) {
-        baseOutputPath = [[envPath stringByAppendingPathComponent:inputFilePath.lastPathComponent] stringByDeletingPathExtension];
+        baseOutputPath = [envPath stringByAppendingPathComponent:inputFilePath.lastPathComponent];
+        baseOutputPath = [baseOutputPath stringByDeletingPathExtension];
     }
 
     return [[NOZCLIUnzipModeInfo alloc] initWithInputFilePath:inputFilePath
@@ -196,8 +202,10 @@
 
     if (0 == info.entryInfos.count) {
         id<NOZDecompressDelegate> decompressDelegate = [[NOZCLIUnzipDecompressDelegate alloc] init];
-        NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:info.inputFilePath destinationDirectoryPath:info.baseOutputPath];
-        NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:decompressDelegate];
+        NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:info.inputFilePath
+                                                                    destinationDirectoryPath:info.baseOutputPath];
+        NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request
+                                                                            delegate:decompressDelegate];
         [op start]; // will run synchronously
         NOZDecompressResult *result = op.result;
         if (result.operationError) {
@@ -231,7 +239,10 @@
         return -2;
     }
 
-    NOZProgressBlock progressBlock = ^(int64_t totalBytes, int64_t bytesComplete, int64_t bytesCompletedThisPass, BOOL *abort) {
+    NOZProgressBlock progressBlock = ^(int64_t totalBytes,
+                                       int64_t bytesComplete,
+                                       int64_t bytesCompletedThisPass,
+                                       BOOL *abort) {
         const double progress = (double)bytesComplete / (double)totalBytes;
         fprintf(stdout, "\r%li%%", (long)progress);
         fflush(stdout);
@@ -254,7 +265,12 @@
 
         printf("%s\n", record.name.UTF8String);
 
-        if (![unzipper saveRecord:record toDirectory:tmpDir options:NOZUnzipperSaveRecordOptionIgnoreIntermediatePath progressBlock:progressBlock error:&error]) {
+        const BOOL saveSucceeded = [unzipper saveRecord:record
+                                            toDirectory:tmpDir
+                                                options:NOZUnzipperSaveRecordOptionIgnoreIntermediatePath
+                                          progressBlock:progressBlock
+                                                  error:&error];
+        if (!saveSucceeded) {
             [fm removeItemAtPath:tmpDir error:NULL];
             printf("\n");
             NOZCLI_printError(error);
@@ -266,7 +282,10 @@
         NSString *tmpPath = [tmpDir stringByAppendingPathComponent:record.name.lastPathComponent];
         NSString *dstPath = entry.outputPath ?: [info.baseOutputPath stringByAppendingPathComponent:entry.entryName];
 
-        [fm createDirectoryAtPath:[dstPath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:NULL];
+        [fm createDirectoryAtPath:[dstPath stringByDeletingLastPathComponent]
+      withIntermediateDirectories:YES
+                       attributes:nil
+                            error:NULL];
 
         if (![fm moveItemAtPath:tmpPath toPath:dstPath error:&error]) {
             [fm removeItemAtPath:tmpDir error:NULL];
@@ -285,7 +304,9 @@
 
 @implementation NOZCLIUnzipModeEntryInfo
 
-+ (NSArray<NOZCLIUnzipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args basePath:(NSString *)basePath environmentPath:(NSString *)envPath
++ (NSArray<NOZCLIUnzipModeEntryInfo *> *)entryInfosFromArgs:(NSArray<NSString *> *)args
+                                                   basePath:(NSString *)basePath
+                                            environmentPath:(NSString *)envPath
 {
     NSMutableArray<NOZCLIUnzipModeEntryInfo *> *entries = [[NSMutableArray alloc] init];
     NSMutableIndexSet *eIndexes = [[args indexesOfObjectsPassingTest:^BOOL(NSString *arg, NSUInteger idx, BOOL *stop) {
@@ -317,7 +338,9 @@
     }
 
     for (NSArray<NSString *> *argsForSingleEntry in entryArgs) {
-        NOZCLIUnzipModeEntryInfo *entry = [NOZCLIUnzipModeEntryInfo entryFromArgs:argsForSingleEntry basePath:basePath environmentPath:envPath];
+        NOZCLIUnzipModeEntryInfo *entry = [NOZCLIUnzipModeEntryInfo entryFromArgs:argsForSingleEntry
+                                                                         basePath:basePath
+                                                                  environmentPath:envPath];
         if (!entry) {
             printf("invalid arguments for unzipping a specific entry!\n");
             for (NSString *arg in argsForSingleEntry) {
@@ -331,7 +354,9 @@
     return entries;
 }
 
-+ (instancetype)entryFromArgs:(NSArray<NSString *> *)args basePath:(NSString *)basePath environmentPath:(NSString *)environmentPath
++ (instancetype)entryFromArgs:(NSArray<NSString *> *)args
+                     basePath:(NSString *)basePath
+              environmentPath:(NSString *)environmentPath
 {
     NSString *name = nil;
     NSString *outputPath = nil;
@@ -378,10 +403,14 @@
 
     outputPath = NOZCLI_normalizedPath(basePath ?: environmentPath, outputPath);
 
-    return [[self alloc] initWithName:name method:methodName outputPath:outputPath];
+    return [[self alloc] initWithName:name
+                               method:methodName
+                           outputPath:outputPath];
 }
 
-- (instancetype)initWithName:(NSString *)name method:(NSString *)methodName outputPath:(NSString *)outputPath
+- (instancetype)initWithName:(NSString *)name
+                      method:(NSString *)methodName
+                  outputPath:(NSString *)outputPath
 {
     if (self = [super init]) {
         _entryName = [name copy];
@@ -403,11 +432,13 @@
     long _lastProgress;
 }
 
-- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result
+- (void)decompressOperation:(NOZDecompressOperation *)op
+      didCompleteWithResult:(NOZDecompressResult *)result
 {
 }
 
-- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress
+- (void)decompressOperation:(NOZDecompressOperation *)op
+          didUpdateProgress:(float)progress
 {
     const long progressInt = (long)(progress * 100.f);
     if (progressInt == _lastProgress) {
@@ -418,7 +449,8 @@
     fflush(stdout);
 }
 
-- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path
+- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op
+              overwriteFileAtPath:(NSString *)path
 {
     return NO;
 }

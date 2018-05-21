@@ -39,9 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NOZCompressDelegate;
 
 //! Block for when `NOZCompressOperation` completes
-typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation* op, NOZCompressResult* result);
+typedef void(^NOZCompressCompletionBlock)(NOZCompressOperation* op,
+                                          NOZCompressResult* result);
 //! Block for dynamically selecting an `NOZCompressionMethod` and `NOZCompressionLevel` for a `NOZCompressOperation` when using `[NOZCompressionRequest addEntriesInDirectory:filterBlock:compressionSelectionBlock:]`
-typedef void(^NOZCompressionSelectionBlock)(NSString* filePath, NOZCompressionMethod* compressionMethodOut, NOZCompressionLevel* compressionLevelOut);
+typedef void(^NOZCompressionSelectionBlock)(NSString* filePath,
+                                            NOZCompressionMethod* compressionMethodOut,
+                                            NOZCompressionLevel* compressionLevelOut);
 //! Block for dynamically filtering out files when using `[NOZCompressionRequest addEntriesInDirectory:filterBlock:compressionSelectionBlock:]`.
 typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 
@@ -66,7 +69,8 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
  @param request The `NOZCompressRequest` of the what and how for compressing.
  @param delegate The `NOZCompressDelegate` for callbacks.
  */
-- (instancetype)initWithRequest:(NOZCompressRequest *)request delegate:(nullable id<NOZCompressDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithRequest:(NOZCompressRequest *)request
+                       delegate:(nullable id<NOZCompressDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  Convenience initializer
@@ -74,7 +78,8 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
  @param request The `NOZCompressRequest` of the what and how for compressing.
  @param completion The `NOZCompressCompletionBlock` to call once operation is finished.
  */
-- (instancetype)initWithRequest:(NOZCompressRequest *)request completion:(nullable NOZCompressCompletionBlock)completion;
+- (instancetype)initWithRequest:(NOZCompressRequest *)request
+                     completion:(nullable NOZCompressCompletionBlock)completion;
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
@@ -98,14 +103,16 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
  @param op The `NOZCompressOperation` that finished.
  @param result The `NOZCompressResult` for the operation.
  */
-- (void)compressOperation:(NOZCompressOperation *)op didCompleteWithResult:(NOZCompressResult *)result;
+- (void)compressOperation:(NOZCompressOperation *)op
+    didCompleteWithResult:(NOZCompressResult *)result;
 
 /**
  Called when the operation updates it's overall progress.
 
  _progress_ will be between `0.0f` and `1.0f`.  A negative value indicates progress is indeterminant.
  */
-- (void)compressOperation:(NOZCompressOperation *)op didUpdateProgress:(float)progress;
+- (void)compressOperation:(NOZCompressOperation *)op
+        didUpdateProgress:(float)progress;
 
 @end
 
@@ -132,9 +139,12 @@ typedef BOOL(^NOZCompressionShouldExcludeFileBlock)(NSString* filePath);
 /** Add an entry via `NSData` with a _name_ for the entry (used as the file name when decompressed) */
 - (void)addDataEntry:(NSData *)data name:(NSString *)name;
 /** Recursively add a directory of files as entries */
-- (void)addEntriesInDirectory:(NSString *)directoryPath filterBlock:(nullable NOZCompressionShouldExcludeFileBlock)filterBlock compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)selectionBlock;
+- (void)addEntriesInDirectory:(NSString *)directoryPath
+                  filterBlock:(nullable NOZCompressionShouldExcludeFileBlock)filterBlock
+    compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)selectionBlock;
 /** See `addEntriesInDirectory:filterBlock:compressionSelectionBlock:` */
-- (void)addEntriesInDirectory:(NSString *)directoryPath compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)block;
+- (void)addEntriesInDirectory:(NSString *)directoryPath
+    compressionSelectionBlock:(nullable NOZCompressionSelectionBlock)block;
 
 /**
  Designated initializer

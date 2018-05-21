@@ -38,7 +38,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //! Callback block when the `NOZDecompressOperation` completes
-typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDecompressResult * result);
+typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op,
+                                            NOZDecompressResult * result);
 
 /**
  `NOZDecompressOperation` is an `NSOperation` for decompressing a zip archive on disk into unarchived files on disk.
@@ -60,7 +61,8 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
  @param request The `NOZDecompressRequest` to operate on
  @param delegate The `NOZDecompressDelegate` for callbacks
  */
-- (instancetype)initWithRequest:(NOZDecompressRequest *)request delegate:(nullable id<NOZDecompressDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithRequest:(NOZDecompressRequest *)request
+                       delegate:(nullable id<NOZDecompressDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 /**
  Convenience initializer
@@ -68,7 +70,8 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
  @param request The `NOZDecompressRequest` to operate on
  @param completion The `NOZDecompressCompletionBlock` block that will be called when the operation finishes
  */
-- (instancetype)initWithRequest:(NOZDecompressRequest *)request completion:(NOZDecompressCompletionBlock)completion;
+- (instancetype)initWithRequest:(NOZDecompressRequest *)request
+                     completion:(NOZDecompressCompletionBlock)completion;
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
@@ -92,14 +95,16 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
  @param op The `NOZDecompressOperation` that finished.
  @param result The `NOZDecompressResult` for the operation.
  */
-- (void)decompressOperation:(NOZDecompressOperation *)op didCompleteWithResult:(NOZDecompressResult *)result;
+- (void)decompressOperation:(NOZDecompressOperation *)op
+      didCompleteWithResult:(NOZDecompressResult *)result;
 
 /**
  Called when the operation updates it's overall progress.
 
  _progress_ will be between `0.0f` and `1.0f`.  A negative value indicates progress is indeterminant.
  */
-- (void)decompressOperation:(NOZDecompressOperation *)op didUpdateProgress:(float)progress;
+- (void)decompressOperation:(NOZDecompressOperation *)op
+          didUpdateProgress:(float)progress;
 
 /**
  Called when unarchive a file would overwrite an existing file on disk.
@@ -110,7 +115,8 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
  
  @return `YES` to overwrite.
  */
-- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op overwriteFileAtPath:(NSString *)path;
+- (BOOL)shouldDecompressOperation:(NOZDecompressOperation *)op
+              overwriteFileAtPath:(NSString *)path;
 
 @end
 
@@ -137,7 +143,8 @@ typedef void(^NOZDecompressCompletionBlock)(NOZDecompressOperation * op, NOZDeco
  @param path The `sourceFilePath`
  @param destinationDirectoryPath The `destinationDirectoryPath`
  */
-- (instancetype)initWithSourceFilePath:(NSString *)path destinationDirectoryPath:(NSString *)destinationDirectoryPath;
+- (instancetype)initWithSourceFilePath:(NSString *)path
+              destinationDirectoryPath:(NSString *)destinationDirectoryPath;
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
