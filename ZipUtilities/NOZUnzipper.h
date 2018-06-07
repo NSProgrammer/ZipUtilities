@@ -221,7 +221,7 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 /**
  Enumerate all the records.
  */
-- (void)enumerateManifestEntriesUsingBlock:(__attribute__((noescape)) NOZUnzipRecordEnumerationBlock __nonnull)block;
+- (void)enumerateManifestEntriesUsingBlock:(NOZUnzipRecordEnumerationBlock __nonnull NS_NOESCAPE)block;
 
 
 /**

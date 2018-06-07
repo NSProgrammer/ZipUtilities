@@ -199,7 +199,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return (_centralDirectory) ? [_centralDirectory indexForRecordWithName:name] : NSNotFound;
 }
 
-- (void)enumerateManifestEntriesUsingBlock:(NOZUnzipRecordEnumerationBlock)block
+- (void)enumerateManifestEntriesUsingBlock:(NOZUnzipRecordEnumerationBlock NS_NOESCAPE)block
 {
     [_centralDirectory.internalRecords enumerateObjectsUsingBlock:block];
 }
