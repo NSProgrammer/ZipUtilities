@@ -172,7 +172,7 @@
                               [NSByteCountFormatter stringFromByteCount:outSize countStyle:NSByteCountFormatterCountStyleBinary],
                               ratio];
     printf("%s", printMessage.UTF8String);
-    return 1;
+    return 0;
 }
 
 @end

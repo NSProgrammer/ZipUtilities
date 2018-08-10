@@ -80,7 +80,6 @@
 		1C7052421EBEBC370071C2FF /* NOZZipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542291B7BDD97007CE7BA /* NOZZipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052431EBEBC370071C2FF /* NOZSyncStepOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052441EBEBC370071C2FF /* NOZEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634381BB64F2100BBFECF /* NOZEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C7052451EBEBC370071C2FF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052461EBEBC370071C2FF /* NOZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7981B740ACF00969629 /* NOZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052471EBEBC370071C2FF /* NOZUnzipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052481EBEBC370071C2FF /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
@@ -367,7 +366,6 @@
 		8BF29229208FAC1700541EE0 /* encoder_dict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BF29226208FAC1600541EE0 /* encoder_dict.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8BF2922A208FAC1700541EE0 /* encoder_dict.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BF29226208FAC1600541EE0 /* encoder_dict.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8BF2922B208FAC1700541EE0 /* encoder_dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29227208FAC1700541EE0 /* encoder_dict.h */; };
-		B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = B3F87BF41CF4C08A00FBBFEF /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -1348,7 +1346,6 @@
 				1C05422B1B7BDD97007CE7BA /* NOZZipper.h in Headers */,
 				1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */,
 				1C76343A1BB64F2100BBFECF /* NOZEncoder.h in Headers */,
-				B3F87BF51CF4C09600FBBFEF /* module.modulemap in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
 				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
 				1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */,
@@ -1376,7 +1373,6 @@
 				1C7052421EBEBC370071C2FF /* NOZZipper.h in Headers */,
 				1C7052431EBEBC370071C2FF /* NOZSyncStepOperation.h in Headers */,
 				1C7052441EBEBC370071C2FF /* NOZEncoder.h in Headers */,
-				1C7052451EBEBC370071C2FF /* module.modulemap in Headers */,
 				1C7052461EBEBC370071C2FF /* NOZUtils.h in Headers */,
 				1C7052471EBEBC370071C2FF /* NOZUnzipper.h in Headers */,
 				1C7052481EBEBC370071C2FF /* hash_longest_match64_inc.h in Headers */,

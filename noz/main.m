@@ -21,7 +21,9 @@ int main(int argc, const char * argv[])
             exe = [path lastPathComponent];
             path = [path stringByDeletingLastPathComponent];
             args = [args subarrayWithRange:NSMakeRange(1, args.count - 1)];
-            NSString *currentDir = @(getenv("PWD"));
+
+            const char *pwd = getenv("PWD");
+            NSString *currentDir = pwd ? @(pwd) : nil;
 
             retVal = NOZCLI_main(exe, path, currentDir, args);
         }
