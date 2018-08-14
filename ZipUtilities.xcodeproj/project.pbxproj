@@ -32,6 +32,64 @@
 		1C3223821B780CC500DC0A33 /* NOZSyncStepOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C3223831B780CC500DC0A33 /* NOZSyncStepOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */; };
 		1C3223851B78501A00DC0A33 /* Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C3223841B78501A00DC0A33 /* Data.zip */; };
+		1C5AD78B2123869300A4AA17 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD7892123869300A4AA17 /* debug.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C5AD78C2123869300A4AA17 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD7892123869300A4AA17 /* debug.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C5AD78D2123869300A4AA17 /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD78A2123869300A4AA17 /* debug.h */; };
+		1C5AD78E212386AB00A4AA17 /* hash_composite_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD7852123866600A4AA17 /* hash_composite_inc.h */; };
+		1C5AD78F212386AB00A4AA17 /* hash_rolling_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */; };
+		1C5AD804212386F000A4AA17 /* backward_references_hq.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */; };
+		1C5AD805212386F000A4AA17 /* backward_references_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35411DE392D9004A35C7 /* backward_references_inc.h */; };
+		1C5AD806212386F000A4AA17 /* backward_references.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35431DE392D9004A35C7 /* backward_references.h */; };
+		1C5AD807212386F000A4AA17 /* bit_cost_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35441DE392D9004A35C7 /* bit_cost_inc.h */; };
+		1C5AD808212386F000A4AA17 /* bit_cost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35461DE392D9004A35C7 /* bit_cost.h */; };
+		1C5AD809212386F000A4AA17 /* block_encoder_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35471DE392D9004A35C7 /* block_encoder_inc.h */; };
+		1C5AD80A212386F000A4AA17 /* block_splitter_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35481DE392D9004A35C7 /* block_splitter_inc.h */; };
+		1C5AD80B212386F000A4AA17 /* block_splitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E354A1DE392D9004A35C7 /* block_splitter.h */; };
+		1C5AD80C212386F000A4AA17 /* brotli_bit_stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E354C1DE392D9004A35C7 /* brotli_bit_stream.h */; };
+		1C5AD80D212386F000A4AA17 /* cluster_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E354D1DE392D9004A35C7 /* cluster_inc.h */; };
+		1C5AD80E212386F000A4AA17 /* cluster.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E354F1DE392D9004A35C7 /* cluster.h */; };
+		1C5AD80F212386F000A4AA17 /* command.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35501DE392D9004A35C7 /* command.h */; };
+		1C5AD810212386F000A4AA17 /* compress_fragment_two_pass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35521DE392D9004A35C7 /* compress_fragment_two_pass.h */; };
+		1C5AD811212386F000A4AA17 /* compress_fragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35541DE392D9004A35C7 /* compress_fragment.h */; };
+		1C5AD812212386F000A4AA17 /* dictionary_hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35561DE392D9004A35C7 /* dictionary_hash.h */; };
+		1C5AD813212386F000A4AA17 /* entropy_encode_static.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */; };
+		1C5AD814212386F000A4AA17 /* entropy_encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355A1DE392D9004A35C7 /* entropy_encode.h */; };
+		1C5AD815212386F000A4AA17 /* fast_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355B1DE392D9004A35C7 /* fast_log.h */; };
+		1C5AD816212386F000A4AA17 /* find_match_length.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355C1DE392D9004A35C7 /* find_match_length.h */; };
+		1C5AD817212386F000A4AA17 /* hash_forgetful_chain_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355D1DE392D9004A35C7 /* hash_forgetful_chain_inc.h */; };
+		1C5AD818212386F000A4AA17 /* hash_longest_match_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355E1DE392D9004A35C7 /* hash_longest_match_inc.h */; };
+		1C5AD819212386F000A4AA17 /* hash_longest_match_quickly_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E355F1DE392D9004A35C7 /* hash_longest_match_quickly_inc.h */; };
+		1C5AD81A212386F000A4AA17 /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
+		1C5AD81B212386F000A4AA17 /* hash_to_binary_tree_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */; };
+		1C5AD81C212386F000A4AA17 /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35601DE392D9004A35C7 /* hash.h */; };
+		1C5AD81D212386F000A4AA17 /* histogram_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35611DE392D9004A35C7 /* histogram_inc.h */; };
+		1C5AD81E212386F000A4AA17 /* histogram.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35631DE392D9004A35C7 /* histogram.h */; };
+		1C5AD81F212386F000A4AA17 /* literal_cost.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35651DE392D9004A35C7 /* literal_cost.h */; };
+		1C5AD820212386F000A4AA17 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35671DE392D9004A35C7 /* memory.h */; };
+		1C5AD821212386F000A4AA17 /* metablock_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35681DE392D9004A35C7 /* metablock_inc.h */; };
+		1C5AD822212386F000A4AA17 /* metablock.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E356A1DE392D9004A35C7 /* metablock.h */; };
+		1C5AD823212386F000A4AA17 /* prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E356C1DE392D9004A35C7 /* prefix.h */; };
+		1C5AD824212386F000A4AA17 /* quality.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E356D1DE392D9004A35C7 /* quality.h */; };
+		1C5AD825212386F000A4AA17 /* ringbuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E356E1DE392D9004A35C7 /* ringbuffer.h */; };
+		1C5AD826212386F000A4AA17 /* static_dict_lut.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E356F1DE392D9004A35C7 /* static_dict_lut.h */; };
+		1C5AD827212386F000A4AA17 /* static_dict.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35711DE392D9004A35C7 /* static_dict.h */; };
+		1C5AD828212386F000A4AA17 /* utf8_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35731DE392D9004A35C7 /* utf8_util.h */; };
+		1C5AD829212386F000A4AA17 /* write_bits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35741DE392D9004A35C7 /* write_bits.h */; };
+		1C5AD82A2123870500A4AA17 /* bit_reader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35271DE392CC004A35C7 /* bit_reader.h */; };
+		1C5AD82B2123870500A4AA17 /* huffman.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352B1DE392CC004A35C7 /* huffman.h */; };
+		1C5AD82C2123870500A4AA17 /* prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352D1DE392CC004A35C7 /* prefix.h */; };
+		1C5AD82D2123870500A4AA17 /* state.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352F1DE392CC004A35C7 /* state.h */; };
+		1C5AD82E2123871200A4AA17 /* decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E342F1DE36963004A35C7 /* decode.h */; };
+		1C5AD82F2123871200A4AA17 /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34301DE36963004A35C7 /* encode.h */; };
+		1C5AD8302123871200A4AA17 /* port.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34311DE36963004A35C7 /* port.h */; };
+		1C5AD8312123871200A4AA17 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34321DE36963004A35C7 /* types.h */; };
+		1C5AD8322123874D00A4AA17 /* zstd_opt.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34F21DE39298004A35C7 /* zstd_opt.h */; };
+		1C5AD8332123875800A4AA17 /* divsufsort.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35131DE392AF004A35C7 /* divsufsort.h */; };
+		1C5AD8342123875D00A4AA17 /* zdict.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E35151DE392AF004A35C7 /* zdict.h */; };
+		1C5AD8352123876100A4AA17 /* zstd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3C0C761DDC1FC9000C7DE1 /* zstd.h */; };
+		1C5AD838212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C5AD839212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C5AD83A212387C400A4AA17 /* hist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD837212387C400A4AA17 /* hist.h */; };
 		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
 		1C6BF77C1B74086000969629 /* libZipUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6BF7701B74086000969629 /* libZipUtilities.a */; };
 		1C6BF78E1B74093B00969629 /* NOZCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF78D1B74093B00969629 /* NOZCompress.m */; };
@@ -42,9 +100,6 @@
 		1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C6BF7B51B7476BB00969629 /* NOZ_Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B31B7476BB00969629 /* NOZ_Project.m */; };
 		1C6BF7B71B7564A700969629 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
-		1C70520E1EBEA7A80071C2FF /* backward_references_hq.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */; };
-		1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
-		1C7052101EBEA7A80071C2FF /* hash_to_binary_tree_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */; };
 		1C7052111EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C7052121EBEA87F0071C2FF /* backward_references_hq.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052091EBEA7A80071C2FF /* backward_references_hq.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C7052151EBEA92F0071C2FF /* dictionary_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C7052131EBEA92B0071C2FF /* dictionary_hash.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -66,13 +121,11 @@
 		1C7052311EBEBC370071C2FF /* NOZDeflateCoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAC79A1B8997F4004AD418 /* NOZDeflateCoders.m */; };
 		1C7052351EBEBC370071C2FF /* NOZCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCAC7961B890FAD004AD418 /* NOZCompression.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052361EBEBC370071C2FF /* NOZDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634401BB6522800BBFECF /* NOZDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C7052371EBEBC370071C2FF /* backward_references_hq.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */; };
 		1C7052381EBEBC370071C2FF /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052391EBEBC370071C2FF /* NSData+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634301BB6455700BBFECF /* NSData+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C70523A1EBEBC370071C2FF /* NOZCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78C1B74093B00969629 /* NOZCompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C70523B1EBEBC370071C2FF /* NOZDecompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF78F1B74095500969629 /* NOZDecompress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C70523C1EBEBC370071C2FF /* NSStream+NOZAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD441BB1BBCDDA500F40FAB /* NSStream+NOZAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C70523D1EBEBC370071C2FF /* hash_to_binary_tree_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */; };
 		1C70523E1EBEBC370071C2FF /* NOZError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3223781B77BE9F00DC0A33 /* NOZError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C70523F1EBEBC370071C2FF /* NOZ_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7B21B7476BB00969629 /* NOZ_Project.h */; };
 		1C7052401EBEBC370071C2FF /* NOZCompressionLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD3DA251DA2047D0007A693 /* NOZCompressionLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -82,7 +135,6 @@
 		1C7052441EBEBC370071C2FF /* NOZEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C7634381BB64F2100BBFECF /* NOZEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052461EBEBC370071C2FF /* NOZUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C6BF7981B740ACF00969629 /* NOZUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052471EBEBC370071C2FF /* NOZUnzipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C05422D1B7BDDBA007CE7BA /* NOZUnzipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1C7052481EBEBC370071C2FF /* hash_longest_match64_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */; };
 		1C7052491EBEBC370071C2FF /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C7052561EBEBD400071C2FF /* libbrotli-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B0455711DF8DBD600EBB706 /* libbrotli-mac.a */; };
 		1C7052571EBEBD400071C2FF /* libZipUtilities-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C70524D1EBEBC370071C2FF /* libZipUtilities-mac.a */; };
@@ -556,6 +608,12 @@
 		1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZSyncStepOperation.h; sourceTree = "<group>"; };
 		1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZSyncStepOperation.m; sourceTree = "<group>"; };
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
+		1C5AD7852123866600A4AA17 /* hash_composite_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_composite_inc.h; path = Extra/brotli/enc/hash_composite_inc.h; sourceTree = "<group>"; };
+		1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_rolling_inc.h; path = Extra/brotli/enc/hash_rolling_inc.h; sourceTree = "<group>"; };
+		1C5AD7892123869300A4AA17 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = debug.c; path = Extra/zstd/common/debug.c; sourceTree = "<group>"; };
+		1C5AD78A2123869300A4AA17 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = Extra/zstd/common/debug.h; sourceTree = "<group>"; };
+		1C5AD836212387C400A4AA17 /* hist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hist.c; path = Extra/zstd/compress/hist.c; sourceTree = "<group>"; };
+		1C5AD837212387C400A4AA17 /* hist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hist.h; path = Extra/zstd/compress/hist.h; sourceTree = "<group>"; };
 		1C6B60D81B9CA2190068DCB0 /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ZipUtilities.podspec; sourceTree = "<group>"; };
 		1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -1119,6 +1177,8 @@
 				8BAE42331E5A9E4200AFD299 /* bitstream.h */,
 				8BF291ED208FA98000541EE0 /* compiler.h */,
 				8BF291EE208FA98000541EE0 /* cpu.h */,
+				1C5AD7892123869300A4AA17 /* debug.c */,
+				1C5AD78A2123869300A4AA17 /* debug.h */,
 				8BAE42341E5A9E4200AFD299 /* entropy_common.c */,
 				8BAE42351E5A9E4200AFD299 /* error_private.c */,
 				8BAE42361E5A9E4200AFD299 /* error_private.h */,
@@ -1142,7 +1202,12 @@
 		8B3C0C951DDC1FFF000C7DE1 /* compress */ = {
 			isa = PBXGroup;
 			children = (
+				8B6E34EE1DE39298004A35C7 /* fse_compress.c */,
+				1C5AD836212387C400A4AA17 /* hist.c */,
+				1C5AD837212387C400A4AA17 /* hist.h */,
+				8B6E34EF1DE39298004A35C7 /* huf_compress.c */,
 				8BF291F2208FA9A900541EE0 /* zstd_compress_internal.h */,
+				8B6E34F11DE39298004A35C7 /* zstd_compress.c */,
 				8BF291F9208FA9A900541EE0 /* zstd_double_fast.c */,
 				8BF291F1208FA9A800541EE0 /* zstd_double_fast.h */,
 				8BF291F4208FA9A900541EE0 /* zstd_fast.c */,
@@ -1152,9 +1217,6 @@
 				8BF291F5208FA9A900541EE0 /* zstd_ldm.c */,
 				8BF291F6208FA9A900541EE0 /* zstd_ldm.h */,
 				8BF291F7208FA9A900541EE0 /* zstd_opt.c */,
-				8B6E34EE1DE39298004A35C7 /* fse_compress.c */,
-				8B6E34EF1DE39298004A35C7 /* huf_compress.c */,
-				8B6E34F11DE39298004A35C7 /* zstd_compress.c */,
 				8B6E34F21DE39298004A35C7 /* zstd_opt.h */,
 				8BAE42051E5A9E0900AFD299 /* zstdmt_compress.c */,
 				8BAE42061E5A9E0900AFD299 /* zstdmt_compress.h */,
@@ -1247,10 +1309,12 @@
 				8B6E355A1DE392D9004A35C7 /* entropy_encode.h */,
 				8B6E355B1DE392D9004A35C7 /* fast_log.h */,
 				8B6E355C1DE392D9004A35C7 /* find_match_length.h */,
+				1C5AD7852123866600A4AA17 /* hash_composite_inc.h */,
 				8B6E355D1DE392D9004A35C7 /* hash_forgetful_chain_inc.h */,
 				8B6E355E1DE392D9004A35C7 /* hash_longest_match_inc.h */,
 				8B6E355F1DE392D9004A35C7 /* hash_longest_match_quickly_inc.h */,
 				1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */,
+				1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */,
 				1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */,
 				8B6E35601DE392D9004A35C7 /* hash.h */,
 				8B6E35611DE392D9004A35C7 /* histogram_inc.h */,
@@ -1281,12 +1345,12 @@
 			isa = PBXGroup;
 			children = (
 				8B6E35261DE392CC004A35C7 /* bit_reader.c */,
-				8B6E35271DE392CC004A35C7 /* bit_reader.h */,
 				8B6E35291DE392CC004A35C7 /* decode.c */,
 				8B6E352A1DE392CC004A35C7 /* huffman.c */,
+				8B6E352E1DE392CC004A35C7 /* state.c */,
+				8B6E35271DE392CC004A35C7 /* bit_reader.h */,
 				8B6E352B1DE392CC004A35C7 /* huffman.h */,
 				8B6E352D1DE392CC004A35C7 /* prefix.h */,
-				8B6E352E1DE392CC004A35C7 /* state.c */,
 				8B6E352F1DE392CC004A35C7 /* state.h */,
 			);
 			name = dec;
@@ -1332,13 +1396,11 @@
 			files = (
 				1CCAC7981B890FAD004AD418 /* NOZCompression.h in Headers */,
 				1C7634421BB6522800BBFECF /* NOZDecoder.h in Headers */,
-				1C70520E1EBEA7A80071C2FF /* backward_references_hq.h in Headers */,
 				1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */,
 				1C7634321BB6455700BBFECF /* NSData+NOZAdditions.h in Headers */,
 				1C6BF7951B740AA400969629 /* NOZCompress.h in Headers */,
 				1C6BF7961B740AA400969629 /* NOZDecompress.h in Headers */,
 				1CD441BD1BBCDDA500F40FAB /* NSStream+NOZAdditions.h in Headers */,
-				1C7052101EBEA7A80071C2FF /* hash_to_binary_tree_inc.h in Headers */,
 				1C32237A1B77BE9F00DC0A33 /* NOZError.h in Headers */,
 				1C6BF7B41B7476BB00969629 /* NOZ_Project.h in Headers */,
 				1CD3DA271DA2047D0007A693 /* NOZCompressionLibrary.h in Headers */,
@@ -1348,7 +1410,6 @@
 				1C76343A1BB64F2100BBFECF /* NOZEncoder.h in Headers */,
 				1C6BF79A1B740ACF00969629 /* NOZUtils.h in Headers */,
 				1C05422F1B7BDDBA007CE7BA /* NOZUnzipper.h in Headers */,
-				1C70520F1EBEA7A80071C2FF /* hash_longest_match64_inc.h in Headers */,
 				B3F87BF61CF4C21600FBBFEF /* ZipUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1359,13 +1420,11 @@
 			files = (
 				1C7052351EBEBC370071C2FF /* NOZCompression.h in Headers */,
 				1C7052361EBEBC370071C2FF /* NOZDecoder.h in Headers */,
-				1C7052371EBEBC370071C2FF /* backward_references_hq.h in Headers */,
 				1C7052381EBEBC370071C2FF /* NOZZipEntry.h in Headers */,
 				1C7052391EBEBC370071C2FF /* NSData+NOZAdditions.h in Headers */,
 				1C70523A1EBEBC370071C2FF /* NOZCompress.h in Headers */,
 				1C70523B1EBEBC370071C2FF /* NOZDecompress.h in Headers */,
 				1C70523C1EBEBC370071C2FF /* NSStream+NOZAdditions.h in Headers */,
-				1C70523D1EBEBC370071C2FF /* hash_to_binary_tree_inc.h in Headers */,
 				1C70523E1EBEBC370071C2FF /* NOZError.h in Headers */,
 				1C70523F1EBEBC370071C2FF /* NOZ_Project.h in Headers */,
 				1C7052401EBEBC370071C2FF /* NOZCompressionLibrary.h in Headers */,
@@ -1375,7 +1434,6 @@
 				1C7052441EBEBC370071C2FF /* NOZEncoder.h in Headers */,
 				1C7052461EBEBC370071C2FF /* NOZUtils.h in Headers */,
 				1C7052471EBEBC370071C2FF /* NOZUnzipper.h in Headers */,
-				1C7052481EBEBC370071C2FF /* hash_longest_match64_inc.h in Headers */,
 				1C7052491EBEBC370071C2FF /* ZipUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1436,17 +1494,23 @@
 				8BAE424E1E5A9E4200AFD299 /* mem.h in Headers */,
 				8BAE425B1E5A9E4200AFD299 /* zstd_internal.h in Headers */,
 				8BF291FD208FA9A900541EE0 /* zstd_fast.h in Headers */,
+				1C5AD8352123876100A4AA17 /* zstd.h in Headers */,
 				8BF291EF208FA98000541EE0 /* compiler.h in Headers */,
 				8BF29205208FA9A900541EE0 /* zstd_lazy.h in Headers */,
 				8BAE42441E5A9E4200AFD299 /* bitstream.h in Headers */,
+				1C5AD8322123874D00A4AA17 /* zstd_opt.h in Headers */,
+				1C5AD78D2123869300A4AA17 /* debug.h in Headers */,
 				8BF29202208FA9A900541EE0 /* zstd_ldm.h in Headers */,
 				8BAE424C1E5A9E4200AFD299 /* fse.h in Headers */,
+				1C5AD83A212387C400A4AA17 /* hist.h in Headers */,
 				8BAE424D1E5A9E4200AFD299 /* huf.h in Headers */,
 				8BAE42491E5A9E4200AFD299 /* error_private.h in Headers */,
+				1C5AD8342123875D00A4AA17 /* zdict.h in Headers */,
 				8BAE42571E5A9E4200AFD299 /* xxhash.h in Headers */,
 				8BAE42091E5A9E0900AFD299 /* zstdmt_compress.h in Headers */,
 				8BF291FB208FA9A900541EE0 /* zstd_double_fast.h in Headers */,
 				8BF291F0208FA98000541EE0 /* cpu.h in Headers */,
+				1C5AD8332123875800A4AA17 /* divsufsort.h in Headers */,
 				8BAE42511E5A9E4200AFD299 /* pool.h in Headers */,
 				8BAE42541E5A9E4200AFD299 /* threading.h in Headers */,
 				8BF291FC208FA9A900541EE0 /* zstd_compress_internal.h in Headers */,
@@ -1457,13 +1521,61 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5AD817212386F000A4AA17 /* hash_forgetful_chain_inc.h in Headers */,
+				1C5AD812212386F000A4AA17 /* dictionary_hash.h in Headers */,
+				1C5AD8312123871200A4AA17 /* types.h in Headers */,
+				1C5AD82F2123871200A4AA17 /* encode.h in Headers */,
+				1C5AD811212386F000A4AA17 /* compress_fragment.h in Headers */,
+				1C5AD82A2123870500A4AA17 /* bit_reader.h in Headers */,
+				1C5AD813212386F000A4AA17 /* entropy_encode_static.h in Headers */,
 				8BF29220208FABFA00541EE0 /* context.h in Headers */,
+				1C5AD82D2123870500A4AA17 /* state.h in Headers */,
+				1C5AD82C2123870500A4AA17 /* prefix.h in Headers */,
+				1C5AD810212386F000A4AA17 /* compress_fragment_two_pass.h in Headers */,
 				8BF29224208FABFA00541EE0 /* version.h in Headers */,
+				1C5AD81B212386F000A4AA17 /* hash_to_binary_tree_inc.h in Headers */,
+				1C5AD804212386F000A4AA17 /* backward_references_hq.h in Headers */,
+				1C5AD82B2123870500A4AA17 /* huffman.h in Headers */,
 				8BF29221208FABFA00541EE0 /* platform.h in Headers */,
+				1C5AD828212386F000A4AA17 /* utf8_util.h in Headers */,
+				1C5AD80F212386F000A4AA17 /* command.h in Headers */,
+				1C5AD805212386F000A4AA17 /* backward_references_inc.h in Headers */,
+				1C5AD80C212386F000A4AA17 /* brotli_bit_stream.h in Headers */,
+				1C5AD816212386F000A4AA17 /* find_match_length.h in Headers */,
+				1C5AD80E212386F000A4AA17 /* cluster.h in Headers */,
+				1C5AD78F212386AB00A4AA17 /* hash_rolling_inc.h in Headers */,
 				8BF29228208FAC1700541EE0 /* params.h in Headers */,
+				1C5AD81A212386F000A4AA17 /* hash_longest_match64_inc.h in Headers */,
+				1C5AD808212386F000A4AA17 /* bit_cost.h in Headers */,
+				1C5AD806212386F000A4AA17 /* backward_references.h in Headers */,
+				1C5AD820212386F000A4AA17 /* memory.h in Headers */,
+				1C5AD814212386F000A4AA17 /* entropy_encode.h in Headers */,
+				1C5AD80D212386F000A4AA17 /* cluster_inc.h in Headers */,
 				8BF2921E208FABFA00541EE0 /* constants.h in Headers */,
 				8BF2921F208FABFA00541EE0 /* transform.h in Headers */,
+				1C5AD81D212386F000A4AA17 /* histogram_inc.h in Headers */,
+				1C5AD819212386F000A4AA17 /* hash_longest_match_quickly_inc.h in Headers */,
+				1C5AD807212386F000A4AA17 /* bit_cost_inc.h in Headers */,
+				1C5AD809212386F000A4AA17 /* block_encoder_inc.h in Headers */,
+				1C5AD829212386F000A4AA17 /* write_bits.h in Headers */,
+				1C5AD81E212386F000A4AA17 /* histogram.h in Headers */,
+				1C5AD824212386F000A4AA17 /* quality.h in Headers */,
+				1C5AD80B212386F000A4AA17 /* block_splitter.h in Headers */,
+				1C5AD815212386F000A4AA17 /* fast_log.h in Headers */,
+				1C5AD821212386F000A4AA17 /* metablock_inc.h in Headers */,
+				1C5AD80A212386F000A4AA17 /* block_splitter_inc.h in Headers */,
+				1C5AD81C212386F000A4AA17 /* hash.h in Headers */,
+				1C5AD825212386F000A4AA17 /* ringbuffer.h in Headers */,
+				1C5AD78E212386AB00A4AA17 /* hash_composite_inc.h in Headers */,
+				1C5AD8302123871200A4AA17 /* port.h in Headers */,
+				1C5AD823212386F000A4AA17 /* prefix.h in Headers */,
 				8BF2921B208FABFA00541EE0 /* dictionary.h in Headers */,
+				1C5AD81F212386F000A4AA17 /* literal_cost.h in Headers */,
+				1C5AD82E2123871200A4AA17 /* decode.h in Headers */,
+				1C5AD818212386F000A4AA17 /* hash_longest_match_inc.h in Headers */,
+				1C5AD827212386F000A4AA17 /* static_dict.h in Headers */,
+				1C5AD826212386F000A4AA17 /* static_dict_lut.h in Headers */,
+				1C5AD822212386F000A4AA17 /* metablock.h in Headers */,
 				8BF2922B208FAC1700541EE0 /* encoder_dict.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2056,6 +2168,7 @@
 				8BAE424A1E5A9E4200AFD299 /* fse_decompress.c in Sources */,
 				8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */,
 				8BAE42551E5A9E4200AFD299 /* xxhash.c in Sources */,
+				1C5AD838212387C400A4AA17 /* hist.c in Sources */,
 				8BAE42071E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8BF29208208FA9A900541EE0 /* zstd_lazy.c in Sources */,
 				8B04551C1DF8D8C000EBB706 /* huf_decompress.c in Sources */,
@@ -2063,6 +2176,7 @@
 				8BAE42581E5A9E4200AFD299 /* zstd_common.c in Sources */,
 				8BAE42031E5A9DDA00AFD299 /* cover.c in Sources */,
 				8BF29206208FA9A900541EE0 /* zstd_double_fast.c in Sources */,
+				1C5AD78B2123869300A4AA17 /* debug.c in Sources */,
 				8BAE42471E5A9E4200AFD299 /* error_private.c in Sources */,
 				8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */,
 				8BF29203208FA9A900541EE0 /* zstd_opt.c in Sources */,
@@ -2115,6 +2229,7 @@
 				8BAE424B1E5A9E4200AFD299 /* fse_decompress.c in Sources */,
 				8B04557A1DF8DBFD00EBB706 /* fse_compress.c in Sources */,
 				8BAE42561E5A9E4200AFD299 /* xxhash.c in Sources */,
+				1C5AD839212387C400A4AA17 /* hist.c in Sources */,
 				8BAE42081E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8BF29209208FA9A900541EE0 /* zstd_lazy.c in Sources */,
 				8B04557E1DF8DBFD00EBB706 /* huf_decompress.c in Sources */,
@@ -2122,6 +2237,7 @@
 				8BAE42591E5A9E4200AFD299 /* zstd_common.c in Sources */,
 				8BAE42041E5A9DDA00AFD299 /* cover.c in Sources */,
 				8BF29207208FA9A900541EE0 /* zstd_double_fast.c in Sources */,
+				1C5AD78C2123869300A4AA17 /* debug.c in Sources */,
 				8BAE42481E5A9E4200AFD299 /* error_private.c in Sources */,
 				8B04557D1DF8DBFD00EBB706 /* zstd_compress.c in Sources */,
 				8BF29204208FA9A900541EE0 /* zstd_opt.c in Sources */,
