@@ -2,6 +2,11 @@
 
 ## History
 
+### 1.11.1 (August 14, 2018) - Nolan O'Brien
+
+- Update Brotli (v1.0.5) and ZStandard (v1.3.5)
+- Bug fixes for CLI 
+
 ### 1.11.0 (April 24, 2018) - Nolan O'Brien
 
 - Update Brotli (v1.0.4) and ZStandard (v1.3.4)
