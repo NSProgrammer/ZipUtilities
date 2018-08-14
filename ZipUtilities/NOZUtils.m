@@ -222,7 +222,10 @@ BOOL NOZEncodeFile(NSString *sourceFile,
 
     do {
         const size_t bufferSize = 1024 * 1024;
-        Byte buffer[bufferSize];
+        Byte *buffer = malloc(bufferSize * sizeof(Byte));
+        noz_defer(^{
+            free(buffer);
+        });
         while (!feof(uncompressedFile)) {
 
             const size_t bytesRead = fread(buffer, 1, bufferSize, uncompressedFile);
@@ -321,7 +324,10 @@ BOOL NOZDecodeFile(NSString *sourceFile,
 
     do {
         const size_t bufferSize = 1024 * 1024;
-        Byte buffer[bufferSize];
+        Byte *buffer = malloc(bufferSize * sizeof(Byte));
+        noz_defer(^{
+            free(buffer);
+        });
         while (!context.hasFinished) {
             const size_t bytesRead = fread(buffer, 1, bufferSize, compressedFile);
             if (ferror(compressedFile)) {
