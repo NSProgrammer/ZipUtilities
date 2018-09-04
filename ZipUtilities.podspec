@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZipUtilities"
-  s.version      = "1.11.1"
+  s.version      = "1.11.2"
   s.summary      = "Zip Archiving, Unarchiving and Utilities in Objective-C"
   s.description  = <<-DESC
 					ZipUtilities, prefixed with NOZ for Nolan O'Brien ZipUtilities, is a library of zipping and unzipping utilities for iOS and Mac OS X.

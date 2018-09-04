@@ -301,20 +301,20 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
         NSError *innerError = nil;
         [self->_unzipper saveRecord:record
-                  toDirectory:self->_sanitizedDestinationDirectoryPath
-                      options:(overwrite) ? NOZUnzipperSaveRecordOptionOverwriteExisting : NOZUnzipperSaveRecordOptionsNone
-                progressBlock:^(int64_t totalBytes,
-                                int64_t bytesComplete,
-                                int64_t byteWrittenThisPass,
-                                BOOL *abort) {
-                    if (self.isCancelled) {
-                        stackError = kCancelledError;
-                        *abort = YES;
-                    } else {
-                        [self private_didDecompressBytes:byteWrittenThisPass];
-                    }
-                }
-                        error:&innerError];
+                        toDirectory:self->_sanitizedDestinationDirectoryPath
+                            options:(overwrite) ? NOZUnzipperSaveRecordOptionOverwriteExisting : NOZUnzipperSaveRecordOptionsNone
+                      progressBlock:^(int64_t totalBytes,
+                                      int64_t bytesComplete,
+                                      int64_t byteWrittenThisPass,
+                                      BOOL *abort) {
+                          if (self.isCancelled) {
+                              stackError = kCancelledError;
+                              *abort = YES;
+                          } else {
+                              [self private_didDecompressBytes:byteWrittenThisPass];
+                          }
+                      }
+                              error:&innerError];
 
         if (!stackError) {
             if (innerError) {

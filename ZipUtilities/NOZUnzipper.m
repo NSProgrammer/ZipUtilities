@@ -347,8 +347,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
     });
 
-    BOOL overwrite = (options & NOZUnzipperSaveRecordOptionOverwriteExisting) != 0;
-    BOOL followIntermediatePaths = !(options & NOZUnzipperSaveRecordOptionIgnoreIntermediatePath);
+    destinationRootDirectory = [destinationRootDirectory stringByStandardizingPath];
+    const BOOL overwrite = (options & NOZUnzipperSaveRecordOptionOverwriteExisting) != 0;
+    const BOOL followIntermediatePaths = !(options & NOZUnzipperSaveRecordOptionIgnoreIntermediatePath);
 
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *destinationFile = nil;
@@ -358,7 +359,13 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy.lastPathComponent] stringByStandardizingPath];
     }
 
+    if (![destinationFile hasPrefix:destinationRootDirectory]) {
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EBADF userInfo:nil];
+        return NO;
+    }
+
     if (![fm createDirectoryAtPath:[destinationFile stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:error]) {
+        stackError = [NSError errorWithDomain:NSPOSIXErrorDomain code:EACCES userInfo:nil];
         return NO;
     }
 
