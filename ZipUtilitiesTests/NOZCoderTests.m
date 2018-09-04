@@ -10,8 +10,9 @@
 #import "NOZXBrotliCompressionCoder.h"
 #import "NOZXZStandardCompressionCoder.h"
 
+#import "ZipUtilities.h"
+
 @import XCTest;
-@import ZipUtilities;
 
 #define NOZCompressionMethodZStandard       (100)
 #define NOZCompressionMethodZStandard_D128  (101)

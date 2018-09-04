@@ -25,9 +25,10 @@
 //  SOFTWARE.
 //
 
+#import "ZipUtilities.h"
+
 @import Foundation;
 @import XCTest;
-@import ZipUtilities;
 
 //#define TESTLOG(...) NSLog(__VA_ARGS__)
 #define TESTLOG(...) ((void)0)
