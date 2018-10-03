@@ -1832,7 +1832,7 @@
 			attributes = {
 				CLASSPREFIX = NOZ;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = NSProgrammer;
 				TargetAttributes = {
 					1C6BF76F1B74086000969629 = {
