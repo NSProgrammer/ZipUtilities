@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 import ZipUtilities
 
-var zipQueue : OperationQueue? = nil;
+var zipQueue : OperationQueue?
 
 func RemoveTemporaryDirectoryContents()
 {
