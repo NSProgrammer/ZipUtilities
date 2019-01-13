@@ -443,6 +443,97 @@ Since _ZipUtilities_ takes a modular approach for compression methods, adding su
 }
 ```
 
+## ZipUtilities CLI (aka _noz_)
+
+ZipUtilities includes a command-line interface for convenient tooling integration and scriptability.  It can be built via the Xcode project directly or installed via [Homebrew](https://brew.sh).
+
+### Installing via Homebrew
+
+Tapping the NSProgrammer formulae:
+```
+brew tap NSProgrammer/macos
+```
+
+Installing _noz_:
+```
+brew install noz
+```
+
+Upgrading _noz_ (when already installed):
+```
+brew upgrade noz
+```
+
+### Using _noz_
+
+**List _noz_ compression methods**
+```
+noz -A
+```
+
+**Dump info of zip archive**
+```
+noz -D [dump_options] -i zip_file
+
+dump_options:
+-------------------------------
+	-L                list all entries
+	-v                verbose info
+	-s                silence the archive info (the default info that is output)
+```
+
+**Compress file**
+```
+noz -c -m METHOD [-l LEVEL] -i in_file -o out_file
+
+Example: noz -c -m Brotli -l 12 -i payload.json -o payload.json.br
+(Use 'noz -A' for available compression methods and levels)
+```
+
+**Decompress file**
+```
+noz -d -m METHOD -i in_file -o out_file
+
+Example: noz -d -m Brotli -i payload.json.br -o payload.json
+(Use 'noz -A' for available compression methods)
+```
+
+**Zip up an archive**
+```
+noz -z [zip_options] -o output_file -i input_file1 [file_options] [... [-i intput_fileN [file_options]]]
+
+zip_options:
+-------------------------------
+	-c COMMENT        provide an archive comment
+	-M METHOD NUMBER  map a METHOD to a different archive number... this impacts unzipping!
+
+zip file_options:
+-------------------------------
+	-c COMMENT        provide an archive entry comment
+	-n NAME           override the name
+	-m METHOD         specify a compression method, default is "deflate" (see METHODS below)
+	-l LEVEL          specify a compression level, levels are defined per METHOD each with their own default
+	-h                permit hidden file(s)
+	-f                don't recurse into the director if provided path was a directory (default is to recurse)
+```
+
+**Unzip an archive**
+```
+noz -u [unzip_options] -i zip_file [-e [entry_options] entry1 [... [-e [entry_options] entryN]]]
+
+unzip_options:
+-------------------------------
+	-f                forcibly guess METHOD when unzipping an unknown METHOD
+	-F                forcibly fail when unzipping an unknown METHOD
+	-M METHOD NUMBER  map a METHOD to a different archive number... this impacts unzipping!
+	-b BASE_PATH      provide the base path output to.  Default is directory named after archive, './zip_file/'
+
+unzip entry_options:
+-------------------------------
+	-o OUTPUT_FILE    provide the specific output file
+	-m METHOD         override the method to unzip the entry with
+```
+
 ## TODO
 
 ### Eventually
