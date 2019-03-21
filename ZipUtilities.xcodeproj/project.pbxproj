@@ -1587,10 +1587,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1C6BF7841B74086000969629 /* Build configuration list for PBXNativeTarget "libZipUtilities" */;
 			buildPhases = (
+				1C6BF7921B740A9500969629 /* Headers */,
 				1C6BF76C1B74086000969629 /* Sources */,
 				1C6BF76D1B74086000969629 /* Frameworks */,
 				1C6BF76E1B74086000969629 /* CopyFiles */,
-				1C6BF7921B740A9500969629 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1645,10 +1645,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1C70524A1EBEBC370071C2FF /* Build configuration list for PBXNativeTarget "libZipUtilities-mac" */;
 			buildPhases = (
+				1C7052341EBEBC370071C2FF /* Headers */,
 				1C7052231EBEBC370071C2FF /* Sources */,
 				1C7052321EBEBC370071C2FF /* Frameworks */,
 				1C7052331EBEBC370071C2FF /* CopyFiles */,
-				1C7052341EBEBC370071C2FF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1663,9 +1663,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4623A8411B9A828A00A56535 /* Build configuration list for PBXNativeTarget "ZipUtilities" */;
 			buildPhases = (
+				4623A82B1B9A828A00A56535 /* Headers */,
 				4623A8291B9A828A00A56535 /* Sources */,
 				4623A82A1B9A828A00A56535 /* Frameworks */,
-				4623A82B1B9A828A00A56535 /* Headers */,
 				4623A82C1B9A828A00A56535 /* Resources */,
 			);
 			buildRules = (
@@ -1701,9 +1701,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4623A85F1B9A82AF00A56535 /* Build configuration list for PBXNativeTarget "OSXZipUtilities" */;
 			buildPhases = (
+				4623A8491B9A82AF00A56535 /* Headers */,
 				4623A8471B9A82AF00A56535 /* Sources */,
 				4623A8481B9A82AF00A56535 /* Frameworks */,
-				4623A8491B9A82AF00A56535 /* Headers */,
 				4623A84A1B9A82AF00A56535 /* Resources */,
 			);
 			buildRules = (
@@ -1773,9 +1773,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B04556A1DF8DBA000EBB706 /* Build configuration list for PBXNativeTarget "libzstd-mac" */;
 			buildPhases = (
+				8B0455671DF8DBA000EBB706 /* Headers */,
 				8B0455651DF8DBA000EBB706 /* Sources */,
 				8B0455661DF8DBA000EBB706 /* Frameworks */,
-				8B0455671DF8DBA000EBB706 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1790,9 +1790,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B0455721DF8DBD600EBB706 /* Build configuration list for PBXNativeTarget "libbrotli-mac" */;
 			buildPhases = (
+				8B04556F1DF8DBD600EBB706 /* Headers */,
 				8B04556D1DF8DBD600EBB706 /* Sources */,
 				8B04556E1DF8DBD600EBB706 /* Frameworks */,
-				8B04556F1DF8DBD600EBB706 /* Headers */,
 			);
 			buildRules = (
 			);
