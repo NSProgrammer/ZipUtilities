@@ -1848,6 +1848,7 @@
 					4623A82D1B9A828A00A56535 = {
 						CreatedOnToolsVersion = 6.4;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Manual;
 					};
 					4623A8371B9A828A00A56535 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2617,6 +2618,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos13.0]" = "";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2641,6 +2643,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos13.0]" = "";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
