@@ -116,16 +116,15 @@ func TearDownZipQueue()
     }
 
     func testLargeZipCompress() {
-        var result:NOZCompressResult? = nil
+        var result: NOZCompressResult?
         let filePath = try! NOZSwiftCompressionTests.prepareFileForCompression("Star.Wars.7.Trailer.mp4") as NSString
         let expectation = self.expectation(description: "completion closure is called");
         let request = NOZCompressRequest(destinationPath: filePath.appendingPathExtension("zip")! as String)
         request.addFileEntry(filePath as String)
-        let operation = NOZCompressOperation(request: request, completion: {
-            (op, res) -> Void in
+        let operation = NOZCompressOperation(request: request) { _, res -> Void in
             result = res
             expectation.fulfill()
-        })
+        }
 
         zipQueue?.addOperation(operation)
         waitForExpectations(timeout: 5.0 * 60.0, handler: nil)
@@ -213,15 +212,14 @@ func TearDownZipQueue()
     }
 
     func testLargeZipDecompress() {
-        var result:NOZDecompressResult? = nil
+        var result:NOZDecompressResult?
         let zipFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("Star.Wars.7.Trailer.mp4")
         let expectation = self.expectation(description: "completion closure is called");
         let request = NOZDecompressRequest(sourceFilePath: zipFilePath)
-        let operation = NOZDecompressOperation(request: request, completion: {
-            (op, res) -> Void in
+        let operation = NOZDecompressOperation(request: request) { _, res -> Void in
             result = res
             expectation.fulfill()
-        })
+        }
 
         zipQueue?.addOperation(operation)
         waitForExpectations(timeout: 5.0 * 60.0, handler: nil)
@@ -249,15 +247,15 @@ func TearDownZipQueue()
         unzipper = NOZUnzipper.init(zipFile: goodFilePath)
         try! unzipper.open()
         try! unzipper.readCentralDirectory()
-        unzipper.enumerateManifestEntries({ record, index, stop in
-            var caughtError: NSError? = nil
+        unzipper.enumerateManifestEntries { record, _, _ in
+            var caughtError: NSError?
             do {
                 try unzipper.validate(record, progressBlock: nil)
             } catch let error as NSError {
                 caughtError = error
             }
             XCTAssertNil(caughtError)
-        })
+        }
         try! unzipper.close()
 
         let badFilePath = try! NOZSwiftDecompressionTests.prepareZipFileForDecompression("Bad_File")
@@ -265,14 +263,14 @@ func TearDownZipQueue()
         try! unzipper.open()
         try! unzipper.readCentralDirectory()
         var didEncouterError: Bool = false
-        unzipper.enumerateManifestEntries({ record, index, stop in
+        unzipper.enumerateManifestEntries { record, _, _ in
             do {
                 try unzipper.validate(record, progressBlock: nil)
             } catch let error as NSError {
                 XCTAssertEqual(NOZErrorCode.init(rawValue: error.code), NOZErrorCode.unzipChecksumMissmatch)
                 didEncouterError = true
             }
-        })
+        }
         XCTAssertTrue(didEncouterError)
         try! unzipper.close()
     }
