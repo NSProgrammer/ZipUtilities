@@ -27,7 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NOZCompression.h"
+#import <ZipUtilities/NOZCompression.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

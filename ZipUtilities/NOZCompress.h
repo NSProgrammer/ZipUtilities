@@ -27,9 +27,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NOZError.h"
-#import "NOZSyncStepOperation.h"
-#import "NOZZipEntry.h"
+#import <ZipUtilities/NOZError.h>
+#import <ZipUtilities/NOZSyncStepOperation.h>
+#import <ZipUtilities/NOZZipEntry.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

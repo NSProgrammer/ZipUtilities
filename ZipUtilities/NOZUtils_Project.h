@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-#import "NOZUtils.h"
+#import <ZipUtilities/NOZUtils.h>
 
 #if __LP64__
 static const size_t NOZPointerByteSize = 8;

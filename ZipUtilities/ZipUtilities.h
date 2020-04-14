@@ -25,18 +25,18 @@
 //  SOFTWARE.
 //
 
-#import "NOZCompress.h"
-#import "NOZCompression.h"
-#import "NOZCompressionLibrary.h"
-#import "NOZDecoder.h"
-#import "NOZDecompress.h"
-#import "NOZEncoder.h"
-#import "NOZError.h"
-#import "NOZSyncStepOperation.h"
-#import "NOZUnzipper.h"
-#import "NOZUtils.h"
-#import "NOZZipEntry.h"
-#import "NOZZipper.h"
+#import <ZipUtilities/NOZCompress.h>
+#import <ZipUtilities/NOZCompression.h>
+#import <ZipUtilities/NOZCompressionLibrary.h>
+#import <ZipUtilities/NOZDecoder.h>
+#import <ZipUtilities/NOZDecompress.h>
+#import <ZipUtilities/NOZEncoder.h>
+#import <ZipUtilities/NOZError.h>
+#import <ZipUtilities/NOZSyncStepOperation.h>
+#import <ZipUtilities/NOZUnzipper.h>
+#import <ZipUtilities/NOZUtils.h>
+#import <ZipUtilities/NOZZipEntry.h>
+#import <ZipUtilities/NOZZipper.h>
 
-#import "NSData+NOZAdditions.h"
-#import "NSStream+NOZAdditions.h"
+#import <ZipUtilities/NSData+NOZAdditions.h>
+#import <ZipUtilities/NSStream+NOZAdditions.h>

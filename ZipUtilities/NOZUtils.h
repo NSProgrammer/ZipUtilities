@@ -25,7 +25,7 @@
 //  SOFTWARE.
 //
 
-#import "NOZCompression.h"
+#import <ZipUtilities/NOZCompression.h>
 
 @protocol NOZEncoder;
 @protocol NOZDecoder;
