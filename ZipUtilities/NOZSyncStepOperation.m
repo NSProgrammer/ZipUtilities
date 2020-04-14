@@ -189,7 +189,7 @@
 
     SInt64 currentWeight = 0;
     for (NSUInteger iStep = 0; iStep < _stepCount; iStep++) {
-        currentWeight += _currentStepProgress[iStep] * _stepWeights[iStep];
+        currentWeight += (SInt64)_currentStepProgress[iStep] * _stepWeights[iStep];
         if (_currentStepProgress[iStep] < 0.f) {
             isIndeeterminate = YES;
         }
