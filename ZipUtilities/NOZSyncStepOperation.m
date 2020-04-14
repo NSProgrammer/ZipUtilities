@@ -179,9 +179,9 @@
 
     const float oldProgress = self.progress;
     const BOOL wasIndeterminate = oldProgress < 0.f;
-    BOOL isIndeeterminate = progress < 0.f;
+    BOOL isIndeterminate = wasIndeterminate || (progress < 0.f);
 
-    if (wasIndeterminate && isIndeeterminate) {
+    if (isIndeterminate) {
         return;
     }
 
@@ -189,13 +189,16 @@
 
     SInt64 currentWeight = 0;
     for (NSUInteger iStep = 0; iStep < _stepCount; iStep++) {
-        currentWeight += _currentStepProgress[iStep] * _stepWeights[iStep];
-        if (_currentStepProgress[iStep] < 0.f) {
-            isIndeeterminate = YES;
+        NSComparisonResult progressComparedToZero = (NSComparisonResult)_currentStepProgress[iStep];
+        if (NSOrderedDescending == progressComparedToZero) {
+            currentWeight += _stepWeights[iStep];
+        } else if (NSOrderedSame != progressComparedToZero) {
+            isIndeterminate = YES;
+            break;
         }
     }
 
-    progress = (isIndeeterminate) ? -1.f : (float)((double)currentWeight / (double)_totalWeight);
+    progress = (isIndeterminate) ? -1.f : (float)((double)currentWeight / (double)_totalWeight);
     self.progress = progress;
     [self handleProgressUpdated:progress];
 }
