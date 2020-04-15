@@ -27,8 +27,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NOZUtils.h"
-#import "NOZZipEntry.h"
+#import <ZipUtilities/NOZUtils.h>
+#import <ZipUtilities/NOZZipEntry.h>
 
 @class NOZGlobalInfo;
 @class NOZCentralDirectory;

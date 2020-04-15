@@ -27,7 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NOZCompression.h"
+#import <ZipUtilities/NOZCompression.h>
 
 /**
  Protocol for encapsulating the context and state of an encoding process.
