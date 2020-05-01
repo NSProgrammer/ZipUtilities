@@ -70,12 +70,12 @@
      return YES; // fclose will auto happen
  */
 #define noz_defer(deferBlock) \
-__strong noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock
+__unsafe_unretained noz_defer_block_t noz_macro_concat(__noz_stack_defer_block_, __LINE__) __attribute__((cleanup(noz_deferFunc), unused)) = deferBlock
 
 typedef void(^noz_defer_block_t)(void);
-NS_INLINE void noz_deferFunc(__strong noz_defer_block_t __nonnull * __nonnull blockRef)
+NS_INLINE void noz_deferFunc(__unsafe_unretained noz_defer_block_t __nonnull * __nonnull blockRef)
 {
-    noz_defer_block_t actualBlock = *blockRef;
+    __unsafe_unretained noz_defer_block_t actualBlock = *blockRef;
     actualBlock();
 }
 
