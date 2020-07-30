@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.11.3 (July 30, 2020) - Nolan O'Brien
+- Update Brotli (v1.0.7) and ZStandard (v1.4.5)
+- Other minor fixes
+
 ### 1.11.2 (September 4, 2018) - Nolan O'Brien
 - Fix vulnerability when zip archive provides malicious output file name
 
