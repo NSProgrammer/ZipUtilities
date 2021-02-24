@@ -34,13 +34,19 @@
 #pragma mark - Raw Encoder
 
 @interface NOZRawEncoderContext : NSObject <NOZEncoderContext>
-@property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL encodedDataWasText;
 @end
 
+__attribute__((objc_direct_members))
+@interface NOZRawEncoderContext (/* direct declarations */)
+@property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
+@end
+
+__attribute__((objc_direct_members))
 @implementation NOZRawEncoderContext
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZRawEncoder
 
 - (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
@@ -85,13 +91,19 @@
 #pragma mark - Raw Decoder
 
 @interface NOZRawDecoderContext : NSObject <NOZDecoderContext>
-@property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL hasFinished;
 @end
 
+__attribute__((objc_direct_members))
+@interface NOZRawDecoderContext (/* direct declarations */)
+@property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
+@end
+
+__attribute__((objc_direct_members))
 @implementation NOZRawDecoderContext
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZRawDecoder
 
 - (NOZRawDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags

@@ -289,6 +289,7 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 - (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
 + (nonnull instancetype)new NS_UNAVAILABLE;
+- (nonnull instancetype)initWithOwner:(nonnull NOZCentralDirectory *)cd NS_DESIGNATED_INITIALIZER;
 @end
 
 /**
@@ -320,5 +321,6 @@ typedef NS_OPTIONS(NSInteger, NOZUnzipperSaveRecordOptions)
 - (nonnull instancetype)init NS_UNAVAILABLE;
 /** Unavailable */
 + (nonnull instancetype)new NS_UNAVAILABLE;
+- (nonnull instancetype)initWithKnownFileSize:(SInt64)fileSize NS_DESIGNATED_INITIALIZER;
 @end
 

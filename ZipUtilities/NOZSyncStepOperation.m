@@ -30,12 +30,17 @@
 #import "NOZ_Project.h"
 #import "NOZSyncStepOperation.h"
 
-@interface NOZSyncStepOperation ()
-@property (nonatomic) float progress;
+@interface NOZSyncStepOperation (/* non-direct */)
 @property (atomic, getter=isCancelled) BOOL cancelled;
+@end
+
+__attribute__((objc_direct_members))
+@interface NOZSyncStepOperation (/* direct declarations */)
+@property (nonatomic) float progress;
 @property (atomic, nullable) NSError *operationError;
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZSyncStepOperation
 {
     NSUInteger _stepCount;
@@ -85,7 +90,7 @@
         }
     };
 
-    [self finish];
+    [self private_finish];
 }
 
 - (void)start
@@ -110,11 +115,11 @@
     }
 
     self.operationError = [[self class] operationCancelledError];
-    [self finish];
+    [self private_finish];
     self.cancelled = YES;
 }
 
-- (void)finish
+- (void)private_finish
 {
     if (!atomic_flag_test_and_set(&_finishedFlag)) {
         [self handleFinishing];

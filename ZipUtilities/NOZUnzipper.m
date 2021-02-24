@@ -35,37 +35,26 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 #define PRIVATE_READ(file, value) noz_fread_value(file, (Byte *)&value, sizeof(value))
 
-@interface NOZCentralDirectoryRecord ()
-- (instancetype)initWithOwner:(NOZCentralDirectory *)cd;
-- (NOZFileEntryT *)internalEntry;
-- (NOZErrorCode)validate;
-- (BOOL)isOwnedByCentralDirectory:(NOZCentralDirectory *)cd;
-- (NSString *)nameNoCopy;
+__attribute__((objc_direct_members))
+@interface NOZCentralDirectoryRecord (/* direct declarations */)
+- (NOZFileEntryT *)private_internalEntry;
+- (NOZErrorCode)private_validate;
+- (BOOL)private_isOwnedByCentralDirectory:(NOZCentralDirectory *)cd;
+- (NSString *)private_nameNoCopy;
 @end
 
-@interface NOZCentralDirectory ()
-- (nonnull instancetype)initWithKnownFileSize:(SInt64)fileSize NS_DESIGNATED_INITIALIZER;
+__attribute__((objc_direct_members))
+@interface NOZCentralDirectory (/* direct declarations */)
+- (NSArray<NOZCentralDirectoryRecord *> *)private_internalRecords;
+- (BOOL)private_readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file;
+- (BOOL)private_readCentralDirectoryEntriesWithFile:(FILE*)file;
+- (NOZCentralDirectoryRecord *)private_readCentralDirectoryEntryAtCurrentPositionWithFile:(FILE*)file;
+- (BOOL)private_validateCentralDirectoryAndReturnError:(NSError **)error;
+- (NOZCentralDirectoryRecord *)private_recordAtIndex:(NSUInteger)index;
+- (NSUInteger)private_indexForRecordWithName:(NSString *)name;
 @end
 
-@interface NOZCentralDirectory (Protected)
-- (NSArray<NOZCentralDirectoryRecord *> *)internalRecords;
-- (BOOL)readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file;
-- (BOOL)readCentralDirectoryEntriesWithFile:(FILE*)file;
-- (NOZCentralDirectoryRecord *)readCentralDirectoryEntryAtCurrentPositionWithFile:(FILE*)file;
-- (BOOL)validateCentralDirectoryAndReturnError:(NSError **)error;
-- (NOZCentralDirectoryRecord *)recordAtIndex:(NSUInteger)index;
-- (NSUInteger)indexForRecordWithName:(NSString *)name;
-@end
-
-@interface NOZUnzipper (Private)
-- (SInt64)private_locateSignature:(UInt32)signature;
-- (BOOL)private_locateCompressedDataOfRecord:(NOZCentralDirectoryRecord *)record;
-- (BOOL)private_deflateWithProgressBlock:(nullable NOZProgressBlock)progressBlock
-                              usingBlock:(nonnull NOZUnzipByteRangeEnumerationBlock)block
-                                   error:(out NSError *__autoreleasing  __nullable * __nullable)error;
-- (BOOL)private_flushDecompressedBytes:(const Byte*)buffer length:(size_t)length block:(nonnull NOZUnzipByteRangeEnumerationBlock)block;
-@end
-
+__attribute__((objc_direct_members))
 @implementation NOZUnzipper
 {
     NSString *_standardizedFilePath;
@@ -164,17 +153,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     NOZCentralDirectory *cd = [[NOZCentralDirectory alloc] initWithKnownFileSize:_internal.endOfFilePosition];
 
     @autoreleasepool {
-        if (![cd readEndOfCentralDirectoryRecordAtPosition:_internal.endOfCentralDirectorySignaturePosition inFile:_internal.file]) {
+        if (![cd private_readEndOfCentralDirectoryRecordAtPosition:_internal.endOfCentralDirectorySignaturePosition inFile:_internal.file]) {
             stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
             return nil;
         }
 
-        if (![cd readCentralDirectoryEntriesWithFile:_internal.file]) {
+        if (![cd private_readCentralDirectoryEntriesWithFile:_internal.file]) {
             stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadCentralDirectory, nil);
             return nil;
         }
 
-        if (![cd validateCentralDirectoryAndReturnError:&stackError]) {
+        if (![cd private_validateCentralDirectoryAndReturnError:&stackError]) {
             return nil;
         }
     }
@@ -191,17 +180,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
         return nil;
     }
-    return [_centralDirectory recordAtIndex:index];
+    return [_centralDirectory private_recordAtIndex:index];
 }
 
 - (NSUInteger)indexForRecordWithName:(NSString *)name
 {
-    return (_centralDirectory) ? [_centralDirectory indexForRecordWithName:name] : NSNotFound;
+    return (_centralDirectory) ? [_centralDirectory private_indexForRecordWithName:name] : NSNotFound;
 }
 
 - (void)enumerateManifestEntriesUsingBlock:(NOZUnzipRecordEnumerationBlock NS_NOESCAPE)block
 {
-    [_centralDirectory.internalRecords enumerateObjectsUsingBlock:block];
+    [[_centralDirectory private_internalRecords] enumerateObjectsUsingBlock:block];
 }
 
 - (BOOL)enumerateByteRangesOfRecord:(NOZCentralDirectoryRecord *)record
@@ -222,7 +211,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
             return NO;
         }
 
-        if (![record isOwnedByCentralDirectory:_centralDirectory]) {
+        if (![record private_isOwnedByCentralDirectory:_centralDirectory]) {
             stackError = NOZErrorCreate(NOZErrorCodeUnzipCannotReadFileEntry, nil);
             return NO;
         }
@@ -233,7 +222,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         }
 
         do {
-            NOZErrorCode code = [record validate];
+            NOZErrorCode code = [record private_validate];
             if (0 != code) {
                 stackError = NOZErrorCreate(code, nil);
                 return NO;
@@ -264,8 +253,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
                                                     length:length
                                                      block:block];
         };
-        _currentDecoder = [[NOZCompressionLibrary sharedInstance] decoderForMethod:record.internalEntry->fileHeader.compressionMethod];
-        _currentDecoderContext = [_currentDecoder createContextForDecodingWithBitFlags:record.internalEntry->fileHeader.bitFlag
+        _currentDecoder = [[NOZCompressionLibrary sharedInstance] decoderForMethod:[record private_internalEntry]->fileHeader.compressionMethod];
+        _currentDecoderContext = [_currentDecoder createContextForDecodingWithBitFlags:[record private_internalEntry]->fileHeader.bitFlag
                                                                          flushCallback:flushCallback];
 
         noz_defer(^{
@@ -283,7 +272,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
             return NO;
         }
         
-        _currentUnzipping.entry = record.internalEntry;
+        _currentUnzipping.entry = record.private_internalEntry;
         noz_defer(^{ self->_currentUnzipping.entry = NULL; });
         
         if (![self private_deflateWithProgressBlock:progressBlock usingBlock:block error:&stackError]) {
@@ -354,9 +343,9 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *destinationFile = nil;
     if (followIntermediatePaths) {
-        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy] stringByStandardizingPath];
+        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:[record private_nameNoCopy]] stringByStandardizingPath];
     } else {
-        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:record.nameNoCopy.lastPathComponent] stringByStandardizingPath];
+        destinationFile = [[destinationRootDirectory stringByAppendingPathComponent:[record private_nameNoCopy].lastPathComponent] stringByStandardizingPath];
     }
 
     if (![destinationFile hasPrefix:destinationRootDirectory]) {
@@ -380,8 +369,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
         return NO;
     }
 
-    NSDate *fileDate = noz_NSDate_from_dos_date(record.internalEntry->fileHeader.dosDate,
-                                                record.internalEntry->fileHeader.dosTime);
+    NSDate *fileDate = noz_NSDate_from_dos_date(record.private_internalEntry->fileHeader.dosDate,
+                                                record.private_internalEntry->fileHeader.dosTime);
 
     noz_defer(^{
         off_t offset = ftello(file);
@@ -430,10 +419,6 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
                                   }
                                        error:error];
 }
-
-@end
-
-@implementation NOZUnzipper (Private)
 
 - (BOOL)private_flushDecompressedBytes:(const Byte *)buffer
                                 length:(size_t)length
@@ -517,7 +502,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 - (BOOL)private_locateCompressedDataOfRecord:(NOZCentralDirectoryRecord *)record
 {
-    NOZFileEntryT *entry = record.internalEntry;
+    NOZFileEntryT *entry = record.private_internalEntry;
     if (!entry) {
         return NO;
     }
@@ -635,6 +620,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZCentralDirectory
 {
     off_t _endOfCentralDirectoryRecordPosition;
@@ -667,11 +653,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return _records.count;
 }
 
-@end
-
-@implementation NOZCentralDirectory (Protected)
-
-- (BOOL)readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file
+- (BOOL)private_readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file
 {
     if (!file) {
         return NO;
@@ -709,7 +691,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (BOOL)readCentralDirectoryEntriesWithFile:(FILE *)file
+- (BOOL)private_readCentralDirectoryEntriesWithFile:(FILE *)file
 {
     if (!file || !_endOfCentralDirectoryRecordPosition) {
         return NO;
@@ -721,7 +703,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
     NSMutableArray<NOZCentralDirectoryRecord *> *records = [NSMutableArray arrayWithCapacity:_endOfCentralDirectoryRecord.totalRecordCount];
     while (_endOfCentralDirectoryRecordPosition > ftello(file)) {
-        NOZCentralDirectoryRecord *record = [self readCentralDirectoryEntryAtCurrentPositionWithFile:file];
+        NOZCentralDirectoryRecord *record = [self private_readCentralDirectoryEntryAtCurrentPositionWithFile:file];
         if (record) {
             [records addObject:record];
         } else {
@@ -733,7 +715,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return YES;
 }
 
-- (NOZCentralDirectoryRecord *)readCentralDirectoryEntryAtCurrentPositionWithFile:(FILE *)file
+- (NOZCentralDirectoryRecord *)private_readCentralDirectoryEntryAtCurrentPositionWithFile:(FILE *)file
 {
     UInt32 signature = 0;
     if (!PRIVATE_READ(file, signature) || signature != NOZMagicNumberCentralDirectoryFileRecord) {
@@ -741,7 +723,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     }
 
     NOZCentralDirectoryRecord *record = [[NOZCentralDirectoryRecord alloc] initWithOwner:self];
-    NOZFileEntryT* entry = record.internalEntry;
+    NOZFileEntryT* entry = record.private_internalEntry;
 
     if (!PRIVATE_READ(file, entry->centralDirectoryRecord.versionMadeBy) ||
         !PRIVATE_READ(file, entry->centralDirectoryRecord.fileHeader->versionForExtraction) ||
@@ -790,16 +772,16 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return record;
 }
 
-- (NOZCentralDirectoryRecord *)recordAtIndex:(NSUInteger)index
+- (NOZCentralDirectoryRecord *)private_recordAtIndex:(NSUInteger)index
 {
     return [_records objectAtIndex:index];
 }
 
-- (NSUInteger)indexForRecordWithName:(NSString *)name
+- (NSUInteger)private_indexForRecordWithName:(NSString *)name
 {
     __block NSUInteger index = NSNotFound;
     [_records enumerateObjectsUsingBlock:^(NOZCentralDirectoryRecord *record, NSUInteger idx, BOOL *stop) {
-        if ([name isEqualToString:record.nameNoCopy]) {
+        if ([name isEqualToString:[record private_nameNoCopy]]) {
             index = idx;
             *stop = YES;
         }
@@ -807,12 +789,12 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     return index;
 }
 
-- (NSArray<NOZCentralDirectoryRecord *> *)internalRecords
+- (NSArray<NOZCentralDirectoryRecord *> *)private_internalRecords
 {
     return _records;
 }
 
-- (BOOL)validateCentralDirectoryAndReturnError:(NSError * __autoreleasing *)error
+- (BOOL)private_validateCentralDirectoryAndReturnError:(NSError * __autoreleasing *)error
 {
     __block NOZErrorCode code = 0;
     __block NSDictionary *userInfo = nil;
@@ -848,6 +830,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZCentralDirectoryRecord
 {
     NOZFileEntryT _entry;
@@ -874,7 +857,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     abort();
 }
 
-- (NSString *)nameNoCopy
+- (NSString *)private_nameNoCopy
 {
     return [[NSString alloc] initWithBytesNoCopy:(void *)_entry.name
                                           length:_entry.fileHeader.nameSize
@@ -957,39 +940,17 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 #pragma mark Internal
 
-- (BOOL)isOwnedByCentralDirectory:(NOZCentralDirectory *)cd
+- (BOOL)private_isOwnedByCentralDirectory:(NOZCentralDirectory *)cd
 {
     return (cd != nil) && (cd == _owner);
 }
 
-- (NOZFileEntryT *)internalEntry
+- (NOZFileEntryT *)private_internalEntry
 {
     return &_entry;
 }
 
-- (BOOL)isZeroLength
-{
-    return (_entry.centralDirectoryRecord.fileHeader->fileDescriptor->compressedSize == 0);
-}
-
-- (BOOL)isMacOSXAttribute
-{
-    NSArray<NSString *> *components = [self.nameNoCopy pathComponents];
-    if ([components containsObject:@"__MACOSX"]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)isMacOSXDSStore
-{
-    if ([self.nameNoCopy.lastPathComponent isEqualToString:@".DS_Store"]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (NOZErrorCode)validate
+- (NOZErrorCode)private_validate
 {
     if (self.isZeroLength || self.isMacOSXAttribute || self.isMacOSXDSStore) {
         return 0;
@@ -1003,6 +964,32 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
     }
 
     return 0;
+}
+
+@end
+
+@implementation NOZCentralDirectoryRecord (Attributes)
+
+- (BOOL)isZeroLength
+{
+    return (_entry.centralDirectoryRecord.fileHeader->fileDescriptor->compressedSize == 0);
+}
+
+- (BOOL)isMacOSXAttribute
+{
+    NSArray<NSString *> *components = [[self private_nameNoCopy] pathComponents];
+    if ([components containsObject:@"__MACOSX"]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isMacOSXDSStore
+{
+    if ([[self private_nameNoCopy].lastPathComponent isEqualToString:@".DS_Store"]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

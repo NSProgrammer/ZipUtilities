@@ -46,41 +46,7 @@ static UInt8 noz_store_value(UInt64 x,
 #define PRIVATE_WRITE(v) \
 noz_fwrite_value((v), sizeof(v), _internal.file)
 
-@interface NOZZipper (Private)
-
-// Top level methods
-- (BOOL)private_forciblyClose:(BOOL)forceClose
-                        error:(out NSError * __nullable * __nullable)error;
-
-// Entry methods
-- (BOOL)private_openEntry:(nonnull id<NOZZippableEntry>)entry
-                    error:(out NSError * __nullable * __nullable)error;
-- (BOOL)private_writeEntry:(nonnull id<NOZZippableEntry>)entry
-             progressBlock:(nullable NOZProgressBlock)progressBlock
-                     error:(out NSError * __nullable * __nullable)error
-                  abortRef:(nonnull BOOL *)abort;
-- (BOOL)private_closeCurrentOpenEntryAndReturnError:(out NSError * __nullable * __nullable)error;
-
-// Helpers
-- (BOOL)private_finishEncoding;
-- (BOOL)private_flushWriteBuffer:(const Byte*)buffer length:(size_t)length;
-- (void)private_freeLinkedList;
-
-// Records
-- (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(nonnull id<NOZZippableEntry>)entry
-                                                      error:(out NSError * __nullable * __nullable)error;
-- (BOOL)private_writeLocalFileHeaderForCurrentEntryAndReturnError:(out NSError * __nullable * __nullable)error;
-- (BOOL)private_writeLocalFileHeaderForEntry:(NOZFileEntryT *)entry
-                                   signature:(BOOL)writeSig;
-- (BOOL)private_writeCurrentLocalFileDescriptor:(BOOL)writeSignature;
-- (BOOL)private_writeLocalFileDescriptorForEntry:(NOZFileEntryT *)entry
-                                       signature:(BOOL)writeSig;
-- (BOOL)private_writeCentralDirectoryRecords;
-- (BOOL)private_writeCentralDirectoryRecord:(NOZFileEntryT *)entry;
-- (BOOL)private_writeEndOfCentralDirectoryRecord;
-
-@end
-
+__attribute__((objc_direct_members))
 @implementation NOZZipper
 {
     NSString *_standardizedZipFilePath;
@@ -260,10 +226,6 @@ noz_fwrite_value((v), sizeof(v), _internal.file)
         return YES;
     }
 }
-
-@end
-
-@implementation NOZZipper (Private)
 
 - (BOOL)private_forciblyClose:(BOOL)forceClose
                         error:(out NSError * __autoreleasing *)error

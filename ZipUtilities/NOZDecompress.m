@@ -41,7 +41,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 #define kCancelledError NOZErrorCreate(NOZErrorCodeDecompressCancelled, nil)
 
-@interface NOZDecompressResult ()
+__attribute__((objc_direct_members))
+@interface NOZDecompressResult (/* direct declarations */)
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
 @property (nonatomic, copy, nullable) NSArray<NSString *> *destinationFiles;
 @property (nonatomic, nullable) NSError *operationError;
@@ -59,23 +60,12 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
-@interface NOZDecompressOperation ()
+__attribute__((objc_direct_members))
+@interface NOZDecompressOperation (/* direct declarations */)
 @property (nonatomic) NOZDecompressResult *result;
 @end
 
-@interface NOZDecompressOperation (Private);
-
-#pragma mark Steps
-- (nullable NSError *)private_openFile;
-- (nullable NSError *)private_readExpectedSizes;
-- (nullable NSError *)private_unzipAllEntries;
-- (nullable NSError *)private_closeFile;
-
-#pragma mark Helpers
-- (void)private_didDecompressBytes:(SInt64)bytes;
-
-@end
-
+__attribute__((objc_direct_members))
 @implementation NOZDecompressOperation
 {
     NOZUnzipper *_unzipper;
@@ -235,10 +225,6 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     }
 }
 
-@end
-
-@implementation NOZDecompressOperation (Private)
-
 #pragma mark Steps
 
 - (NSError *)private_openFile
@@ -366,6 +352,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDecompressRequest
 
 - (instancetype)initWithSourceFilePath:(NSString *)path
@@ -394,6 +381,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDecompressDelegateInternal
 
 - (instancetype)init
@@ -420,6 +408,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDecompressResult
 
 - (float)compressionRatio

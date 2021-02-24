@@ -40,6 +40,11 @@
 static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 @interface NOZDeflateEncoderContext : NSObject <NOZEncoderContext>
+@property (nonatomic) BOOL encodedDataWasText;
+@end
+
+__attribute__((objc_direct_members))
+@interface NOZDeflateEncoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) int compressionLevel;
 @property (nonatomic) BOOL zStreamOpen;
@@ -48,9 +53,9 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 @property (nonatomic, readonly) Byte *compressedDataBuffer;
 @property (nonatomic, readonly) size_t compressedDataBufferSize;
 @property (nonatomic) size_t compressedDataPosition;
-@property (nonatomic) BOOL encodedDataWasText;
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDeflateEncoderContext
 {
     z_stream _zStream;
@@ -93,6 +98,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDeflateEncoder
 
 - (NSUInteger)numberOfCompressionLevels
@@ -248,19 +254,22 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 #pragma mark - Deflate Decoder
 
 @interface NOZDeflateDecoderContext : NSObject <NOZDecoderContext>
+@property (nonatomic) BOOL hasFinished;
+@end
+
+__attribute__((objc_direct_members))
+@interface NOZDeflateDecoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL zStreamOpen;
-@property (nonatomic) BOOL hasFinished;
 
 @property (nonatomic, readonly) z_stream *zStream;
 @property (nonatomic, readonly) Byte *decompressedDataBuffer;
 @property (nonatomic, readonly) size_t decompressedDataBufferSize;
 //@property (nonatomic) size_t decompressedDataPosition;
 
-- (void)doubleDecompressDataBuffer;
-
 @end
 
+__attribute__((objc_direct_members))
 @implementation NOZDeflateDecoderContext
 {
     z_stream _zStream;
@@ -294,7 +303,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
     return &_zStream;
 }
 
-- (void)doubleDecompressDataBuffer
+- (void)private_doubleDecompressDataBuffer
 {
     static const size_t kMaxBufferSize = 5 * 1024 * 1024; // 5MBs
     if (_decompressedDataBufferSize == kMaxBufferSize) {
@@ -379,7 +388,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
                 // did we run out of output buffer?
                 if (zStream->avail_out == 0 && zStream->avail_in > 0) {
                     // not enough buffer, double it
-                    [context doubleDecompressDataBuffer];
+                    [context private_doubleDecompressDataBuffer];
 
                     // retry
                     zStream->avail_out = 0;

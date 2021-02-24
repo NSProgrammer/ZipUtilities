@@ -35,10 +35,6 @@
 
 static NSOperationQueue *sQueue = nil;
 
-@interface NOZCompressRequest (TestExposure)
-- (nonnull NSMutableArray<id<NOZZippableEntry>> *)mutableEntries;
-@end
-
 @interface NOZCompressTests : XCTestCase <NOZCompressDelegate>
 @end
 
@@ -106,7 +102,8 @@ static NSOperationQueue *sQueue = nil;
                                                              ]];
     });
 
-    for (NOZAbstractZipEntry *entry in request.mutableEntries) {
+    NSArray *entries = request.entries;
+    for (NOZAbstractZipEntry *entry in entries) {
         if ([entry isKindOfClass:[NOZFileZipEntry class]]) {
             NSString *extension = [[(NOZFileZipEntry *)entry filePath].pathExtension lowercaseString];
             if ([sAlreadyCompressedExtensions containsObject:extension]) {
@@ -115,6 +112,7 @@ static NSOperationQueue *sQueue = nil;
         }
         entry.compressionLevel = level;
     }
+    request.entries = entries;
 }
 
 - (void)runValidCompressRequest:(NOZCompressRequest *)request withQueue:(NSOperationQueue *)queue
@@ -159,9 +157,11 @@ static NSOperationQueue *sQueue = nil;
 {
     [[self class] forceCompressionLevel:NOZCompressionLevelDefault forAllEntriesOnRequest:request];
     for (NOZCompressionMethod method = NOZCompressionMethodNone; method <= NOZCompressionMethodLZ77; method++) {
-        for (NOZAbstractZipEntry *entry in request.mutableEntries) {
+        NSArray *entries = request.entries;
+        for (NOZAbstractZipEntry *entry in entries) {
             entry.compressionMethod = method;
         }
+        request.entries = entries;
 
         if ([[NOZCompressionLibrary sharedInstance] encoderForMethod:method] != nil) {
             [self runValidCompressRequest:request withQueue:sQueue];
@@ -239,8 +239,9 @@ static NSOperationQueue *sQueue = nil;
 - (void)runGambitWithRequest:(NOZCompressRequest *)request expectedOutputZipName:(NSString *)zipName
 {
     request.comment = @"This is a comment on the ZIP archive.  Nothing special...just some extra text.";
-    NOZAbstractZipEntry *lastEntry = [[request mutableEntries] lastObject];
-    lastEntry.comment = @"This is a comment on a specific entry in a ZIP archive.";
+    NSArray *entries = request.entries;
+    ((NOZAbstractZipEntry *)entries.lastObject).comment = @"This is a comment on a specific entry in a ZIP archive.";
+    request.entries = entries;
     [self runCompressRequest:request withQueue:sQueue expectedOutputZipName:zipName];
     [self runCompressRequest:request withQueue:nil expectedOutputZipName:zipName];
     [self runCompressRequest:request cancelling:YES];
