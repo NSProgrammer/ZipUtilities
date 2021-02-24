@@ -96,7 +96,7 @@
 #if TARGET_OS_IPHONE
     return osVersion.majorVersion >= 9;
 #elif TARGET_OS_MAC
-    return osVersion.majorVersion == 10 && osVersion.minorVersion >= 11;
+    return (osVersion.majorVersion == 10 && osVersion.minorVersion >= 11) || osVersion.majorVersion >= 11;
 #else
     return NO;
 #endif
