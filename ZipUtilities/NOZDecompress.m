@@ -28,6 +28,7 @@
 #import "NOZ_Project.h"
 #import "NOZDecompress.h"
 #import "NOZUnzipper.h"
+#import "NOZUtils.h"
 
 #define kWEIGHT (1000ll)
 
@@ -41,7 +42,8 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 #define kCancelledError NOZErrorCreate(NOZErrorCodeDecompressCancelled, nil)
 
-@interface NOZDecompressResult ()
+NOZ_OBJC_DIRECT_MEMBERS
+@interface NOZDecompressResult (/* direct declarations */)
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
 @property (nonatomic, copy, nullable) NSArray<NSString *> *destinationFiles;
 @property (nonatomic, nullable) NSError *operationError;
@@ -59,23 +61,12 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
-@interface NOZDecompressOperation ()
+NOZ_OBJC_DIRECT_MEMBERS
+@interface NOZDecompressOperation (/* direct declarations */)
 @property (nonatomic) NOZDecompressResult *result;
 @end
 
-@interface NOZDecompressOperation (Private);
-
-#pragma mark Steps
-- (nullable NSError *)private_openFile;
-- (nullable NSError *)private_readExpectedSizes;
-- (nullable NSError *)private_unzipAllEntries;
-- (nullable NSError *)private_closeFile;
-
-#pragma mark Helpers
-- (void)private_didDecompressBytes:(SInt64)bytes;
-
-@end
-
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressOperation
 {
     NOZUnzipper *_unzipper;
@@ -235,10 +226,6 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
     }
 }
 
-@end
-
-@implementation NOZDecompressOperation (Private)
-
 #pragma mark Steps
 
 - (NSError *)private_openFile
@@ -366,6 +353,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressRequest
 
 - (instancetype)initWithSourceFilePath:(NSString *)path
@@ -394,6 +382,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressDelegateInternal
 
 - (instancetype)init
@@ -420,6 +409,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressResult
 
 - (float)compressionRatio

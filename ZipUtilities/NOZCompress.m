@@ -42,17 +42,23 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 #define kCancelledError NOZErrorCreate(NOZErrorCodeCompressCancelled, nil)
 
 @interface NOZCompressDelegateInternal : NSObject <NOZCompressDelegate>
-@property (nonatomic, readonly, nonnull) NOZCompressCompletionBlock completionBlock;
 - (nonnull instancetype)initWithCompletion:(nonnull NOZCompressCompletionBlock)completion;
 - (nonnull instancetype)init NS_UNAVAILABLE;
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
-@interface NOZCompressRequest ()
+NOZ_OBJC_DIRECT_MEMBERS
+@interface NOZCompressDelegateInternal (/* direct declarations */)
+@property (nonatomic, readonly, nonnull) NOZCompressCompletionBlock completionBlock;
+@end
+
+NOZ_OBJC_DIRECT_MEMBERS
+@interface NOZCompressRequest (/* direct declarations */)
 @property (nonatomic, nonnull) NSMutableArray<id<NOZZippableEntry>> *mutableEntries;
 @end
 
-@interface NOZCompressResult ()
+NOZ_OBJC_DIRECT_MEMBERS
+@interface NOZCompressResult (/* direct declarations */)
 @property (nonatomic, copy) NSString *destinationPath;
 @property (nonatomic, nullable) NSError *operationError;
 @property (nonatomic) BOOL didSucceed;
@@ -61,20 +67,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 @property (nonatomic) SInt64 compressedSize;
 @end
 
-@interface NOZCompressOperation (Private)
-
-#pragma mark Steps
-- (nullable NSError *)private_prepareProgress;
-- (nullable NSError *)private_openFile;
-- (nullable NSError *)private_addEntries;
-- (nullable NSError *)private_closeFile;
-
-#pragma mark Helpers
-- (nullable NSError *)private_addEntry:(nonnull id<NOZZippableEntry>)entry;
-- (void)private_didCompressBytes:(SInt64)byteCount;
-
-@end
-
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressOperation
 {
     NOZZipper *_zipper;
@@ -229,10 +222,6 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
     }
 }
 
-@end
-
-@implementation NOZCompressOperation (Private)
-
 #pragma mark Steps
 
 - (NSError *)private_prepareProgress
@@ -350,6 +339,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressDelegateInternal
 
 - (instancetype)init
@@ -376,6 +366,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressResult
 
 - (float)compressionRatio
@@ -411,6 +402,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressRequest
 
 - (instancetype)init
@@ -448,11 +440,7 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 
 - (NSArray<id<NOZZippableEntry>> *)entries
 {
-    NSMutableArray<id<NOZZippableEntry>> *entries = [[NSMutableArray alloc] initWithCapacity:_mutableEntries.count];
-    for (id<NOZZippableEntry> entry in _mutableEntries) {
-        [entries addObject:[entry copy]];
-    }
-    return [entries copy];
+    return [[NSArray alloc] initWithArray:_mutableEntries copyItems:YES];
 }
 
 - (void)setEntries:(NSArray<id<NOZZippableEntry>> *)entries

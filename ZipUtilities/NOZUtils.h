@@ -48,3 +48,21 @@ FOUNDATION_EXTERN BOOL NOZDecodeFile(NSString * __nonnull sourceFile,
                                      NSString * __nonnull destinationFile,
                                      id<NOZDecoder> __nonnull decoder,
                                      NSError * __nullable * __nullable error);
+
+#pragma mark - Objective-C attribute support
+
+#if defined(__has_attribute) && (defined(__IPHONE_14_0) || defined(__MAC_10_16) || defined(__MAC_11_0))
+# define NOZ_SUPPORTS_OBJC_DIRECT __has_attribute(objc_direct)
+#else
+# define NOZ_SUPPORTS_OBJC_DIRECT 0
+#endif
+
+#pragma mark - Objective-C Direct Support
+
+#if NOZ_SUPPORTS_OBJC_DIRECT
+# define NOZ_OBJC_DIRECT          __attribute__((objc_direct))
+# define NOZ_OBJC_DIRECT_MEMBERS  __attribute__((objc_direct_members))
+#else
+# define NOZ_OBJC_DIRECT
+# define NOZ_OBJC_DIRECT_MEMBERS
+#endif // #if NOZ_SUPPORTS_OBJC_DIRECT

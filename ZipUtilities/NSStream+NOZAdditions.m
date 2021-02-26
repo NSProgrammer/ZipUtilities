@@ -31,6 +31,7 @@
 #import "NOZ_Project.h"
 #import "NOZEncoder.h"
 #import "NOZError.h"
+#import "NOZUtils.h"
 
 typedef void (*StreamCreateBoundPairFunc)(CFAllocatorRef,
                                           CFReadStreamRef *,
@@ -49,6 +50,14 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef alloc,
 - (nonnull instancetype)initWithData:(nonnull NSData *)data NS_UNAVAILABLE;
 - (nullable instancetype)initWithURL:(nonnull NSURL *)url NS_UNAVAILABLE;
 
+// Undocumented CFReadStream methods
+
+- (void)_scheduleInCFRunLoop:(CFRunLoopRef)aRunLoop forMode:(CFStringRef)aMode;
+- (BOOL)_setCFClientFlags:(CFOptionFlags)inFlags
+                 callback:(CFReadStreamClientCallBack)inCallback
+                  context:(CFStreamClientContext *)inContext;
+- (void)_unscheduleFromCFRunLoop:(CFRunLoopRef)aRunLoop forMode:(CFStringRef)aMode;
+
 @end
 
 @implementation NSInputStream (NOZAdditions)
@@ -64,6 +73,7 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef alloc,
 
 @end
 
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZEncodingInputStream
 {
     NSInputStream *_stream;
