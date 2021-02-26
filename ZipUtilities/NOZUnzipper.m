@@ -35,7 +35,7 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 #define PRIVATE_READ(file, value) noz_fread_value(file, (Byte *)&value, sizeof(value))
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCentralDirectoryRecord (/* direct declarations */)
 - (NOZFileEntryT *)private_internalEntry;
 - (NOZErrorCode)private_validate;
@@ -43,7 +43,7 @@ __attribute__((objc_direct_members))
 - (NSString *)private_nameNoCopy;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCentralDirectory (/* direct declarations */)
 - (NSArray<NOZCentralDirectoryRecord *> *)private_internalRecords;
 - (BOOL)private_readEndOfCentralDirectoryRecordAtPosition:(off_t)eocdPos inFile:(FILE*)file;
@@ -54,7 +54,7 @@ __attribute__((objc_direct_members))
 - (NSUInteger)private_indexForRecordWithName:(NSString *)name;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZUnzipper
 {
     NSString *_standardizedFilePath;
@@ -620,7 +620,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCentralDirectory
 {
     off_t _endOfCentralDirectoryRecordPosition;
@@ -830,7 +830,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCentralDirectoryRecord
 {
     NOZFileEntryT _entry;

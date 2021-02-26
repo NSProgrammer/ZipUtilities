@@ -37,16 +37,16 @@
 @property (nonatomic) BOOL encodedDataWasText;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZRawEncoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZRawEncoderContext
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZRawEncoder
 
 - (UInt16)bitFlagsForEntry:(id<NOZZipEntry>)entry
@@ -94,16 +94,16 @@ __attribute__((objc_direct_members))
 @property (nonatomic) BOOL hasFinished;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZRawDecoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZRawDecoderContext
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZRawDecoder
 
 - (NOZRawDecoderContext *)createContextForDecodingWithBitFlags:(UInt16)bitFlags

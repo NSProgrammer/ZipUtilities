@@ -28,6 +28,7 @@
 #import "NOZ_Project.h"
 #import "NOZDecompress.h"
 #import "NOZUnzipper.h"
+#import "NOZUtils.h"
 
 #define kWEIGHT (1000ll)
 
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSUInteger, NOZDecompressStep)
 
 #define kCancelledError NOZErrorCreate(NOZErrorCodeDecompressCancelled, nil)
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZDecompressResult (/* direct declarations */)
 @property (nonatomic, copy) NSString *destinationDirectoryPath;
 @property (nonatomic, copy, nullable) NSArray<NSString *> *destinationFiles;
@@ -60,12 +61,12 @@ __attribute__((objc_direct_members))
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZDecompressOperation (/* direct declarations */)
 @property (nonatomic) NOZDecompressResult *result;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressOperation
 {
     NOZUnzipper *_unzipper;
@@ -352,7 +353,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressRequest
 
 - (instancetype)initWithSourceFilePath:(NSString *)path
@@ -381,7 +382,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressDelegateInternal
 
 - (instancetype)init
@@ -408,7 +409,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDecompressResult
 
 - (float)compressionRatio

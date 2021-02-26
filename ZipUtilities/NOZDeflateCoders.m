@@ -43,7 +43,7 @@ static UInt16 NOZCompressionLevelToDeflateLevel(NOZCompressionLevel level);
 @property (nonatomic) BOOL encodedDataWasText;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZDeflateEncoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) int compressionLevel;
@@ -55,7 +55,7 @@ __attribute__((objc_direct_members))
 @property (nonatomic) size_t compressedDataPosition;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDeflateEncoderContext
 {
     z_stream _zStream;
@@ -98,7 +98,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDeflateEncoder
 
 - (NSUInteger)numberOfCompressionLevels
@@ -257,7 +257,7 @@ __attribute__((objc_direct_members))
 @property (nonatomic) BOOL hasFinished;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZDeflateDecoderContext (/* direct declarations */)
 @property (nonatomic, copy, nullable) NOZFlushCallback flushCallback;
 @property (nonatomic) BOOL zStreamOpen;
@@ -269,7 +269,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZDeflateDecoderContext
 {
     z_stream _zStream;

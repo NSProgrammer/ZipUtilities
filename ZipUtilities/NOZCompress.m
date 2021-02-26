@@ -47,17 +47,17 @@ typedef NS_ENUM(NSUInteger, NOZCompressStep)
 - (nonnull instancetype)new NS_UNAVAILABLE;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCompressDelegateInternal (/* direct declarations */)
 @property (nonatomic, readonly, nonnull) NOZCompressCompletionBlock completionBlock;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCompressRequest (/* direct declarations */)
 @property (nonatomic, nonnull) NSMutableArray<id<NOZZippableEntry>> *mutableEntries;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCompressResult (/* direct declarations */)
 @property (nonatomic, copy) NSString *destinationPath;
 @property (nonatomic, nullable) NSError *operationError;
@@ -67,7 +67,7 @@ __attribute__((objc_direct_members))
 @property (nonatomic) SInt64 compressedSize;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressOperation
 {
     NOZZipper *_zipper;
@@ -339,7 +339,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressDelegateInternal
 
 - (instancetype)init
@@ -366,7 +366,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressResult
 
 - (float)compressionRatio
@@ -402,7 +402,7 @@ __attribute__((objc_direct_members))
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZCompressRequest
 
 - (instancetype)init

@@ -29,18 +29,19 @@
 
 #import "NOZ_Project.h"
 #import "NOZSyncStepOperation.h"
+#import "NOZUtils.h"
 
 @interface NOZSyncStepOperation (/* non-direct */)
 @property (atomic, getter=isCancelled) BOOL cancelled;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZSyncStepOperation (/* direct declarations */)
 @property (nonatomic) float progress;
 @property (atomic, nullable) NSError *operationError;
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZSyncStepOperation
 {
     NSUInteger _stepCount;

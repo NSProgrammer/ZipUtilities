@@ -46,7 +46,7 @@ static UInt8 noz_store_value(UInt64 x,
 #define PRIVATE_WRITE(v) \
 noz_fwrite_value((v), sizeof(v), _internal.file)
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZZipper
 {
     NSString *_standardizedZipFilePath;

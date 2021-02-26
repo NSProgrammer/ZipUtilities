@@ -31,6 +31,7 @@
 #import "NOZ_Project.h"
 #import "NOZEncoder.h"
 #import "NOZError.h"
+#import "NOZUtils.h"
 
 typedef void (*StreamCreateBoundPairFunc)(CFAllocatorRef,
                                           CFReadStreamRef *,
@@ -72,7 +73,7 @@ static void NOZStreamCreateBoundPairCompat(CFAllocatorRef alloc,
 
 @end
 
-__attribute__((objc_direct_members))
+NOZ_OBJC_DIRECT_MEMBERS
 @implementation NOZEncodingInputStream
 {
     NSInputStream *_stream;
