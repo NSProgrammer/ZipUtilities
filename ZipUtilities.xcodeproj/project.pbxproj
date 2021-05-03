@@ -2646,7 +2646,7 @@
 				INFOPLIST_FILE = ZipUtilities/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
@@ -2672,7 +2672,7 @@
 				INFOPLIST_FILE = ZipUtilities/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NSProgrammer.$(PRODUCT_NAME:rfc1034identifier)";
@@ -2856,7 +2856,7 @@
 				EXECUTABLE_PREFIX = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2873,7 +2873,7 @@
 				EXECUTABLE_PREFIX = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
