@@ -100,12 +100,23 @@ typedef NS_ENUM(UInt16, NOZCompressionMethod)
     NOZCompressionMethodIBMTERSENew = 18,
     /** LZ77 */
     NOZCompressionMethodLZ77        = 19,
+    /** Deprecated, Do Not Use */
+    NOZCompressionMethodDeprecated20 = 20,
 
-
+    /** ZStandard (Facebook) */
+    NOZCompressionMethodZStandard   = 93, // added to v6.3.7 (circa 2019)
+    /** MP3 Compression */
+    NOZCompressionMethodMP3         = 94,
+    /** XZ Compression */
+    NOZCompressionMethodXZ          = 95,
+    /** JPEG variant */
+    NOZCompressionMethodJPEG        = 96,
     /** WAV Pack */
     NOZCompressionMethodWAVPack     = 97,
     /** PPM version 1 revision 1 */
     NOZCompressionMethodPPMv1rev1   = 98,
+    /** AE-x encryption marker */
+    NOZCompressionMethodAEXEncryption = 99,
 };
 
 //! Block for flushing a buffer of bytes

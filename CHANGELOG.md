@@ -2,6 +2,10 @@
 
 ## History
 
+### 1.13.0 (June 18th, 2021) - Nolan O'Brien
+- Update ZStandard extended support to v1.5.0
+- Update constants of spec based compression methods (including addition of ZStandard as #93)
+
 ### 1.12.0 (June 18th, 2021) - Nolan O'Brien
 - Fix benign decoder bug where the incorrect compression level could be inferred
 - Fix significant bug in string encoding support

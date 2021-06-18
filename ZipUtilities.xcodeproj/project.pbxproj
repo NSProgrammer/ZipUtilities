@@ -51,6 +51,23 @@
 		1C3FFC3E24D36DF400027E5C /* zstd_compress_literals.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C3FFC3524D36DF400027E5C /* zstd_compress_literals.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C3FFC4024D36DF400027E5C /* zstd_compress_superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C3FFC3724D36DF400027E5C /* zstd_compress_superblock.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C3FFC4124D36DF400027E5C /* zstd_compress_superblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C3FFC3724D36DF400027E5C /* zstd_compress_superblock.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		1C5A196D267D3D8200B4FDBA /* zdict.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5A196B267D3D8200B4FDBA /* zdict.h */; };
+		1C5A196E267D3D8200B4FDBA /* zstd_errors.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5A196C267D3D8200B4FDBA /* zstd_errors.h */; };
+		1C5A1970267D3DC600B4FDBA /* zstd_ldm_geartab.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5A196F267D3DC600B4FDBA /* zstd_ldm_geartab.h */; };
+		1C5A1971267D3DD700B4FDBA /* hist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD837212387C400A4AA17 /* hist.h */; };
+		1C5A1972267D3DD700B4FDBA /* zstd_compress_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF291F2208FA9A900541EE0 /* zstd_compress_internal.h */; };
+		1C5A1973267D3DD700B4FDBA /* zstd_compress_literals.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3FFC3324D36DF400027E5C /* zstd_compress_literals.h */; };
+		1C5A1974267D3DD700B4FDBA /* zstd_compress_sequences.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3FFC3624D36DF400027E5C /* zstd_compress_sequences.h */; };
+		1C5A1975267D3DD700B4FDBA /* zstd_compress_superblock.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3FFC3124D36DF400027E5C /* zstd_compress_superblock.h */; };
+		1C5A1976267D3DD700B4FDBA /* zstd_cwksp.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C3FFC3424D36DF400027E5C /* zstd_cwksp.h */; };
+		1C5A1977267D3DD700B4FDBA /* zstd_double_fast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF291F1208FA9A800541EE0 /* zstd_double_fast.h */; };
+		1C5A1978267D3DD700B4FDBA /* zstd_fast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF291F3208FA9A900541EE0 /* zstd_fast.h */; };
+		1C5A1979267D3DD700B4FDBA /* zstd_lazy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF291F8208FA9A900541EE0 /* zstd_lazy.h */; };
+		1C5A197A267D3DD700B4FDBA /* zstd_ldm.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF291F6208FA9A900541EE0 /* zstd_ldm.h */; };
+		1C5A197B267D3DD700B4FDBA /* zstd_opt.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34F21DE39298004A35C7 /* zstd_opt.h */; };
+		1C5A197C267D3DD700B4FDBA /* zstdmt_compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BAE42061E5A9E0900AFD299 /* zstdmt_compress.h */; };
+		1C5A197F267D3E0B00B4FDBA /* zstd_trace.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5A197D267D3E0B00B4FDBA /* zstd_trace.h */; };
+		1C5A1980267D3E0B00B4FDBA /* zstd_deps.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5A197E267D3E0B00B4FDBA /* zstd_deps.h */; };
 		1C5AD78B2123869300A4AA17 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD7892123869300A4AA17 /* debug.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C5AD78C2123869300A4AA17 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD7892123869300A4AA17 /* debug.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C5AD78E212386AB00A4AA17 /* hash_composite_inc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C5AD7852123866600A4AA17 /* hash_composite_inc.h */; };
@@ -101,7 +118,7 @@
 		1C5AD82F2123871200A4AA17 /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34301DE36963004A35C7 /* encode.h */; };
 		1C5AD8302123871200A4AA17 /* port.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34311DE36963004A35C7 /* port.h */; };
 		1C5AD8312123871200A4AA17 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34321DE36963004A35C7 /* types.h */; };
-		1C5AD8352123876100A4AA17 /* zstd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3C0C761DDC1FC9000C7DE1 /* zstd.h */; };
+		1C5AD8352123876100A4AA17 /* zstd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3C0C761DDC1FC9000C7DE1 /* zstd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C5AD838212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C5AD839212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C6534761B852B9700F38A87 /* NOZDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7901B74095500969629 /* NOZDecompress.m */; };
@@ -620,6 +637,11 @@
 		1C3FFC3524D36DF400027E5C /* zstd_compress_literals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_compress_literals.c; path = Extra/zstd/compress/zstd_compress_literals.c; sourceTree = "<group>"; };
 		1C3FFC3624D36DF400027E5C /* zstd_compress_sequences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_compress_sequences.h; path = Extra/zstd/compress/zstd_compress_sequences.h; sourceTree = "<group>"; };
 		1C3FFC3724D36DF400027E5C /* zstd_compress_superblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_compress_superblock.c; path = Extra/zstd/compress/zstd_compress_superblock.c; sourceTree = "<group>"; };
+		1C5A196B267D3D8200B4FDBA /* zdict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zdict.h; path = Extra/zstd/zdict.h; sourceTree = "<group>"; };
+		1C5A196C267D3D8200B4FDBA /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/zstd_errors.h; sourceTree = "<group>"; };
+		1C5A196F267D3DC600B4FDBA /* zstd_ldm_geartab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_ldm_geartab.h; path = Extra/zstd/compress/zstd_ldm_geartab.h; sourceTree = "<group>"; };
+		1C5A197D267D3E0B00B4FDBA /* zstd_trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_trace.h; path = Extra/zstd/common/zstd_trace.h; sourceTree = "<group>"; };
+		1C5A197E267D3E0B00B4FDBA /* zstd_deps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_deps.h; path = Extra/zstd/common/zstd_deps.h; sourceTree = "<group>"; };
 		1C5AD7852123866600A4AA17 /* hash_composite_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_composite_inc.h; path = Extra/brotli/enc/hash_composite_inc.h; sourceTree = "<group>"; };
 		1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_rolling_inc.h; path = Extra/brotli/enc/hash_rolling_inc.h; sourceTree = "<group>"; };
 		1C5AD7892123869300A4AA17 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = debug.c; path = Extra/zstd/common/debug.c; sourceTree = "<group>"; };
@@ -720,7 +742,6 @@
 		8B6E35121DE392AF004A35C7 /* divsufsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = divsufsort.c; path = Extra/zstd/dictBuilder/divsufsort.c; sourceTree = "<group>"; };
 		8B6E35131DE392AF004A35C7 /* divsufsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = divsufsort.h; path = Extra/zstd/dictBuilder/divsufsort.h; sourceTree = "<group>"; };
 		8B6E35141DE392AF004A35C7 /* zdict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zdict.c; path = Extra/zstd/dictBuilder/zdict.c; sourceTree = "<group>"; };
-		8B6E35151DE392AF004A35C7 /* zdict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zdict.h; path = Extra/zstd/dictBuilder/zdict.h; sourceTree = "<group>"; };
 		8B6E35261DE392CC004A35C7 /* bit_reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_reader.c; path = Extra/brotli/dec/bit_reader.c; sourceTree = "<group>"; };
 		8B6E35271DE392CC004A35C7 /* bit_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_reader.h; path = Extra/brotli/dec/bit_reader.h; sourceTree = "<group>"; };
 		8B6E35291DE392CC004A35C7 /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decode.c; path = Extra/brotli/dec/decode.c; sourceTree = "<group>"; };
@@ -811,7 +832,6 @@
 		8BAE423F1E5A9E4200AFD299 /* xxhash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xxhash.c; path = Extra/zstd/common/xxhash.c; sourceTree = "<group>"; };
 		8BAE42401E5A9E4200AFD299 /* xxhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xxhash.h; path = Extra/zstd/common/xxhash.h; sourceTree = "<group>"; };
 		8BAE42411E5A9E4200AFD299 /* zstd_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_common.c; path = Extra/zstd/common/zstd_common.c; sourceTree = "<group>"; };
-		8BAE42421E5A9E4200AFD299 /* zstd_errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_errors.h; path = Extra/zstd/common/zstd_errors.h; sourceTree = "<group>"; };
 		8BAE42431E5A9E4200AFD299 /* zstd_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_internal.h; path = Extra/zstd/common/zstd_internal.h; sourceTree = "<group>"; };
 		8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Bad_File.zip; sourceTree = "<group>"; };
 		8BF291ED208FA98000541EE0 /* compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compiler.h; path = Extra/zstd/common/compiler.h; sourceTree = "<group>"; };
@@ -1176,6 +1196,8 @@
 				8B3C0C951DDC1FFF000C7DE1 /* compress */,
 				8B3C0CAB1DDC2027000C7DE1 /* decompress */,
 				8B3C0CB81DDC203A000C7DE1 /* dictBuilder */,
+				1C5A196B267D3D8200B4FDBA /* zdict.h */,
+				1C5A196C267D3D8200B4FDBA /* zstd_errors.h */,
 				8B3C0C761DDC1FC9000C7DE1 /* zstd.h */,
 			);
 			name = zstd;
@@ -1203,7 +1225,8 @@
 				8BAE423F1E5A9E4200AFD299 /* xxhash.c */,
 				8BAE42401E5A9E4200AFD299 /* xxhash.h */,
 				8BAE42411E5A9E4200AFD299 /* zstd_common.c */,
-				8BAE42421E5A9E4200AFD299 /* zstd_errors.h */,
+				1C5A197E267D3E0B00B4FDBA /* zstd_deps.h */,
+				1C5A197D267D3E0B00B4FDBA /* zstd_trace.h */,
 				8BAE42431E5A9E4200AFD299 /* zstd_internal.h */,
 			);
 			name = common;
@@ -1231,6 +1254,7 @@
 				8BF291F3208FA9A900541EE0 /* zstd_fast.h */,
 				8BF291FA208FA9A900541EE0 /* zstd_lazy.c */,
 				8BF291F8208FA9A900541EE0 /* zstd_lazy.h */,
+				1C5A196F267D3DC600B4FDBA /* zstd_ldm_geartab.h */,
 				8BF291F5208FA9A900541EE0 /* zstd_ldm.c */,
 				8BF291F6208FA9A900541EE0 /* zstd_ldm.h */,
 				8BF291F7208FA9A900541EE0 /* zstd_opt.c */,
@@ -1264,7 +1288,6 @@
 				8B6E35131DE392AF004A35C7 /* divsufsort.h */,
 				1C3FFC1C24D36D2300027E5C /* fastcover.c */,
 				8B6E35141DE392AF004A35C7 /* zdict.c */,
-				8B6E35151DE392AF004A35C7 /* zdict.h */,
 			);
 			name = dictBuilder;
 			sourceTree = "<group>";
@@ -1516,7 +1539,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5A1971267D3DD700B4FDBA /* hist.h in Headers */,
 				1C5AD8352123876100A4AA17 /* zstd.h in Headers */,
+				1C5A1974267D3DD700B4FDBA /* zstd_compress_sequences.h in Headers */,
+				1C5A197A267D3DD700B4FDBA /* zstd_ldm.h in Headers */,
+				1C5A1972267D3DD700B4FDBA /* zstd_compress_internal.h in Headers */,
+				1C5A1976267D3DD700B4FDBA /* zstd_cwksp.h in Headers */,
+				1C5A197F267D3E0B00B4FDBA /* zstd_trace.h in Headers */,
+				1C5A1973267D3DD700B4FDBA /* zstd_compress_literals.h in Headers */,
+				1C5A197B267D3DD700B4FDBA /* zstd_opt.h in Headers */,
+				1C5A197C267D3DD700B4FDBA /* zstdmt_compress.h in Headers */,
+				1C5A1977267D3DD700B4FDBA /* zstd_double_fast.h in Headers */,
+				1C5A1980267D3E0B00B4FDBA /* zstd_deps.h in Headers */,
+				1C5A196E267D3D8200B4FDBA /* zstd_errors.h in Headers */,
+				1C5A1970267D3DC600B4FDBA /* zstd_ldm_geartab.h in Headers */,
+				1C5A196D267D3D8200B4FDBA /* zdict.h in Headers */,
+				1C5A1979267D3DD700B4FDBA /* zstd_lazy.h in Headers */,
+				1C5A1975267D3DD700B4FDBA /* zstd_compress_superblock.h in Headers */,
+				1C5A1978267D3DD700B4FDBA /* zstd_fast.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

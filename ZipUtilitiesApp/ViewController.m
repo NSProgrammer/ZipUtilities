@@ -13,7 +13,7 @@
 
 @import ZipUtilities;
 
-#define NOZCompressionMethodZStandard       (100)
+// NOZCompressionMethodZStandard is now part of the ZIP spec, method #93
 #define NOZCompressionMethodZStandard_D128  (101)
 #define NOZCompressionMethodZStandard_D256  (102)
 #define NOZCompressionMethodZStandard_D512  (104)
