@@ -117,7 +117,19 @@ static int NOZXZStandardLevelFromNOZCompressionLevel(NOZCompressionLevel level);
 - (BOOL)initializeWithDictionaryData:(NSData *)dictionaryData
 {
     if (!_flags.initialized) {
-        const size_t initResult = (dictionaryData.length > 0) ? ZSTD_initCStream_usingDict(_stream, dictionaryData.bytes, dictionaryData.length, _level) : ZSTD_initCStream(_stream, _level);
+        size_t initResult = 0;
+        if (dictionaryData.length > 0) {
+            initResult = ZSTD_CCtx_reset(_stream, ZSTD_reset_session_only);
+            if (!ZSTD_isError(initResult)) {
+                initResult = ZSTD_CCtx_setParameter(_stream, ZSTD_c_compressionLevel, _level);
+                if (!ZSTD_isError(initResult)) {
+                    initResult = ZSTD_CCtx_loadDictionary(_stream, dictionaryData.bytes, dictionaryData.length);
+                }
+            }
+        } else {
+            initResult = ZSTD_initCStream(_stream, _level);
+        }
+
         if (!ZSTD_isError(initResult)) {
             _outBuffer.pos = 0;
             _outBuffer.size = ZSTD_CStreamOutSize();

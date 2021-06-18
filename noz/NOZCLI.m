@@ -20,7 +20,6 @@
 #import "NOZXZStandardCompressionCoder.h"
 
 #define kMethodBrotli       (101)
-#define kMethodZStandard    (102)
 
 @implementation MethodInfo
 
@@ -252,9 +251,9 @@ void NOZCLI_registerExtraEncoders(void)
               forMethod:kMethodBrotli];
 
     [library setEncoder:[NOZXZStandardCompressionCoder encoder]
-              forMethod:kMethodZStandard];
+              forMethod:NOZCompressionMethodZStandard];
     [library setDecoder:[NOZXZStandardCompressionCoder decoder]
-              forMethod:kMethodZStandard];
+              forMethod:NOZCompressionMethodZStandard];
 }
 
 NSArray<MethodInfo *> *NOZCLI_allMethods()
@@ -309,9 +308,14 @@ NSArray<MethodInfo *> *NOZCLI_allUnsupportedMethods()
     UNS_ADD_METHOD(methods, @"*PKWare Reserved*", NOZCompressionMethodReserved17);
     UNS_ADD_METHOD(methods, @"IBM TERSE (new)", NOZCompressionMethodIBMTERSENew);
     UNS_ADD_METHOD(methods, @"LZ77", NOZCompressionMethodLZ77);
+    UNS_ADD_METHOD(methods, @"*Deprecated*", NOZCompressionMethodDeprecated20);
 
+    UNS_ADD_METHOD(methods, @"MP3", NOZCompressionMethodMP3);
+    UNS_ADD_METHOD(methods, @"XZ", NOZCompressionMethodXZ);
+    UNS_ADD_METHOD(methods, @"JPEG", NOZCompressionMethodJPEG);
     UNS_ADD_METHOD(methods, @"WAV Pack", NOZCompressionMethodWAVPack);
     UNS_ADD_METHOD(methods, @"PPM v1 rev1", NOZCompressionMethodPPMv1rev1);
+    UNS_ADD_METHOD(methods, @"AE-x Encrypted", NOZCompressionMethodAEXEncryption);
 
     return methods;
 }
@@ -330,8 +334,8 @@ NSArray<MethodInfo *> *NOZCLI_allExtendedMethods()
 {
     NSMutableArray<MethodInfo *> *methods = [[NSMutableArray alloc] init];
 
-    ADD_METHOD(methods, @"ZStandard", kMethodZStandard, NO);
-    ADD_METHOD(methods, @"Brotli", kMethodBrotli, NO);
+    ADD_METHOD(methods, @"ZStandard", NOZCompressionMethodZStandard, NO);
+    ADD_METHOD(methods, @"Brotli", kMethodBrotli, NO); /* TODO: Apple is adding Brotli to iOS 15 (COMPRESSION_BROTLI) */
 
     if ([NOZXAppleCompressionCoder isSupported]) {
         ADD_METHOD(methods, @"LZMA", NOZCompressionMethodLZMA, NO);
