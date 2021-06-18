@@ -154,8 +154,11 @@ func TearDownZipQueue()
 
     class func prepareZipFileForDecompression(_ fileName: String) throws -> String
     {
-        let tmpDir : NSString = NSTemporaryDirectory() as NSString
-        let zipFilePath = tmpDir.appendingPathComponent(fileName + ".zip")
+        let tmpDir = NSTemporaryDirectory()
+        do {
+            try FileManager.default.createDirectory(atPath: tmpDir, withIntermediateDirectories: true, attributes: nil)
+        } catch {}
+        let zipFilePath = (tmpDir as NSString).appendingPathComponent(fileName + ".zip")
         let bundle = Bundle.init(for: self)
         let sourceFilePath = bundle.path(forResource: fileName, ofType: "zip")!
         try FileManager.default.copyItem(atPath: sourceFilePath, toPath: zipFilePath)

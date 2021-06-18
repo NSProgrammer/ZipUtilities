@@ -35,6 +35,8 @@ static BOOL noz_fread_value(FILE *file, Byte* value, const UInt8 byteCount);
 
 #define PRIVATE_READ(file, value) noz_fread_value(file, (Byte *)&value, sizeof(value))
 
+#define NOZStringEncodingDOSLatinUS CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSLatinUS)
+
 NOZ_OBJC_DIRECT_MEMBERS
 @interface NOZCentralDirectoryRecord (/* direct declarations */)
 - (NOZFileEntryT *)private_internalEntry;
@@ -682,9 +684,24 @@ NOZ_OBJC_DIRECT_MEMBERS
         unsigned char* commentBuffer = malloc(_endOfCentralDirectoryRecord.commentSize + 1);
         if (_endOfCentralDirectoryRecord.commentSize == fread(commentBuffer, 1, _endOfCentralDirectoryRecord.commentSize, file)) {
             commentBuffer[_endOfCentralDirectoryRecord.commentSize] = '\0';
-            _globalComment = [[NSString alloc] initWithUTF8String:(const char *)commentBuffer];
+
+            // There is no flag to check for the encoding format of the global comment...
+            // Best effort is to decode as UTF8 and fall back to DOS Latin US.
+
+            _globalComment = [[NSString alloc] initWithBytesNoCopy:commentBuffer
+                                                            length:_endOfCentralDirectoryRecord.commentSize
+                                                          encoding:NSUTF8StringEncoding
+                                                      freeWhenDone:YES];
+            if (!_globalComment) {
+                _globalComment = [[NSString alloc] initWithBytesNoCopy:commentBuffer
+                                                                length:_endOfCentralDirectoryRecord.commentSize
+                                                              encoding:NOZStringEncodingDOSLatinUS
+                                                          freeWhenDone:YES];
+            }
         }
-        free(commentBuffer);
+        if (!_globalComment) {
+            free(commentBuffer);
+        }
     }
 
     _endOfCentralDirectoryRecordPosition = eocdPos;
@@ -861,7 +878,7 @@ NOZ_OBJC_DIRECT_MEMBERS
 {
     return [[NSString alloc] initWithBytesNoCopy:(void *)_entry.name
                                           length:_entry.fileHeader.nameSize
-                                        encoding:NSUTF8StringEncoding
+                                        encoding:(_entry.fileHeader.bitFlag & NOZFlagBitsUTF8EncodedStrings) ? NSUTF8StringEncoding : NOZStringEncodingDOSLatinUS
                                     freeWhenDone:NO];
 }
 
@@ -869,7 +886,7 @@ NOZ_OBJC_DIRECT_MEMBERS
 {
     return [[NSString alloc] initWithBytes:_entry.name
                                     length:_entry.fileHeader.nameSize
-                                  encoding:NSUTF8StringEncoding];
+                                  encoding:(_entry.fileHeader.bitFlag & NOZFlagBitsUTF8EncodedStrings) ? NSUTF8StringEncoding : NOZStringEncodingDOSLatinUS];
 }
 
 - (NSString *)comment
@@ -879,19 +896,32 @@ NOZ_OBJC_DIRECT_MEMBERS
     }
     return [[NSString alloc] initWithBytes:_entry.comment
                                     length:_entry.centralDirectoryRecord.commentSize
-                                  encoding:NSUTF8StringEncoding];
+                                  encoding:(_entry.fileHeader.bitFlag & NOZFlagBitsUTF8EncodedStrings) ? NSUTF8StringEncoding : NOZStringEncodingDOSLatinUS];
 }
 
 - (NOZCompressionLevel)compressionLevel
 {
-    UInt16 bitFlag = _entry.fileHeader.bitFlag;
-    if (bitFlag & NOZFlagBitsSuperFastDeflate) {
-        return NOZCompressionLevelMin;
-    } else if (bitFlag & NOZFlagBitsFastDeflate) {
-        return (2.f / 9.f);
-    } else if (bitFlag & NOZFlagBitsMaxDeflate) {
-        return NOZCompressionLevelMax;
+    switch (_entry.fileHeader.compressionMethod) {
+        case NOZCompressionMethodDeflate:
+        {
+            const NOZDeflateFlagBits deflateFlags = NOZExtractDeflateFlagBits(_entry.fileHeader.bitFlag);
+            if ((deflateFlags & NOZDeflateFlagBitsSuperFast) == NOZDeflateFlagBitsSuperFast) {
+                return NOZCompressionLevelMin;
+            } else if ((deflateFlags & NOZDeflateFlagBitsFast) == NOZDeflateFlagBitsFast) {
+                return (2.f / 9.f);
+            } else if ((deflateFlags & NOZDeflateFlagBitsMax) == NOZDeflateFlagBitsMax) {
+                return NOZCompressionLevelMax;
+            }
+            break;
+        }
+
+        // Insert any other customizations by the compression method here
+
+        // Default
+        default:
+            break;
     }
+
     return NOZCompressionLevelDefault;
 }
 
@@ -959,7 +989,7 @@ NOZ_OBJC_DIRECT_MEMBERS
     if ((_entry.centralDirectoryRecord.fileHeader->versionForExtraction & 0x00ff) > (NOZVersionForExtraction & 0x00ff)) {
         return NOZErrorCodeUnzipUnsupportedRecordVersion;
     }
-    if ((_entry.centralDirectoryRecord.fileHeader->bitFlag & 0b01)) {
+    if ((_entry.centralDirectoryRecord.fileHeader->bitFlag & NOZFlagBitsEncrypted)) {
         return NOZErrorCodeUnzipDecompressionEncryptionNotSupported;
     }
 

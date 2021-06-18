@@ -13,6 +13,9 @@
 		1C0542301B7BDDBA007CE7BA /* NOZUnzipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */; };
 		1C0542331B7D7D57007CE7BA /* NOZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C0542341B7D7D57007CE7BA /* NOZZipEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */; };
+		1C13767F267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C13767E267D15EA009C2EF2 /* Aesop_cp437.zip */; };
+		1C137680267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C13767E267D15EA009C2EF2 /* Aesop_cp437.zip */; };
+		1C137681267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1C13767E267D15EA009C2EF2 /* Aesop_cp437.zip */; };
 		1C16F4F11B787EC100963AB3 /* maniac-mansion in Resources */ = {isa = PBXBuildFile; fileRef = 1C16F4F01B787EC100963AB3 /* maniac-mansion */; };
 		1C19A25E1BA3925D004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1C19A25F1BA3926A004E8D6C /* libcompression.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C19A25D1BA3925D004E8D6C /* libcompression.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -584,6 +587,8 @@
 		1C05422E1B7BDDBA007CE7BA /* NOZUnzipper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZUnzipper.m; sourceTree = "<group>"; };
 		1C0542311B7D7D57007CE7BA /* NOZZipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZZipEntry.h; sourceTree = "<group>"; };
 		1C0542321B7D7D57007CE7BA /* NOZZipEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZZipEntry.m; sourceTree = "<group>"; };
+		1C137679267CED26009C2EF2 /* PKWARE_ZIPSPEC_APPNOTE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PKWARE_ZIPSPEC_APPNOTE.txt; sourceTree = "<group>"; };
+		1C13767E267D15EA009C2EF2 /* Aesop_cp437.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Aesop_cp437.zip; sourceTree = "<group>"; };
 		1C16F4F01B787EC100963AB3 /* maniac-mansion */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "maniac-mansion"; sourceTree = "<group>"; };
 		1C19A25D1BA3925D004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = usr/lib/libcompression.tbd; sourceTree = SDKROOT; };
 		1C19A2601BA39284004E8D6C /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libcompression.tbd; sourceTree = DEVELOPER_DIR; };
@@ -977,6 +982,7 @@
 				1C6B60DA1B9CA5F30068DCB0 /* CHANGELOG.md */,
 				4623A8AD1B9A8D3500A56535 /* LICENSE */,
 				4623A8AE1B9A8D3500A56535 /* README.md */,
+				1C137679267CED26009C2EF2 /* PKWARE_ZIPSPEC_APPNOTE.txt */,
 				1C6B60D91B9CA2310068DCB0 /* ZipUtilities.podspec */,
 				1C667BF91BA1294F0028E5E7 /* Extra Encoders/Decoders */,
 				8B8D5ADE1DDD465C00037E0E /* ZipUtilitiesApp */,
@@ -1113,6 +1119,7 @@
 			isa = PBXGroup;
 			children = (
 				1CD9BAB31B757A38000B93C4 /* Aesop.txt */,
+				1C13767E267D15EA009C2EF2 /* Aesop_cp437.zip */,
 				8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */,
 				8BAE425C1E5AAFFE00AFD299 /* Bad_File.zip */,
 				1C3223841B78501A00DC0A33 /* Data.zip */,
@@ -1916,6 +1923,7 @@
 				8B8D5A971DDD153E00037E0E /* timeline.json in Resources */,
 				1CD9BABC1B75B419000B93C4 /* Directory.zip in Resources */,
 				8B8D5AA51DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
+				1C13767F267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */,
 				1C2DFB3F1C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				8B8D5AA21DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				1C3223851B78501A00DC0A33 /* Data.zip in Resources */,
@@ -1945,6 +1953,7 @@
 				8B8D5A981DDD153E00037E0E /* timeline.json in Resources */,
 				4623A8971B9A882700A56535 /* Aesop.txt in Resources */,
 				8B8D5AA61DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
+				1C137680267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */,
 				1C2DFB401C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				8B8D5AA31DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				4623A89A1B9A882700A56535 /* File.zip in Resources */,
@@ -1974,6 +1983,7 @@
 				8B8D5A991DDD153E00037E0E /* timeline.json in Resources */,
 				4623A89C1B9A882800A56535 /* Aesop.txt in Resources */,
 				8B8D5AA71DDD2E9100037E0E /* htl.256.zstd_dict in Resources */,
+				1C137681267D15EA009C2EF2 /* Aesop_cp437.zip in Resources */,
 				1C2DFB411C208A9F00C9A238 /* Star.Wars.7.Trailer.mp4 in Resources */,
 				8B8D5AA41DDD2E9100037E0E /* htl.128.zstd_dict in Resources */,
 				4623A89F1B9A882800A56535 /* File.zip in Resources */,
