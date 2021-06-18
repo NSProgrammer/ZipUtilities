@@ -49,9 +49,11 @@ static NSOperationQueue *sQueue = nil;
     sFileNames = @[
                    @"Directory",
                    @"File",
-                   @"Mixed"
+                   @"Mixed",
+                   @"Aesop_cp437",
                    ];
 
+    [[NSFileManager defaultManager] createDirectoryAtPath:NSTemporaryDirectory() withIntermediateDirectories:YES attributes:nil error:NULL];
     for (NSString *fileName in sFileNames) {
         NSString *zipFile = [bundle pathForResource:fileName ofType:@"zip"];
         NSString *dstZipFile = [NSTemporaryDirectory() stringByAppendingPathComponent:zipFile.lastPathComponent];
@@ -202,6 +204,46 @@ static NSOperationQueue *sQueue = nil;
     NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:zipFilePath];
 
     [self runGambitWithRequest:request expectedOutputFiles:[NSSet setWithArray:@[@"Aesop.txt"]]];
+}
+
+- (void)testDecompressDOSLatinUSEncodedFilenames
+{
+    NSString *zipFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Aesop_cp437.zip"];
+
+    NSString *const rawString = @"Åêsöp.txt";
+    const NSStringEncoding cp437Encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSLatinUS);
+    NSString * const expectedString = [NSString stringWithCString:[rawString cStringUsingEncoding:cp437Encoding] encoding:cp437Encoding];
+
+    // Operation
+    {
+        NOZDecompressRequest *request = [[NOZDecompressRequest alloc] initWithSourceFilePath:zipFilePath];
+        NOZDecompressOperation *op = [[NOZDecompressOperation alloc] initWithRequest:request delegate:self];
+        [op start];
+        [op waitUntilFinished];
+        NOZDecompressResult *result = op.result;
+        XCTAssertNotNil(result);
+        XCTAssertNil(result.operationError);
+        XCTAssertTrue(result.didSucceed);
+
+        TESTLOG(@"%@", result);
+
+        XCTAssertEqual(1, result.destinationFiles.count);
+        XCTAssertEqualObjects(result.destinationFiles.firstObject, expectedString);
+    }
+
+    // Unzipper
+    {
+        NOZUnzipper *unzipper = [[NOZUnzipper alloc] initWithZipFile:zipFilePath];
+        XCTAssertTrue([unzipper openAndReturnError:NULL]);
+        NOZCentralDirectory *cd = [unzipper readCentralDirectoryAndReturnError:NULL];
+        XCTAssertNotNil(cd);
+        XCTAssertEqualObjects(cd.globalComment, expectedString);
+        XCTAssertEqual(cd.recordCount, 1);
+        NOZCentralDirectoryRecord *record = [unzipper readRecordAtIndex:0 error:NULL];
+        XCTAssertEqualObjects(record.comment, expectedString);
+        XCTAssertEqualObjects(record.name, expectedString);
+        XCTAssertTrue([unzipper closeAndReturnError:NULL]);
+    }
 }
 
 - (void)testDecompressDirectory

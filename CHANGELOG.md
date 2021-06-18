@@ -2,6 +2,12 @@
 
 ## History
 
+### 1.12.0 (June 18th, 2021) - Nolan O'Brien
+- Fix benign decoder bug where the incorrect compression level could be inferred
+- Fix significant bug in string encoding support
+  - Need to handle both UTF8 encoded filenames/comments AND DOS Latin US (Code Page 437) encoded (Appendix D of ZIP Specification)
+  - ***Note:** Any zip archives created with ZipUtilities **v1.11.3 or older** that have non-ascii characters for filenames/comments will have mangled filenames/comments as they will decode using DOS Latin US character set instead of UTF8.*
+
 ### 1.11.3 (July 30, 2020) - Nolan O'Brien
 - Update Brotli (v1.0.7) and ZStandard (v1.4.5)
 - Other minor fixes

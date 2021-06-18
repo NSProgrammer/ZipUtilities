@@ -41,11 +41,42 @@ static const UInt32 NOZMagicNumberEndOfCentralDirectoryRecord   = 0x06054b50;
 static const UInt32 NOZVersionForCreation   = 20; // Zip 2.0
 static const UInt32 NOZVersionForExtraction = 20; // Zip 2.0
 
-static const UInt16 NOZFlagBitsNormalDeflate    = 0b000000;
-static const UInt16 NOZFlagBitsMaxDeflate       = 0b000010;
-static const UInt16 NOZFlagBitsFastDeflate      = 0b000100;
-static const UInt16 NOZFlagBitsSuperFastDeflate = 0b000110;
-static const UInt16 NOZFlagBitUseDescriptor     = 0b001000;
+typedef NS_OPTIONS(UInt16, NOZFlagBits)
+{
+    NOZFlagBitsEncrypted = 0b1 << 0, // Unsupported w/ NOZ
+    NOZFlagBitsCompressionInfoMask = (0b1 << 1) | (0b1 << 2), // flags specifically for compression methods (differs by method) -- see `NOZDeflateFlagBits`
+    NOZFlagBitsFileMetadataInDescriptor = 0b1 << 3, // CRC32, Compressed size and uncompressed size are not set in the record, instead they are in the data descriptor (follows the compressed data)
+    NOZFlagBitsDeflateMethodIsEnhanced = 0b1 << 4, // for DEFLATE compression method, uses enhanced deflating
+    NOZFlagBitsPatchData = 0b1 << 5, // effectively reserved for PKZIP
+    NOZFlagBitsStronglyEncrypted = 0b1 << 6, // when `NOZFlagBitesEncrypted` (bit zero) is set, Strong Encryption is used.  MUST have a version of at least 50 as well.
+    NOZFlagBitsReserved7 = 0b1 << 7,
+    NOZFlagBitsReserved8 = 0b1 << 8,
+    NOZFlagBitsReserved9 = 0b1 << 9,
+    NOZFlagBitsReserved10 = 0b1 << 10,
+    NOZFlagBitsUTF8EncodedStrings = 0b1 << 11, // For filename and comment strings: unset means DOS Latin US (Code Page 437) encoded, set means UTF-8 encoded.
+    NOZFlagBitsPKWAREEnhancedCompression = 0b1 << 12, // effectively reserved by PKWARE
+    NOZFlagBitsStronglyEncryptedMaskingRecords = 0b1 << 13, // used with `NOZFlagBitsStronglyEncrypted` (bit 6) to indicate that records should themselves be encrypted as well
+    NOZFlagBitsPKWAREAlternateStreams = 0b1 << 14, // effectively reserved by PKWARE
+    NOZFlagBitsPKWAREReserved15 = 0b1 << 15,
+};
+
+typedef NS_OPTIONS(UInt8, NOZDeflateFlagBits)
+{
+    NOZDeflateFlagBitsNormal = 0b00,
+    NOZDeflateFlagBitsMax = 0b01,
+    NOZDeflateFlagBitsFast = 0b10,
+    NOZDeflateFlagBitsSuperFast = 0b11,
+};
+
+NS_INLINE NOZDeflateFlagBits NOZExtractDeflateFlagBits(NOZFlagBits bits)
+{
+    return (NOZDeflateFlagBits)((bits & 0b0110) >> 1);
+}
+
+NS_INLINE NOZFlagBits NOZEmplaceDeflateFlagBits(NOZDeflateFlagBits deflateBits)
+{
+    return (NOZFlagBits)((deflateBits & 0b11) << 1);
+}
 
 typedef struct _NOZLocalFileDescriptorT
 {

@@ -43,7 +43,7 @@ void NOZFileEntryInit(NOZFileEntryT* entry)
         entry->centralDirectoryRecord.versionMadeBy = NOZVersionForCreation;
         entry->centralDirectoryRecord.fileHeader = &entry->fileHeader;
 
-        entry->fileHeader.bitFlag = NOZFlagBitUseDescriptor;
+        entry->fileHeader.bitFlag = NOZFlagBitsFileMetadataInDescriptor;
         entry->fileHeader.compressionMethod = Z_DEFLATED;
         entry->fileHeader.versionForExtraction = NOZVersionForExtraction;
         entry->fileHeader.fileDescriptor = &entry->fileDescriptor;

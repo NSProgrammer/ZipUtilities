@@ -117,13 +117,13 @@ NOZ_OBJC_DIRECT_MEMBERS
     switch (level) {
         case Z_BEST_COMPRESSION:
         case Z_BEST_COMPRESSION - 1:
-            return NOZFlagBitsMaxDeflate;
+            return NOZEmplaceDeflateFlagBits(NOZDeflateFlagBitsMax);
         case Z_BEST_SPEED + 1:
-            return NOZFlagBitsFastDeflate;
+            return NOZEmplaceDeflateFlagBits(NOZDeflateFlagBitsFast);
         case Z_BEST_SPEED:
-            return NOZFlagBitsSuperFastDeflate;
+            return NOZEmplaceDeflateFlagBits(NOZDeflateFlagBitsSuperFast);
         default:
-            return NOZFlagBitsNormalDeflate;
+            return NOZEmplaceDeflateFlagBits(NOZDeflateFlagBitsNormal);
     }
 }
 

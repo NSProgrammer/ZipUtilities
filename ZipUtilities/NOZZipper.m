@@ -35,6 +35,16 @@
 #define NOZ_SINGLE_PASS_ZIP 1
 #endif
 
+#ifndef NOZ_CP437_STRINGS
+#define NOZ_CP437_STRINGS 0 /*Set to 0 for UTF8 encoded strings, 1 for DOS Latin US encoded strings (very 1980s!) */
+#endif
+
+#if NOZ_CP437_STRINGS
+#define kENCODING CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSLatinUS)
+#else
+#define kENCODING NSUTF8StringEncoding
+#endif
+
 static UInt8 noz_fwrite_value(UInt64 x,
                               const UInt8 byteCount,
                               FILE *file);
@@ -245,14 +255,14 @@ NOZ_OBJC_DIRECT_MEMBERS
         return NO;
     }
 
-    NSUInteger globalCommentSize = [self.globalComment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger globalCommentSize = [self.globalComment lengthOfBytesUsingEncoding:kENCODING];
     if (globalCommentSize > UINT16_MAX) {
         globalCommentSize = 0;
     }
     if (globalCommentSize > 0) {
         _internal.endOfCentralDirectoryRecord.commentSize = (UInt16)globalCommentSize;
         _internal.comment = malloc(globalCommentSize);
-        memcpy(_internal.comment, self.globalComment.UTF8String, globalCommentSize);
+        memcpy(_internal.comment, [self.globalComment cStringUsingEncoding:kENCODING], globalCommentSize);
         _internal.ownsComment = YES;
     }
 
@@ -285,7 +295,7 @@ NOZ_OBJC_DIRECT_MEMBERS
     __block BOOL errorEncountered = NO;
     noz_defer(^{ if (errorEncountered && error) { *error = NOZErrorCreate(NOZErrorCodeZipCannotOpenNewEntry, nil); } });
 
-    const NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    const NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:kENCODING];
     if (nameSize > UINT16_MAX || nameSize == 0) {
         errorEncountered = YES;
         return NO;
@@ -490,17 +500,17 @@ NOZ_OBJC_DIRECT_MEMBERS
 - (BOOL)private_populateRecordsForCurrentOpenEntryWithEntry:(id<NOZZippableEntry>)entry
                                                       error:(out NSError **)error
 {
-    NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger nameSize = [entry.name lengthOfBytesUsingEncoding:kENCODING];
     if (nameSize > UINT16_MAX) {
         nameSize = 0;
     }
 
-    NSUInteger extraFieldSize = 0;
+    NSUInteger extraFieldSize = 0; // TODO: support extra field
     if (extraFieldSize > UINT16_MAX) {
         extraFieldSize = 0;
     }
 
-    NSUInteger commentSize = [entry.comment lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger commentSize = [entry.comment lengthOfBytesUsingEncoding:kENCODING];
     if (commentSize > UINT16_MAX) {
         commentSize = 0;
     }
@@ -532,12 +542,15 @@ NOZ_OBJC_DIRECT_MEMBERS
             /* Bit Flag */
             {
                 record->fileHeader->bitFlag = 0;
+#if !NOZ_CP437_STRINGS
+                record->fileHeader->bitFlag |= NOZFlagBitsUTF8EncodedStrings;
+#endif
                 id<NOZEncoder> encoder = [[NOZCompressionLibrary sharedInstance] encoderForMethod:entry.compressionMethod];
                 if (encoder) {
                     record->fileHeader->bitFlag |= [encoder bitFlagsForEntry:entry];
                 }
 #if NOZ_SINGLE_PASS_ZIP
-                record->fileHeader->bitFlag |= NOZFlagBitUseDescriptor;
+                record->fileHeader->bitFlag |= NOZFlagBitsFileMetadataInDescriptor;
 #endif
             }
 
@@ -571,14 +584,14 @@ NOZ_OBJC_DIRECT_MEMBERS
 
     if (nameSize > 0) {
         _internal.currentEntry->name = (const Byte*)malloc(nameSize);
-        memcpy((void *)_internal.currentEntry->name, entry.name.UTF8String, nameSize);
+        memcpy((void *)_internal.currentEntry->name, [entry.name cStringUsingEncoding:kENCODING], nameSize);
         _internal.currentEntry->ownsName = YES;
     }
     _internal.currentEntry->extraField = NULL;
     _internal.currentEntry->ownsName = NO;
     if (commentSize > 0) {
         _internal.currentEntry->comment = (const Byte*)malloc(commentSize);
-        memcpy((void *)_internal.currentEntry->comment, entry.comment.UTF8String, commentSize);
+        memcpy((void *)_internal.currentEntry->comment, [entry.comment cStringUsingEncoding:kENCODING], commentSize);
         _internal.currentEntry->ownsName = YES;
     }
 
