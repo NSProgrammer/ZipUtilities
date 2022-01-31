@@ -114,10 +114,6 @@
 		1C5AD82B2123870500A4AA17 /* huffman.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352B1DE392CC004A35C7 /* huffman.h */; };
 		1C5AD82C2123870500A4AA17 /* prefix.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352D1DE392CC004A35C7 /* prefix.h */; };
 		1C5AD82D2123870500A4AA17 /* state.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E352F1DE392CC004A35C7 /* state.h */; };
-		1C5AD82E2123871200A4AA17 /* decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E342F1DE36963004A35C7 /* decode.h */; };
-		1C5AD82F2123871200A4AA17 /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34301DE36963004A35C7 /* encode.h */; };
-		1C5AD8302123871200A4AA17 /* port.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34311DE36963004A35C7 /* port.h */; };
-		1C5AD8312123871200A4AA17 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E34321DE36963004A35C7 /* types.h */; };
 		1C5AD8352123876100A4AA17 /* zstd.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3C0C761DDC1FC9000C7DE1 /* zstd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C5AD838212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1C5AD839212387C400A4AA17 /* hist.c in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AD836212387C400A4AA17 /* hist.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -217,6 +213,27 @@
 		1CD9BABD1B75B419000B93C4 /* File.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BAB91B75B419000B93C4 /* File.zip */; };
 		1CD9BABE1B75B419000B93C4 /* Mixed.zip in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9BABA1B75B419000B93C4 /* Mixed.zip */; };
 		1CF2F7EE1B87ABE9005E7C77 /* NOZUtils_Project.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CF2F7ED1B87ABE9005E7C77 /* NOZUtils_Project.h */; };
+		3D37D78A27A7CC64003300F5 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D78527A7CC64003300F5 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D37D78B27A7CC64003300F5 /* shared_dictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D78627A7CC64003300F5 /* shared_dictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D37D78C27A7CC64003300F5 /* decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D78727A7CC64003300F5 /* decode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D37D78D27A7CC64003300F5 /* port.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D78827A7CC64003300F5 /* port.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D37D78E27A7CC64003300F5 /* encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D78927A7CC64003300F5 /* encode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D37D79327A7CCE0003300F5 /* shared_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D78F27A7CCE0003300F5 /* shared_dictionary.c */; };
+		3D37D79427A7CCE0003300F5 /* shared_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D78F27A7CCE0003300F5 /* shared_dictionary.c */; };
+		3D37D79527A7CCE0003300F5 /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79027A7CCE0003300F5 /* platform.c */; };
+		3D37D79627A7CCE0003300F5 /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79027A7CCE0003300F5 /* platform.c */; };
+		3D37D79727A7CCE0003300F5 /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79127A7CCE0003300F5 /* constants.c */; };
+		3D37D79827A7CCE0003300F5 /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79127A7CCE0003300F5 /* constants.c */; };
+		3D37D79927A7CCE0003300F5 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79227A7CCE0003300F5 /* context.c */; };
+		3D37D79A27A7CCE0003300F5 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79227A7CCE0003300F5 /* context.c */; };
+		3D37D79C27A7CD05003300F5 /* shared_dictionary_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D79B27A7CD05003300F5 /* shared_dictionary_internal.h */; };
+		3D37D7A027A7CD4F003300F5 /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79D27A7CD4E003300F5 /* fast_log.c */; };
+		3D37D7A127A7CD4F003300F5 /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79D27A7CD4E003300F5 /* fast_log.c */; };
+		3D37D7A227A7CD4F003300F5 /* compound_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79E27A7CD4F003300F5 /* compound_dictionary.c */; };
+		3D37D7A327A7CD4F003300F5 /* compound_dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79E27A7CD4F003300F5 /* compound_dictionary.c */; };
+		3D37D7A427A7CD4F003300F5 /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79F27A7CD4F003300F5 /* command.c */; };
+		3D37D7A527A7CD4F003300F5 /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D37D79F27A7CD4F003300F5 /* command.c */; };
+		3D37D7A727A7CD74003300F5 /* compound_dictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D37D7A627A7CD74003300F5 /* compound_dictionary.h */; };
 		4623A8331B9A828A00A56535 /* ZipUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 4623A8321B9A828A00A56535 /* ZipUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4623A8391B9A828A00A56535 /* ZipUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A82E1B9A828A00A56535 /* ZipUtilities.framework */; };
 		4623A8571B9A82AF00A56535 /* ZipUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623A84C1B9A82AF00A56535 /* ZipUtilities.framework */; };
@@ -419,7 +436,7 @@
 		8BF2921E208FABFA00541EE0 /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29215208FABF900541EE0 /* constants.h */; };
 		8BF2921F208FABFA00541EE0 /* transform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29216208FABF900541EE0 /* transform.h */; };
 		8BF29220208FABFA00541EE0 /* context.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29217208FABFA00541EE0 /* context.h */; };
-		8BF29221208FABFA00541EE0 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29218208FABFA00541EE0 /* platform.h */; };
+		8BF29221208FABFA00541EE0 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF29218208FABFA00541EE0 /* platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BF29222208FABFA00541EE0 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BF29219208FABFA00541EE0 /* dictionary.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8BF29223208FABFA00541EE0 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BF29219208FABFA00541EE0 /* dictionary.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8BF29224208FABFA00541EE0 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF2921A208FABFA00541EE0 /* version.h */; };
@@ -619,8 +636,8 @@
 		1C3223801B780CC500DC0A33 /* NOZSyncStepOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZSyncStepOperation.h; sourceTree = "<group>"; };
 		1C3223811B780CC500DC0A33 /* NOZSyncStepOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZSyncStepOperation.m; sourceTree = "<group>"; };
 		1C3223841B78501A00DC0A33 /* Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Data.zip; sourceTree = "<group>"; };
-		1C3FFC1924D36C0800027E5C /* dictionary.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = dictionary.bin; path = Extra/brotli/common/dictionary.bin; sourceTree = "<group>"; };
-		1C3FFC1A24D36C0800027E5C /* dictionary.bin.br */ = {isa = PBXFileReference; lastKnownFileType = file; name = dictionary.bin.br; path = Extra/brotli/common/dictionary.bin.br; sourceTree = "<group>"; };
+		1C3FFC1924D36C0800027E5C /* dictionary.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = dictionary.bin; sourceTree = "<group>"; };
+		1C3FFC1A24D36C0800027E5C /* dictionary.bin.br */ = {isa = PBXFileReference; lastKnownFileType = file; path = dictionary.bin.br; sourceTree = "<group>"; };
 		1C3FFC1B24D36D2300027E5C /* cover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cover.h; path = Extra/zstd/dictBuilder/cover.h; sourceTree = "<group>"; };
 		1C3FFC1C24D36D2300027E5C /* fastcover.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = fastcover.c; path = Extra/zstd/dictBuilder/fastcover.c; sourceTree = "<group>"; };
 		1C3FFC1F24D36D7B00027E5C /* zstd_decompress_block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_decompress_block.c; path = Extra/zstd/decompress/zstd_decompress_block.c; sourceTree = "<group>"; };
@@ -642,8 +659,8 @@
 		1C5A196F267D3DC600B4FDBA /* zstd_ldm_geartab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_ldm_geartab.h; path = Extra/zstd/compress/zstd_ldm_geartab.h; sourceTree = "<group>"; };
 		1C5A197D267D3E0B00B4FDBA /* zstd_trace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_trace.h; path = Extra/zstd/common/zstd_trace.h; sourceTree = "<group>"; };
 		1C5A197E267D3E0B00B4FDBA /* zstd_deps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_deps.h; path = Extra/zstd/common/zstd_deps.h; sourceTree = "<group>"; };
-		1C5AD7852123866600A4AA17 /* hash_composite_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_composite_inc.h; path = Extra/brotli/enc/hash_composite_inc.h; sourceTree = "<group>"; };
-		1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_rolling_inc.h; path = Extra/brotli/enc/hash_rolling_inc.h; sourceTree = "<group>"; };
+		1C5AD7852123866600A4AA17 /* hash_composite_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_composite_inc.h; sourceTree = "<group>"; };
+		1C5AD7862123866700A4AA17 /* hash_rolling_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_rolling_inc.h; sourceTree = "<group>"; };
 		1C5AD7892123869300A4AA17 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = debug.c; path = Extra/zstd/common/debug.c; sourceTree = "<group>"; };
 		1C5AD78A2123869300A4AA17 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = Extra/zstd/common/debug.h; sourceTree = "<group>"; };
 		1C5AD836212387C400A4AA17 /* hist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hist.c; path = Extra/zstd/compress/hist.c; sourceTree = "<group>"; };
@@ -663,11 +680,11 @@
 		1C6BF7B21B7476BB00969629 /* NOZ_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZ_Project.h; sourceTree = "<group>"; };
 		1C6BF7B31B7476BB00969629 /* NOZ_Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZ_Project.m; sourceTree = "<group>"; };
 		1C6BF7B61B7564A700969629 /* NOZCompressTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCompressTests.m; sourceTree = "<group>"; };
-		1C7052091EBEA7A80071C2FF /* backward_references_hq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references_hq.c; path = Extra/brotli/enc/backward_references_hq.c; sourceTree = "<group>"; };
-		1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = backward_references_hq.h; path = Extra/brotli/enc/backward_references_hq.h; sourceTree = "<group>"; };
-		1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_longest_match64_inc.h; path = Extra/brotli/enc/hash_longest_match64_inc.h; sourceTree = "<group>"; };
-		1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_to_binary_tree_inc.h; path = Extra/brotli/enc/hash_to_binary_tree_inc.h; sourceTree = "<group>"; };
-		1C7052131EBEA92B0071C2FF /* dictionary_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dictionary_hash.c; path = Extra/brotli/enc/dictionary_hash.c; sourceTree = "<group>"; };
+		1C7052091EBEA7A80071C2FF /* backward_references_hq.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = backward_references_hq.c; sourceTree = "<group>"; };
+		1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backward_references_hq.h; sourceTree = "<group>"; };
+		1C70520B1EBEA7A80071C2FF /* hash_longest_match64_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_longest_match64_inc.h; sourceTree = "<group>"; };
+		1C70520C1EBEA7A80071C2FF /* hash_to_binary_tree_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_to_binary_tree_inc.h; sourceTree = "<group>"; };
+		1C7052131EBEA92B0071C2FF /* dictionary_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary_hash.c; sourceTree = "<group>"; };
 		1C70521B1EBEBBF20071C2FF /* noz */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = noz; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C70521D1EBEBBF20071C2FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C70524D1EBEBC370071C2FF /* libZipUtilities-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libZipUtilities-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -710,6 +727,20 @@
 		1CD9BAB91B75B419000B93C4 /* File.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = File.zip; sourceTree = "<group>"; };
 		1CD9BABA1B75B419000B93C4 /* Mixed.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Mixed.zip; sourceTree = "<group>"; };
 		1CF2F7ED1B87ABE9005E7C77 /* NOZUtils_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOZUtils_Project.h; sourceTree = "<group>"; };
+		3D37D78527A7CC64003300F5 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		3D37D78627A7CC64003300F5 /* shared_dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shared_dictionary.h; sourceTree = "<group>"; };
+		3D37D78727A7CC64003300F5 /* decode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decode.h; sourceTree = "<group>"; };
+		3D37D78827A7CC64003300F5 /* port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = port.h; sourceTree = "<group>"; };
+		3D37D78927A7CC64003300F5 /* encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encode.h; sourceTree = "<group>"; };
+		3D37D78F27A7CCE0003300F5 /* shared_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shared_dictionary.c; sourceTree = "<group>"; };
+		3D37D79027A7CCE0003300F5 /* platform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = platform.c; sourceTree = "<group>"; };
+		3D37D79127A7CCE0003300F5 /* constants.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = constants.c; sourceTree = "<group>"; };
+		3D37D79227A7CCE0003300F5 /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = context.c; sourceTree = "<group>"; };
+		3D37D79B27A7CD05003300F5 /* shared_dictionary_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shared_dictionary_internal.h; sourceTree = "<group>"; };
+		3D37D79D27A7CD4E003300F5 /* fast_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fast_log.c; sourceTree = "<group>"; };
+		3D37D79E27A7CD4F003300F5 /* compound_dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compound_dictionary.c; sourceTree = "<group>"; };
+		3D37D79F27A7CD4F003300F5 /* command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = command.c; sourceTree = "<group>"; };
+		3D37D7A627A7CD74003300F5 /* compound_dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compound_dictionary.h; sourceTree = "<group>"; };
 		4623A82E1B9A828A00A56535 /* ZipUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZipUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4623A8311B9A828A00A56535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4623A8321B9A828A00A56535 /* ZipUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipUtilities.h; sourceTree = "<group>"; };
@@ -729,10 +760,6 @@
 		8B3C0C761DDC1FC9000C7DE1 /* zstd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd.h; path = Extra/zstd/zstd.h; sourceTree = "<group>"; };
 		8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = book.zstd_dict; sourceTree = "<group>"; };
 		8B3C0CF01DDCEF39000C7DE1 /* NOZCoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCoderTests.m; sourceTree = "<group>"; };
-		8B6E342F1DE36963004A35C7 /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = decode.h; path = Extra/brotli/decode.h; sourceTree = "<group>"; };
-		8B6E34301DE36963004A35C7 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = encode.h; path = Extra/brotli/encode.h; sourceTree = "<group>"; };
-		8B6E34311DE36963004A35C7 /* port.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = port.h; path = Extra/brotli/port.h; sourceTree = "<group>"; };
-		8B6E34321DE36963004A35C7 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = Extra/brotli/types.h; sourceTree = "<group>"; };
 		8B6E34C61DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXBrotliCompressionCoder.h; path = Extra/NOZXBrotliCompressionCoder.h; sourceTree = "<group>"; };
 		8B6E34C71DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXBrotliCompressionCoder.m; path = Extra/NOZXBrotliCompressionCoder.m; sourceTree = "<group>"; };
 		8B6E34EE1DE39298004A35C7 /* fse_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_compress.c; path = Extra/zstd/compress/fse_compress.c; sourceTree = "<group>"; };
@@ -742,64 +769,64 @@
 		8B6E35121DE392AF004A35C7 /* divsufsort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = divsufsort.c; path = Extra/zstd/dictBuilder/divsufsort.c; sourceTree = "<group>"; };
 		8B6E35131DE392AF004A35C7 /* divsufsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = divsufsort.h; path = Extra/zstd/dictBuilder/divsufsort.h; sourceTree = "<group>"; };
 		8B6E35141DE392AF004A35C7 /* zdict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zdict.c; path = Extra/zstd/dictBuilder/zdict.c; sourceTree = "<group>"; };
-		8B6E35261DE392CC004A35C7 /* bit_reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_reader.c; path = Extra/brotli/dec/bit_reader.c; sourceTree = "<group>"; };
-		8B6E35271DE392CC004A35C7 /* bit_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_reader.h; path = Extra/brotli/dec/bit_reader.h; sourceTree = "<group>"; };
-		8B6E35291DE392CC004A35C7 /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decode.c; path = Extra/brotli/dec/decode.c; sourceTree = "<group>"; };
-		8B6E352A1DE392CC004A35C7 /* huffman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huffman.c; path = Extra/brotli/dec/huffman.c; sourceTree = "<group>"; };
-		8B6E352B1DE392CC004A35C7 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huffman.h; path = Extra/brotli/dec/huffman.h; sourceTree = "<group>"; };
-		8B6E352D1DE392CC004A35C7 /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.h; path = Extra/brotli/dec/prefix.h; sourceTree = "<group>"; };
-		8B6E352E1DE392CC004A35C7 /* state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = state.c; path = Extra/brotli/dec/state.c; sourceTree = "<group>"; };
-		8B6E352F1DE392CC004A35C7 /* state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state.h; path = Extra/brotli/dec/state.h; sourceTree = "<group>"; };
-		8B6E35411DE392D9004A35C7 /* backward_references_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = backward_references_inc.h; path = Extra/brotli/enc/backward_references_inc.h; sourceTree = "<group>"; };
-		8B6E35421DE392D9004A35C7 /* backward_references.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references.c; path = Extra/brotli/enc/backward_references.c; sourceTree = "<group>"; };
-		8B6E35431DE392D9004A35C7 /* backward_references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = backward_references.h; path = Extra/brotli/enc/backward_references.h; sourceTree = "<group>"; };
-		8B6E35441DE392D9004A35C7 /* bit_cost_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_cost_inc.h; path = Extra/brotli/enc/bit_cost_inc.h; sourceTree = "<group>"; };
-		8B6E35451DE392D9004A35C7 /* bit_cost.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bit_cost.c; path = Extra/brotli/enc/bit_cost.c; sourceTree = "<group>"; };
-		8B6E35461DE392D9004A35C7 /* bit_cost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bit_cost.h; path = Extra/brotli/enc/bit_cost.h; sourceTree = "<group>"; };
-		8B6E35471DE392D9004A35C7 /* block_encoder_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block_encoder_inc.h; path = Extra/brotli/enc/block_encoder_inc.h; sourceTree = "<group>"; };
-		8B6E35481DE392D9004A35C7 /* block_splitter_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block_splitter_inc.h; path = Extra/brotli/enc/block_splitter_inc.h; sourceTree = "<group>"; };
-		8B6E35491DE392D9004A35C7 /* block_splitter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = block_splitter.c; path = Extra/brotli/enc/block_splitter.c; sourceTree = "<group>"; };
-		8B6E354A1DE392D9004A35C7 /* block_splitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block_splitter.h; path = Extra/brotli/enc/block_splitter.h; sourceTree = "<group>"; };
-		8B6E354B1DE392D9004A35C7 /* brotli_bit_stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = brotli_bit_stream.c; path = Extra/brotli/enc/brotli_bit_stream.c; sourceTree = "<group>"; };
-		8B6E354C1DE392D9004A35C7 /* brotli_bit_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = brotli_bit_stream.h; path = Extra/brotli/enc/brotli_bit_stream.h; sourceTree = "<group>"; };
-		8B6E354D1DE392D9004A35C7 /* cluster_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cluster_inc.h; path = Extra/brotli/enc/cluster_inc.h; sourceTree = "<group>"; };
-		8B6E354E1DE392D9004A35C7 /* cluster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cluster.c; path = Extra/brotli/enc/cluster.c; sourceTree = "<group>"; };
-		8B6E354F1DE392D9004A35C7 /* cluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cluster.h; path = Extra/brotli/enc/cluster.h; sourceTree = "<group>"; };
-		8B6E35501DE392D9004A35C7 /* command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = command.h; path = Extra/brotli/enc/command.h; sourceTree = "<group>"; };
-		8B6E35511DE392D9004A35C7 /* compress_fragment_two_pass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress_fragment_two_pass.c; path = Extra/brotli/enc/compress_fragment_two_pass.c; sourceTree = "<group>"; };
-		8B6E35521DE392D9004A35C7 /* compress_fragment_two_pass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compress_fragment_two_pass.h; path = Extra/brotli/enc/compress_fragment_two_pass.h; sourceTree = "<group>"; };
-		8B6E35531DE392D9004A35C7 /* compress_fragment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress_fragment.c; path = Extra/brotli/enc/compress_fragment.c; sourceTree = "<group>"; };
-		8B6E35541DE392D9004A35C7 /* compress_fragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = compress_fragment.h; path = Extra/brotli/enc/compress_fragment.h; sourceTree = "<group>"; };
-		8B6E35561DE392D9004A35C7 /* dictionary_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dictionary_hash.h; path = Extra/brotli/enc/dictionary_hash.h; sourceTree = "<group>"; };
-		8B6E35571DE392D9004A35C7 /* encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encode.c; path = Extra/brotli/enc/encode.c; sourceTree = "<group>"; };
-		8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entropy_encode_static.h; path = Extra/brotli/enc/entropy_encode_static.h; sourceTree = "<group>"; };
-		8B6E35591DE392D9004A35C7 /* entropy_encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entropy_encode.c; path = Extra/brotli/enc/entropy_encode.c; sourceTree = "<group>"; };
-		8B6E355A1DE392D9004A35C7 /* entropy_encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entropy_encode.h; path = Extra/brotli/enc/entropy_encode.h; sourceTree = "<group>"; };
-		8B6E355B1DE392D9004A35C7 /* fast_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fast_log.h; path = Extra/brotli/enc/fast_log.h; sourceTree = "<group>"; };
-		8B6E355C1DE392D9004A35C7 /* find_match_length.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = find_match_length.h; path = Extra/brotli/enc/find_match_length.h; sourceTree = "<group>"; };
-		8B6E355D1DE392D9004A35C7 /* hash_forgetful_chain_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_forgetful_chain_inc.h; path = Extra/brotli/enc/hash_forgetful_chain_inc.h; sourceTree = "<group>"; };
-		8B6E355E1DE392D9004A35C7 /* hash_longest_match_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_longest_match_inc.h; path = Extra/brotli/enc/hash_longest_match_inc.h; sourceTree = "<group>"; };
-		8B6E355F1DE392D9004A35C7 /* hash_longest_match_quickly_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash_longest_match_quickly_inc.h; path = Extra/brotli/enc/hash_longest_match_quickly_inc.h; sourceTree = "<group>"; };
-		8B6E35601DE392D9004A35C7 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hash.h; path = Extra/brotli/enc/hash.h; sourceTree = "<group>"; };
-		8B6E35611DE392D9004A35C7 /* histogram_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = histogram_inc.h; path = Extra/brotli/enc/histogram_inc.h; sourceTree = "<group>"; };
-		8B6E35621DE392D9004A35C7 /* histogram.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = histogram.c; path = Extra/brotli/enc/histogram.c; sourceTree = "<group>"; };
-		8B6E35631DE392D9004A35C7 /* histogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = histogram.h; path = Extra/brotli/enc/histogram.h; sourceTree = "<group>"; };
-		8B6E35641DE392D9004A35C7 /* literal_cost.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = literal_cost.c; path = Extra/brotli/enc/literal_cost.c; sourceTree = "<group>"; };
-		8B6E35651DE392D9004A35C7 /* literal_cost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = literal_cost.h; path = Extra/brotli/enc/literal_cost.h; sourceTree = "<group>"; };
-		8B6E35661DE392D9004A35C7 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memory.c; path = Extra/brotli/enc/memory.c; sourceTree = "<group>"; };
-		8B6E35671DE392D9004A35C7 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memory.h; path = Extra/brotli/enc/memory.h; sourceTree = "<group>"; };
-		8B6E35681DE392D9004A35C7 /* metablock_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = metablock_inc.h; path = Extra/brotli/enc/metablock_inc.h; sourceTree = "<group>"; };
-		8B6E35691DE392D9004A35C7 /* metablock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = metablock.c; path = Extra/brotli/enc/metablock.c; sourceTree = "<group>"; };
-		8B6E356A1DE392D9004A35C7 /* metablock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = metablock.h; path = Extra/brotli/enc/metablock.h; sourceTree = "<group>"; };
-		8B6E356C1DE392D9004A35C7 /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prefix.h; path = Extra/brotli/enc/prefix.h; sourceTree = "<group>"; };
-		8B6E356D1DE392D9004A35C7 /* quality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quality.h; path = Extra/brotli/enc/quality.h; sourceTree = "<group>"; };
-		8B6E356E1DE392D9004A35C7 /* ringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ringbuffer.h; path = Extra/brotli/enc/ringbuffer.h; sourceTree = "<group>"; };
-		8B6E356F1DE392D9004A35C7 /* static_dict_lut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_dict_lut.h; path = Extra/brotli/enc/static_dict_lut.h; sourceTree = "<group>"; };
-		8B6E35701DE392D9004A35C7 /* static_dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = static_dict.c; path = Extra/brotli/enc/static_dict.c; sourceTree = "<group>"; };
-		8B6E35711DE392D9004A35C7 /* static_dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_dict.h; path = Extra/brotli/enc/static_dict.h; sourceTree = "<group>"; };
-		8B6E35721DE392D9004A35C7 /* utf8_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utf8_util.c; path = Extra/brotli/enc/utf8_util.c; sourceTree = "<group>"; };
-		8B6E35731DE392D9004A35C7 /* utf8_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utf8_util.h; path = Extra/brotli/enc/utf8_util.h; sourceTree = "<group>"; };
-		8B6E35741DE392D9004A35C7 /* write_bits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = write_bits.h; path = Extra/brotli/enc/write_bits.h; sourceTree = "<group>"; };
+		8B6E35261DE392CC004A35C7 /* bit_reader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bit_reader.c; sourceTree = "<group>"; };
+		8B6E35271DE392CC004A35C7 /* bit_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bit_reader.h; sourceTree = "<group>"; };
+		8B6E35291DE392CC004A35C7 /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decode.c; sourceTree = "<group>"; };
+		8B6E352A1DE392CC004A35C7 /* huffman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = huffman.c; sourceTree = "<group>"; };
+		8B6E352B1DE392CC004A35C7 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huffman.h; sourceTree = "<group>"; };
+		8B6E352D1DE392CC004A35C7 /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefix.h; sourceTree = "<group>"; };
+		8B6E352E1DE392CC004A35C7 /* state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = state.c; sourceTree = "<group>"; };
+		8B6E352F1DE392CC004A35C7 /* state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state.h; sourceTree = "<group>"; };
+		8B6E35411DE392D9004A35C7 /* backward_references_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backward_references_inc.h; sourceTree = "<group>"; };
+		8B6E35421DE392D9004A35C7 /* backward_references.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = backward_references.c; sourceTree = "<group>"; };
+		8B6E35431DE392D9004A35C7 /* backward_references.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backward_references.h; sourceTree = "<group>"; };
+		8B6E35441DE392D9004A35C7 /* bit_cost_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bit_cost_inc.h; sourceTree = "<group>"; };
+		8B6E35451DE392D9004A35C7 /* bit_cost.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bit_cost.c; sourceTree = "<group>"; };
+		8B6E35461DE392D9004A35C7 /* bit_cost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bit_cost.h; sourceTree = "<group>"; };
+		8B6E35471DE392D9004A35C7 /* block_encoder_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_encoder_inc.h; sourceTree = "<group>"; };
+		8B6E35481DE392D9004A35C7 /* block_splitter_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_splitter_inc.h; sourceTree = "<group>"; };
+		8B6E35491DE392D9004A35C7 /* block_splitter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block_splitter.c; sourceTree = "<group>"; };
+		8B6E354A1DE392D9004A35C7 /* block_splitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_splitter.h; sourceTree = "<group>"; };
+		8B6E354B1DE392D9004A35C7 /* brotli_bit_stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = brotli_bit_stream.c; sourceTree = "<group>"; };
+		8B6E354C1DE392D9004A35C7 /* brotli_bit_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brotli_bit_stream.h; sourceTree = "<group>"; };
+		8B6E354D1DE392D9004A35C7 /* cluster_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cluster_inc.h; sourceTree = "<group>"; };
+		8B6E354E1DE392D9004A35C7 /* cluster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cluster.c; sourceTree = "<group>"; };
+		8B6E354F1DE392D9004A35C7 /* cluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cluster.h; sourceTree = "<group>"; };
+		8B6E35501DE392D9004A35C7 /* command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = command.h; sourceTree = "<group>"; };
+		8B6E35511DE392D9004A35C7 /* compress_fragment_two_pass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress_fragment_two_pass.c; sourceTree = "<group>"; };
+		8B6E35521DE392D9004A35C7 /* compress_fragment_two_pass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compress_fragment_two_pass.h; sourceTree = "<group>"; };
+		8B6E35531DE392D9004A35C7 /* compress_fragment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress_fragment.c; sourceTree = "<group>"; };
+		8B6E35541DE392D9004A35C7 /* compress_fragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compress_fragment.h; sourceTree = "<group>"; };
+		8B6E35561DE392D9004A35C7 /* dictionary_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary_hash.h; sourceTree = "<group>"; };
+		8B6E35571DE392D9004A35C7 /* encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encode.c; sourceTree = "<group>"; };
+		8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entropy_encode_static.h; sourceTree = "<group>"; };
+		8B6E35591DE392D9004A35C7 /* entropy_encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = entropy_encode.c; sourceTree = "<group>"; };
+		8B6E355A1DE392D9004A35C7 /* entropy_encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entropy_encode.h; sourceTree = "<group>"; };
+		8B6E355B1DE392D9004A35C7 /* fast_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fast_log.h; sourceTree = "<group>"; };
+		8B6E355C1DE392D9004A35C7 /* find_match_length.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = find_match_length.h; sourceTree = "<group>"; };
+		8B6E355D1DE392D9004A35C7 /* hash_forgetful_chain_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_forgetful_chain_inc.h; sourceTree = "<group>"; };
+		8B6E355E1DE392D9004A35C7 /* hash_longest_match_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_longest_match_inc.h; sourceTree = "<group>"; };
+		8B6E355F1DE392D9004A35C7 /* hash_longest_match_quickly_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash_longest_match_quickly_inc.h; sourceTree = "<group>"; };
+		8B6E35601DE392D9004A35C7 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
+		8B6E35611DE392D9004A35C7 /* histogram_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = histogram_inc.h; sourceTree = "<group>"; };
+		8B6E35621DE392D9004A35C7 /* histogram.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = histogram.c; sourceTree = "<group>"; };
+		8B6E35631DE392D9004A35C7 /* histogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = histogram.h; sourceTree = "<group>"; };
+		8B6E35641DE392D9004A35C7 /* literal_cost.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = literal_cost.c; sourceTree = "<group>"; };
+		8B6E35651DE392D9004A35C7 /* literal_cost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = literal_cost.h; sourceTree = "<group>"; };
+		8B6E35661DE392D9004A35C7 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		8B6E35671DE392D9004A35C7 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		8B6E35681DE392D9004A35C7 /* metablock_inc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metablock_inc.h; sourceTree = "<group>"; };
+		8B6E35691DE392D9004A35C7 /* metablock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = metablock.c; sourceTree = "<group>"; };
+		8B6E356A1DE392D9004A35C7 /* metablock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metablock.h; sourceTree = "<group>"; };
+		8B6E356C1DE392D9004A35C7 /* prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefix.h; sourceTree = "<group>"; };
+		8B6E356D1DE392D9004A35C7 /* quality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quality.h; sourceTree = "<group>"; };
+		8B6E356E1DE392D9004A35C7 /* ringbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ringbuffer.h; sourceTree = "<group>"; };
+		8B6E356F1DE392D9004A35C7 /* static_dict_lut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_dict_lut.h; sourceTree = "<group>"; };
+		8B6E35701DE392D9004A35C7 /* static_dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = static_dict.c; sourceTree = "<group>"; };
+		8B6E35711DE392D9004A35C7 /* static_dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_dict.h; sourceTree = "<group>"; };
+		8B6E35721DE392D9004A35C7 /* utf8_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf8_util.c; sourceTree = "<group>"; };
+		8B6E35731DE392D9004A35C7 /* utf8_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8_util.h; sourceTree = "<group>"; };
+		8B6E35741DE392D9004A35C7 /* write_bits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = write_bits.h; sourceTree = "<group>"; };
 		8B8D5A961DDD153E00037E0E /* timeline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timeline.json; sourceTree = "<group>"; };
 		8B8D5A9E1DDD2E9100037E0E /* htl.128.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.128.zstd_dict; sourceTree = "<group>"; };
 		8B8D5A9F1DDD2E9100037E0E /* htl.256.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = htl.256.zstd_dict; sourceTree = "<group>"; };
@@ -846,17 +873,17 @@
 		8BF291F8208FA9A900541EE0 /* zstd_lazy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd_lazy.h; path = Extra/zstd/compress/zstd_lazy.h; sourceTree = "<group>"; };
 		8BF291F9208FA9A900541EE0 /* zstd_double_fast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_double_fast.c; path = Extra/zstd/compress/zstd_double_fast.c; sourceTree = "<group>"; };
 		8BF291FA208FA9A900541EE0 /* zstd_lazy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zstd_lazy.c; path = Extra/zstd/compress/zstd_lazy.c; sourceTree = "<group>"; };
-		8BF29213208FABF900541EE0 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dictionary.h; path = Extra/brotli/common/dictionary.h; sourceTree = "<group>"; };
-		8BF29214208FABF900541EE0 /* transform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transform.c; path = Extra/brotli/common/transform.c; sourceTree = "<group>"; };
-		8BF29215208FABF900541EE0 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constants.h; path = Extra/brotli/common/constants.h; sourceTree = "<group>"; };
-		8BF29216208FABF900541EE0 /* transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transform.h; path = Extra/brotli/common/transform.h; sourceTree = "<group>"; };
-		8BF29217208FABFA00541EE0 /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = context.h; path = Extra/brotli/common/context.h; sourceTree = "<group>"; };
-		8BF29218208FABFA00541EE0 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform.h; path = Extra/brotli/common/platform.h; sourceTree = "<group>"; };
-		8BF29219208FABFA00541EE0 /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dictionary.c; path = Extra/brotli/common/dictionary.c; sourceTree = "<group>"; };
-		8BF2921A208FABFA00541EE0 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = Extra/brotli/common/version.h; sourceTree = "<group>"; };
-		8BF29225208FAC1600541EE0 /* params.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = params.h; path = Extra/brotli/enc/params.h; sourceTree = "<group>"; };
-		8BF29226208FAC1600541EE0 /* encoder_dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encoder_dict.c; path = Extra/brotli/enc/encoder_dict.c; sourceTree = "<group>"; };
-		8BF29227208FAC1700541EE0 /* encoder_dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encoder_dict.h; path = Extra/brotli/enc/encoder_dict.h; sourceTree = "<group>"; };
+		8BF29213208FABF900541EE0 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
+		8BF29214208FABF900541EE0 /* transform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = transform.c; sourceTree = "<group>"; };
+		8BF29215208FABF900541EE0 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		8BF29216208FABF900541EE0 /* transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
+		8BF29217208FABFA00541EE0 /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
+		8BF29218208FABFA00541EE0 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		8BF29219208FABFA00541EE0 /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary.c; sourceTree = "<group>"; };
+		8BF2921A208FABFA00541EE0 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		8BF29225208FAC1600541EE0 /* params.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = params.h; sourceTree = "<group>"; };
+		8BF29226208FAC1600541EE0 /* encoder_dict.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encoder_dict.c; sourceTree = "<group>"; };
+		8BF29227208FAC1700541EE0 /* encoder_dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encoder_dict.h; sourceTree = "<group>"; };
 		B3F87BF41CF4C08A00FBBFEF /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1127,6 +1154,19 @@
 			path = noz;
 			sourceTree = "<group>";
 		};
+		3D37D78227A7CBFC003300F5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3D37D78727A7CC64003300F5 /* decode.h */,
+				3D37D78927A7CC64003300F5 /* encode.h */,
+				3D37D78827A7CC64003300F5 /* port.h */,
+				3D37D78627A7CC64003300F5 /* shared_dictionary.h */,
+				3D37D78527A7CC64003300F5 /* types.h */,
+			);
+			name = include;
+			path = include/brotli;
+			sourceTree = "<group>";
+		};
 		4613835B1B9AAA130076C8B5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,32 +1335,35 @@
 		8B6E342B1DE36937004A35C7 /* brotli */ = {
 			isa = PBXGroup;
 			children = (
-				8B6E342F1DE36963004A35C7 /* decode.h */,
-				8B6E34301DE36963004A35C7 /* encode.h */,
-				8B6E34311DE36963004A35C7 /* port.h */,
-				8B6E34321DE36963004A35C7 /* types.h */,
 				8B6E342C1DE3693E004A35C7 /* common */,
 				8B6E342E1DE3694A004A35C7 /* dec */,
 				8B6E342D1DE36946004A35C7 /* enc */,
+				3D37D78227A7CBFC003300F5 /* include */,
 			);
 			name = brotli;
+			path = Extra/brotli;
 			sourceTree = "<group>";
 		};
 		8B6E342C1DE3693E004A35C7 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				3D37D79127A7CCE0003300F5 /* constants.c */,
+				3D37D79227A7CCE0003300F5 /* context.c */,
 				8BF29215208FABF900541EE0 /* constants.h */,
 				8BF29217208FABFA00541EE0 /* context.h */,
 				1C3FFC1924D36C0800027E5C /* dictionary.bin */,
 				1C3FFC1A24D36C0800027E5C /* dictionary.bin.br */,
 				8BF29219208FABFA00541EE0 /* dictionary.c */,
 				8BF29213208FABF900541EE0 /* dictionary.h */,
+				3D37D79027A7CCE0003300F5 /* platform.c */,
 				8BF29218208FABFA00541EE0 /* platform.h */,
+				3D37D78F27A7CCE0003300F5 /* shared_dictionary.c */,
+				3D37D79B27A7CD05003300F5 /* shared_dictionary_internal.h */,
 				8BF29214208FABF900541EE0 /* transform.c */,
 				8BF29216208FABF900541EE0 /* transform.h */,
 				8BF2921A208FABFA00541EE0 /* version.h */,
 			);
-			name = common;
+			path = common;
 			sourceTree = "<group>";
 		};
 		8B6E342D1DE36946004A35C7 /* enc */ = {
@@ -1343,11 +1386,14 @@
 				8B6E354D1DE392D9004A35C7 /* cluster_inc.h */,
 				8B6E354E1DE392D9004A35C7 /* cluster.c */,
 				8B6E354F1DE392D9004A35C7 /* cluster.h */,
+				3D37D79F27A7CD4F003300F5 /* command.c */,
 				8B6E35501DE392D9004A35C7 /* command.h */,
 				8B6E35511DE392D9004A35C7 /* compress_fragment_two_pass.c */,
 				8B6E35521DE392D9004A35C7 /* compress_fragment_two_pass.h */,
 				8B6E35531DE392D9004A35C7 /* compress_fragment.c */,
 				8B6E35541DE392D9004A35C7 /* compress_fragment.h */,
+				3D37D79E27A7CD4F003300F5 /* compound_dictionary.c */,
+				3D37D7A627A7CD74003300F5 /* compound_dictionary.h */,
 				1C7052131EBEA92B0071C2FF /* dictionary_hash.c */,
 				8B6E35561DE392D9004A35C7 /* dictionary_hash.h */,
 				8B6E35571DE392D9004A35C7 /* encode.c */,
@@ -1356,6 +1402,7 @@
 				8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */,
 				8B6E35591DE392D9004A35C7 /* entropy_encode.c */,
 				8B6E355A1DE392D9004A35C7 /* entropy_encode.h */,
+				3D37D79D27A7CD4E003300F5 /* fast_log.c */,
 				8B6E355B1DE392D9004A35C7 /* fast_log.h */,
 				8B6E355C1DE392D9004A35C7 /* find_match_length.h */,
 				1C5AD7852123866600A4AA17 /* hash_composite_inc.h */,
@@ -1387,7 +1434,7 @@
 				8B6E35731DE392D9004A35C7 /* utf8_util.h */,
 				8B6E35741DE392D9004A35C7 /* write_bits.h */,
 			);
-			name = enc;
+			path = enc;
 			sourceTree = "<group>";
 		};
 		8B6E342E1DE3694A004A35C7 /* dec */ = {
@@ -1402,7 +1449,7 @@
 				8B6E352D1DE392CC004A35C7 /* prefix.h */,
 				8B6E352F1DE392CC004A35C7 /* state.h */,
 			);
-			name = dec;
+			path = dec;
 			sourceTree = "<group>";
 		};
 		8B8D5ADE1DDD465C00037E0E /* ZipUtilitiesApp */ = {
@@ -1540,18 +1587,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C5A1971267D3DD700B4FDBA /* hist.h in Headers */,
+				3D37D78D27A7CC64003300F5 /* port.h in Headers */,
+				3D37D78B27A7CC64003300F5 /* shared_dictionary.h in Headers */,
 				1C5AD8352123876100A4AA17 /* zstd.h in Headers */,
 				1C5A1974267D3DD700B4FDBA /* zstd_compress_sequences.h in Headers */,
 				1C5A197A267D3DD700B4FDBA /* zstd_ldm.h in Headers */,
 				1C5A1972267D3DD700B4FDBA /* zstd_compress_internal.h in Headers */,
+				3D37D7A727A7CD74003300F5 /* compound_dictionary.h in Headers */,
 				1C5A1976267D3DD700B4FDBA /* zstd_cwksp.h in Headers */,
 				1C5A197F267D3E0B00B4FDBA /* zstd_trace.h in Headers */,
 				1C5A1973267D3DD700B4FDBA /* zstd_compress_literals.h in Headers */,
+				3D37D78E27A7CC64003300F5 /* encode.h in Headers */,
 				1C5A197B267D3DD700B4FDBA /* zstd_opt.h in Headers */,
 				1C5A197C267D3DD700B4FDBA /* zstdmt_compress.h in Headers */,
+				3D37D78A27A7CC64003300F5 /* types.h in Headers */,
 				1C5A1977267D3DD700B4FDBA /* zstd_double_fast.h in Headers */,
 				1C5A1980267D3E0B00B4FDBA /* zstd_deps.h in Headers */,
+				3D37D78C27A7CC64003300F5 /* decode.h in Headers */,
 				1C5A196E267D3D8200B4FDBA /* zstd_errors.h in Headers */,
+				3D37D79C27A7CD05003300F5 /* shared_dictionary_internal.h in Headers */,
 				1C5A1970267D3DC600B4FDBA /* zstd_ldm_geartab.h in Headers */,
 				1C5A196D267D3D8200B4FDBA /* zdict.h in Headers */,
 				1C5A1979267D3DD700B4FDBA /* zstd_lazy.h in Headers */,
@@ -1566,8 +1620,6 @@
 			files = (
 				1C5AD817212386F000A4AA17 /* hash_forgetful_chain_inc.h in Headers */,
 				1C5AD812212386F000A4AA17 /* dictionary_hash.h in Headers */,
-				1C5AD8312123871200A4AA17 /* types.h in Headers */,
-				1C5AD82F2123871200A4AA17 /* encode.h in Headers */,
 				1C5AD811212386F000A4AA17 /* compress_fragment.h in Headers */,
 				1C5AD82A2123870500A4AA17 /* bit_reader.h in Headers */,
 				1C5AD813212386F000A4AA17 /* entropy_encode_static.h in Headers */,
@@ -1610,11 +1662,9 @@
 				1C5AD81C212386F000A4AA17 /* hash.h in Headers */,
 				1C5AD825212386F000A4AA17 /* ringbuffer.h in Headers */,
 				1C5AD78E212386AB00A4AA17 /* hash_composite_inc.h in Headers */,
-				1C5AD8302123871200A4AA17 /* port.h in Headers */,
 				1C5AD823212386F000A4AA17 /* prefix.h in Headers */,
 				8BF2921B208FABFA00541EE0 /* dictionary.h in Headers */,
 				1C5AD81F212386F000A4AA17 /* literal_cost.h in Headers */,
-				1C5AD82E2123871200A4AA17 /* decode.h in Headers */,
 				1C5AD818212386F000A4AA17 /* hash_longest_match_inc.h in Headers */,
 				1C5AD827212386F000A4AA17 /* static_dict.h in Headers */,
 				1C5AD826212386F000A4AA17 /* static_dict_lut.h in Headers */,
@@ -1875,7 +1925,7 @@
 			attributes = {
 				CLASSPREFIX = NOZ;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = NSProgrammer;
 				TargetAttributes = {
 					1C6BF76F1B74086000969629 = {
@@ -2204,12 +2254,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D37D79927A7CCE0003300F5 /* context.c in Sources */,
 				1C3FFC3D24D36DF400027E5C /* zstd_compress_literals.c in Sources */,
 				1C3FFC2C24D36D7B00027E5C /* zstd_ddict.c in Sources */,
 				1C3FFC2824D36D7B00027E5C /* huf_decompress.c in Sources */,
 				1C3FFC3924D36DF400027E5C /* zstd_compress_sequences.c in Sources */,
 				8BAE42521E5A9E4200AFD299 /* threading.c in Sources */,
+				3D37D7A027A7CD4F003300F5 /* fast_log.c in Sources */,
 				8BAE424F1E5A9E4200AFD299 /* pool.c in Sources */,
+				3D37D79327A7CCE0003300F5 /* shared_dictionary.c in Sources */,
+				3D37D7A427A7CD4F003300F5 /* command.c in Sources */,
 				1C3FFC4024D36DF400027E5C /* zstd_compress_superblock.c in Sources */,
 				8BAE42451E5A9E4200AFD299 /* entropy_common.c in Sources */,
 				8B0455201DF8D8C000EBB706 /* zdict.c in Sources */,
@@ -2223,13 +2277,16 @@
 				8BAE42071E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8BF29208208FA9A900541EE0 /* zstd_lazy.c in Sources */,
 				8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */,
+				3D37D7A227A7CD4F003300F5 /* compound_dictionary.c in Sources */,
 				8BAE42581E5A9E4200AFD299 /* zstd_common.c in Sources */,
 				8BAE42031E5A9DDA00AFD299 /* cover.c in Sources */,
 				8BF29206208FA9A900541EE0 /* zstd_double_fast.c in Sources */,
 				1C5AD78B2123869300A4AA17 /* debug.c in Sources */,
 				8BAE42471E5A9E4200AFD299 /* error_private.c in Sources */,
+				3D37D79727A7CCE0003300F5 /* constants.c in Sources */,
 				1C3FFC2E24D36D7B00027E5C /* zstd_decompress.c in Sources */,
 				8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */,
+				3D37D79527A7CCE0003300F5 /* platform.c in Sources */,
 				8BF29203208FA9A900541EE0 /* zstd_opt.c in Sources */,
 				1C3FFC2624D36D7B00027E5C /* zstd_decompress_block.c in Sources */,
 				8B04551F1DF8D8C000EBB706 /* divsufsort.c in Sources */,
@@ -2271,12 +2328,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D37D79A27A7CCE0003300F5 /* context.c in Sources */,
 				1C3FFC3E24D36DF400027E5C /* zstd_compress_literals.c in Sources */,
 				1C3FFC2D24D36D7B00027E5C /* zstd_ddict.c in Sources */,
 				1C3FFC2924D36D7B00027E5C /* huf_decompress.c in Sources */,
 				1C3FFC3A24D36DF400027E5C /* zstd_compress_sequences.c in Sources */,
 				8BAE42531E5A9E4200AFD299 /* threading.c in Sources */,
+				3D37D7A127A7CD4F003300F5 /* fast_log.c in Sources */,
 				8BAE42501E5A9E4200AFD299 /* pool.c in Sources */,
+				3D37D79427A7CCE0003300F5 /* shared_dictionary.c in Sources */,
+				3D37D7A527A7CD4F003300F5 /* command.c in Sources */,
 				1C3FFC4124D36DF400027E5C /* zstd_compress_superblock.c in Sources */,
 				8BAE42461E5A9E4200AFD299 /* entropy_common.c in Sources */,
 				8B0455821DF8DBFD00EBB706 /* zdict.c in Sources */,
@@ -2290,13 +2351,16 @@
 				8BAE42081E5A9E0900AFD299 /* zstdmt_compress.c in Sources */,
 				8BF29209208FA9A900541EE0 /* zstd_lazy.c in Sources */,
 				8B04557B1DF8DBFD00EBB706 /* huf_compress.c in Sources */,
+				3D37D7A327A7CD4F003300F5 /* compound_dictionary.c in Sources */,
 				8BAE42591E5A9E4200AFD299 /* zstd_common.c in Sources */,
 				8BAE42041E5A9DDA00AFD299 /* cover.c in Sources */,
 				8BF29207208FA9A900541EE0 /* zstd_double_fast.c in Sources */,
 				1C5AD78C2123869300A4AA17 /* debug.c in Sources */,
 				8BAE42481E5A9E4200AFD299 /* error_private.c in Sources */,
+				3D37D79827A7CCE0003300F5 /* constants.c in Sources */,
 				1C3FFC2F24D36D7B00027E5C /* zstd_decompress.c in Sources */,
 				8B04557D1DF8DBFD00EBB706 /* zstd_compress.c in Sources */,
+				3D37D79627A7CCE0003300F5 /* platform.c in Sources */,
 				8BF29204208FA9A900541EE0 /* zstd_opt.c in Sources */,
 				1C3FFC2724D36D7B00027E5C /* zstd_decompress_block.c in Sources */,
 				8B0455811DF8DBFD00EBB706 /* divsufsort.c in Sources */,
@@ -2597,7 +2661,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2614,7 +2681,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2633,7 +2703,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2647,7 +2720,10 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2739,7 +2815,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 8.0;
@@ -2758,7 +2837,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2826,7 +2908,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2849,7 +2934,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2870,7 +2958,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2887,7 +2978,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2904,7 +2998,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2921,7 +3018,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2938,7 +3038,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Extra/brotli/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2953,7 +3057,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Extra/brotli/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2968,7 +3076,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Extra/brotli/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2983,7 +3095,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Extra/brotli/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2999,7 +3115,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -3017,7 +3136,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
