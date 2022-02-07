@@ -283,6 +283,16 @@
 		4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
+		5BEB48A827B134A300A669BC /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A527B134A300A669BC /* platform.c */; };
+		5BEB48A927B134A300A669BC /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A527B134A300A669BC /* platform.c */; };
+		5BEB48AA27B134A300A669BC /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A627B134A300A669BC /* constants.c */; };
+		5BEB48AB27B134A300A669BC /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A627B134A300A669BC /* constants.c */; };
+		5BEB48AC27B134A300A669BC /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A727B134A300A669BC /* context.c */; };
+		5BEB48AD27B134A300A669BC /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48A727B134A300A669BC /* context.c */; };
+		5BEB48B027B1369700A669BC /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48AE27B1369700A669BC /* command.c */; };
+		5BEB48B127B1369700A669BC /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48AE27B1369700A669BC /* command.c */; };
+		5BEB48B227B1369700A669BC /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48AF27B1369700A669BC /* fast_log.c */; };
+		5BEB48B327B1369700A669BC /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB48AF27B1369700A669BC /* fast_log.c */; };
 		8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -720,6 +730,11 @@
 		4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		4623A8AD1B9A8D3500A56535 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4623A8AE1B9A8D3500A56535 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5BEB48A527B134A300A669BC /* platform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = platform.c; path = Extra/brotli/common/platform.c; sourceTree = "<group>"; };
+		5BEB48A627B134A300A669BC /* constants.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = constants.c; path = Extra/brotli/common/constants.c; sourceTree = "<group>"; };
+		5BEB48A727B134A300A669BC /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = context.c; path = Extra/brotli/common/context.c; sourceTree = "<group>"; };
+		5BEB48AE27B1369700A669BC /* command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = command.c; path = Extra/brotli/enc/command.c; sourceTree = "<group>"; };
+		5BEB48AF27B1369700A669BC /* fast_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fast_log.c; path = Extra/brotli/enc/fast_log.c; sourceTree = "<group>"; };
 		8B04550A1DF8D81300EBB706 /* libzstd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzstd.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0455381DF8D97900EBB706 /* libbrotli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbrotli.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0455691DF8DBA000EBB706 /* libzstd-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libzstd-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1309,6 +1324,9 @@
 		8B6E342C1DE3693E004A35C7 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				5BEB48A627B134A300A669BC /* constants.c */,
+				5BEB48A727B134A300A669BC /* context.c */,
+				5BEB48A527B134A300A669BC /* platform.c */,
 				8BF29215208FABF900541EE0 /* constants.h */,
 				8BF29217208FABFA00541EE0 /* context.h */,
 				1C3FFC1924D36C0800027E5C /* dictionary.bin */,
@@ -1326,6 +1344,8 @@
 		8B6E342D1DE36946004A35C7 /* enc */ = {
 			isa = PBXGroup;
 			children = (
+				5BEB48AE27B1369700A669BC /* command.c */,
+				5BEB48AF27B1369700A669BC /* fast_log.c */,
 				1C7052091EBEA7A80071C2FF /* backward_references_hq.c */,
 				1C70520A1EBEA7A80071C2FF /* backward_references_hq.h */,
 				8B6E35411DE392D9004A35C7 /* backward_references_inc.h */,
@@ -2240,7 +2260,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEB48AC27B134A300A669BC /* context.c in Sources */,
+				5BEB48B027B1369700A669BC /* command.c in Sources */,
 				8B04553E1DF8D9BD00EBB706 /* backward_references.c in Sources */,
+				5BEB48B227B1369700A669BC /* fast_log.c in Sources */,
 				8B0455461DF8D9BD00EBB706 /* entropy_encode.c in Sources */,
 				8B04553A1DF8D9BD00EBB706 /* bit_reader.c in Sources */,
 				8B0455411DF8D9BD00EBB706 /* brotli_bit_stream.c in Sources */,
@@ -2259,8 +2282,10 @@
 				8B0455491DF8D9BD00EBB706 /* memory.c in Sources */,
 				8B0455451DF8D9BD00EBB706 /* encode.c in Sources */,
 				8BF29229208FAC1700541EE0 /* encoder_dict.c in Sources */,
+				5BEB48AA27B134A300A669BC /* constants.c in Sources */,
 				8B04554C1DF8D9BD00EBB706 /* utf8_util.c in Sources */,
 				8B0455471DF8D9BD00EBB706 /* histogram.c in Sources */,
+				5BEB48A827B134A300A669BC /* platform.c in Sources */,
 				8B04553C1DF8D9BD00EBB706 /* huffman.c in Sources */,
 				8BF2921C208FABFA00541EE0 /* transform.c in Sources */,
 				8B0455431DF8D9BD00EBB706 /* compress_fragment_two_pass.c in Sources */,
@@ -2307,7 +2332,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEB48AD27B134A300A669BC /* context.c in Sources */,
+				5BEB48B127B1369700A669BC /* command.c in Sources */,
 				8B0455881DF8DC1B00EBB706 /* backward_references.c in Sources */,
+				5BEB48B327B1369700A669BC /* fast_log.c in Sources */,
 				8B0455901DF8DC1B00EBB706 /* entropy_encode.c in Sources */,
 				8B0455841DF8DC1B00EBB706 /* bit_reader.c in Sources */,
 				8B04558B1DF8DC1B00EBB706 /* brotli_bit_stream.c in Sources */,
@@ -2326,8 +2354,10 @@
 				8B0455931DF8DC1B00EBB706 /* memory.c in Sources */,
 				8B04558F1DF8DC1B00EBB706 /* encode.c in Sources */,
 				8BF2922A208FAC1700541EE0 /* encoder_dict.c in Sources */,
+				5BEB48AB27B134A300A669BC /* constants.c in Sources */,
 				8B0455961DF8DC1B00EBB706 /* utf8_util.c in Sources */,
 				8B0455911DF8DC1B00EBB706 /* histogram.c in Sources */,
+				5BEB48A927B134A300A669BC /* platform.c in Sources */,
 				8B0455861DF8DC1B00EBB706 /* huffman.c in Sources */,
 				8BF2921D208FABFA00541EE0 /* transform.c in Sources */,
 				8B04558D1DF8DC1B00EBB706 /* compress_fragment_two_pass.c in Sources */,
