@@ -283,6 +283,16 @@
 		4623A8A41B9A883600A56535 /* NOZCompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C6BF7B61B7564A700969629 /* NOZCompressTests.m */; };
 		4623A8A51B9A883900A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
 		4623A8A61B9A883A00A56535 /* NOZDecompressTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3223761B76FB7C00DC0A33 /* NOZDecompressTests.m */; };
+		5497733D27D843A900AB7917 /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733A27D843A800AB7917 /* platform.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497733F27D843A900AB7917 /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733B27D843A900AB7917 /* constants.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734127D843A900AB7917 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733C27D843A900AB7917 /* context.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734427D843C300AB7917 /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497734327D843C300AB7917 /* fast_log.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734827D8462A00AB7917 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733C27D843A900AB7917 /* context.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734927D8462D00AB7917 /* constants.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733B27D843A900AB7917 /* constants.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734A27D8465300AB7917 /* platform.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497733A27D843A800AB7917 /* platform.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734B27D8466100AB7917 /* fast_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497734327D843C300AB7917 /* fast_log.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734D27D8499E00AB7917 /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497734C27D8499E00AB7917 /* command.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		5497734E27D8499E00AB7917 /* command.c in Sources */ = {isa = PBXBuildFile; fileRef = 5497734C27D8499E00AB7917 /* command.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455181DF8D8C000EBB706 /* fse_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EE1DE39298004A35C7 /* fse_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B0455191DF8D8C000EBB706 /* huf_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34EF1DE39298004A35C7 /* huf_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8B04551B1DF8D8C000EBB706 /* zstd_compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E34F11DE39298004A35C7 /* zstd_compress.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -720,6 +730,11 @@
 		4623A8AB1B9A8CA400A56535 /* OSX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		4623A8AD1B9A8D3500A56535 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4623A8AE1B9A8D3500A56535 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5497733A27D843A800AB7917 /* platform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = platform.c; path = Extra/brotli/common/platform.c; sourceTree = "<group>"; };
+		5497733B27D843A900AB7917 /* constants.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = constants.c; path = Extra/brotli/common/constants.c; sourceTree = "<group>"; };
+		5497733C27D843A900AB7917 /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = context.c; path = Extra/brotli/common/context.c; sourceTree = "<group>"; };
+		5497734327D843C300AB7917 /* fast_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fast_log.c; path = Extra/brotli/enc/fast_log.c; sourceTree = "<group>"; };
+		5497734C27D8499E00AB7917 /* command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = command.c; path = Extra/brotli/enc/command.c; sourceTree = "<group>"; };
 		8B04550A1DF8D81300EBB706 /* libzstd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzstd.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0455381DF8D97900EBB706 /* libbrotli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbrotli.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0455691DF8DBA000EBB706 /* libzstd-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libzstd-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -729,10 +744,10 @@
 		8B3C0C761DDC1FC9000C7DE1 /* zstd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zstd.h; path = Extra/zstd/zstd.h; sourceTree = "<group>"; };
 		8B3C0CEC1DDCEAAE000C7DE1 /* book.zstd_dict */ = {isa = PBXFileReference; lastKnownFileType = file; path = book.zstd_dict; sourceTree = "<group>"; };
 		8B3C0CF01DDCEF39000C7DE1 /* NOZCoderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOZCoderTests.m; sourceTree = "<group>"; };
-		8B6E342F1DE36963004A35C7 /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = decode.h; path = Extra/brotli/decode.h; sourceTree = "<group>"; };
-		8B6E34301DE36963004A35C7 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = encode.h; path = Extra/brotli/encode.h; sourceTree = "<group>"; };
-		8B6E34311DE36963004A35C7 /* port.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = port.h; path = Extra/brotli/port.h; sourceTree = "<group>"; };
-		8B6E34321DE36963004A35C7 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = Extra/brotli/types.h; sourceTree = "<group>"; };
+		8B6E342F1DE36963004A35C7 /* decode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = decode.h; path = Extra/brotli/include/brotli/decode.h; sourceTree = "<group>"; };
+		8B6E34301DE36963004A35C7 /* encode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = encode.h; path = Extra/brotli/include/brotli/encode.h; sourceTree = "<group>"; };
+		8B6E34311DE36963004A35C7 /* port.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = port.h; path = Extra/brotli/include/brotli/port.h; sourceTree = "<group>"; };
+		8B6E34321DE36963004A35C7 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = Extra/brotli/include/brotli/types.h; sourceTree = "<group>"; };
 		8B6E34C61DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOZXBrotliCompressionCoder.h; path = Extra/NOZXBrotliCompressionCoder.h; sourceTree = "<group>"; };
 		8B6E34C71DE36A2B004A35C7 /* NOZXBrotliCompressionCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOZXBrotliCompressionCoder.m; path = Extra/NOZXBrotliCompressionCoder.m; sourceTree = "<group>"; };
 		8B6E34EE1DE39298004A35C7 /* fse_compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fse_compress.c; path = Extra/zstd/compress/fse_compress.c; sourceTree = "<group>"; };
@@ -1189,6 +1204,17 @@
 			name = OSX;
 			sourceTree = "<group>";
 		};
+		5497733927D8432300AB7917 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8B6E342F1DE36963004A35C7 /* decode.h */,
+				8B6E34301DE36963004A35C7 /* encode.h */,
+				8B6E34311DE36963004A35C7 /* port.h */,
+				8B6E34321DE36963004A35C7 /* types.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
 		8B3C0C751DDC1FBC000C7DE1 /* zstd */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,13 +1321,10 @@
 		8B6E342B1DE36937004A35C7 /* brotli */ = {
 			isa = PBXGroup;
 			children = (
-				8B6E342F1DE36963004A35C7 /* decode.h */,
-				8B6E34301DE36963004A35C7 /* encode.h */,
-				8B6E34311DE36963004A35C7 /* port.h */,
-				8B6E34321DE36963004A35C7 /* types.h */,
 				8B6E342C1DE3693E004A35C7 /* common */,
 				8B6E342E1DE3694A004A35C7 /* dec */,
 				8B6E342D1DE36946004A35C7 /* enc */,
+				5497733927D8432300AB7917 /* include */,
 			);
 			name = brotli;
 			sourceTree = "<group>";
@@ -1309,12 +1332,15 @@
 		8B6E342C1DE3693E004A35C7 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				5497733B27D843A900AB7917 /* constants.c */,
 				8BF29215208FABF900541EE0 /* constants.h */,
+				5497733C27D843A900AB7917 /* context.c */,
 				8BF29217208FABFA00541EE0 /* context.h */,
 				1C3FFC1924D36C0800027E5C /* dictionary.bin */,
 				1C3FFC1A24D36C0800027E5C /* dictionary.bin.br */,
 				8BF29219208FABFA00541EE0 /* dictionary.c */,
 				8BF29213208FABF900541EE0 /* dictionary.h */,
+				5497733A27D843A800AB7917 /* platform.c */,
 				8BF29218208FABFA00541EE0 /* platform.h */,
 				8BF29214208FABF900541EE0 /* transform.c */,
 				8BF29216208FABF900541EE0 /* transform.h */,
@@ -1343,6 +1369,7 @@
 				8B6E354D1DE392D9004A35C7 /* cluster_inc.h */,
 				8B6E354E1DE392D9004A35C7 /* cluster.c */,
 				8B6E354F1DE392D9004A35C7 /* cluster.h */,
+				5497734C27D8499E00AB7917 /* command.c */,
 				8B6E35501DE392D9004A35C7 /* command.h */,
 				8B6E35511DE392D9004A35C7 /* compress_fragment_two_pass.c */,
 				8B6E35521DE392D9004A35C7 /* compress_fragment_two_pass.h */,
@@ -1356,6 +1383,7 @@
 				8B6E35581DE392D9004A35C7 /* entropy_encode_static.h */,
 				8B6E35591DE392D9004A35C7 /* entropy_encode.c */,
 				8B6E355A1DE392D9004A35C7 /* entropy_encode.h */,
+				5497734327D843C300AB7917 /* fast_log.c */,
 				8B6E355B1DE392D9004A35C7 /* fast_log.h */,
 				8B6E355C1DE392D9004A35C7 /* find_match_length.h */,
 				1C5AD7852123866600A4AA17 /* hash_composite_inc.h */,
@@ -2240,8 +2268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5497734127D843A900AB7917 /* context.c in Sources */,
 				8B04553E1DF8D9BD00EBB706 /* backward_references.c in Sources */,
 				8B0455461DF8D9BD00EBB706 /* entropy_encode.c in Sources */,
+				5497734D27D8499E00AB7917 /* command.c in Sources */,
 				8B04553A1DF8D9BD00EBB706 /* bit_reader.c in Sources */,
 				8B0455411DF8D9BD00EBB706 /* brotli_bit_stream.c in Sources */,
 				8B0455481DF8D9BD00EBB706 /* literal_cost.c in Sources */,
@@ -2259,8 +2289,11 @@
 				8B0455491DF8D9BD00EBB706 /* memory.c in Sources */,
 				8B0455451DF8D9BD00EBB706 /* encode.c in Sources */,
 				8BF29229208FAC1700541EE0 /* encoder_dict.c in Sources */,
+				5497733F27D843A900AB7917 /* constants.c in Sources */,
 				8B04554C1DF8D9BD00EBB706 /* utf8_util.c in Sources */,
+				5497734427D843C300AB7917 /* fast_log.c in Sources */,
 				8B0455471DF8D9BD00EBB706 /* histogram.c in Sources */,
+				5497733D27D843A900AB7917 /* platform.c in Sources */,
 				8B04553C1DF8D9BD00EBB706 /* huffman.c in Sources */,
 				8BF2921C208FABFA00541EE0 /* transform.c in Sources */,
 				8B0455431DF8D9BD00EBB706 /* compress_fragment_two_pass.c in Sources */,
@@ -2310,13 +2343,17 @@
 				8B0455881DF8DC1B00EBB706 /* backward_references.c in Sources */,
 				8B0455901DF8DC1B00EBB706 /* entropy_encode.c in Sources */,
 				8B0455841DF8DC1B00EBB706 /* bit_reader.c in Sources */,
+				5497734E27D8499E00AB7917 /* command.c in Sources */,
 				8B04558B1DF8DC1B00EBB706 /* brotli_bit_stream.c in Sources */,
 				8B0455921DF8DC1B00EBB706 /* literal_cost.c in Sources */,
 				8B04558E1DF8DC1B00EBB706 /* compress_fragment.c in Sources */,
 				1C7052121EBEA87F0071C2FF /* backward_references_hq.c in Sources */,
 				8B04558A1DF8DC1B00EBB706 /* block_splitter.c in Sources */,
 				8B0455951DF8DC1B00EBB706 /* static_dict.c in Sources */,
+				5497734927D8462D00AB7917 /* constants.c in Sources */,
 				8B0455851DF8DC1B00EBB706 /* decode.c in Sources */,
+				5497734827D8462A00AB7917 /* context.c in Sources */,
+				5497734A27D8465300AB7917 /* platform.c in Sources */,
 				8B0455941DF8DC1B00EBB706 /* metablock.c in Sources */,
 				8BF29223208FABFA00541EE0 /* dictionary.c in Sources */,
 				8B0455891DF8DC1B00EBB706 /* bit_cost.c in Sources */,
@@ -2326,6 +2363,7 @@
 				8B0455931DF8DC1B00EBB706 /* memory.c in Sources */,
 				8B04558F1DF8DC1B00EBB706 /* encode.c in Sources */,
 				8BF2922A208FAC1700541EE0 /* encoder_dict.c in Sources */,
+				5497734B27D8466100AB7917 /* fast_log.c in Sources */,
 				8B0455961DF8DC1B00EBB706 /* utf8_util.c in Sources */,
 				8B0455911DF8DC1B00EBB706 /* histogram.c in Sources */,
 				8B0455861DF8DC1B00EBB706 /* huffman.c in Sources */,
@@ -2597,7 +2635,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2614,7 +2655,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2633,7 +2677,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2647,7 +2694,10 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "-";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2739,7 +2789,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 8.0;
@@ -2758,7 +2811,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -2826,7 +2882,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2849,7 +2908,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -2870,7 +2932,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2887,7 +2952,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2904,7 +2972,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2921,7 +2992,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.*]" = 9.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2938,7 +3012,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2953,7 +3030,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2968,7 +3048,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2983,7 +3066,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				EXECUTABLE_PREFIX = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2999,7 +3085,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
@@ -3017,7 +3106,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Extra";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Extra",
+					"$(PROJECT_DIR)/Extra/brotli/include",
+				);
 				INFOPLIST_FILE = ZipUtilitiesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator14.0]" = 9.0;
